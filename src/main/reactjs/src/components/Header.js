@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 function Header() {
     return (
-        <>
-            <div>Project&Study Talk Web</div>
+        <div>
+            <h2>Project&Study Talk Web</h2>
             <img src={Logo} />
             <Link to="/signup"><button>sign up</button></Link>
             <button>login</button>
-        </>
+        </div>
     );
 }
 
