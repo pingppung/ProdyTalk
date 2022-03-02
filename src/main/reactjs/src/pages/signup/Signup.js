@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Signup() {
     return (
-        <>
+        <body>
             <form class="container" action="/" method="post">
                 <div class="mb-3">
                     <label class="form-label">아이디</label>
@@ -16,7 +16,7 @@ function Signup() {
                 </div>
                 <Link to="/"><button type="submit" class="btn btn-primary">Submit</button></Link>
             </form>
-        </>
+        </body>
     );
 }
 

@@ -3,9 +3,9 @@ import './Main.css';
 
 function Main() {
     return (
-        <>
+        <body>
             <h2>Main page</h2>
-        </>
+        </body>
     );
 }
 
