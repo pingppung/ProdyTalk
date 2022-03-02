@@ -13,9 +13,10 @@ public class PostController {
     @Autowired
     UserMapper userMapper;
 
-    @PostMapping("/user/create")
-    void insertUser(UserVO user){
+    @PostMapping("/signup")
+    public String insertUser(UserVO user){
         userMapper.insertUser(user);
         System.out.println("유저 DB 저장 성공");
+        return "";
     }
 }
