@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://prodytalk-db.cxe3wlhwdbsi.us-east-1.rds.amazonaws.com:3306/prodytalk?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
+    username: twomandarin
     password: 12341234
 
   jpa:
