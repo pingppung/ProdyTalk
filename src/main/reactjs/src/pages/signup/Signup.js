@@ -1,5 +1,6 @@
 import React from 'react';
 import './Signup.css';
+import { Link } from "react-router-dom";
 
 function Signup() {
     return (
@@ -13,7 +14,7 @@ function Signup() {
                     <label class="form-label">비밀번호</label>
                     <input type="text" class="form-control" name="user_pwd"></input>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <Link to="/"><button type="submit" class="btn btn-primary">Submit</button></Link>
             </form>
         </>
     );

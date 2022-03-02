@@ -4,7 +4,7 @@ import './Main.css';
 function Main() {
     return (
         <>
-            <div>Main page</div>
+            <h2>Main page</h2>
         </>
     );
 }

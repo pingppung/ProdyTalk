@@ -8,9 +8,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 function App() {
   return (
     <>
-        <Header />
-        <Route path="/main" component={Main} />
-        <Route path="/signup" component={Signup} />
+           <Header />
+           <Route path="/" component={Main} />
+           <Route path="/signup" component={Signup} />
     </>
   );
 }
