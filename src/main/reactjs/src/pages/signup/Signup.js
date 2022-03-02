@@ -14,7 +14,7 @@ function Signup() {
                     <label class="form-label">비밀번호</label>
                     <input type="text" class="form-control" name="user_pwd"></input>
                 </div>
-                <Link to="/"><button type="submit" class="btn btn-primary">Submit</button></Link>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </body>
     );
