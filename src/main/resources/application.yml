@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://prodytalk-db.cxe3wlhwdbsi.us-east-1.rds.amazonaws.com:3306/prodytalk?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: 1234
+    username: twomandarin
+    password: 12341234
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -22,3 +22,18 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+
+
+mybatis:
+  config-location: classpath:MyBatisConfig.xml
+  multiple-result-sets-enabled: false
+  map-underscore-to-camel-case: true
+  call-setters-on-nulls: true
+  jdbc-type-for-null: varchar
+  default-fetch-size: 500
+  mapper-locations: classpath:mybatis/*.xml
+
+
+
+
+
