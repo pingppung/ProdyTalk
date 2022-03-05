@@ -12,8 +12,9 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
     List<UserVO> userList();
-    UserVO fetchUserByID(int id);
+    UserVO fetchUserByID(String id);
     void updateUser(UserVO user);
     void insertUser(UserVO user);
-    void deleteUser(int id);
+    void deleteUser(String id);
+
 }
