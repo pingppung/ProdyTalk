@@ -5,18 +5,33 @@ import { Link } from "react-router-dom";
 function Signup() {
     return (
         <body>
-            <form class="container" action="/" method="post">
-                <div class="mb-3">
-                    <label class="form-label">아이디</label>
-                    <input type="text" class="form-control" name="user_id"></input>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">비밀번호</label>
-                    <input type="text" class="form-control" name="user_pwd"></input>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </body>
+           <form className="container" action="/signup/result" method="post">
+               <div>
+                   <label>아이디</label>
+                   <input type="text" name="user_id"></input>
+               </div>
+
+               <div>
+                    <label>비밀번호</label>
+                    <input type="text"name="user_pwd"></input>
+               </div>
+               <div>
+                    <label>닉네임</label>
+                    <input type="text"name="user_name"></input>
+               </div>
+               <div>
+                    <label>이메일</label>
+                    <input type="text"name="user_email"></input>
+               </div>
+               <div>
+                    <label>전화번호</label>
+                    <input type="text"name="user_phone"></input>
+               </div>
+               <div className="btn">
+                    <button type="submit">Submit</button>
+               </div>
+           </form>
+       </body>
     );
 }
 
