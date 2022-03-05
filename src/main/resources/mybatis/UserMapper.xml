@@ -5,7 +5,7 @@
 <mapper namespace="com.example.ProdyTalk.mapper.UserMapper">
 
     <insert id="insertUser" parameterType="com.example.ProdyTalk.vo.UserVO">
-        INSERT INTO users(user_id,user_pwd)
-        values(#{user_id},#{user_pwd})
+        INSERT INTO users(user_id,user_pwd,user_name,user_email,user_phone)
+        values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{user_phone})
     </insert>
 </mapper>

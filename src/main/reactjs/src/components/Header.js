@@ -6,17 +6,15 @@ import { Link } from "react-router-dom";
 
 function Header() {
     return (
-        <div>
             <header>
                 <h3>Project&Study Talk Web</h3>
                 <img src={Logo} alt="logo"/>
-                <div>
+                <div className="btn">
                     <Link to="/signup"><button>sign up</button></Link>
                     /
-                    <button>login</button>
+                    <Link to="/login"><button>login</button></Link>
                 </div>
             </header>
-        </div>
     );
 }
 
