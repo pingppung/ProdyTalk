@@ -23,7 +23,6 @@ logging:
             sql:
               BasicBinder: TRACE
 
-
 mybatis:
   config-location: classpath:MyBatisConfig.xml
   multiple-result-sets-enabled: false
@@ -32,8 +31,4 @@ mybatis:
   jdbc-type-for-null: varchar
   default-fetch-size: 500
   mapper-locations: classpath:mybatis/*.xml
-
-
-
-
 

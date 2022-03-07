@@ -1,21 +1,38 @@
 import React from 'react';
 import './Signup.css';
+import { Link } from "react-router-dom";
 
 function Signup() {
     return (
         <body>
            <form className="container" action="/signup/result" method="post">
-               <div className="mb-3">
-                   <label className="form-label">아이디</label>
-                   <input type="text" className="form-control" name="user_id"></input>
+               <div>
+                   <label>아이디</label>
+                   <input type="text" name="user_id"></input>
                </div>
-               <div className="mb-3">
-                    <label className="form-label">비밀번호</label>
-                    <input type="text" className="form-control" name="user_pwd"></input>
+
+               <div>
+                    <label>비밀번호</label>
+                    <input type="text"name="user_pwd"></input>
                </div>
-               <button type="submit" className="btn btn-primary">Submit</button>
+               <div>
+                    <label>닉네임</label>
+                    <input type="text"name="user_name"></input>
+               </div>
+               <div>
+                    <label>이메일</label>
+                    <input type="text"name="user_email"></input>
+               </div>
+               <div>
+                    <label>전화번호</label>
+                    <input type="text"name="user_phone"></input>
+               </div>
+               <div className="btn">
+                    <button type="submit">Submit</button>
+               </div>
            </form>
        </body>
     );
 }
+
 export default Signup;
