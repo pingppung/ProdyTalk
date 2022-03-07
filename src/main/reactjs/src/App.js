@@ -1,22 +1,22 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header'
-import Main from './pages/main/Main'
-import Login from './pages/login/Login'
+import Room from './pages/main/Room'
 import Signup from './pages/signup/Signup'
-import Result from './pages/signup/Result'
-import LoginTest from './pages/login/Test'
+import Login from './pages/login/Login'
+import ResultSignup from './pages/signup/ResultSignup'
+import ResultLogin from './pages/login/ResultLogin'
 import { Route } from "react-router-dom";
 
 function App() {
   return (
     <>
            <Header />
-           <Route exact path="/" component={Main} />
-           <Route exact path="/login" component={Login} />
+           <Route exact path="/" component={Room} />
            <Route exact path="/signup" component={Signup} />
-           <Route exact path="/signup/result" component={Result} />
-           <Route exact path="/login/test" component={LoginTest} />
+           <Route exact path="/login" component={Login} />
+           <Route exact path="/signup/result" component={ResultSignup} />
+           <Route exact path="/login/test" component={ResultLogin} />
     </>
   );
 }

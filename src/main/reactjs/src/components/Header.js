@@ -7,11 +7,6 @@ function Header() {
     return (
             <header>
                 <h3>Project&Study Talk Web</h3>
-                <img src={Logo} />
-                <div>
-                    <Link to="/signup"><button>sign up</button></Link>
-                    <a>/</a>
-                    <button>login</button>
                 <img src={Logo} alt="logo"/>
                 <div className="btn">
                     <Link to="/signup"><button>sign up</button></Link>

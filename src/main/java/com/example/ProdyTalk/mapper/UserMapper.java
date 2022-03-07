@@ -1,10 +1,12 @@
 package com.example.ProdyTalk.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import com.example.ProdyTalk.vo.UserVO;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 @Mapper
 public interface UserMapper {
 
