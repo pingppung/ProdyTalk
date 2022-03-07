@@ -12,7 +12,7 @@ public interface UserMapper {
 
     List<UserVO> userList();
     UserVO fetchUserByID(String id);
-    boolean findUser(UserVO user);
+    UserVO findUser(UserVO user);
     void updateUser(UserVO user);
     void insertUser(UserVO user);
     void deleteUser(String id);

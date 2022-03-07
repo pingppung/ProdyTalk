@@ -35,7 +35,7 @@ public class PostController {
     public void findUser(UserVO user, HttpServletResponse response) throws IOException {
         userService.findUser(user);
         System.out.println(userService.findUser(user));
-        if(userService.findUser(user) == true) {
+        if(userService.findUser(user) != null) {
             System.out.println("유저 확인!!");
             response.sendRedirect("http://localhost:3000/");
         }
