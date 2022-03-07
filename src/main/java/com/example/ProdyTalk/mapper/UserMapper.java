@@ -2,7 +2,6 @@ package com.example.ProdyTalk.mapper;
 
 import java.util.List;
 
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
 import com.example.ProdyTalk.vo.UserVO;
 import org.springframework.stereotype.Repository;
@@ -12,8 +11,9 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
     List<UserVO> userList();
-    UserVO fetchUserByID(int id);
+    UserVO fetchUserByID(String id);
     void updateUser(UserVO user);
     void insertUser(UserVO user);
-    void deleteUser(int id);
+    void deleteUser(String id);
+
 }
