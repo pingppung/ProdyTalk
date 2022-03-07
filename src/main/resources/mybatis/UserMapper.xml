@@ -9,8 +9,8 @@
         values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{user_phone})
     </insert>
 
-    <select id="findUser" resultType="boolean">
-        SELECT IF(COUNT(*) = 1, 1, 0) FROM users
+    <select id="findUser" resultType="com.example.ProdyTalk.vo.UserVO">
+        SELECT * FROM users
         WHERE user_id = #{user_id} AND user_pwd=#{user_pwd}
     </select>
 </mapper>
