@@ -1,10 +1,10 @@
 import React from 'react';
-import './Login.css';
+import './css/Login.css';
 
 function Login() {
     return (
         <body>
-            <form className="container" action="/login/result" method="post">
+            <form className="container" action="/login" method="post">
                  <div>
                      <label>아이디</label>
                      <input type="text" name="user_id"></input>
