@@ -7,7 +7,7 @@ function Header() {
     return (
             <header>
                 <h3>Project&Study Talk Web</h3>
-                <img src={Logo} alt="logo"/>
+                <Link to="/"><img src={Logo} alt="logo"/></Link>
                 <div className="btn">
                     <Link to="/signup"><button>sign up</button></Link>
                     /

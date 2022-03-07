@@ -31,4 +31,17 @@ public class PostController {
         System.out.println("회원가입 성공!!!");
     }
 
+    @PostMapping("/login")
+    public void findUser(UserVO user, HttpServletResponse response) throws IOException {
+        userService.findUser(user);
+        System.out.println(userService.findUser(user));
+        if(userService.findUser(user) == true) {
+            System.out.println("유저 확인!!");
+            response.sendRedirect("http://localhost:3000/");
+        }
+        else{
+            System.out.println("회원가입 안된 유저!!");
+            response.sendRedirect("http://localhost:3000/login");
+        }
+    }
 }
