@@ -2,6 +2,8 @@ import React from 'react';
 
 function CreateRoom({ room_name, room_type, onChange, onCreate }) {
     return (
+    <body>
+    <form className="container" action="/createroom" method="post">
         <div>
             <h2>방만들기</h2>
             <input
@@ -24,8 +26,10 @@ function CreateRoom({ room_name, room_type, onChange, onCreate }) {
                 onChange={onChange}
                 value="스터디"
             />스터디
-            <button onClick={onCreate}>등록</button>
+            <button type="submit">등록</button>
         </div>
+        </form>
+        </body>
     );
 }
 
