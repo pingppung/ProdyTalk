@@ -13,7 +13,7 @@ import java.io.IOException;
 @CrossOrigin(origins="*",maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
-public class PostController {
+public class UserController {
     private final UserService userService;
 
     @Autowired
