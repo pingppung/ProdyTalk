@@ -23,16 +23,12 @@ logging:
             sql:
               BasicBinder: TRACE
 
-
 mybatis:
-configuration:
-multiple-result-sets-enabled: false
-map-underscore-to-camel-case: true
-call-setters-on-nulls: true
-jdbc-type-for-null: varchar
-default-fetch-size: 500
-mapper-locations:
-  - classpath:mapper/*.xml
-
-
+  config-location: classpath:MyBatisConfig.xml
+  multiple-result-sets-enabled: false
+  map-underscore-to-camel-case: true
+  call-setters-on-nulls: true
+  jdbc-type-for-null: varchar
+  default-fetch-size: 500
+  mapper-locations: classpath:mybatis/*.xml
 
