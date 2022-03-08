@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './Room.css';
 import CreateRoom from "./CreateRoom"
-import RoomList from './RoomList';
+import SimpleList from './SimpleList';
 
 function Room() {
     const [visible, setVisible] = useState(false);
@@ -61,7 +61,7 @@ function Room() {
                 onCreate={onCreate}
             />}
             {}
-            <RoomList rooms={rooms} onRemove={onRemove} />
+            <SimpleList rooms={rooms} onRemove={onRemove} />
         </body>
     );
 }

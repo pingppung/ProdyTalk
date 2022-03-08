@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RoomServicelmpl implements RoomService {
@@ -15,5 +17,10 @@ public class RoomServicelmpl implements RoomService {
     @Override
     public void insertRoom(RoomVO room) {
         roomMapper.insertRoom(room);
+    }
+
+    @Override
+    public List<RoomVO> getAllRooms() {
+        return roomMapper.findAll();
     }
 }

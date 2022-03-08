@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Main from './pages/MainPage'
 import Signup from './pages/SignupPage'
 import Login from './pages/LoginPage'
+import RoomList from './components/room/RoomList'
 
 
 import ResultSignup from './pages/ResultSignup'
@@ -22,6 +23,8 @@ function App() {
 
            <Route exact path="/signup/result" component={ResultSignup} />
            <Route exact path="/login/test" component={ResultLogin} />
+
+           <Route exact path="/RoomList" component={RoomList} />
     </>
   );
 }
