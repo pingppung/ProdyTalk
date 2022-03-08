@@ -37,6 +37,7 @@ public class UserController {
         System.out.println(userService.findUser(user));
         if(userService.findUser(user) != null) {
             System.out.println("유저 확인!!");
+
             response.sendRedirect("http://localhost:3000/");
         }
         else{

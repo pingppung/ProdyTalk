@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface RoomMapper {
 
     void insertRoom(RoomVO room);
+    List<RoomVO> findAll();
 
 }

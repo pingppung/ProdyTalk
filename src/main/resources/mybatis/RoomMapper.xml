@@ -9,4 +9,8 @@
         values(#{room_name},#{room_type})
     </insert>
 
+    <select id="findAll" resultType="com.example.ProdyTalk.vo.RoomVO">
+        SELECT * from room_list
+    </select>
+
 </mapper>

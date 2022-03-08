@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function CreateRoom({ room_name, room_type, onChange, onCreate }) {
     return (
@@ -29,6 +30,9 @@ function CreateRoom({ room_name, room_type, onChange, onCreate }) {
             <button type="submit">등록</button>
         </div>
         </form>
+        <Link to="/RoomList">
+            <button>조회</button>
+          </Link>
         </body>
     );
 }
