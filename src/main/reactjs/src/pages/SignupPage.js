@@ -3,7 +3,7 @@ import './css/Signup.css';
 
 function Signup() {
     return (
-        <body>
+        <div>
            <form className="container" action="/signup/result" method="post">
                <div>
                    <label>아이디</label>
@@ -30,7 +30,7 @@ function Signup() {
                     <button type="submit">Submit</button>
                </div>
            </form>
-       </body>
+       </div>
     );
 }
 

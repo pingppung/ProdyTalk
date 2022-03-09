@@ -7,9 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("com.example.ProdyTalk.mapper")
 public class ProdyTalkApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(ProdyTalkApplication.class, args);
 	}
-
 }

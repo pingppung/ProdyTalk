@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface RoomMapper {
-
     void insertRoom(RoomVO room);
     List<RoomVO> findAll();
-
 }
