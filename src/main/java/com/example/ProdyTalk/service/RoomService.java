@@ -8,5 +8,4 @@ import java.util.List;
 public interface RoomService {
     public void insertRoom(RoomVO room);
     public List<RoomVO> getAllRooms();
-
 }
