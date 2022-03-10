@@ -13,7 +13,7 @@ import java.io.IOException;
 @CrossOrigin(origins="*",maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
-public class PostController {
+public class UserController {
     private final UserService userService;
 
     @Autowired
@@ -31,4 +31,16 @@ public class PostController {
         System.out.println("회원가입 성공!!!");
     }
 
+    @PostMapping("/login")
+    public void findUser(UserVO user, HttpServletResponse response) throws IOException {
+        userService.findUser(user);
+        System.out.println(userService.findUser(user));
+        if (userService.findUser(user) != null) {
+            System.out.println("유저 확인!!");
+            response.sendRedirect("http://localhost:3000/login/result");
+        } else {
+            System.out.println("회원가입 안된 유저!!");
+            response.sendRedirect("http://localhost:3000/login");
+        }
+    }
 }
