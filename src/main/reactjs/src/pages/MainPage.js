@@ -1,5 +1,5 @@
 import React from 'react';
-import Room from '../components/room/Room'
+import Room from '../components/Room'
 
 function MainPage() {
     return (
