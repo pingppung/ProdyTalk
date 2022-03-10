@@ -47,7 +47,7 @@ function Room() {
     };
 
     return (
-        <body>
+        <div>
             <button onClick={() => {setVisible(!visible);}}>+</button>
             <RoomList />
             {visible &&
@@ -58,7 +58,7 @@ function Room() {
                 onCreate={onCreate}
             />}
             {}
-        </body>
+        </div>
     );
 }
 
