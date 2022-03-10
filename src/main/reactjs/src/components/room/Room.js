@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './Room.css';
 import CreateRoom from "./CreateRoom"
-import RoomList from './RoomList';
+import RoomList from './RoomList'
 
 function Room() {
     const [visible, setVisible] = useState(false);
@@ -46,13 +46,10 @@ function Room() {
         setVisible(!visible);
     };
 
-    const onRemove = id => {
-        setRooms(rooms.filter(room => room.id !== id));
-    };
-
     return (
         <body>
             <button onClick={() => {setVisible(!visible);}}>+</button>
+            <RoomList />
             {visible &&
             <CreateRoom
                 room_name={room_name}
@@ -61,7 +58,6 @@ function Room() {
                 onCreate={onCreate}
             />}
             {}
-            <RoomList rooms={rooms} onRemove={onRemove} />
         </body>
     );
 }
