@@ -6,9 +6,9 @@ import Signup from './pages/SignupPage'
 import Login from './pages/LoginPage'
 import Openvidu from './components/VideoRoomComponent'
 
+
 import ResultSignup from './pages/ResultSignup'
 import ResultLogin from './pages/ResultLogin'
-
 
 import { Route } from "react-router-dom";
 
@@ -21,10 +21,10 @@ function App() {
            <Route exact path="/login" component={Login} />
            <Route exact path="/video" component={Openvidu} />
 
-           <Route exact path="/signup/result" component={ResultSignup} />
-           <Route exact path="/login/test" component={ResultLogin} />
-    </>
-  );
+            <Route exact path="/signup/result" component={ResultSignup} />
+            <Route exact path="/login/result" component={ResultLogin} />
+        </>
+    );
 }
 
 export default App;

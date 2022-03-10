@@ -1,22 +1,44 @@
-import React from 'react';
+import React,{ Component } from 'react';
+import RoomService from '../../service/RoomService';
 
-function Room({ room, onRemove }) {
-    return (
-        <div>
-            <b>{room.room_name}</b> <span>({room.room_type})</span>
-            <button onClick={() => onRemove(room.id)}>삭제</button>
-        </div>
-    );
-}
+class RoomList extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            rooms: []
+        }
+    }
+    componentDidMount(){
+        RoomService.getRooms().then((res) => {
+            this.setState({rooms: res.data});
+        });
+    }
 
-function RoomList({ rooms, onRemove }) {
-    return (
-        <div>
-            {rooms.map(room => (
-                <Room room={room} key={room.id} onRemove={onRemove} />
-            ))}
-        </div>
-    );
+    render() {
+        return (
+            <table className="roomlist">
+                <thead>
+                    <tr>
+                        <th>방 번호</th>
+                        <th>방 이름 </th>
+                        <th>방 유형 </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        this.state.rooms.map(
+                            room =>
+                                <tr key = {room.room_number}>
+                                    <td> {room.room_number} </td>
+                                    <td> {room.room_name} </td>
+                                    <td> {room.room_type} </td>
+                                    </tr>
+                        )
+                    }
+                </tbody>
+            </table>
+        );
+    }
 }
 
 export default RoomList;
