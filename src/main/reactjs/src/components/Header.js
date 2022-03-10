@@ -12,6 +12,8 @@ function Header() {
                     <Link to="/signup"><button>sign up</button></Link>
                     /
                     <Link to="/login"><button>login</button></Link>
+                    /
+                    <Link to="/join"><button>chatting</button></Link>
                 </div>
             </header>
     );
