@@ -3,7 +3,7 @@ import './css/Login.css';
 
 function Login() {
     return (
-        <body>
+        <div>
             <form className="container" action="/login" method="post">
                  <div>
                      <label>아이디</label>
@@ -19,7 +19,7 @@ function Login() {
                      <button type="submit">Submit</button>
                  </div>
             </form>
-        </body>
+        </div>
     );
 }
 
