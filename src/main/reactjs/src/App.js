@@ -14,7 +14,7 @@ import { Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
+        <div>
            <Header />
            <Route exact path="/" component={Main} />
            <Route exact path="/signup" component={Signup} />
@@ -23,7 +23,7 @@ function App() {
 
             <Route exact path="/signup/result" component={ResultSignup} />
             <Route exact path="/login/result" component={ResultLogin} />
-        </>
+        </div>
     );
 }
 

@@ -9,3 +9,8 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+.username{
+    position: relative;
+    float: left;
+    top: 22px;
+}
