@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Main from './pages/MainPage'
 import Signup from './pages/SignupPage'
 import Login from './pages/LoginPage'
+import Chat from './pages/ChatPage'
 
 import ResultSignup from './pages/ResultSignup'
 import ResultLogin from './pages/ResultLogin'
@@ -20,6 +21,8 @@ function App() {
 
             <Route exact path="/signup/result" component={ResultSignup} />
             <Route exact path="/login/result" component={ResultLogin} />
+
+            <Route exact path="/chat" component={Chat} />
         </>
     );
 }
