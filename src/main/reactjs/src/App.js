@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header'
+import Header from './components/HeaderComponent'
 import Main from './pages/MainPage'
-import Signup from './pages/SignupPage'
-import Login from './pages/LoginPage'
+import Login from './components/LoginComponent'
+import Signup from './components/SignupComponent'
+//import Login from './pages/LoginPage'
 import Openvidu from './components/VideoRoomComponent'
 
 
@@ -19,6 +20,7 @@ function App() {
            <Route exact path="/" component={Main} />
            <Route exact path="/signup" component={Signup} />
            <Route exact path="/login" component={Login} />
+
            <Route exact path="/video" component={Openvidu} />
 
             <Route exact path="/signup/result" component={ResultSignup} />
