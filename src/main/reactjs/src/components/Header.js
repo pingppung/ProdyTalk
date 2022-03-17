@@ -13,7 +13,9 @@ function Header() {
                     /
                     <Link to="/login"><button>login</button></Link>
                     /
-                    <Link to="/join"><button>chatting</button></Link>
+                    <Link to="/chat"><button>chatting</button></Link>
+                    /
+                    <Link to="/calender"><button>calender</button></Link>
                 </div>
             </header>
     );
