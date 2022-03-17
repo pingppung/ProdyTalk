@@ -1,7 +1,8 @@
-import React, {  useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/Login.css';
-import LoginForm from "../components/LoginForm"
+import LoginComponent from "../components/LoginComponent"
 import { Link } from "react-router-dom";
+//import UserService from '../service/UserService';
 
 function Login() {
     const [inputs, setInputs] = useState({
@@ -11,7 +12,9 @@ function Login() {
 
     const { user_id, user_pwd } = inputs;
 
+
     const onChange = e => {
+
         const { name, value } = e.target;
 
         setInputs({
@@ -35,13 +38,15 @@ function Login() {
             user_id: '',
             user_pwd: '',
         });
-        window.sessionStorage.setItem('id', user_id);
-        window.sessionStorage.setItem('password', user_pwd);
-
     };
+
+//    useEffect(() => {
+//        fetch('/login')
+//          .then(response => console.log(response.text()));
+//    },[])
     return (
         <div>
-            <LoginForm
+            <LoginComponent
                 user_id={user_id}
                 user_pwd={user_pwd}
                 onChange={onChange}
