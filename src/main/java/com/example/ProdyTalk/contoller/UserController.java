@@ -19,8 +19,8 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
 
-    @PostMapping("/signup/result")
-    public void insertUser(UserVO user, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public void insertUser(@RequestBody UserVO user, HttpServletResponse response) throws IOException {
         userService.insertUser(user);
         System.out.println("유저 DB 저장 성공");
         response.sendRedirect("http://localhost:3000/signup/result");
@@ -37,10 +37,13 @@ public class UserController {
         System.out.println(userService.findUser(user));
         if (userService.findUser(user) != null) {
             System.out.println("유저 확인!!");
-            response.sendRedirect("http://localhost:3000/login/result");
+            //response.sendRedirect("http://localhost:3000/login/result");
+            //return "success";
         } else {
             System.out.println("회원가입 안된 유저!!");
-            response.sendRedirect("http://localhost:3000/login");
+            //response.sendRedirect("http://localhost:3000/login");
+            //return "fail";
         }
+
     }
 }
