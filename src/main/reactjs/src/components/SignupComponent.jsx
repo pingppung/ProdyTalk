@@ -44,7 +44,7 @@ class SignupComponent extends Component {
             user_phone: this.state.user_phone
         };
         UserService.Signup(User).then(res => {
-            //this.props.history.push('/login');
+            this.props.history.push('/');
             window.alert("회원가입에 성공했습니다")
         });
     }
