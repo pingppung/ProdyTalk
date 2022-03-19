@@ -9,7 +9,7 @@ class UserService {
     }
 
     getUserName(){
-        return axios.get(USER_API_BASE_URL+"/authenticate", {
+        return axios.get("/authenticate", {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
@@ -18,7 +18,7 @@ class UserService {
 
     Signup(user) {
     //    return axios.post("http://localhost:3000/signup", user, {contentType: 'application/json'});
-        return axios.post("http://localhost:8080/signup", JSON.stringify(user), {
+        return axios.post("/signup", JSON.stringify(user), {
         	headers: { "Content-Type": `application/json`}
             }
         ).then((res) => {

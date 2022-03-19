@@ -29,11 +29,12 @@ class LoginComponent extends Component {
                 user_pwd: this.state.user_pwd
             };
             axios
-                  .post("http://localhost:8080/authenticate", User)
+                  .post("/authenticate", User)
                   .then((response) => {
-                    console.log(response.data.jwt);
-                    UserService.fetchToken(response.data.jwt);
-                    localStorage.setItem("user", JSON.stringify(response.data.jwt));
+                    console.log(response);
+                    console.log(response.data);
+                    UserService.fetchToken(response.data);
+                    localStorage.setItem("user", JSON.stringify(response.data));
                     this.props.history.push("/");
                   })
                   .catch((error) => {
@@ -45,7 +46,7 @@ class LoginComponent extends Component {
     render(){
         return (
             <div>
-                <form action="/login" method="post">
+                <form>
                      <div>
                          <label>아이디</label>
                          <input
