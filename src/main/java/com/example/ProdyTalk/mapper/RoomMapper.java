@@ -1,10 +1,9 @@
 package com.example.ProdyTalk.mapper;
 
-import java.util.List;
-
 import com.example.ProdyTalk.vo.RoomListVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
 @Mapper
