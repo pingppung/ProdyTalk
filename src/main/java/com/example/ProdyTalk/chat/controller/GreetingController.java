@@ -1,43 +1,50 @@
 package com.example.ProdyTalk.chat.controller;
 
-import com.example.ProdyTalk.chat.domain.Chat;
-import com.example.ProdyTalk.chat.vo.Message;
-import com.example.ProdyTalk.chat.vo.User;
+import com.example.ProdyTalk.chat.vo.MessageVO;
+import com.example.ProdyTalk.mapper.ChatMapper;
+import com.example.ProdyTalk.service.ChatService;
+import com.example.ProdyTalk.vo.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.util.HtmlUtils;
-
-
-import com.example.ProdyTalk.chat.domain.Greeting;
-import com.example.ProdyTalk.chat.domain.HelloMessage;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Controller
+@CrossOrigin(origins="*",maxAge = 3600)
+@RestController
+@RequiredArgsConstructor
 public class GreetingController {
 
+    private final ChatService chatService;
     private static Set<String> userList = new HashSet<>();
+
+    @Autowired
+    ChatMapper chatMapper;
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
 
-    @MessageMapping("/chat/{toName}")
-    @SendTo("/queue/addChatToClient/{toName}")
-    public Message sendMessage(Message messageVO, @DestinationVariable String toName){
-        //this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/"+toName,messageVO.getContent());
-        return new Message(messageVO.getContent());
+    @MessageMapping("/chat/{toId}")
+    public void sendMessage(MessageVO messageVO, @DestinationVariable String toId){
+
+        int messageId=chatService.searchLast();
+        messageVO.setMessage_id(messageId+1);
+        chatService.insertMessage(messageVO);
+
+        System.out.println("메시지 내용 저장 성공");
+
+        this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/"+toId,messageVO);
     }
 
     @MessageMapping("/join")
-    public void joinUser(User user) throws Exception {
-        userList.add(user.getName());
+    public void joinUser(UserVO userVO) throws Exception {
+        userList.add(userVO.getUser_name());
         userList.forEach(use->System.out.println(use));
     }
 
