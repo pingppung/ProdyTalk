@@ -2,7 +2,7 @@ package com.example.ProdyTalk.contoller;
 
 import com.example.ProdyTalk.mapper.RoomMapper;
 import com.example.ProdyTalk.service.RoomService;
-import com.example.ProdyTalk.vo.RoomVO;
+import com.example.ProdyTalk.vo.RoomListVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +21,14 @@ public class RoomController {
     RoomMapper roomMapper;
 
     @PostMapping("/createroom")
-    public void insertUser(RoomVO room, HttpServletResponse response) throws IOException {
+    public void insertUser(RoomListVO room, HttpServletResponse response) throws IOException {
         roomService.insertRoom(room);
         System.out.println("Room DB 저장 성공");
         response.sendRedirect("http://localhost:3000/");
     }
 
     @GetMapping("/roomlist")
-    public List<RoomVO> getAllRooms() {
+    public List<RoomListVO> getAllRooms() {
         System.out.println("Room List 불러오기 성공");
         return roomService.getAllRooms();
     }
