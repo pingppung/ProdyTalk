@@ -20,13 +20,14 @@ function Chat() {
     const changeMessage = (e) => {
         setchatMessage(e.target.value);
         };
+
     const changeToName = (e) => {
         settoName(e.target.value);
         };
 
     useEffect(()=>{
         client.connect({}, () =>{
-            client.subscribe('/queue/addChatToClient/'+name, function(messageVO){
+            client.subscribe('/queue/addChatToClient/'+name, function(messageVO){ // 구독 후 데이터 가져옴
                                                    const message=JSON.parse(messageVO.body)
                                                    console.log(message.content)
                                                })
