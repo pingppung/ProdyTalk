@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import './Room.css';
+import './css/Room.css';
 import CreateRoom from "./CreateRoom"
 import RoomList from './RoomList'
 
@@ -47,7 +47,7 @@ function Room() {
     };
 
     return (
-        <body>
+        <div>
             <button onClick={() => {setVisible(!visible);}}>+</button>
             <RoomList />
             {visible &&
@@ -58,7 +58,7 @@ function Room() {
                 onCreate={onCreate}
             />}
             {}
-        </body>
+        </div>
     );
 }
 
