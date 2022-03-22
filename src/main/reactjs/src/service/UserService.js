@@ -9,7 +9,7 @@ class UserService {
     }
 
     getUserName(){
-        return fetch("/authenticate", {
+        return axios.get("/authenticate", {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },

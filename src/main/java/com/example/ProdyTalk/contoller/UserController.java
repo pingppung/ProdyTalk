@@ -1,25 +1,22 @@
 package com.example.ProdyTalk.contoller;
 
+
 import com.example.ProdyTalk.mapper.UserMapper;
 import com.example.ProdyTalk.service.UserService;
 import com.example.ProdyTalk.vo.UserVO;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.Duration;
-import java.util.Base64;
 import java.util.Date;
 
 @CrossOrigin(origins="*",maxAge = 3600)
@@ -42,9 +39,12 @@ public class UserController {
     public void success() {
         System.out.println("회원가입 성공!!!");
     }
+
+
     @PostMapping("/authenticate")
-    public String authen(UserVO user){
+    public String authen(@RequestBody UserVO user){
         userService.findUser(user);
+        System.out.println(user);
         System.out.println(userService.findUser(user));
         if (userService.findUser(user) != null) {
             System.out.println("유저 확인!!");
@@ -56,8 +56,8 @@ public class UserController {
                     .setIssuer("fresh") // (2)
                     .setIssuedAt(now) // (3)
                     .setExpiration(new Date(now.getTime() + Duration.ofMinutes(30).toMillis())) // (4)
-                    .claim("id", "아이디") // (5)
-                    .claim("pwd", "비밀번호")
+                    .claim("id", user.getUser_id()) // (5)
+                    .claim("pwd", user.getUser_pwd())
                     .signWith(SignatureAlgorithm.HS256, "secret") // (6)
                     .compact();
 
@@ -67,8 +67,14 @@ public class UserController {
         }
     }
 
+    //토큰으로 유저 아이디 확인 => 아이디 넘기기
     @GetMapping("/authenticate")
-    public String autheddn(UserVO user) {
-        return null;
+    public Claims autheddn(HttpServletRequest request) {
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
+
+        return Jwts.parser()
+                .setSigningKey("secret") // (3)
+                .parseClaimsJws(token) // (4)
+                .getBody();
     }
 }

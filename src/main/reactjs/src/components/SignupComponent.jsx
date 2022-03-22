@@ -51,7 +51,7 @@ class SignupComponent extends Component {
     render() {
         return (
             <div>
-                <form action="/signup" method="post">
+                <form>
                      <div>
                          <label>아이디</label>
                          <input

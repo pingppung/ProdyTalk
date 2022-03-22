@@ -14,9 +14,10 @@ class HeaderComponent extends Component {
     }
     componentDidMount() {
         UserService.getUserName().then(res => {
-            console.log("id is "+res.data)
+            console.log(res.data.id);
+            //console.log("id is "+res.data)
             this.setState({
-                id: res.data
+                id: res.data.id
             });
         });
     }

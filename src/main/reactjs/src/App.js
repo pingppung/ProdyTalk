@@ -16,7 +16,7 @@ import { Route } from "react-router-dom";
 function App() {
   return (
         <div>
-           <Header />
+
            <Route exact path="/" component={Main} />
            <Route exact path="/signup" component={Signup} />
            <Route exact path="/login" component={Login} />
