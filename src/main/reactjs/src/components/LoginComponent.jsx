@@ -29,22 +29,24 @@ class LoginComponent extends Component {
                 user_pwd: this.state.user_pwd
             };
             axios
-                  .post('/authenticate', User)
+                  .post("/authenticate", User)
                   .then((response) => {
-                    console.log(response.data.jwt);
-                    UserService.fetchToken(response.data.jwt);
-                    localStorage.setItem("user", JSON.stringify(response.data.jwt));
+                    console.log(response);
+                    console.log(response.data);
+                    UserService.fetchToken(response.data);
+                    localStorage.setItem("user", JSON.stringify(response.data));
                     this.props.history.push("/");
                   })
                   .catch((error) => {
                     console.log("error");
                     window.alert("아이디나 비밀번호가 다릅니다")
                   });
+
         }
     render(){
         return (
             <div>
-                <form action="/authenticate" method="post">
+                <form>
                      <div>
                          <label>아이디</label>
                          <input
@@ -66,7 +68,7 @@ class LoginComponent extends Component {
                          />
                      </div>
                      <div className="btn">
-                         <button type="submit">로그인</button>
+                         <button type="submit" onClick={this.gotoHome}>로그인</button>
                          <Link to="/signup"><button>회원가입</button></Link>
                      </div>
                 </form>
