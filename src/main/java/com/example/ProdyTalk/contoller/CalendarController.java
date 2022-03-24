@@ -28,7 +28,6 @@ public class CalendarController {
 
     @PostMapping("/calendar/add")
     public void addEvent(@RequestBody CalendarVO calendarVO) throws Exception{
-        System.out.println(calendarVO.getTitle()+calendarVO.getStart());
         calendarService.addEvent(calendarVO);
     }
 }

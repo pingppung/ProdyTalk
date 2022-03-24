@@ -1,6 +1,8 @@
 import React,{useEffect} from 'react';
 import {useState} from 'react';
 import './css/Modal.css';
+import {ColorPicker, useColor} from "react-color-palette";
+import "react-color-palette/lib/css/styles.css";
 
 const Modal = (props) => {
 
@@ -11,6 +13,7 @@ const Modal = (props) => {
   const[startDate, setStartDate] = useState('');
   const[endDate, setEndDate] = useState('');
   const[changeNum, setChangeNum] = useState(1);
+  const[color, setColor] = useColor("hex", "#121212");
 
   const changeContent = (e) => {
     setContent(e.target.value);
@@ -27,7 +30,7 @@ const Modal = (props) => {
   const addEvent = () => {
     setChangeNum(changeNum+1); // add 버튼 누를 때 마다 changeNum + 1 해주기
 
-    props.propFunction(content, startDate, endDate); // 바뀐 값 전달
+    props.propFunction(content, startDate, endDate, color.hex); // 바뀐 값 전달
   }
 
   // changeNum 변경마다 hello 출력 (add 버튼 누를 때 마다)
@@ -57,9 +60,12 @@ const Modal = (props) => {
                     <label htmlFor="taskId" className="col-form-label">일정 내용</label>
                     <input type="text" onChange={changeContent} className="form-control" value={content} id="calendar_content" name="calendar_content"/>
                     <label htmlFor="taskId" className="col-form-label">시작 날짜</label>
-                    <input type="date" onChange={changeStart} className="form-control" value={startDate} id="calendar_start_date" name="calendar_start_date"/>
+                    <input type="datetime-local" onChange={changeStart} className="form-control" value={startDate} id="calendar_start_date" name="calendar_start_date"/>
                     <label htmlFor="taskId" className="col-form-label">종료 날짜</label>
-                    <input type="date" onChange={changeEnd} className="form-control" value={endDate} id="calendar_end_date" name="calendar_end_date"/>
+                    <input type="datetime-local" onChange={changeEnd} className="form-control" value={endDate} id="calendar_end_date" name="calendar_end_date"/>
+                    <br />
+                    <ColorPicker width={400} height={100} color={color} onChange={setColor} hideHSV dark />
+
                 </div>
               </div>
 
