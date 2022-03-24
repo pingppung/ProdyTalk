@@ -8,13 +8,14 @@ class CalendarService {
         return axios.get(CALENDAR_API_BASE_URL);
     }
 
-    addEvent(content,startDate,endDate) {
+    addEvent(content,startDate,endDate,color) {
         axios.post(CALENDARADD_API_BASE_URL, {
             title: content,
             start: startDate,
-            end: endDate
+            end: endDate,
+            color: color
         })
-        console.log(content, startDate, endDate);
+
     }
 }
 
