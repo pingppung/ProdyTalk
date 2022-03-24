@@ -25,23 +25,16 @@ function Calender() {
 
     // Modal에서 add 버튼 클릭 시 실행
     const addModal = (content, startDate, endDate) => {
-
-        // event 추가
-        const event = {
-            title: content,
-            start: startDate,
-            end: endDate,
-        };
-        CalendarService.addEvent(JSON.stringify(event)); // events에 전달받은 이벤트 추가해주기
+        CalendarService.addEvent(content, startDate, endDate); // events에 전달받은 이벤트 추가해주기
         setModalOpen(false); // Modal 닫아주기
-        console.log(content, startDate, endDate);
+
     };
 
     useEffect(()=> {
         CalendarService.getCalendar().then((res) => {
             setEvents(res.data)
         })
-    }, []);
+    }, [addModal]);
 
   return (
     <div className="Calendar">
