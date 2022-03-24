@@ -6,7 +6,7 @@ import Signup from './pages/SignupPage'
 import Login from './pages/LoginPage'
 import Chat from './pages/ChatPage'
 
-import Calender from './pages/Calender'
+import Calendar from './pages/Calendar'
 
 import ResultSignup from './pages/ResultSignup'
 import ResultLogin from './pages/ResultLogin'
@@ -28,7 +28,7 @@ function App() {
             <Route exact path="/login/result" component={ResultLogin} />
 
             <Route exact path="/chat" component={Chat} />
-            <Route exact path="/calender" component={Calender} />
+            <Route exact path="/calendar" component={Calendar} />
         </>
     );
 }

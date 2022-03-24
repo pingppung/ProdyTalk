@@ -15,7 +15,7 @@ function Header() {
                     /
                     <Link to="/chat"><button>chatting</button></Link>
                     /
-                    <Link to="/calender"><button>calender</button></Link>
+                    <Link to="/calendar"><button>calendar</button></Link>
                 </div>
             </header>
     );
