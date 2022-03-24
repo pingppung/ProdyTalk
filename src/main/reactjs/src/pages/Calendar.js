@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import CalendarService from '../service/CalendarService';
 
 import Modal from './Modal'
+import DetailModal from './DetailModal'
 
 function Calender() {
 
@@ -52,6 +53,9 @@ function Calender() {
 
       <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요.">
       </Modal>
+
+      <DetailModal open={detailModalOpen} close={closeDetailModal} header="Event 수정/삭제">
+      </DetailModal>
 
       <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

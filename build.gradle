@@ -25,6 +25,8 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	implementation 'org.springframework:spring-messaging:5.3.16'
 	implementation 'org.springframework:spring-websocket:5.3.14'
+	implementation 'org.apache.httpcomponents:httpclient'
+
 
 
 	runtimeOnly 'mysql:mysql-connector-java:8.0.25'

@@ -12,6 +12,10 @@ function Header() {
                     <Link to="/signup"><button>sign up</button></Link>
                     /
                     <Link to="/login"><button>login</button></Link>
+                    /
+                    <Link to="/chat"><button>chatting</button></Link>
+                    /
+                    <Link to="/calendar"><button>calendar</button></Link>
                 </div>
             </header>
     );
