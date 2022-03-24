@@ -9,8 +9,8 @@
     </select>
 
     <insert id="addEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
-        insert into calendar (title,start,end)
-        values (#{title},#{start},#{end})
+        insert into calendar (title,start,end,color)
+        values (#{title},#{start},#{end},#{color})
     </insert>
 
 

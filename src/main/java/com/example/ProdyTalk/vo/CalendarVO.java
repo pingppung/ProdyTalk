@@ -10,4 +10,5 @@ public class CalendarVO {
     String title;
     String start;
     String end;
+    String color;
 }
