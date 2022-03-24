@@ -4,30 +4,14 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import CalendarService from '../service/CalendarService';
 
 import Modal from './Modal'
 import EditModal from './EditModal'
 
 function Calender() {
 
-    const [events, setEvents] = useState([
-    {
-        id: 1,
-        title: 'event 1',
-        start: '2021-06-14T10:00:00',
-        end: '2021-06-14T12:00:00',
-    },
-    {
-        id: 2,
-        title: 'event 2',
-        start: '2021-06-16T13:00:00',
-        end: '2021-06-16T18:00:00',
-    },
-
-    { id: 3, title: '캡스톤 모임', start: '2022-03-17', end: '2022-03-17' },
-    ]);
-
-    const nextId = useRef(4);
+    const [events, setEvents] = useState([]);
 
     // open인 경우만 Modal 열림
     const [modalOpen, setModalOpen] = useState(false);
@@ -44,17 +28,20 @@ function Calender() {
 
         // event 추가
         const event = {
-            id: nextId.current,
             title: content,
             start: startDate,
             end: endDate,
         };
-        setEvents(events.concat(event)); // events에 전달받은 이벤트 추가해주기
-
-        nextId.current += 1;
+        CalendarService.addEvent(JSON.stringify(event)); // events에 전달받은 이벤트 추가해주기
         setModalOpen(false); // Modal 닫아주기
         console.log(content, startDate, endDate);
     };
+
+    useEffect(()=> {
+        CalendarService.getCalendar().then((res) => {
+            setEvents(res.data)
+        })
+    }, []);
 
   return (
     <div className="Calendar">

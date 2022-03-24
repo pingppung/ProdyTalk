@@ -4,9 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ProdyTalk.mapper.CalendarMapper">
 
-    <select id="getCalendar" resultType="List">
+    <select id="getCalendar" resultType="com.example.ProdyTalk.vo.CalendarVO">
         select * from calendar
     </select>
+
+    <insert id="addEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
+        insert into calendar (title,start,end)
+        values (#{title},#{start},#{end})
+    </insert>
 
 
 </mapper>
