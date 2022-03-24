@@ -12,7 +12,6 @@ import DetailModal from './DetailModal'
 function Calender() {
 
     const [events, setEvents] = useState([]);
-
     // open인 경우만 Modal 열림
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -37,16 +36,17 @@ function Calender() {
     };
 
     // Modal에서 add 버튼 클릭 시 실행
-    const addModal = (content, startDate, endDate) => {
-        CalendarService.addEvent(content, startDate, endDate); // events에 전달받은 이벤트 추가해주기
+    const addModal = (content, startDate, endDate, color) => {
+        CalendarService.addEvent(content, startDate, endDate, color); // events에 전달받은 이벤트 추가해주기
         setModalOpen(false); // Modal 닫아주기
     };
 
     useEffect(()=> {
         CalendarService.getCalendar().then((res) => {
             setEvents(res.data)
+
         })
-    }, [addModal]);
+    }, [events]);
 
   return (
     <div className="Calendar">
@@ -64,6 +64,8 @@ function Calender() {
                 center: 'dayGridMonth,timeGridWeek,timeGridDay new',
             }}
 
+            displayEventTime={false}
+
         customButtons = {{
             new : {
                 text : "new",
@@ -77,6 +79,7 @@ function Calender() {
         events={events} // event 전달
         eventColor="gray"
         nowIndicator
+
         dateClick={(e) => console.log(e.dateStr)}
         // eventClick={(e) => console.log(e.event.id)}
 
