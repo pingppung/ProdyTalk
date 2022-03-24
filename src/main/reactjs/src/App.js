@@ -6,13 +6,18 @@ import Signup from './pages/SignupPage'
 import Login from './pages/LoginPage'
 import Chat from './pages/ChatPage'
 
+import Calendar from './pages/Calendar'
+
 import ResultSignup from './pages/ResultSignup'
 import ResultLogin from './pages/ResultLogin'
 
 import { Route } from "react-router-dom";
 
 function App() {
+
+
     return (
+
         <>
             <Header />
             <Route exact path="/" component={Main} />
@@ -23,6 +28,7 @@ function App() {
             <Route exact path="/login/result" component={ResultLogin} />
 
             <Route exact path="/chat" component={Chat} />
+            <Route exact path="/calendar" component={Calendar} />
         </>
     );
 }
