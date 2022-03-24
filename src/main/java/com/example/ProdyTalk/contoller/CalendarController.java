@@ -5,10 +5,7 @@ import com.example.ProdyTalk.service.CalendarService;
 import com.example.ProdyTalk.vo.CalendarVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.List;
@@ -29,8 +26,9 @@ public class CalendarController {
         return calendarService.getCalendar();
     }
 
-    @GetMapping("/calendar/add")
-    public void addEvent(CalendarVO calendarVO) throws Exception{
+    @PostMapping("/calendar/add")
+    public void addEvent(@RequestBody CalendarVO calendarVO) throws Exception{
+        System.out.println(calendarVO.getTitle()+calendarVO.getStart());
         calendarService.addEvent(calendarVO);
     }
 }
