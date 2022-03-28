@@ -11,7 +11,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +25,6 @@ public class GreetingController {
     @Autowired
     ChatMapper chatMapper;
 
-    @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
 
