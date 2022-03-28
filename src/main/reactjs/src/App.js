@@ -9,10 +9,7 @@ import Openvidu from './components/VideoRoomComponent'
 //import Signup from './pages/SignupPage'
 //import Login from './pages/LoginPage'
 import Chat from './pages/ChatPage'
-//import Chat2 from './components/ChatComponent'
 
-import ResultSignup from './pages/ResultSignup'
-import ResultLogin from './pages/ResultLogin'
 
 import { Route } from "react-router-dom";
 
@@ -26,8 +23,6 @@ function App() {
 
            <Route exact path="/video" component={Openvidu} />
 
-            <Route exact path="/signup/result" component={ResultSignup} />
-            <Route exact path="/login/result" component={ResultLogin} />
             <Route exact path="/chat" component={Chat} />
         </div>
 

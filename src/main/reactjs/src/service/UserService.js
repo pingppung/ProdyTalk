@@ -19,7 +19,7 @@ class UserService {
     Signup(user) {
     //    return axios.post("http://localhost:3000/signup", user, {contentType: 'application/json'});
         return axios.post("/signup", JSON.stringify(user), {
-        	headers: { "Content-Type": `application/json`}
+        	headers: { "Content-Type": 'application/json'}
             }
         ).then((res) => {
              console.log(res);

@@ -6,4 +6,5 @@ import lombok.Data;
 public class RoomJoinVO {
     String user_id;
     int room_id;
+
 }
