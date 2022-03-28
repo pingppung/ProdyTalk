@@ -1,4 +1,4 @@
-package com.example.ProdyTalk.chat.config;
+package com.example.ProdyTalk.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

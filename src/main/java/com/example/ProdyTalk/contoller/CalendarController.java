@@ -21,8 +21,6 @@ public class CalendarController {
 
     @GetMapping("/calendar")
     public List<Calendar> getCalendar() throws Exception{
-        System.out.println("Calendar 불러오기 성공");
-
         return calendarService.getCalendar();
     }
 
