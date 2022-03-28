@@ -1,9 +1,9 @@
 import React from 'react';
 
-function CreateRoom({ room_name, room_type, onChange, onCreate }) {
+function CreateRoom({ room_name, room_type, onChange, onSubmit }) {
     return (
     <div>
-        <form className="container" action="/createroom" method="post">
+        <form onSubmit={onSubmit}>
             <div>
                 <h2>방만들기</h2>
                 <input
