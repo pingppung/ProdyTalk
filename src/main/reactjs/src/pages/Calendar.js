@@ -7,7 +7,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import CalendarService from '../service/CalendarService';
 
 import Modal from './Modal'
-import DetailModal from './DetailModal'
 
 function Calender() {
 
@@ -20,19 +19,6 @@ function Calender() {
     };
     const closeModal = () => {
         setModalOpen(false); // modal close
-    };
-
-    // DetailModal용
-    // open인 경우만 Modal 열림
-    const [detailModalOpen, setDetailModalOpen] = useState(false);
-
-    const openDetailModal = () => {
-        // console.log("detail modal 오픈!");
-        setDetailModalOpen(true); // detail modal open
-    };
-
-    const closeDetailModal = () => {
-        setDetailModalOpen(false); // detail modal close
     };
 
     // Modal에서 add 버튼 클릭 시 실행
@@ -53,9 +39,6 @@ function Calender() {
 
       <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요.">
       </Modal>
-
-      <DetailModal open={detailModalOpen} close={closeDetailModal} header="Event 수정/삭제">
-      </DetailModal>
 
       <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -84,9 +67,6 @@ function Calender() {
         // eventClick={(e) => console.log(e.event.id)}
 
         // 이벤트 클릭 시 DetailModal open
-        eventClick={(e) =>
-            openDetailModal()
-        }
 
         /*
         eventClick={(e) => {
