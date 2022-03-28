@@ -25,6 +25,7 @@ public class GreetingController {
     @Autowired
     ChatMapper chatMapper;
 
+    @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
 

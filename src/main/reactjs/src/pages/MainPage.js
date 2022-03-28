@@ -3,7 +3,7 @@ import Room from '../components/room/Room'
 
 function MainPage() {
     return (
-        <Room />
+         <Room />
     );
 }
 
