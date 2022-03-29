@@ -27,6 +27,7 @@
     "mongoose": "^6.2.7",
     "nodemon": "^2.0.15",
     "npm": "^8.5.5",
+    "openvidu-browser": "^2.21.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.1",
     "react-color-palette": "^6.2.0",

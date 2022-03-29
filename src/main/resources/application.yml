@@ -32,3 +32,5 @@ mybatis:
   default-fetch-size: 500
   mapper-locations: classpath:mybatis/*.xml
 
+jwt:
+  password: testPassword

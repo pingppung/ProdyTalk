@@ -1,14 +1,18 @@
 package com.example.ProdyTalk.mapper;
 
-import java.util.List;
-
-import com.example.ProdyTalk.vo.RoomVO;
+import com.example.ProdyTalk.vo.RoomJoinVO;
+import com.example.ProdyTalk.vo.RoomListVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
 @Mapper
 public interface RoomMapper {
-    void insertRoom(RoomVO room);
-    List<RoomVO> findAll();
+    void insertRoom(RoomListVO room);
+    List<RoomListVO> findAll();
+    List<RoomJoinVO> findInRoom(String user_id);
+    RoomListVO getInRooms(int room_id);
+    public int findIdRoom(RoomListVO room);
+    void joinRoom(RoomJoinVO room);
 }

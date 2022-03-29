@@ -4,13 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ProdyTalk.mapper.RoomMapper">
 
-    <insert id="insertRoom" parameterType="com.example.ProdyTalk.vo.RoomVO">
+    <insert id="insertRoom" parameterType="com.example.ProdyTalk.vo.RoomListVO">
         INSERT INTO room_list(room_name,room_type)
         values(#{room_name},#{room_type})
     </insert>
 
-    <select id="findAll" resultType="com.example.ProdyTalk.vo.RoomVO">
+    <select id="findAll" resultType="com.example.ProdyTalk.vo.RoomListVO">
         SELECT * from room_list
     </select>
 
+    <select id="findIdRoom" resultType="int">
+        SELECT * FROM room_list
+        WHERE room_name = #{room_name}
+    </select>
+
+
+    <select id="joinRoom" parameterType="com.example.ProdyTalk.vo.RoomJoinVO">
+        INSERT INTO room_join(room_id,user_id)
+        values(#{room_id},#{user_id})
+    </select>
+
+    <select id="findInRoom" resultType="com.example.ProdyTalk.vo.RoomJoinVO">
+        SELECT * from room_join
+        WHERE user_id = #{user_id}
+    </select>
+
+    <select id="getInRooms" resultType="com.example.ProdyTalk.vo.RoomListVO">
+        SELECT * from room_list
+        WHERE room_id = #{room_id}
+    </select>
 </mapper>
