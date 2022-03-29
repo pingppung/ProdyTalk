@@ -4,13 +4,19 @@ import com.example.ProdyTalk.chat.vo.MessageVO;
 import com.example.ProdyTalk.mapper.ChatMapper;
 import com.example.ProdyTalk.service.ChatService;
 import com.example.ProdyTalk.vo.UserVO;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,9 +34,19 @@ public class GreetingController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
+    @GetMapping("/api/chatting")
+    public Claims autheddn(HttpServletRequest request) {
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
 
-    @MessageMapping("/chat/{toId}")
-    public void sendMessage(MessageVO messageVO, @DestinationVariable String toId){
+        return Jwts.parser()
+                .setSigningKey("secret") // (3)
+                .parseClaimsJws(token) // (4)
+                .getBody();
+    }
+
+
+    @MessageMapping("/chat/{conversationId}")
+    public void sendMessage(MessageVO messageVO, @DestinationVariable String conversationId){
 
         int messageId=chatService.searchLast();
         messageVO.setMessage_id(messageId+1);
@@ -38,13 +54,8 @@ public class GreetingController {
 
         System.out.println("메시지 내용 저장 성공");
 
-        this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/"+toId,messageVO);
+        this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/"+conversationId,messageVO);
     }
 
-    @MessageMapping("/join")
-    public void joinUser(UserVO userVO) throws Exception {
-        userList.add(userVO.getUser_name());
-        userList.forEach(use->System.out.println(use));
-    }
 
 }

@@ -41,6 +41,10 @@ class HeaderComponent extends Component {
                     <Link to="/"><img src={Logo} alt="logo"/></Link>
                     <div className="user">
                         {username}
+
+                        <Link to="/chat"><button>chatting</button></Link>
+                        /
+                        <Link to="/calendar"><button>calendar</button></Link>
                     </div>
 
                 </header>
