@@ -47,7 +47,6 @@ const Modal = (props) => {
         <div className={open ? 'openModal modal' : 'modal'}>
           {open ? (
             <section>
-
               <header>
                 {header}
                 <button className="close" onClick={close}>

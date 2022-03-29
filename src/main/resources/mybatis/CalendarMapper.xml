@@ -13,5 +13,12 @@
         values (#{title},#{start},#{end},#{color})
     </insert>
 
+    <update id="editEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
+        update calendar set title = #{title} where calendar_id = #{calendar_id};
+    </update>
+
+    <delete id="deleteEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
+        delete from calendar where calendar_id = #{calendar_id};
+    </delete>
 
 </mapper>
