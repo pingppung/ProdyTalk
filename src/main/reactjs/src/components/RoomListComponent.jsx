@@ -1,7 +1,7 @@
 import React,{ Component } from 'react';
-import RoomService from '../../service/RoomService';
+import RoomService from '../service/RoomService';
 
-class RoomList extends Component {
+class RoomListComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -41,4 +41,4 @@ class RoomList extends Component {
     }
 }
 
-export default RoomList;
+export default RoomListComponent;
