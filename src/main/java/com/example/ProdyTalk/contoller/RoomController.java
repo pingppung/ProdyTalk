@@ -36,15 +36,15 @@ public class RoomController {
         String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id",String.class);
         System.out.println(room_id + "   "+ user_id);
 
-       RoomJoinVO join = new RoomJoinVO();
-       join.setRoom_id(room_id);
-       join.setUser_id(user_id);
+        RoomJoinVO join = new RoomJoinVO();
+        join.setRoom_id(room_id);
+        join.setUser_id(user_id);
 
 
-       roomService.joinRoom(join);
+        roomService.joinRoom(join);
 
 
-      //  response.sendRedirect("http://localhost:3000/");
+        //  response.sendRedirect("http://localhost:3000/");
     }
 
 
@@ -69,7 +69,7 @@ public class RoomController {
         System.out.println(rooms);
         return rooms;
 
-      // roomService.getInRooms(roomids);
+        // roomService.getInRooms(roomids);
         //return roomService.getAllRooms();
     }
 
