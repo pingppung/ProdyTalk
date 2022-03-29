@@ -5,19 +5,10 @@ import Main from './pages/MainPage'
 import LoginComponent from './components/LoginComponent'
 import SignupComponent from './components/SignupComponent'
 import Openvidu from './components/VideoRoomComponent'
-
-//import Signup from './pages/SignupPage'
-//import Login from './pages/LoginPage'
 import Chat from './pages/ChatPage'
-//import Chat2 from './components/ChatComponent'
-
 import Calendar from './pages/Calendar'
 
-import ResultSignup from './pages/ResultSignup'
-import ResultLogin from './pages/ResultLogin'
-
 import { Route } from "react-router-dom";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
