@@ -8,4 +8,6 @@ import java.util.List;
 public interface CalendarService {
     public List<Calendar> getCalendar() throws Exception;
     public void addEvent(CalendarVO calendarVO);
+    public void editEvent(CalendarVO calendarVO);
+    public void deleteEvent(CalendarVO calendarVO);
 }

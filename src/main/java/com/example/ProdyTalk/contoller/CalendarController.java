@@ -30,4 +30,15 @@ public class CalendarController {
     public void addEvent(@RequestBody CalendarVO calendarVO) throws Exception{
         calendarService.addEvent(calendarVO);
     }
+
+    @PostMapping("/calendar/edit")
+    public void editEvent(@RequestBody CalendarVO calendarVO) throws Exception{
+        calendarService.editEvent(calendarVO);
+    }
+
+    @PostMapping("/calendar/delete")
+    public void deleteEvent(@RequestBody CalendarVO calendarVO) throws Exception{
+        calendarService.deleteEvent(calendarVO);
+    }
+
 }
