@@ -8,6 +8,7 @@ import CalendarService from '../service/CalendarService';
 import moment from 'moment';
 
 import Modal from './Modal'
+import DetailModal from './DetailModal'
 
 function Calender() {
 
