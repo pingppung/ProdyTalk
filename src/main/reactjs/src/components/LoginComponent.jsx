@@ -69,6 +69,7 @@ class LoginComponent extends Component {
                      </div>
                      <div className="btn">
                          <button type="submit" onClick={this.gotoHome}>로그인</button>
+                         <Link to="/signup"><button>회원가입</button></Link>
                      </div>
                 </form>
             </div>

@@ -1,36 +1,24 @@
-import React from 'react';
+import axios from 'axios';
 
-function CreateRoom({ room_name, room_type, onChange, onSubmit }) {
-    return (
-    <div>
-        <form onSubmit={onSubmit}>
-            <div>
-                <h2>방만들기</h2>
-                <input
-                    name="room_name"
-                    placeholder="방이름"
-                    onChange={onChange}
-                    value={room_name}
-                />
-                <input
-                    type="radio"
-                    name="room_type"
-                    placeholder="방타입"
-                    onChange={onChange}
-                    value="프로젝트"
-                />프로젝트
-                <input
-                    type="radio"
-                    name="room_type"
-                    placeholder="방타입"
-                    onChange={onChange}
-                    value="스터디"
-                />스터디
-                <button type="submit">등록</button>
-            </div>
-        </form>
-    </div>
-    );
+//const ROOM_API_BASE_URL = "http://localhost:8080/roomlist";
+
+class RoomService {
+    getRooms() {
+        return axios.get("/roomlist", {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        });
+    }
+
+    createRoom(room) {
+        return axios.post("/createroom", JSON.stringify(room),{
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+                "Content-Type": 'application/json',
+            },
+        });
+    }
 }
 
-export default CreateRoom;
+export default new RoomService();
