@@ -73,6 +73,18 @@ class VideoRoomComponent extends Component {
         // --- 1) Get an OpenVidu object ---
         this.OV = new OpenVidu();
 
+        let turnUsername = "twomandarin";
+        let turnCredential = 12341234;
+        this.OV.setAdvancedConfiguration({
+            iceServers: [
+                {
+                    urls: "turns:prodytalk.monster:3000?transport=tcp",
+                    username: turnUsername,
+                    credential: turnCredential
+                }
+            ]
+        });
+
         // --- 2) Init a session ---
         this.setState(
             {
