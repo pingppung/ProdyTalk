@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.Calendar;
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class CalendarServiceImpl implements CalendarService {
@@ -22,5 +21,15 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public void addEvent(CalendarVO calendarVO) {
         calendarMapper.addEvent(calendarVO);
+    }
+
+    @Override
+    public void editEvent(CalendarVO calendarVO) {
+        calendarMapper.editEvent(calendarVO);
+    }
+
+    @Override
+    public void deleteEvent(CalendarVO calendarVO) {
+        calendarMapper.deleteEvent(calendarVO);
     }
 }

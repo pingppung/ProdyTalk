@@ -5,20 +5,35 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import CalendarService from '../service/CalendarService';
+import moment from 'moment';
 
 import Modal from './Modal'
+import DetailModal from './DetailModal'
 
 function Calender() {
 
     const [events, setEvents] = useState([]);
-    // open인 경우만 Modal 열림
     const [modalOpen, setModalOpen] = useState(false);
 
+    const[calId, setCalId] = useState(0);
+
     const openModal = () => {
-        setModalOpen(true); // modal open
+        setModalOpen(true);
     };
     const closeModal = () => {
-        setModalOpen(false); // modal close
+        setModalOpen(false);
+    };
+
+    // DetailModal용
+    // open인 경우만 Modal 열림
+    const [detailModalOpen, setDetailModalOpen] = useState(false);
+
+    const openDetailModal = () => {
+        setDetailModalOpen(true); // detail modal open
+    };
+
+    const closeDetailModal = () => {
+        setDetailModalOpen(false); // detail modal close
     };
 
     // Modal에서 add 버튼 클릭 시 실행
@@ -27,10 +42,27 @@ function Calender() {
         setModalOpen(false); // Modal 닫아주기
     };
 
+    // DetailModal에서 수정 버튼 클릭 시 실행
+    const editEvent = (editTitle) => {
+        console.log(editTitle);
+        console.log('로 event title 변경');
+
+        CalendarService.editEvent(calId, editTitle); // events에 수정할 calId, title 전달
+        setDetailModalOpen(false); // Modal 닫아주기
+    };
+
+    // DetailModal에서 삭제 버튼 클릭 시 실행
+    const deleteEvent = () => {
+        console.log(calId);
+        console.log('를 삭제');
+
+        CalendarService.deleteEvent(calId); // 삭제할 event id 전달
+        setDetailModalOpen(false); // Modal 닫아주기
+    };
+
     useEffect(()=> {
         CalendarService.getCalendar().then((res) => {
             setEvents(res.data)
-
         })
     }, [events]);
 
@@ -39,6 +71,9 @@ function Calender() {
 
       <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요.">
       </Modal>
+
+      <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제">
+      </DetailModal>
 
       <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -60,36 +95,25 @@ function Calender() {
             }
         }}
         events={events} // event 전달
+
+
         eventColor="gray"
         nowIndicator
-
-        dateClick={(e) => console.log(e.dateStr)}
+        // dateClick={(e) => console.log(e.dateStr)}
         // eventClick={(e) => console.log(e.event.id)}
 
-        // 이벤트 클릭 시 DetailModal open
+        dateClick={ (e) => openModal() }
 
-        /*
-        eventClick={(e) => {
-            const val = prompt('이벤트의 제목을 수정하세요! 이벤트를 삭제하고 싶은 경우 "delete"를 입력하세요');
-            console.log(e.event.title); // 선택한 이벤트의 title
+        eventClick={ (e) => {
+            // events 배열에서 선택한 event
+            var temp = events.find(function(data){ return (data.title==e.event.title)&&(data.start==moment(e.event.startStr).format("YYYY-MM-DD HH:mm:ss"))});
 
-            if(val) {
-                if('delete' === val) {
-                    console.log('삭제 선택');
-                }
+            const calId = temp.calendar_id // 선택한 event의 calendar_id
+            setCalId(calId)
 
-                else { // title 수정
-                    const temp = events.find(e => e.title === events.event.title); // 선택한 이벤트 찾기
-                    temp.title = val; // 해당 이벤트 입력한 제목으로 수정
-
-                    console.log(val);
-                    console.log('로 제목 수정');
-                    console.log(temp.title);
-                }
-            }
+            openDetailModal()
           }
         }
-        */
 
       />
     </div>

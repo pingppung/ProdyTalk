@@ -13,4 +13,6 @@ import java.util.List;
 public interface CalendarMapper {
     List<Calendar> getCalendar();
     void addEvent(CalendarVO CalendarVO);
+    void editEvent(CalendarVO calendarVO);
+    void deleteEvent(CalendarVO calendarVO);
 }
