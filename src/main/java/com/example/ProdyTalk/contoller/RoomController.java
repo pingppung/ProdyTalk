@@ -64,9 +64,7 @@ public class RoomController {
 
             rooms.add(roomService.getInRooms(room_id));
             System.out.println(roomService.getInRooms(room_id));
-
         }
-        System.out.println(rooms);
         return rooms;
 
         // roomService.getInRooms(roomids);

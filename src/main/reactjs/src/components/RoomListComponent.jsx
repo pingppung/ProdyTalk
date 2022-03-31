@@ -1,44 +1,31 @@
-import React,{ Component } from 'react';
+import React,{ useState, useEffect } from 'react';
 import RoomService from '../service/RoomService';
+import RoomCircle from './room/RoomCircle.jsx';
 
-class RoomListComponent extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            rooms: []
-        }
-    }
-    componentDidMount(){
+function RoomListComponent() {
+
+    const [rooms,setRooms]=useState([]);
+
+    useEffect(() => {
         RoomService.getRooms().then((res) => {
-            this.setState({rooms: res.data});
-        });
-    }
+            setRooms(res.data);
+        })
 
-    render() {
-        return (
-            <table className="roomlist">
-                <thead>
-                    <tr>
-                        <th>방 번호</th>
-                        <th>방 이름 </th>
-                        <th>방 유형 </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        this.state.rooms.map(
-                            room =>
-                                <tr key = {room.room_number}>
-                                    <td> {room.room_number} </td>
-                                    <td> {room.room_name} </td>
-                                    <td> {room.room_type} </td>
-                                    </tr>
-                        )
-                    }
-                </tbody>
-            </table>
-        );
-    }
+    },[setRooms]);
+
+
+    return (
+        <div style={{ display: 'flex', flexDirection: 'row'}}>
+            {rooms.map(room =>
+
+                <RoomCircle title={room.room_name} />
+
+                )
+            }
+        </div>
+
+    );
+
 }
 
 export default RoomListComponent;
