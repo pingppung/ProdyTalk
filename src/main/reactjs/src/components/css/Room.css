@@ -23,8 +23,14 @@
 
 }
 
-h3#type{
-    padding-left:100px;
-    padding-bottom:40px;
+h3{
+    color:black;
+    font-family:'lefery';
+
+}
+
+@font-face {
+    font-family: 'lefery';
+    src: url('../../pages/css/LeferiBaseBold.ttf') format('truetype');
 }
 
