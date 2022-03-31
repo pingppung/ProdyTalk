@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import {useState} from 'react';
-import './css/Modal.css';
+import '../css/Modal.css';
 
 const DetailModal = (props) => {
 
