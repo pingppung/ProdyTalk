@@ -5,7 +5,6 @@
   border-radius: 50%;
   background-color: ivory;
   text-align:center;
-  padding : 80px 0;
   margin:20px;
 
     cursor: default;
@@ -17,5 +16,15 @@
       user-select: none;
 }
 
+#room {
+    padding:90px 0;
+    padding-left:30px;
+    padding-right:30px;
 
+}
+
+h3#type{
+    padding-left:100px;
+    padding-bottom:40px;
+}
 
