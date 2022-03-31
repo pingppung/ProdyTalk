@@ -91,3 +91,8 @@
     opacity: 1;
   }
 }
+
+label {
+    padding-left: 20px;
+
+}

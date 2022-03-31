@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import CalendarService from '../service/CalendarService';
 
-import Modal from './Modal'
+import Modal from '../components/calendar/Modal'
 
 function Calender() {
 
