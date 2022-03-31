@@ -51,9 +51,7 @@ class HeaderComponent extends Component {
                         {username}
                         <Link to="/chat"><Button>chatting</Button></Link>
                         /
-                        <Link to="/calendar"><button>calendar</button></Link>
-                        /
-                        <Link to="/roomenter"><button>roomenter</button></Link>
+                        <Link to="/calendar"><Button>calendar</Button></Link>
                         /
                         <Link to="/calendar"><Button>calendar</Button></Link>
                     </div>
