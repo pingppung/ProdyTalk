@@ -14,7 +14,9 @@
     </insert>
 
     <update id="editEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
-        update calendar set title = #{title} where calendar_id = #{calendar_id};
+        update calendar
+        set title = #{title}, start = #{start}, end = #{end}, color = #{color}
+        where calendar_id = #{calendar_id};
     </update>
 
     <delete id="deleteEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
