@@ -27,9 +27,8 @@ class HeaderComponent extends Component {
     render(){
 
         const imagestyle = {
-         margin:400,
          height:200,
-         width:200
+         width:180
         };
 
         const isLoggedIn = this.state.isLoggedIn;
@@ -44,7 +43,9 @@ class HeaderComponent extends Component {
                      </div>
         }
         return (
+
                 <header>
+
                     <h3>Project&Study Talk Web</h3>
                     <Link to="/"><img src={Logo} alt="logo" style={imagestyle}/></Link>
                     <div className="user">

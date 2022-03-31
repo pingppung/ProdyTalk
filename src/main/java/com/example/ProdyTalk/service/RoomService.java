@@ -19,7 +19,7 @@ public interface RoomService {
 
     public List<RoomJoinVO> findInRoom(String user_id);
     //유저가 속해있는 방 리스트 불러오기
-    public RoomListVO getInRooms(int room_id);
+    public List<RoomListVO> getInRooms(int[] room_id);
 
 
 
