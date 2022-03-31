@@ -21,6 +21,7 @@ function App() {
            <Route exact path="/video" component={Openvidu} />
            <Route exact path="/chat" component={Chat} />
            <Route exact path="/calendar" component={Calendar} />
+
         </div>
 
     );
