@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import {useState} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button} from '@material-ui/core';
+import SendIcon from '@mui/icons-material/Send';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import Message from "../components/chat/Message.js";
@@ -92,13 +93,13 @@ function Chat() {
                         <div className="form-group">
                             <label>구독할 채팅방 이름</label>
                             <input onChange={changeConversationId} value={conversationId} placeholder="chatRoom.." />
-                            <button onClick={onChangeNum} className="btn btn-default" type="button">등록</button>
+                            <Button variant="contained" color="primary" onClick={onChangeNum}>등록</Button>
                         </div>
 
                         <div className="form-group">
                             <label>메시지 입력</label>
                             <input onChange={changeMessage} value={chatMessage} placeholder="message.." />
-                            <button onClick={onChatMessage} className="btn btn-default" type="button">보내기</button>
+                            <Button variant="contained" color="primary" onClick={onChatMessage}>보내기</Button>
                         </div>
                     </form>
                     <div className="box-container">
