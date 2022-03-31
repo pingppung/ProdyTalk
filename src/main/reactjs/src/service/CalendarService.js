@@ -22,10 +22,13 @@ class CalendarService {
 
     }
 
-    editEvent(calId, editTitle) {
+    editEvent(calId, editTitle, startDate, endDate, color) {
         axios.post(CALENDAREDIT_API_BASE_URL, {
             calendar_id : calId,
-            title : editTitle
+            title : editTitle,
+            start: startDate,
+            end: endDate,
+            color: color
         })
     }
 
