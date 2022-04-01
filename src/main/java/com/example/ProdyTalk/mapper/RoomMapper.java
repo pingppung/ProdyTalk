@@ -12,7 +12,7 @@ public interface RoomMapper {
     void insertRoom(RoomListVO room);
     List<RoomListVO> findAll();
     List<RoomJoinVO> findInRoom(String user_id);
-    RoomListVO getInRooms(int room_id);
+    List<RoomListVO> getInRooms(int[] room_id);
     public int findIdRoom(RoomListVO room);
     void joinRoom(RoomJoinVO room);
 }

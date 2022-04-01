@@ -6,9 +6,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import CalendarService from '../service/CalendarService';
 import moment from 'moment';
+import DetailModal from '../components/calendar/DetailModal'
+import Modal from '../components/calendar/Modal'
 
-import Modal from './Modal'
-import DetailModal from './DetailModal'
 
 function Calender() {
 
