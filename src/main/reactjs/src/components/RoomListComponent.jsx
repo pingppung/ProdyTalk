@@ -8,6 +8,7 @@ function RoomListComponent() {
 
     useEffect(() => {
         RoomService.getRooms().then((res) => {
+            console.log(res);
             setRooms(res.data);
         })
 
@@ -18,7 +19,7 @@ function RoomListComponent() {
         <div style={{ display: 'flex', flexDirection: 'row'}}>
             {rooms.map(room =>
 
-                <RoomCircle title={room.room_name} />
+                <RoomCircle data={room} />
 
                 )
             }
