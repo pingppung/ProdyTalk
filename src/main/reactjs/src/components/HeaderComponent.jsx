@@ -52,8 +52,6 @@ class HeaderComponent extends Component {
                         <Link to="/chat"><Button>chatting</Button></Link>
                         /
                         <Link to="/calendar"><Button>calendar</Button></Link>
-                        /
-                        <Link to="/calendar"><Button>calendar</Button></Link>
                     </div>
 
                 </header>
