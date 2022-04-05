@@ -49,9 +49,6 @@ class HeaderComponent extends Component {
                 </div>
                 <div className="navi">
                     {username}
-                    <Link to="/chat"><Button>chatting</Button></Link>
-                    /
-                    <Link to="/calendar"><Button>calendar</Button></Link>
                 </div>
             </div>
         );

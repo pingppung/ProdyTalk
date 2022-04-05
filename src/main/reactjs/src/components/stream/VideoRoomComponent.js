@@ -78,7 +78,7 @@ class VideoRoomComponent extends Component {
         this.OV.setAdvancedConfiguration({
             iceServers: [
                 {
-                    urls: "turns:prodytalk.monster:3000?transport=tcp",
+                    urls: "turns:pingppung.xyz:8443?transport=tcp",
                     username: turnUsername,
                     credential: turnCredential
                 }
