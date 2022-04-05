@@ -44,7 +44,8 @@ public class RoomServicelmpl implements RoomService {
     }
 
     @Override
-    public RoomListVO getInRooms(int room_id) {
+    public List<RoomListVO> getInRooms(int[] room_id) {
+
         return roomMapper.getInRooms(room_id);
     }
 

@@ -1,0 +1,58 @@
+.background {
+	height: 100vh;
+	background-image: url( "../../components/image/background.png" );
+	animation: bg-pan-right 15s infinite both;
+    text-align: center;
+
+	cursor: default;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+}
+
+ .logo {
+        margin:50px;
+        text-align: center;
+        display: inline-block;
+        width:220px;
+        height: 200px;
+        border: 6px solid white;
+    }
+.font{
+    font-size:50px;
+    color:white;
+    font-family:'lefery';
+
+  }
+.button{
+    margin:50px;
+
+}
+.smallfont{
+    font-family:'lefery';
+    font-size:20px;
+
+}
+
+
+
+@keyframes bg-pan-right {
+  0% {
+    background-position: 0% 90%;
+  }
+
+  50% {
+    background-position: 100% 10%
+  }
+  100% {
+    background-position: 0% 10%
+  }
+}
+
+@font-face {
+    font-family: 'lefery';
+    src: url('./LeferiBaseBold.ttf') format('truetype');
+}

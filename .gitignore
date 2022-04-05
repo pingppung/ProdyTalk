@@ -5,6 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+#keystore.p12 파일
+*.p12
+
 ### STS ###
 .apt_generated
 .classpath
