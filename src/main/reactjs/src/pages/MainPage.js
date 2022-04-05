@@ -16,11 +16,6 @@ function MainPage() {
                 <div>
                     <RoomListComponent />
                 </div>
-            </Box>
-            <div>
-                <Link to="/chat"><button>chatting</button></Link>
-                /
-                <Link to="/calendar"><button>calendar</button></Link>
             </div>
         </div>
     );
