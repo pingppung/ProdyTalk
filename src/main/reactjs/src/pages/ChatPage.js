@@ -10,7 +10,7 @@ import ChatService from "../service/ChatService.js";
 
 function Chat() {
 
-    const sock = new SockJS('http://localhost:8080/chat')
+    const sock = new SockJS('https://prodytalk.monster:3000/chat')
     const client=Stomp.over(sock);
 
     const [id,setId]=useState("");
