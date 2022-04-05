@@ -5,10 +5,10 @@ import P from "../image/p.png"
 import S from "../image/s.png"
 
 function RoomCircle(props) {
-
+    console.log(props);
     var roomtype;
 
-    if(props.type==="프로젝트")
+    if(props.data.type==="프로젝트")
         roomtype="p"
     else roomtype="s"
 
@@ -16,11 +16,10 @@ function RoomCircle(props) {
              height:80,
              width:80,
              marginLeft:120
-            };
+    };
 
 
     return (
-
         <label>
             <div id="circle">
             {
