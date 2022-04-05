@@ -8,7 +8,7 @@ function RoomCircle(props) {
     console.log(props);
     var roomtype;
 
-    if(props.data.type==="프로젝트")
+    if(props.type==="프로젝트")
         roomtype="p"
     else roomtype="s"
 
