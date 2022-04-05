@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import UserService from '../service/UserService'
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import './css/Login.css';
 
 //function LoginForm({ user_id, user_pwd, onChange,onCreate }) {
 class LoginComponent extends Component {
@@ -45,32 +48,46 @@ class LoginComponent extends Component {
         }
     render(){
         return (
-            <div>
+            <div className="form">
                 <form>
-                     <div>
-                         <label>아이디</label>
-                         <input
-                            type="text"
+                <h1 className="loginText">
+                    로그인
+                </h1>
+                <div>
+                    <div className="login">
+                        <label>아이디</label>
+                    </div>
+                    <div className="loginField">
+                        <input type="text"
+                            required="required"
+                            autofocus="autofocus"
                             name="user_id"
-                            placeholder="유저 아이디"
+                            placeholder="  아이디"
                             onChange={this.handleIdChange}
+                        />
+                    </div>
 
-                         />
-                     </div>
-
-                     <div>
-                         <label>비밀번호</label>
-                         <input
-                            type="text"
+                    <div className="password">
+                        <label>비밀번호</label>
+                    </div>
+                    <div className="passwordField">
+                        <input type="text"
+                            required="required"
                             name="user_pwd"
-                            placeholder="유저 비밀번호"
+                            placeholder="  비밀번호"
                             onChange={this.handlePwdChange}
-                         />
+                        />
+                    </div>
+
+                     <div className="loginBtn">
+                         <button type="submit" onClick={this.gotoHome} >로그인 하기</button>
                      </div>
-                     <div className="btn">
-                         <button type="submit" onClick={this.gotoHome}>로그인</button>
-                         <Link to="/signup"><button>회원가입</button></Link>
+
+                     <div className="signupBtn">
+                         아직 계정이 없으신가요?
+                         <a href="/signup">회원 가입</a>
                      </div>
+                </div>
                 </form>
             </div>
         );

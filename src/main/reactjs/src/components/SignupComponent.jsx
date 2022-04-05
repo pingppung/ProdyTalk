@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserService from '../service/UserService'
+import './css/Signup.css';
 
 class SignupComponent extends Component {
     constructor(props) {
@@ -52,53 +53,67 @@ class SignupComponent extends Component {
         return (
             <div>
                 <form>
-                     <div>
+                <h1 className="signupText">
+                    회원가입
+                </h1>
+                     <div className="id">
                          <label>아이디</label>
+                     </div>
+                     <div className="field">
                          <input
                             type="text"
                             name="user_id"
-                            placeholder="유저 아이디"
+                            placeholder="  아이디"
+                            autofocus="autofocus"
                             onChange={this.handleIdChange}
                          />
                      </div>
 
-                     <div>
+                     <div className="textLabel">
                          <label>비밀번호</label>
+                     </div>
+                     <div className="field">
                          <input
                             type="text"
                             name="user_pwd"
-                            placeholder="유저 비밀번호"
+                            placeholder="  비밀번호"
                             onChange={this.handlePwdChange}
                          />
                      </div>
-                     <div>
+                     <div className="textLabel">
                          <label>닉네임</label>
+                     </div>
+                     <div className="field">
                          <input
                             type="text"
                             name="user_name"
-                            placeholder="유저 닉네임"
+                            placeholder="  닉네임"
                             onChange={this.handleNameChange}
                          />
                      </div>
-                     <div>
+                     <div className="textLabel">
                           <label>이메일</label>
+                     </div>
+                     <div className="field">
                           <input
                              type="text"
                              name="user_email"
-                             placeholder="유저 이메일"
+                             placeholder="  이메일"
                              onChange={this.handleEmailChange}
                           />
                      </div>
-                     <div>
+                     <div className="textLabel">
                           <label>전화번호</label>
+                     </div>
+                     <div className="field">
                           <input
                              type="text"
                              name="user_phone"
-                             placeholder="유저 전화번호"
+                             placeholder="  전화번호"
                              onChange={this.handlePhoneChange}
                           />
                       </div>
-                     <div className="btn">
+                     <div className="signupBtn">
                          <button type="submit" onClick={this.gotoLogin}>회원가입</button>
                      </div>
                 </form>
