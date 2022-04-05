@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin(origins="*",maxAge = 3600)
@@ -50,27 +51,18 @@ public class RoomController {
 
     @GetMapping("/roomlist")
     public List<RoomListVO> getAllRooms(HttpServletRequest request) {
-        System.out.println("Room List 불러오기 성공");
 
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
         String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id",String.class);
 
         List<RoomJoinVO> room_ids = roomService.findInRoom(user_id);
+        int[] room_id=new int[room_ids.size()];
 
-        List<RoomListVO> rooms = new ArrayList<>();
-        for (RoomJoinVO roomjoinVO : room_ids) {
-            int room_id = roomjoinVO.getRoom_id();
-            System.out.println(room_id);
-
-            rooms.add(roomService.getInRooms(room_id));
-            System.out.println(roomService.getInRooms(room_id));
-
+        for (int i=0; i<room_ids.size(); i++) {
+            room_id[i]=room_ids.get(i).getRoom_id();
         }
-        System.out.println(rooms);
-        return rooms;
 
-        // roomService.getInRooms(roomids);
-        //return roomService.getAllRooms();
+        return roomService.getInRooms(room_id);
     }
 
 }

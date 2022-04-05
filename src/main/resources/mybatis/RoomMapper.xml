@@ -31,6 +31,9 @@
 
     <select id="getInRooms" resultType="com.example.ProdyTalk.vo.RoomListVO">
         SELECT * from room_list
-        WHERE room_id = #{room_id}
+        WHERE room_id IN
+            <foreach collection="array" item="room_id"  open="(" close=")" separator=",">
+                #{room_id}
+            </foreach>
     </select>
 </mapper>

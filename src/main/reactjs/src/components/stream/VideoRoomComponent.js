@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
-import UserVideoComponent from './stream/UserVideoComponent';
+import UserVideoComponent from './UserVideoComponent';
 
 const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':4443';
 const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
@@ -72,6 +72,18 @@ class VideoRoomComponent extends Component {
     joinSession() {
         // --- 1) Get an OpenVidu object ---
         this.OV = new OpenVidu();
+
+        let turnUsername = "twomandarin";
+        let turnCredential = 12341234;
+        this.OV.setAdvancedConfiguration({
+            iceServers: [
+                {
+                    urls: "turns:prodytalk.monster:3000?transport=tcp",
+                    username: turnUsername,
+                    credential: turnCredential
+                }
+            ]
+        });
 
         // --- 2) Init a session ---
         this.setState(
