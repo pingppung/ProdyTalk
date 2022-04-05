@@ -33,19 +33,24 @@ class HeaderComponent extends Component {
 
         const isLoggedIn = this.state.isLoggedIn;
         let username;
-
+        if (isLoggedIn) {
+          username = <div className="username">{this.state.id}</div>
+        } else {
+          username = <div className="btn">
+                        <Link to="/signup"><Button>sign up</Button></Link>
+                        /
+                        <Link to="/login"><Button>login</Button></Link>
+                     </div>
+        }
         return (
-        <div className="body">
-            <div className="mainlogo">
-                <Link to="/main"><img src={Logo} alt="logo" style={imagestyle}/></Link>
+            <div className="body">
+                <div className="mainlogo">
+                    <Link to="/main"><img src={Logo} alt="logo" style={imagestyle}/></Link>
+                </div>
+                <div className="navi">
+                    {username}
+                </div>
             </div>
-            <div className="navi">
-                {username}
-                <Link to="/chat"><Button>chatting</Button></Link>
-                /
-                <Link to="/calendar"><Button>calendar</Button></Link>
-            </div>
-        </div>
         );
     }
 }
