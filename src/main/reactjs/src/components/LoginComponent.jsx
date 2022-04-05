@@ -35,7 +35,7 @@ class LoginComponent extends Component {
                     console.log(response.data);
                     UserService.fetchToken(response.data);
                     localStorage.setItem("user", JSON.stringify(response.data));
-                    this.props.history.push("/");
+                    this.props.history.push("/main");
                   })
                   .catch((error) => {
                     console.log("error");

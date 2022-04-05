@@ -1,17 +1,38 @@
 import '../css/Room.css';
-import React from 'react';
+import {React,useState} from 'react';
 import { Link,withRouter } from "react-router-dom";
+import P from "../image/p.png"
+import S from "../image/s.png"
 
 function RoomCircle(props) {
+    console.log(props);
+    var roomtype;
+
+    if(props.data.type==="프로젝트")
+        roomtype="p"
+    else roomtype="s"
+
+    const imagestyle = {
+             height:80,
+             width:80,
+             marginLeft:120
+    };
+
 
     return (
-    <Link to="/roomenter">
         <label>
             <div id="circle">
-                <h3>{props.title}</h3>
+            {
+                props.type === "프로젝트"
+                ? <img src={P} alt="p" style={imagestyle} />
+                : <img src={S} alt="s" style={imagestyle} />
+                }
+                <Link to={`/roomenter/${props.data.room_id}`} style={{ textDecoration: 'none' }}>
+                <h3>{props.data.room_name}</h3>
+                </Link>
             </div>
         </label>
-    </Link>
+
 
     );
 }
