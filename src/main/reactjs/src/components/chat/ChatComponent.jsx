@@ -3,8 +3,8 @@ import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import Message from "../components/chat/Message.js";
-import LeftMessage from "../components/chat/LeftMessage.js";
+import Message from "./Message.js";
+import LeftMessage from "./LeftMessage.js";
 
 function Chat() {
 

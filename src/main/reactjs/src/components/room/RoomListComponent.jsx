@@ -24,7 +24,7 @@ function RoomListComponent() {
             </div>
             {rooms.map(room =>
 
-                <RoomCircle title={room.room_name} type={room.room_type} />
+                <RoomCircle title={room.room_name} type={room.room_type} id={room.room_id}/>
 
                 )
             }

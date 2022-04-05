@@ -1,39 +1,37 @@
 import React, { useState, Component } from 'react';
+import {useLocation} from 'react-router-dom';
+import {useEffect} from 'react';
+import ChatPage from '../../pages/ChatPage';
+import {Button} from '@material-ui/core';
 
-class RoomEnter extends Component {
-    //데베에서 불러와서 text에 넣어야돼..!
-    constructor(props) {
-        super(props);
-        this.state = {
-            num: "num",
-            nicknames: "nicknames",
-            memo: "memo"
-        };
+function RoomEnter() {
+
+    const location=useLocation()
+    const id=location.state
+    const [chat,setChat]=useState(false)
+
+    const onChat = () => {
+        if(chat===false){
+            setChat(true)
+        }else {
+            setChat(false);
+        }
     }
 
-    render(){
-        return (
-            <div>
-                <button>프로젝트 정보</button>
-                <button>팀별 캘린더</button>
-                <button>파일공유</button>
-                <button>그룹채팅</button>
-                <button>화상채팅</button>
-                    <div className="ProjectInformation">
-                        <h1>팀별 인원수</h1>
-                        <h1>{this.state.num}</h1>
-                    </div>
-                    <div>
-                         <h1>팀원 닉네임</h1>
-                         <h1>{this.state.nicknames}</h1>
-                    </div>
-                    <div>
-                         <h1>프로젝트 요약</h1>
-                         <h1>{this.state.memo}</h1>
-                    </div>
-            </div>
-        );
-    }
+    console.log(`${id}번 방입니다!`)
+
+
+    return(
+        <div>
+            <Button>프로젝트 정보</Button>
+            <Button>팀별 캘린더</Button>
+            <Button>파일공유</Button>
+            <Button>화상채팅</Button>
+            <Button variant="contained" color="primary" onClick={onChat}>그룹채팅</Button>
+
+            {chat && <ChatPage id={id}/>}
+        </div>
+    )
 }
 
-export default RoomEnter;
+export default RoomEnter
