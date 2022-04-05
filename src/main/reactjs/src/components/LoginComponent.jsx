@@ -86,15 +86,11 @@ class LoginComponent extends Component {
                      <div className="signupBtn">
                          아직 계정이 없으신가요?
                          <a href="/signup">회원 가입</a>
-
-                     <div className="btn">
-                         <button type="submit" onClick={this.gotoHome}>로그인</button>
-                     </div>
+                    </div>
                 </div>
                 </form>
             </div>
         );
     }
 }
-
 export default LoginComponent;
