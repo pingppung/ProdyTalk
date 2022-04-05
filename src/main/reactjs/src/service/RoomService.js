@@ -1,6 +1,6 @@
 import axios from 'axios';
-const ROOM_API_BASE_URL = "http://localhost:8080/room";
-const ROOMList_API_BASE_URL = "http://localhost:8080/room/roomlist";
+const ROOM_API_BASE_URL = "https://pingppung.xyz:8080/room";
+const ROOMList_API_BASE_URL = "https://pingppung.xyz:8080/room/roomlist";
 
 class RoomService {
     getRooms() {

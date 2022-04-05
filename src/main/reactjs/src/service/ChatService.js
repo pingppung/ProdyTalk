@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const CHAT_API_BASE_URL = "http://localhost:8080";
+const CHAT_API_BASE_URL = "https://pingppung.xyz:8080";
 
 class ChatService {
 
