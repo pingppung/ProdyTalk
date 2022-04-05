@@ -8,7 +8,7 @@ import LeftMessage from "../components/chat/LeftMessage.js";
 
 function Chat() {
 
-    const sock = new SockJS('http://localhost:8080/chat')
+    const sock = new SockJS('http://prodytalk.monster:8080/chat')
     const client=Stomp.over(sock);
 
     const [userId,setUserId]=useState("");
