@@ -11,6 +11,7 @@ function RoomListComponent() {
 
     useEffect(() => {
         RoomService.getRooms().then((res) => {
+            console.log(res);
             setRooms(res.data);
         })
 
@@ -23,15 +24,11 @@ function RoomListComponent() {
                 <RoomCreate />
             </div>
             {rooms.map(room =>
-
                 <RoomCircle title={room.room_name} type={room.room_type} id={room.room_id}/>
-
-                )
-            }
-
+                )}
         </div>
 
-    );
+    )
 
 }
 
