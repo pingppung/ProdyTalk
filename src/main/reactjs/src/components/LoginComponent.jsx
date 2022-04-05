@@ -38,7 +38,7 @@ class LoginComponent extends Component {
                     console.log(response.data);
                     UserService.fetchToken(response.data);
                     localStorage.setItem("user", JSON.stringify(response.data));
-                    this.props.history.push("/");
+                    this.props.history.push("/main");
                   })
                   .catch((error) => {
                     console.log("error");
@@ -86,6 +86,9 @@ class LoginComponent extends Component {
                      <div className="signupBtn">
                          아직 계정이 없으신가요?
                          <a href="/signup">회원 가입</a>
+
+                     <div className="btn">
+                         <button type="submit" onClick={this.gotoHome}>로그인</button>
                      </div>
                 </div>
                 </form>
