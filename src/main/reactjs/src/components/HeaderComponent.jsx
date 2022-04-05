@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/Header.css';
-import Logo from "./image/Logo.png";
+import Logo from "./image/LogoWhite.png";
 import {Button} from '@material-ui/core';
 import { Link,withRouter } from "react-router-dom";
 import User from "./image/UserIcon.png";

@@ -28,7 +28,11 @@ function RoomCircle(props) {
                 ? <img src={P} alt="p" style={imagestyle} />
                 : <img src={S} alt="s" style={imagestyle} />
                 }
-                <Link to="/roomenter" style={{ textDecoration: 'none' }}>
+                <Link to={{
+                        pathname:`/roomenter/${props.id}`,
+                        state:`${props.id}`
+                        }}
+                    style={{ textDecoration: 'none' }}>
                 <h3>{props.title}</h3>
                 </Link>
             </div>

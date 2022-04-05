@@ -8,7 +8,7 @@ import Message from "../components/chat/Message.js";
 import LeftMessage from "../components/chat/LeftMessage.js";
 import ChatService from "../service/ChatService.js";
 
-function Chat() {
+function Chat(props) {
 
     const sock = new SockJS('http://localhost:8080/chat')
     const client=Stomp.over(sock);
@@ -19,7 +19,6 @@ function Chat() {
     const [message,setMessage]=useState(null);
     const [children, setChildren]=useState([]);
     const [chatMessage,setchatMessage] = useState("");
-    const [conversationId, setConversationId]=useState("");
     const [changeNum,setChangeNum]=useState(1);
 
 
@@ -27,15 +26,9 @@ function Chat() {
         setchatMessage(e.target.value);
         }; //input 입력시 chatMessage state 변경
 
-    const changeConversationId = (e) => {
-        setConversationId(e.target.value);
-        }; //input 입력시 conversationId state 변경
-
     const onChangeNum = () => {
         setChangeNum(changeNum+1)
     }
-
-
 
     useEffect(()=>{
         ChatService.getUserName().then(res => {
@@ -43,7 +36,7 @@ function Chat() {
             setId(res.data.id) //id에 token id 넣기
         });
         client.connect({}, () =>{
-            client.subscribe('/queue/addChatToClient/'+conversationId, (messageVO) => { //
+            client.subscribe('/queue/addChatToClient/'+props.id, (messageVO) => { //
                 setUserId(JSON.parse(messageVO.body).user_id)
                 setMessage(JSON.parse(messageVO.body).content)
                 setMessageId(JSON.parse(messageVO.body).message_id)
@@ -54,12 +47,12 @@ function Chat() {
                 client.unsubscribe('sub-0');
             })
         }
-    }, [changeNum]) //conversationId가 변경될때 한번만 실행하도록 버튼을 누르면 changeNum이 변하도록 함
+    }, []) //conversationId가 변경될때 한번만 실행하도록 버튼을 누르면 changeNum이 변하도록 함
 
 
     const onChatMessage = () => {
         console.log(id)
-        client.send(`/app/chat/${conversationId}`,{},JSON.stringify({'user_id':id, 'content':chatMessage}))
+        client.send(`/app/chat/${props.id}`,{},JSON.stringify({'user_id':id, 'content':chatMessage}))
         //conversationId로 메세지를 보내면서, user_id와 content를 포함
          setChildren([
                             ...children,
@@ -89,13 +82,6 @@ function Chat() {
             <div className="row">
                 <div className="col-md-6">
                     <form className="form-inline">
-
-                        <div className="form-group">
-                            <label>구독할 채팅방 이름</label>
-                            <input onChange={changeConversationId} value={conversationId} placeholder="chatRoom.." />
-                            <Button variant="contained" color="primary" onClick={onChangeNum}>등록</Button>
-                        </div>
-
                         <div className="form-group">
                             <label>메시지 입력</label>
                             <input onChange={changeMessage} value={chatMessage} placeholder="message.." />

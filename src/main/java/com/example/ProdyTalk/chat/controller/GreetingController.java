@@ -46,10 +46,11 @@ public class GreetingController {
 
 
     @MessageMapping("/chat/{conversationId}")
-    public void sendMessage(MessageVO messageVO, @DestinationVariable String conversationId){
+    public void sendMessage(MessageVO messageVO, @DestinationVariable int conversationId){
 
         int messageId=chatService.searchLast();
         messageVO.setMessage_id(messageId+1);
+        messageVO.setConversation_id(conversationId);
         chatService.insertMessage(messageVO);
 
         System.out.println("메시지 내용 저장 성공");

@@ -20,7 +20,7 @@ function App() {
            <Route exact path="/main" component={Main} />
            <Route exact path="/signup" component={SignupComponent} />
            <Route exact path="/login" component={LoginComponent} />
-           <Route exact path="/roomenter" component={RoomEnter} />
+           <Route exact path="/roomenter/:id" component={RoomEnter} />
            <Route exact path="/video" component={Openvidu} />
            <Route exact path="/chat" component={Chat} />
            <Route exact path="/calendar" component={Calendar} />
