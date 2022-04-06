@@ -1,18 +1,13 @@
 import axios from 'axios';
-const CALENDAR_API_BASE_URL = "http://localhost:8080/calendar";
-const CALENDARADD_API_BASE_URL = "http://localhost:8080/calendar/add";
-
-const CALENDAREDIT_API_BASE_URL = "http://localhost:8080/calendar/edit";
-const CALENDARREMOVE_API_BASE_URL = "http://localhost:8080/calendar/delete";
 
 class CalendarService {
 
     getCalendar() {
-        return axios.get(CALENDAR_API_BASE_URL);
+        return axios.get("/calendar");
     }
 
     addEvent(content,startDate,endDate,color) {
-        axios.post(CALENDARADD_API_BASE_URL, {
+        axios.post("/calendar/add", {
             title: content,
             start: startDate,
             end: endDate,
@@ -24,6 +19,8 @@ class CalendarService {
 
     editEvent(calId, editTitle, startDate, endDate, color) {
         axios.post(CALENDAREDIT_API_BASE_URL, {
+    editEvent(calId, editTitle) {
+        axios.post("/calendar/edit", {
             calendar_id : calId,
             title : editTitle,
             start: startDate,
@@ -33,7 +30,7 @@ class CalendarService {
     }
 
     deleteEvent(calId) {
-        axios.post(CALENDARREMOVE_API_BASE_URL, {
+        axios.post("/calendar/delete", {
             calendar_id : calId
         })
     }

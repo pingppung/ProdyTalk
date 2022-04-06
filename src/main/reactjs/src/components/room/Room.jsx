@@ -60,7 +60,6 @@ function Room() {
                 onChange={onChange}
                 onSubmit={onSubmit}
             />}
-            {}
         </div>
     );
 }
