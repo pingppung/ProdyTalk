@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = "http://localhost:8080";
-
 class UserService {
     fetchToken(token) {
         localStorage.setItem("token", token);
@@ -17,7 +15,6 @@ class UserService {
     }
 
     Signup(user) {
-    //    return axios.post("http://localhost:3000/signup", user, {contentType: 'application/json'});
         return axios.post("/signup", JSON.stringify(user), {
         	headers: { "Content-Type": `application/json`}
             }
