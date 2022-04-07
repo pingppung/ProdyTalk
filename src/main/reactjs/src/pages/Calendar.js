@@ -10,6 +10,7 @@ import DetailModal from '../components/calendar/DetailModal'
 import Modal from '../components/calendar/Modal'
 
 
+
 function Calender(props) {
 
     const [events, setEvents] = useState([]);
@@ -43,11 +44,8 @@ function Calender(props) {
     };
 
     // DetailModal에서 수정 버튼 클릭 시 실행
-    const editEvent = (editTitle) => {
-        console.log(editTitle);
-        console.log('로 event title 변경');
-
-        CalendarService.editEvent(calId, editTitle); // events에 수정할 calId, title 전달
+    const editEvent = (editTitle, startDate, endDate, color) => {
+        CalendarService.editEvent(calId, editTitle, startDate, endDate, color); // events에 수정할 calId, title 전달
         setDetailModalOpen(false); // Modal 닫아주기
     };
 
