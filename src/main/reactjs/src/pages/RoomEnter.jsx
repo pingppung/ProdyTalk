@@ -44,7 +44,7 @@ function RoomEnter() {
 
             {chat && <ChatPage id={id}/>}
             <div className="calendar">
-                {calendar && <Calendar />}
+                {calendar && <Calendar roomId={id}/>}
             </div>
         </div>
     )

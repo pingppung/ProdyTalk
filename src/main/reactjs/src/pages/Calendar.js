@@ -10,7 +10,7 @@ import DetailModal from '../components/calendar/DetailModal'
 import Modal from '../components/calendar/Modal'
 
 
-function Calender() {
+function Calender(props) {
 
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
@@ -38,7 +38,7 @@ function Calender() {
 
     // Modal에서 add 버튼 클릭 시 실행
     const addModal = (content, startDate, endDate, color) => {
-        CalendarService.addEvent(content, startDate, endDate, color); // events에 전달받은 이벤트 추가해주기
+        CalendarService.addEvent(content, startDate, endDate, color, props.roomId); // events에 전달받은 이벤트 추가해주기
         setModalOpen(false); // Modal 닫아주기
     };
 
@@ -61,7 +61,7 @@ function Calender() {
     };
 
     useEffect(()=> {
-        CalendarService.getCalendar().then((res) => {
+        CalendarService.getCalendar(props.roomId).then((res) => {
             setEvents(res.data)
         })
     }, [events]);
