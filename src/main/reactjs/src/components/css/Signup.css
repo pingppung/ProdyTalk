@@ -1,0 +1,38 @@
+form {
+    position: absolute;
+    top: 45%; left: 50%;
+    margin: -300px 0 0 -210px;
+}
+
+.signupText {
+    text-align: center;
+    font-weight: bold;
+}
+
+.id {
+    margin-top: 60px;
+    font-size : 18px;
+}
+
+.field {
+    margin-top: 10px;
+}
+
+.textLabel {
+    margin-top: 20px;
+    font-size : 18px;
+}
+
+.passwordField {
+    margin-top: 10px;
+}
+
+.signupBtn > button {
+    width : 400px;
+    height : 45px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #D0C2E7;
+    color: #464646;
+}

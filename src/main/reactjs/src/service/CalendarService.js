@@ -16,10 +16,13 @@ class CalendarService {
         })
     }
 
-    editEvent(calId, editTitle) {
+    editEvent(calId, editTitle, startDate, endDate, color) {
         axios.post("/calendar/edit", {
             calendar_id : calId,
-            title : editTitle
+            title : editTitle,
+            start: startDate,
+            end: endDate,
+            color: color
         })
     }
 
