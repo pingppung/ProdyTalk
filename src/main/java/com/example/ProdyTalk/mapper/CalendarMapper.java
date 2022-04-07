@@ -11,8 +11,9 @@ import java.util.List;
 @Repository
 @Mapper
 public interface CalendarMapper {
-    List<Calendar> getCalendar();
+    List<Calendar> getCalendar(int room_id);
     void addEvent(CalendarVO CalendarVO);
+    int searchLast();
     void editEvent(CalendarVO calendarVO);
     void deleteEvent(CalendarVO calendarVO);
 }
