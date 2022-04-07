@@ -18,8 +18,6 @@ class CalendarService {
     }
 
     editEvent(calId, editTitle, startDate, endDate, color) {
-        axios.post(CALENDAREDIT_API_BASE_URL, {
-    editEvent(calId, editTitle) {
         axios.post("/calendar/edit", {
             calendar_id : calId,
             title : editTitle,
