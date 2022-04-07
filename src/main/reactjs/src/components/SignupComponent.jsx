@@ -36,18 +36,30 @@ class SignupComponent extends Component {
         this.setState({ user_phone: event.target.value });
     }
     gotoLogin = (event) => {
-        event.preventDefault();
-        let User = {
-            user_id: this.state.user_id,
-            user_pwd: this.state.user_pwd,
-            user_name: this.state.user_name,
-            user_email: this.state.user_email,
-            user_phone: this.state.user_phone
-        };
-        UserService.Signup(User).then(res => {
-            this.props.history.push('/');
-            window.alert("회원가입에 성공했습니다")
-        });
+        if(!this.state.user_id) {
+            alert("아이디는 필수 항목입니다.");
+        }
+        else if(!this.state.user_pwd) {
+            alert("비밀번호는 필수 항목입니다.");
+        }
+        else if(!this.state.user_name) {
+            alert("닉네임은 필수 항목입니다.");
+        }
+
+        else {
+                event.preventDefault();
+                let User = {
+                    user_id: this.state.user_id,
+                    user_pwd: this.state.user_pwd,
+                    user_name: this.state.user_name,
+                    user_email: this.state.user_email,
+                    user_phone: this.state.user_phone
+                };
+                UserService.Signup(User).then(res => {
+                    this.props.history.push('/');
+                    window.alert("회원가입에 성공했습니다")
+                });
+        }
     }
     render() {
         return (
@@ -57,10 +69,11 @@ class SignupComponent extends Component {
                     회원가입
                 </h1>
                      <div className="id">
-                         <label>아이디</label>
+                         <label>아이디 (*)</label>
                      </div>
                      <div className="field">
                          <input
+                            required="required"
                             type="text"
                             name="user_id"
                             placeholder="  아이디"
@@ -70,10 +83,11 @@ class SignupComponent extends Component {
                      </div>
 
                      <div className="textLabel">
-                         <label>비밀번호</label>
+                         <label>비밀번호 (*)</label>
                      </div>
                      <div className="field">
                          <input
+                            required="required"
                             type="text"
                             name="user_pwd"
                             placeholder="  비밀번호"
@@ -81,10 +95,11 @@ class SignupComponent extends Component {
                          />
                      </div>
                      <div className="textLabel">
-                         <label>닉네임</label>
+                         <label>닉네임 (*)</label>
                      </div>
                      <div className="field">
                          <input
+                            required="required"
                             type="text"
                             name="user_name"
                             placeholder="  닉네임"
@@ -96,7 +111,7 @@ class SignupComponent extends Component {
                      </div>
                      <div className="field">
                           <input
-                             type="text"
+                             type="email"
                              name="user_email"
                              placeholder="  이메일"
                              onChange={this.handleEmailChange}
