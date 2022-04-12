@@ -45,7 +45,7 @@ public class GreetingController {
     }
 
 
-    @MessageMapping("/chat/{conversationId}")
+    @MessageMapping("/chat/group/{conversationId}")
     public void sendMessage(MessageVO messageVO, @DestinationVariable int conversationId){
 
         int messageId=chatService.searchLast();
@@ -55,7 +55,7 @@ public class GreetingController {
 
         System.out.println("메시지 내용 저장 성공");
 
-        this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/"+conversationId,messageVO);
+        this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/group/"+conversationId,messageVO);
     }
 
 

@@ -13,6 +13,9 @@ function FileList(props) {
     const onDelete = () => {
         console.log(props.id);
         FileService.fileDelete(props.id)
+            .then(() => {
+                props.propFunction()
+            })
     }
 
     return (

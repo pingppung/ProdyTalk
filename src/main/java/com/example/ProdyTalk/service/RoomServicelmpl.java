@@ -16,37 +16,55 @@ import java.util.List;
 public class RoomServicelmpl implements RoomService {
     private final RoomMapper roomMapper;
 
-    @Override
+    @Override //room_name, room_info, room_type을 넣어 방을 생성하는 메서드
     public void insertRoom(RoomListVO roomVO) {
         roomMapper.insertRoom(roomVO);
     }
 
-    @Override
+    @Override //룸 정보들로 room_id 받아오는 메서드
     public int findIdRoom(RoomListVO roomVO) {
         return roomMapper.findIdRoom(roomVO);
     }
 
-    @Override
+    @Override //roomJoin 테이블에 새로운 user-room 연결 추가
     public void joinRoom(RoomJoinVO room) {
         roomMapper.joinRoom(room);
         System.out.println(room);
     }
 
-    @Override
+    @Override //모든 룸 리스트 불러오기
     public List<RoomListVO> getAllRooms() {
         return roomMapper.findAll();
     }
 
-    //유저가 속해있는 room 리스트 받아오기
-    @Override
+
+    @Override //user_id에 따른 룸 리스트 불러오기
     public List<RoomJoinVO> findInRoom(String user_id) {
         return roomMapper.findInRoom(user_id);
     }
 
     @Override
     public List<RoomListVO> getInRooms(int[] room_id) {
-
         return roomMapper.getInRooms(room_id);
     }
 
+    @Override //룸의 현재 인원 가져오는 메서드
+    public int getRoomTotal(int room_id) {
+        return roomMapper.getRoomTotal(room_id);
+    }
+
+    @Override
+    public void setRoomTotal(RoomListVO roomListVO) {
+        roomMapper.setRoomTotal(roomListVO);
+    }
+
+    @Override
+    public RoomListVO getRoomById(int room_id) {
+        return roomMapper.getRoomById(room_id);
+    }
+
+    @Override
+    public List<RoomJoinVO> getMemberById(int room_id){
+        return roomMapper.getMemberById(room_id);
+    }
 }

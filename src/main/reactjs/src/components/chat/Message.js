@@ -2,16 +2,13 @@ import React from 'react';
 
 function Message(props) {
 
-    const divStyle={
-        float:"right"
-    }
 
     return (
-        <div style= {divStyle}>
-
+    <div className="message">
+        <div className="balloon" >
             {props.id}: {props.content}
-
         </div>
+    </div>
     );
 }
 
