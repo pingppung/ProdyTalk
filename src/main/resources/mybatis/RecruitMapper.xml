@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ProdyTalk.mapper.RecruitMapper">
+
+    <select id="findAll" resultType="com.example.ProdyTalk.vo.RecruitVO">
+        SELECT * from recruit
+    </select>
+
+    <insert id="save" parameterType="com.example.ProdyTalk.vo.RecruitVO">
+        insert into recruit (room_type,title,content,user_id)
+        values (#{room_type},#{title},#{content},#{user_id})
+    </insert>
+
+    <select id="findById" resultType="com.example.ProdyTalk.vo.RecruitVO">
+        SELECT * from recruit where recruit_id = #{recruit_id}
+    </select>
+
+    <update id="update" parameterType="com.example.ProdyTalk.vo.RecruitVO">
+        update recruit
+        set room_type = #{room_type}, title = #{title}, content = #{content}, user_id = #{user_id}
+        where recruit_id = #{recruit_id}
+    </update>
+
+    <delete id="delete" parameterType="com.example.ProdyTalk.vo.RecruitVO">
+        delete from recruit
+        where recruit_id = #{recruit_id}
+    </delete>
+</mapper>
