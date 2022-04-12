@@ -5,7 +5,6 @@ import P from "../image/p.png"
 import S from "../image/s.png"
 
 function RoomCircle(props) {
-    console.log(props);
     var roomtype;
 
     if(props.type==="프로젝트")

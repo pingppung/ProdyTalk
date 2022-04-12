@@ -16,7 +16,7 @@ class FileService {
     }
 
     fileDelete(fileId) {
-        axios.post("/api/filedelete",{ file_id: fileId })
+        return axios.post("/api/filedelete",{ file_id: fileId })
     }
 
 }

@@ -8,4 +8,5 @@ public class RoomListVO {
     String room_name;
     String room_type;
     int room_total;
+    String room_info;
 }
