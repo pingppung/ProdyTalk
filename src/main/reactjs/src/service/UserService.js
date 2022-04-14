@@ -22,7 +22,6 @@ class UserService {
              console.log(res);
         })
     }
-
 }
 
 export default new UserService();

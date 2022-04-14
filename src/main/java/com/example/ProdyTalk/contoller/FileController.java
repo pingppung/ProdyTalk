@@ -51,7 +51,6 @@ public class FileController {
            System.out.println("size=" + fileSize);
            System.out.println("file_info=" + fileInfo);
 
-
            File savefile = new File(uploadFolder, fileId + "." + fileExtension);
            if(!savefile.exists()) {
                savefile.mkdirs();

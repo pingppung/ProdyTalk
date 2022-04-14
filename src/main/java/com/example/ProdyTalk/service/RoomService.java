@@ -28,5 +28,4 @@ public interface RoomService {
     public RoomListVO getRoomById(int room_id);
 
     public List<RoomJoinVO> getMemberById(int room_id);
-
 }

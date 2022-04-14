@@ -21,7 +21,6 @@ public class CalendarController {
     @Autowired
     CalendarMapper calendarMapper;
 
-
     @GetMapping("/calendar")
     public List<Calendar> getCalendar(@RequestParam(value="room_id") int room_id) throws Exception{
         return calendarService.getCalendar(room_id);

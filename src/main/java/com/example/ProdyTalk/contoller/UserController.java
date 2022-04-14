@@ -1,6 +1,5 @@
 package com.example.ProdyTalk.contoller;
 
-
 import com.example.ProdyTalk.mapper.UserMapper;
 import com.example.ProdyTalk.service.UserService;
 import com.example.ProdyTalk.vo.UserVO;
@@ -32,7 +31,6 @@ public class UserController {
     public void insertUser(@RequestBody UserVO user, HttpServletResponse response) throws IOException {
         userService.insertUser(user);
         System.out.println("유저 DB 저장 성공");
-        //response.sendRedirect("http://localhost:3000/signup/result");
     }
 
     @PostMapping("/authenticate")

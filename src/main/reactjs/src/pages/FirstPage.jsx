@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { pink} from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import './css/firstPage.css';
+
 function FirstPage() {
     const imagestyle = {
              height:200,
@@ -37,10 +38,6 @@ function FirstPage() {
                     </Link>
                 </div>
         </div>
-
-
-
-
     );
 }
 
