@@ -11,4 +11,5 @@ public class CalendarVO {
     String start;
     String end;
     String color;
+    int room_id;
 }

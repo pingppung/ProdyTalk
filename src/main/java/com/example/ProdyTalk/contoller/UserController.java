@@ -57,7 +57,7 @@ public class UserController {
 
         } else {
             System.out.println("회원가입 안된 유저!!");
-            return null;
+            throw new IllegalArgumentException("회원가입 안됨.");
         }
     }
 

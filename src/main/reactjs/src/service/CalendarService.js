@@ -2,25 +2,27 @@ import axios from 'axios';
 
 class CalendarService {
 
-    getCalendar() {
-        return axios.get("/calendar");
+    getCalendar(roomId) {
+        return axios.get("/calendar",{params: { room_id: roomId,}});
     }
 
-    addEvent(content,startDate,endDate,color) {
+    addEvent(content,startDate,endDate,color,roomId) {
         axios.post("/calendar/add", {
             title: content,
             start: startDate,
             end: endDate,
-            color: color
+            color: color,
+            room_id: roomId,
         })
-        console.log(color);
-
     }
 
-    editEvent(calId, editTitle) {
+    editEvent(calId, editTitle, startDate, endDate, color) {
         axios.post("/calendar/edit", {
             calendar_id : calId,
-            title : editTitle
+            title : editTitle,
+            start: startDate,
+            end: endDate,
+            color: color
         })
     }
 

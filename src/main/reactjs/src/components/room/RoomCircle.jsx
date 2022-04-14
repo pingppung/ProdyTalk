@@ -5,10 +5,9 @@ import P from "../image/p.png"
 import S from "../image/s.png"
 
 function RoomCircle(props) {
-    console.log(props);
     var roomtype;
 
-    if(props.data.type==="프로젝트")
+    if(props.type==="프로젝트")
         roomtype="p"
     else roomtype="s"
 
@@ -27,8 +26,12 @@ function RoomCircle(props) {
                 ? <img src={P} alt="p" style={imagestyle} />
                 : <img src={S} alt="s" style={imagestyle} />
                 }
-                <Link to={`/roomenter/${props.data.room_id}`} style={{ textDecoration: 'none' }}>
-                <h3>{props.data.room_name}</h3>
+                <Link to={{
+                        pathname:`/roomenter/${props.id}`,
+                        state:`${props.id}`
+                        }}
+                    style={{ textDecoration: 'none' }}>
+                <h3>{props.title}</h3>
                 </Link>
             </div>
         </label>

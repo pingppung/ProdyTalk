@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserService from '../service/UserService'
+import './css/Signup.css';
 
 class SignupComponent extends Component {
     constructor(props) {
@@ -35,70 +36,99 @@ class SignupComponent extends Component {
         this.setState({ user_phone: event.target.value });
     }
     gotoLogin = (event) => {
-        event.preventDefault();
-        let User = {
-            user_id: this.state.user_id,
-            user_pwd: this.state.user_pwd,
-            user_name: this.state.user_name,
-            user_email: this.state.user_email,
-            user_phone: this.state.user_phone
-        };
-        UserService.Signup(User).then(res => {
-            this.props.history.push('/');
-            window.alert("회원가입에 성공했습니다")
-        });
+        if(!this.state.user_id) {
+            alert("아이디는 필수 항목입니다.");
+        }
+        else if(!this.state.user_pwd) {
+            alert("비밀번호는 필수 항목입니다.");
+        }
+        else if(!this.state.user_name) {
+            alert("닉네임은 필수 항목입니다.");
+        }
+
+        else {
+                event.preventDefault();
+                let User = {
+                    user_id: this.state.user_id,
+                    user_pwd: this.state.user_pwd,
+                    user_name: this.state.user_name,
+                    user_email: this.state.user_email,
+                    user_phone: this.state.user_phone
+                };
+                UserService.Signup(User).then(res => {
+                    this.props.history.push('/');
+                    window.alert("회원가입에 성공했습니다")
+                });
+        }
     }
     render() {
         return (
             <div>
                 <form>
-                     <div>
-                         <label>아이디</label>
+                <h1 className="signupText">
+                    회원가입
+                </h1>
+                     <div className="id">
+                         <label>아이디 (*)</label>
+                     </div>
+                     <div className="field">
                          <input
+                            required="required"
                             type="text"
                             name="user_id"
-                            placeholder="유저 아이디"
+                            placeholder="  아이디"
+                            autofocus="autofocus"
                             onChange={this.handleIdChange}
                          />
                      </div>
 
-                     <div>
-                         <label>비밀번호</label>
+                     <div className="textLabel">
+                         <label>비밀번호 (*)</label>
+                     </div>
+                     <div className="field">
                          <input
+                            required="required"
                             type="text"
                             name="user_pwd"
-                            placeholder="유저 비밀번호"
+                            placeholder="  비밀번호"
                             onChange={this.handlePwdChange}
                          />
                      </div>
-                     <div>
-                         <label>닉네임</label>
+                     <div className="textLabel">
+                         <label>닉네임 (*)</label>
+                     </div>
+                     <div className="field">
                          <input
+                            required="required"
                             type="text"
                             name="user_name"
-                            placeholder="유저 닉네임"
+                            placeholder="  닉네임"
                             onChange={this.handleNameChange}
                          />
                      </div>
-                     <div>
+                     <div className="textLabel">
                           <label>이메일</label>
+                     </div>
+                     <div className="field">
                           <input
-                             type="text"
+                             type="email"
                              name="user_email"
-                             placeholder="유저 이메일"
+                             placeholder="  이메일"
                              onChange={this.handleEmailChange}
                           />
                      </div>
-                     <div>
+                     <div className="textLabel">
                           <label>전화번호</label>
+                     </div>
+                     <div className="field">
                           <input
                              type="text"
                              name="user_phone"
-                             placeholder="유저 전화번호"
+                             placeholder="  전화번호"
                              onChange={this.handlePhoneChange}
                           />
                       </div>
-                     <div className="btn">
+                     <div className="signupBtn">
                          <button type="submit" onClick={this.gotoLogin}>회원가입</button>
                      </div>
                 </form>

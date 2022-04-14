@@ -21,7 +21,12 @@ public interface RoomService {
     //유저가 속해있는 방 리스트 불러오기
     public List<RoomListVO> getInRooms(int[] room_id);
 
+    public int getRoomTotal(int room_id);
 
+    public void setRoomTotal(RoomListVO roomListVO);
 
+    public RoomListVO getRoomById(int room_id);
+
+    public List<RoomJoinVO> getMemberById(int room_id);
 
 }

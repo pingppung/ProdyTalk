@@ -9,14 +9,31 @@ class RoomService {
         });
     }
 
-    createRoom(room) {
-        return axios.post("/createroom", JSON.stringify(room),{
+    createRoom(room_name, room_type, room_info) {
+        return axios.post("/createroom", {
+            room_name: room_name,
+            room_type: room_type,
+            room_info: room_info,
+        },{
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
                 "Content-Type": 'application/json',
             },
         });
     }
+
+    getRoomById(roomId){
+        return axios.get("/api/getroom",{
+            params: { room_id: roomId,}
+        })
+    }
+
+    getMemberById(roomId){
+        return axios.get("/api/getmember", {
+            params: { room_id: roomId}
+        })
+    }
+
 }
 
 export default new RoomService();
