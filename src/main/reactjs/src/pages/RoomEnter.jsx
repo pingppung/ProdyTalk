@@ -79,7 +79,6 @@ function RoomEnter() {
 
     console.log(`${id}번 방입니다!`)
 
-
     return(
         <div>
             <div id="inviteLink">

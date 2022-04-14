@@ -33,7 +33,6 @@ class RoomService {
             params: { room_id: roomId}
         })
     }
-
 }
 
 export default new RoomService();

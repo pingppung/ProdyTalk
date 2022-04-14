@@ -7,7 +7,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import {useAsync} from 'react-async';
 
-
 function InfoComponent(props) {
     const [total,setTotal]=useState("")
     const [member,setMember]=useState([])
@@ -60,7 +59,6 @@ function InfoComponent(props) {
 
       }
     </div>
-
     );
 }
 

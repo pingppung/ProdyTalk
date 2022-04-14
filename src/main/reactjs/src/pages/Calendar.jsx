@@ -9,8 +9,6 @@ import moment from 'moment';
 import DetailModal from '../components/calendar/DetailModal'
 import Modal from '../components/calendar/Modal'
 
-
-
 function Calender(props) {
 
     const [events, setEvents] = useState([]);
@@ -91,7 +89,6 @@ function Calender(props) {
                 }}
         events={events} // event 전달
 
-
         eventColor="gray"
         nowIndicator
         // dateClick={(e) => console.log(e.dateStr)}
@@ -109,7 +106,6 @@ function Calender(props) {
             openDetailModal()
           }
         }
-
       />
     </div>
   ); // return 끝

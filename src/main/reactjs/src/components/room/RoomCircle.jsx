@@ -17,7 +17,6 @@ function RoomCircle(props) {
              marginLeft:120
     };
 
-
     return (
         <label>
             <div id="circle">
@@ -35,8 +34,6 @@ function RoomCircle(props) {
                 </Link>
             </div>
         </label>
-
-
     );
 }
 export default withRouter(RoomCircle);

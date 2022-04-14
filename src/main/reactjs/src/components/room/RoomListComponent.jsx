@@ -16,7 +16,6 @@ function RoomListComponent() {
             setRooms(res.data);
             setLoading(true)
         })
-
     },[state]);
 
     return (
@@ -31,9 +30,7 @@ function RoomListComponent() {
 
             }
         </div>
-
     )
-
 }
 
 export default RoomListComponent;
