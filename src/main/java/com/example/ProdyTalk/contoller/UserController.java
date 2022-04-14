@@ -35,12 +35,6 @@ public class UserController {
         //response.sendRedirect("http://localhost:3000/signup/result");
     }
 
-    @GetMapping("/signup/result")
-    public void success() {
-        System.out.println("회원가입 성공!!!");
-    }
-
-
     @PostMapping("/authenticate")
     public String authen(@RequestBody UserVO user){
         userService.findUser(user);

@@ -3,8 +3,8 @@ import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
 
-const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':4443';
-const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
+const OPENVIDU_SERVER_URL = 'https://prodytalk.xyz:4443';
+const OPENVIDU_SERVER_SECRET = '12341234';
 
 class VideoRoomComponent extends Component {
     constructor(props) {
@@ -73,17 +73,26 @@ class VideoRoomComponent extends Component {
         // --- 1) Get an OpenVidu object ---
         this.OV = new OpenVidu();
 
-        let turnUsername = "twomandarin";
-        let turnCredential = 12341234;
-        this.OV.setAdvancedConfiguration({
-            iceServers: [
-                {
-                    urls: "turns:prodytalk.monster:3000?transport=tcp",
-                    username: turnUsername,
-                    credential: turnCredential
-                }
-            ]
-        });
+        let turnUsername = 'twomandarin';
+        let turnCredential = '12341234';
+//        this.OV.setAdvancedConfiguration({
+//            iceServers: [
+//                {
+//                    urls: 'turn:prodytalk.xyz:3478',
+//                    username: turnUsername,
+//                    credential: turnCredential
+//                }
+//            ]
+//        });
+        this.OV.setAdvancedConfiguration({ iceServers: [
+            { urls: "stun:prodytalk.xyz:3478" },
+            { urls: [
+                  "turn:prodytalk.xyz:3478",
+                  "turn:prodytalk.xyz:3478?transport=tcp"
+              ],
+              username: turnUsername,
+              credentials: turnCredential },
+        ]});
 
         // --- 2) Init a session ---
         this.setState(

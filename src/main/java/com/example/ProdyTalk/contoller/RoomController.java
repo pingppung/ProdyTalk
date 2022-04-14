@@ -41,9 +41,7 @@ public class RoomController {
         join.setRoom_id(room_id);
         join.setUser_id(user_id);
 
-
         roomService.joinRoom(join);
-
 
         //  response.sendRedirect("http://localhost:3000/");
     }
