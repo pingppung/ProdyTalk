@@ -1,5 +1,5 @@
 import React, { useState, Component } from 'react';
-
+import { Link } from "react-router-dom";
 class RoomEnter extends Component {
     //데베에서 불러와서 text에 넣어야돼..!
     constructor(props) {
@@ -18,7 +18,7 @@ class RoomEnter extends Component {
                 <button>팀별 캘린더</button>
                 <button>파일공유</button>
                 <button>그룹채팅</button>
-                <button>화상채팅</button>
+                <Link to="/video"><button>화상채팅</button></Link>
                     <div className="ProjectInformation">
                         <h1>팀별 인원수</h1>
                         <h1>{this.state.num}</h1>
