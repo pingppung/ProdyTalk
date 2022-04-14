@@ -11,8 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins="*",maxAge = 3600)
@@ -26,10 +26,10 @@ public class RoomController {
 
     @PostMapping("/createroom")
     public void insertUser(@RequestBody RoomListVO room, HttpServletRequest request) {
+        room.setRoom_total(1);
         roomService.insertRoom(room);
         System.out.println("Room DB 저장 성공");
 
-        //유저가 속한 방만 띄우기 위한 부분
         int room_id = roomService.findIdRoom(room);  //방 id 가지고 오기
 
         //어떤 유저가 방을 만드는 건지 token을 이용해 유저id 알아내기
@@ -42,10 +42,7 @@ public class RoomController {
         join.setUser_id(user_id);
 
         roomService.joinRoom(join);
-
-        //  response.sendRedirect("http://localhost:3000/");
     }
-
 
     @GetMapping("/roomlist")
     public List<RoomListVO> getAllRooms(HttpServletRequest request) {
@@ -61,6 +58,40 @@ public class RoomController {
         }
 
         return roomService.getInRooms(room_id);
+    }
+
+    @GetMapping("/api/enterRoom")
+    public void enterRoom(@RequestParam("roomId") int room_id,
+                          HttpServletResponse response,
+                          HttpServletRequest request ) throws IOException {
+        System.out.println("룸 아이디는"+room_id);
+
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
+        String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id",String.class);
+
+        RoomJoinVO roomJoinVO = new RoomJoinVO();
+        roomJoinVO.setRoom_id(room_id);
+        roomJoinVO.setUser_id(user_id);
+        roomService.joinRoom(roomJoinVO);
+
+        RoomListVO roomListVO = new RoomListVO();
+        int room_total = roomService.getRoomTotal(room_id);
+        roomListVO.setRoom_id(room_id);
+        roomListVO.setRoom_total(room_total+1);
+
+        roomService.setRoomTotal(roomListVO);
+        response.sendRedirect("http://prodytalk.xyz:3000/main");
+        //response.sendRedirect("http://localhost:3000/main");
+    }
+
+    @GetMapping("/api/getroom")
+    public RoomListVO getRoomById(@RequestParam(value="room_id") int room_id) {
+        return roomService.getRoomById(room_id);
+    }
+
+    @GetMapping("/api/getmember")
+    public List<RoomJoinVO> getMemberById(@RequestParam(value="room_id") int room_id) {
+        return roomService.getMemberById(room_id);
     }
 
 }

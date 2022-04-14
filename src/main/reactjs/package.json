@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://prodytalk.xyz:8080",
   "dependencies": {
+    "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@fullcalendar/daygrid": "^5.10.1",
     "@fullcalendar/interaction": "^5.10.1",
@@ -25,6 +26,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "fix": "^0.0.6",
+    "formik": "^2.2.9",
     "http-proxy-middleware": "^2.0.4",
     "jquery": "^3.6.0",
     "json": "^11.0.0",
@@ -34,6 +36,7 @@
     "npm": "^8.5.5",
     "openvidu-browser": "^2.21.0",
     "react": "^17.0.2",
+    "react-async": "^10.0.1",
     "react-bootstrap": "^2.2.1",
     "react-color-palette": "^6.2.0",
     "react-dom": "^17.0.2",

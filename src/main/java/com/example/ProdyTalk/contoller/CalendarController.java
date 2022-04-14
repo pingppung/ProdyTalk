@@ -3,6 +3,7 @@ package com.example.ProdyTalk.contoller;
 import com.example.ProdyTalk.mapper.CalendarMapper;
 import com.example.ProdyTalk.service.CalendarService;
 import com.example.ProdyTalk.vo.CalendarVO;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,18 +16,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CalendarController {
     private final CalendarService calendarService;
+    private int calendar_id;
 
     @Autowired
     CalendarMapper calendarMapper;
 
+
     @GetMapping("/calendar")
-    public List<Calendar> getCalendar() throws Exception{
-        return calendarService.getCalendar();
+    public List<Calendar> getCalendar(@RequestParam(value="room_id") int room_id) throws Exception{
+        return calendarService.getCalendar(room_id);
     }
 
     @PostMapping("/calendar/add")
     public void addEvent(@RequestBody CalendarVO calendarVO) throws Exception{
-        calendarService.addEvent(calendarVO);
+        calendar_id=calendarService.searchLast();
+        calendarVO.setCalendar_id(++calendar_id);
+        calendarService.addEvent(calendarVO); //캘린더 추가
     }
 
     @PostMapping("/calendar/edit")

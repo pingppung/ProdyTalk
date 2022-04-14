@@ -3,6 +3,7 @@ import {React,useState} from "react";
 import AddIcon from '@mui/icons-material/Add';
 import RoomModal from "./RoomModal";
 import { styled } from '@mui/material/styles';
+import RoomService from '../../service/RoomService';
 
 function RoomCreate(props) {
     const [modalOpen, setModalOpen] = useState(false);
@@ -15,8 +16,8 @@ function RoomCreate(props) {
         setModalOpen(false); // modal close
     };
 
-    const addModal = (room_name, room_type) => {
-
+    const addModal = (room_name, room_type, room_info) => {
+        RoomService.createRoom(room_name,room_type,room_info)
         setModalOpen(false); // Modal 닫아주기
     };
 

@@ -15,4 +15,8 @@ public interface RoomMapper {
     List<RoomListVO> getInRooms(int[] room_id);
     public int findIdRoom(RoomListVO room);
     void joinRoom(RoomJoinVO room);
+    int getRoomTotal(int room_id);
+    void setRoomTotal(RoomListVO roomListVO);
+    RoomListVO getRoomById(int room_id);
+    List<RoomJoinVO> getMemberById(int room_id);
 }

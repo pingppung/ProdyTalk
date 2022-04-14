@@ -14,13 +14,16 @@ public class CalendarServiceImpl implements CalendarService {
     private final CalendarMapper calendarMapper;
 
     @Override
-    public List<Calendar> getCalendar() throws Exception {
-        return calendarMapper.getCalendar();
+    public List<Calendar> getCalendar(int room_id) throws Exception {
+        return calendarMapper.getCalendar(room_id);
     }
 
     @Override
-    public void addEvent(CalendarVO calendarVO) {
-        calendarMapper.addEvent(calendarVO);
+    public void addEvent(CalendarVO calendarVO) { calendarMapper.addEvent(calendarVO);}
+
+    @Override
+    public int searchLast() {
+        return calendarMapper.searchLast();
     }
 
     @Override

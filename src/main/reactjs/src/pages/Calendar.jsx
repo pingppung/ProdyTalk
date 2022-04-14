@@ -10,10 +10,12 @@ import DetailModal from '../components/calendar/DetailModal'
 import Modal from '../components/calendar/Modal'
 
 
-function Calender() {
+
+function Calender(props) {
 
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const[calId, setCalId] = useState(0);
 
@@ -38,16 +40,13 @@ function Calender() {
 
     // Modal에서 add 버튼 클릭 시 실행
     const addModal = (content, startDate, endDate, color) => {
-        CalendarService.addEvent(content, startDate, endDate, color); // events에 전달받은 이벤트 추가해주기
+        CalendarService.addEvent(content, startDate, endDate, color, props.roomId); // events에 전달받은 이벤트 추가해주기
         setModalOpen(false); // Modal 닫아주기
     };
 
     // DetailModal에서 수정 버튼 클릭 시 실행
-    const editEvent = (editTitle) => {
-        console.log(editTitle);
-        console.log('로 event title 변경');
-
-        CalendarService.editEvent(calId, editTitle); // events에 수정할 calId, title 전달
+    const editEvent = (editTitle, startDate, endDate, color) => {
+        CalendarService.editEvent(calId, editTitle, startDate, endDate, color); // events에 수정할 calId, title 전달
         setDetailModalOpen(false); // Modal 닫아주기
     };
 
@@ -61,7 +60,7 @@ function Calender() {
     };
 
     useEffect(()=> {
-        CalendarService.getCalendar().then((res) => {
+        CalendarService.getCalendar(props.roomId).then((res) => {
             setEvents(res.data)
         })
     }, [events]);
@@ -69,31 +68,27 @@ function Calender() {
   return (
     <div className="Calendar">
 
-      <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요.">
-      </Modal>
+          <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요." />
+            <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
 
-      <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제">
-      </DetailModal>
+            <FullCalendar
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                initialView="dayGridMonth" // 기본 : 월 달력
+                headerToolbar={{ // 월, 주, 일 버튼 클릭 시 달력 보기 변경
+                    center: 'dayGridMonth,timeGridWeek,timeGridDay new',
+                }}
 
-      <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView="dayGridMonth" // 기본 : 월 달력
-            headerToolbar={{ // 월, 주, 일 버튼 클릭 시 달력 보기 변경
-                center: 'dayGridMonth,timeGridWeek,timeGridDay new',
-            }}
+                displayEventTime={false}
 
-            displayEventTime={false}
+                customButtons = {{
+                new : {
+                    text : "new",
 
-        customButtons = {{
-            new : {
-                text : "new",
-
-                click : function() {
-                    openModal();
-                }
-
-            }
-        }}
+                    click : function() {
+                        openModal();
+                    }
+                    }
+                }}
         events={events} // event 전달
 
 

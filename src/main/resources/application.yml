@@ -13,6 +13,10 @@ spring:
     url: jdbc:mysql://prodytalk-db.cxe3wlhwdbsi.us-east-1.rds.amazonaws.com:3306/prodytalk?serverTimezone=UTC&characterEncoding=UTF-8
     username: twomandarin
     password: 12341234
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

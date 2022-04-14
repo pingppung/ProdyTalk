@@ -6,6 +6,8 @@
   background-color: ivory;
   text-align:center;
   margin:20px;
+  margin-top:40px;
+
 
     cursor: default;
       -webkit-touch-callout: none;
@@ -17,9 +19,8 @@
 }
 
 #room {
-    padding:90px 0;
-    padding-left:30px;
-    padding-right:30px;
+    padding:110px 0;
+    padding-left:40px;
 
 }
 
@@ -28,6 +29,24 @@ h3{
     font-family:'lefery';
 
 }
+
+#inviteLink{
+    float: right;
+    margin: 30px;
+}
+
+#menu{
+    margin: 30px;
+}
+
+#loadingBox{
+    text-align: center;
+}
+
+#loading{
+    display: inline-block;
+}
+
 
 @font-face {
     font-family: 'lefery';
