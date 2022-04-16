@@ -6,7 +6,7 @@ class FileService {
     }
 
     fileDownload(fileId,extension,size,name) {
-        window.location.href=`http://prodytalk.xyz:8080/filedownload?file_id=${fileId}&extension=${extension}&file_size=${size}&origin_name=${name}`;
+        window.location.href=`http://prody.xyz:8080/filedownload?file_id=${fileId}&extension=${extension}&file_size=${size}&origin_name=${name}`;
         //window.location.href=`http://localhost:8080/filedownload?file_id=${fileId}&extension=${extension}&file_size=${size}&origin_name=${name}`;
 //         axios.get("/filedownload",{
 //             file_id: fileId,
