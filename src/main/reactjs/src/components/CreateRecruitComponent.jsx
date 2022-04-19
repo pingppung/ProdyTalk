@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import RecruitService from '../service/RecruitService'
+import RecruitService from '../service/RecruitService';
+import UserService from '../service/UserService'
 import './css/Recruit.css';
 
 class CreateRecruitComponent extends Component {
@@ -12,7 +13,8 @@ class CreateRecruitComponent extends Component {
             room_type: '스터디',
             title: '',
             content: '',
-            user_id: ''
+            user_id: '',
+            date: this.getDate(),
         }
 
         // form 양식에 값 입력되면 this.state에 정의된 변수의 값 변경됨
@@ -48,7 +50,8 @@ class CreateRecruitComponent extends Component {
             room_type: this.state.room_type,
             title: this.state.title,
             content: this.state.content,
-            user_id: this.state.user_id
+            user_id: this.state.user_id,
+            date: this.state.date
         };
         console.log("recruit => "+ JSON.stringify(recruit));
 
@@ -79,8 +82,28 @@ class CreateRecruitComponent extends Component {
         }
     }
 
+    // 작성일
+    getDate() {
+        let now = new Date();
+        let year = now.getFullYear();
+        let month = now.getMonth() + 1;
+        let day = now.getDate();
+
+        let todayDate = year + '-' + month + '-' + day;
+        return todayDate;
+    }
+
     // 페이지 로딩 시 새글 작성이면 비어있는 폼, 수정이면 글의 객체값 가져와서 binding 해주도록
     componentDidMount() {
+
+        // UserService에서 user_id 가져오기
+        UserService.getUserName().then(res => {
+            console.log(res.data.id);
+            this.setState({
+                user_id: res.data.id,
+            })
+        })
+
         if(this.state.recruit_id === '_create') {
             return
         }
@@ -107,7 +130,7 @@ class CreateRecruitComponent extends Component {
                                     <div className = "card col-md-6 offset-md-3 offset-md-3">
                                         <h3 className="text-center">새글을 작성해주세요</h3>
                                         <div className = "card-body">
-                                            <form>
+                                            <form id="createRecruitForm">
                                                 <div className = "form-group">
                                                     <label> Type </label>
                                                     <select placeholder="type" name="type" className="form-control"
@@ -129,7 +152,7 @@ class CreateRecruitComponent extends Component {
                                                 <div className = "form-group">
                                                     <label> UserId  </label>
                                                     <input placeholder="userId" name="userId" className="form-control"
-                                                    value={this.state.user_id} onChange={this.changeUserIdHandler}/>
+                                                    value={this.state.user_id} onChange={this.changeUserIdHandler} disabled/>
                                                 </div>
                                                 <button className="btn btn-success" onClick={this.createRecruit}>Save</button>
                                                 <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft:"10px"}}>Cancel</button>

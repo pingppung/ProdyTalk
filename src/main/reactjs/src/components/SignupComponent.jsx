@@ -64,7 +64,7 @@ class SignupComponent extends Component {
     render() {
         return (
             <div>
-                <form>
+                <form id="signupForm">
                 <h1 className="signupText">
                     회원가입
                 </h1>

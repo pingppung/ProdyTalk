@@ -5,8 +5,8 @@ table {
     margin-right: 40px;
 }
 
-form {
-    margin-top:80px;
+#createRecruitForm {
+    margin-top: 20px;
 }
 
 .row {
@@ -14,3 +14,11 @@ form {
     margin-bottom: 20px;
 }
 
+form > button {
+    margin-top: 20px;
+}
+
+.chatComponent {
+    margin-top: 20px;
+    margin-left: 380px;
+}

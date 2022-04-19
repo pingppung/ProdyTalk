@@ -3,10 +3,13 @@ package com.example.ProdyTalk.contoller;
 import com.example.ProdyTalk.service.RecruitService;
 import com.example.ProdyTalk.vo.RecruitVO;
 
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins="*",maxAge = 3600)
@@ -24,6 +27,12 @@ public class RecruitController {
 
     @PostMapping("/recruit")
     public void createRecruit(@RequestBody RecruitVO recruit) {
+
+        //어떤 유저가 게시글 작성하는 건지 token을 이용해 user_id 알아내기
+        // String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
+        // String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id",String.class);
+        // System.out.println(recruit.getRecruit_id() + "   "+ user_id);
+        
         recruitService.createRecruit(recruit);
     }
 

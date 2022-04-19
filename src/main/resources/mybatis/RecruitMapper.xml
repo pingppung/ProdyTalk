@@ -9,8 +9,8 @@
     </select>
 
     <insert id="save" parameterType="com.example.ProdyTalk.vo.RecruitVO">
-        insert into recruit (room_type,title,content,user_id)
-        values (#{room_type},#{title},#{content},#{user_id})
+        insert into recruit (room_type,title,content,user_id,date)
+        values (#{room_type},#{title},#{content},#{user_id},#{date})
     </insert>
 
     <select id="findById" resultType="com.example.ProdyTalk.vo.RecruitVO">
