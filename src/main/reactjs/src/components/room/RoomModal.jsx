@@ -14,6 +14,7 @@ const RoomModal = (props) => {
 
   const[roomName, setRoomName] = useState('');
   const[roomType, setRoomType] = useState('프로젝트');
+  const[roomInfo, setRoomInfo] = useState('');
   const[changeNum, setChangeNum] = useState(1);
 
   const changeRoomName = (e) => {
@@ -24,10 +25,17 @@ const RoomModal = (props) => {
     setRoomType(e.target.value);
   }
 
+  const changeRoomInfo = (e) => {
+    setRoomInfo(e.target.value);
+  }
+
   const addEvent = () => {
     setChangeNum(changeNum+1); // add 버튼 누를 때 마다 changeNum + 1 해주기
 
-    props.propFunction(roomName,roomType); // 바뀐 값 전달
+    props.propFunction(roomName,roomType,roomInfo); // 바뀐 값 전달
+    setRoomName("");
+    setRoomType("");
+    setRoomInfo("");
   }
 
   return (
@@ -58,7 +66,11 @@ const RoomModal = (props) => {
                             <FormControlLabel value="프로젝트" control={<Radio />} label="프로젝트" />
                             <FormControlLabel value="스터디" control={<Radio />} label="스터디" />
                           </RadioGroup>
-                        </FormControl>
+                     </FormControl>
+                     <br />
+                     <label htmlFor="taskId" className="col-form-label">방 정보</label>
+                     <input type="text" onChange={changeRoomInfo} className="form-control" value={roomInfo} id="room_info" name="room_info"/>
+
                 </div>
               </div>
 

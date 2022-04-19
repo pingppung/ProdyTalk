@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ProdyTalk.mapper.FileMapper">
+
+    <insert id="insertFile" parameterType="com.example.ProdyTalk.vo.FileVO">
+        INSERT INTO file(file_id,origin_name,extension,file_size,file_info,user_id,room_id)
+        values(#{file_id},#{origin_name},#{extension},#{file_size},#{file_info},#{user_id},#{room_id})
+    </insert>
+
+    <select id="getAllFiles" parameterType="int" resultType="com.example.ProdyTalk.vo.FileVO">
+        select * from file where room_id=#{room_id}
+    </select>
+
+    <delete id="deleteFile" parameterType="String">
+        delete from file where file_id=#{file_id}
+
+    </delete>
+
+
+
+</mapper>
