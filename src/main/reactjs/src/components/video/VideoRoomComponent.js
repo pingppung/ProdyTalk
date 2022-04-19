@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
-
+import UserService from '../../service/UserService'
 const OPENVIDU_SERVER_URL = 'https://prody.xyz:4443';
 const OPENVIDU_SERVER_SECRET = '12341234';
 
@@ -11,7 +12,7 @@ class VideoRoomComponent extends Component {
         super(props);
 
         this.state = {
-            mySessionId: 'SessionA',
+            mySessionId: 'MySessionA',
             myUserName: 'Participant' + Math.floor(Math.random() * 100),
             session: undefined,
             mainStreamManager: undefined,
@@ -28,6 +29,18 @@ class VideoRoomComponent extends Component {
         this.onbeforeunload = this.onbeforeunload.bind(this);
     }
     componentDidMount() {
+        //roomid로
+       /* const location=useLocation()
+        this.setState({
+            mySessionId: location.state,
+        });*/
+        console.log(window.location.href);
+        UserService.getUserName().then(res => {
+            console.log(res.data.id);
+            this.setState({
+                myUserName: res.data.id
+            });
+        });
         window.addEventListener('beforeunload', this.onbeforeunload);
     }
 
@@ -84,15 +97,6 @@ class VideoRoomComponent extends Component {
                 }
             ]
         });
-//        this.OV.setAdvancedConfiguration({ iceServers: [
-//            { urls: "stun:prody.xyz:3478" },
-//            { urls: [
-//                  "turn:prody.xyz:3478",
-//                  "turn:prody.xyz:3478?transport=tcp"
-//              ],
-//              username: turnUsername,
-//              credentials: turnCredential },
-//        ]});
 
         // --- 2) Init a session ---
         this.setState(
@@ -194,7 +198,7 @@ class VideoRoomComponent extends Component {
         this.setState({
             session: undefined,
             subscribers: [],
-            mySessionId: 'SessionA',
+            mySessionId: 'MySessionA',
             myUserName: 'Participant' + Math.floor(Math.random() * 100),
             mainStreamManager: undefined,
             publisher: undefined

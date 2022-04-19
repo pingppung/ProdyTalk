@@ -6,7 +6,7 @@ import Main from './pages/MainPage'
 import LoginComponent from './components/LoginComponent'
 import SignupComponent from './components/SignupComponent'
 import RoomEnter from './pages/RoomEnter'
-import Openvidu from './components/stream/VideoRoomComponent'
+import Video from './components/video/VideoRoomComponent'
 import Chat from './components/chat/GroupChatComponent'
 import Calendar from './pages/Calendar'
 
@@ -22,7 +22,7 @@ function App() {
            <Route exact path="/signup" component={SignupComponent} />
            <Route exact path="/login" component={LoginComponent} />
            <Route exact path="/roomenter/:id" component={RoomEnter} />
-           <Route exact path="/video" component={Openvidu} />
+           <Route exact path="/video/:id" component={Video} />
            <Route exact path="/chat" component={Chat} />
            <Route exact path="/calendar" component={Calendar} />
 
