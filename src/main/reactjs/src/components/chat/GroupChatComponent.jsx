@@ -17,16 +17,17 @@ function Chat(props) {
     //const sock = new SockJS('https://pingppung.xyz:3000/chat')
     const client=Stomp.over(sock);
 
+    const [list,setList]=useState(null)
     const [id,setId]=useState(null);
     const [userId,setUserId]=useState("");
     const [messageId,setMessageId]=useState(0);
     const [message,setMessage]=useState(null);
     const [children, setChildren]=useState([]);
-    const [chatMessage,setchatMessage] = useState("");
-    const [changeNum,setChangeNum]=useState(1);
+    const [chatMessage,setChatMessage] = useState("");
+    const [changeNum,setChangeNum]=useState(1)
 
     const changeMessage = (e) => {
-        setchatMessage(e.target.value);
+        setChatMessage(e.target.value);
         }; //input 입력시 chatMessage state 변경
 
     const onChangeNum = () => {
@@ -40,9 +41,14 @@ function Chat(props) {
         }, 1)
     }
 
+
     useEffect(()=>{
         ChatService.getUserName().then(res => {
             setId(res.data.id) //id에 token id 넣기'
+        })
+
+        ChatService.getChatList(props.id).then(res => {
+            setList(res.data)
         })
 
         client.connect({}, () =>{
@@ -58,7 +64,7 @@ function Chat(props) {
                 client.unsubscribe('sub-0');
             })
         }
-    }, []) //conversationId가 변경될때 한번만 실행하도록 버튼을 누르면 changeNum이 변하도록 함
+    }, [])
 
     useEffect(() => {
         if(id!=null){
@@ -66,16 +72,41 @@ function Chat(props) {
                 ...children,
                 <Connected id={id} />
             ])
-        }else {
+        } else {
             <CircularProgress />
         }
     },[id])
+
+    useEffect(() => {
+        if(list!=null){
+            const tempArray = []
+
+            list.forEach(listItem => {
+                if(listItem.user_id === id){
+                    tempArray.push([
+                        <Message id={listItem.user_id} content={listItem.content} />,
+                        <br /> ])
+                }else {
+                    tempArray.push([
+                        <LeftMessage userId={listItem.user_id} content={listItem.content} />,
+                        <br /> ])
+                }
+            })
+            setChildren([
+                ...children,
+                tempArray
+            ])
+
+
+        }
+    },[list])
+
 
 
     const onChatMessage = () => {
         waitForConnection(client,function() {
             client.send(`/app/chat/group/${props.id}`,{},JSON.stringify({'user_id':id, 'content':chatMessage}))
-            //conversationId로 메세지를 보내면서, user_id와 content를 포함
+            //conversationId로 메세지를 보내면서, user_id와 content, 방번호 포함
             setChildren([
                 ...children,
                 <Message id={id} content={chatMessage} />, //보냄과 동시에 화면에 내가보낸 메시지 내용 오른쪽에 표시
@@ -83,6 +114,7 @@ function Chat(props) {
             ])
         })
 
+        setChatMessage("")
     }
 
     useEffect(() => {
@@ -95,7 +127,6 @@ function Chat(props) {
                 ])
             }
         }
-
     },[messageId])
 
 
@@ -108,7 +139,7 @@ function Chat(props) {
                     </div>
                     <div id="inputMessage">
                         <label>메시지 입력</label>
-                        <input onChange={changeMessage} value={chatMessage} placeholder="message.." />
+                        <input className="obj" onChange={changeMessage} value={chatMessage} placeholder="message.." />
                         <Button variant="contained" color="primary" onClick={onChatMessage}>보내기</Button>
                     </div>
                 </div>
