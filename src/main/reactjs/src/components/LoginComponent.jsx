@@ -49,7 +49,7 @@ class LoginComponent extends Component {
     render(){
         return (
             <div className="form">
-                <form>
+                <form id="loginForm">
                 <h1 className="loginText">
                     로그인
                 </h1>

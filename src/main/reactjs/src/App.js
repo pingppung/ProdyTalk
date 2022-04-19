@@ -13,6 +13,10 @@ import Calendar from './pages/Calendar'
 import { Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import ListRecruitComponent from './components/ListRecruitComponent'
+import CreateRecruitComponent from './components/CreateRecruitComponent'
+import ReadRecruitComponent from './components/ReadRecruitComponent'
+
 function App() {
   return (
         <div>
@@ -25,7 +29,9 @@ function App() {
            <Route exact path="/video" component={Openvidu} />
            <Route exact path="/chat" component={Chat} />
            <Route exact path="/calendar" component={Calendar} />
-
+           <Route exact path="/recruit" component={ListRecruitComponent} />
+           <Route exact path="/createRecruit/:recruit_id" component={CreateRecruitComponent} />
+           <Route exact path="/readRecruit/:recruit_id" component={ReadRecruitComponent} />
         </div>
 
     );
