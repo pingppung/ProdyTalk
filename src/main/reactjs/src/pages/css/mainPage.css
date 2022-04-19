@@ -2,9 +2,23 @@
     background-color:#cfe8fc;
     background-color:#cfe8fd;
     background-blend-mode:multiply;
+    width:100%;
+    text-align:center;
+    cursor: default;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
 }
 
 .mainPage{
     background-color:#cfe8fc;
-    height:950px;
+    min-height:100vh;
+}
+
+#putLink{
+    float:right;
+    padding:50px;
 }
