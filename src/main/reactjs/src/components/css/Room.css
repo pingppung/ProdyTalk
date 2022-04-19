@@ -5,9 +5,6 @@
   border-radius: 50%;
   background-color: ivory;
   text-align:center;
-  margin:20px;
-  margin-top:40px;
-
 
     cursor: default;
       -webkit-touch-callout: none;
@@ -18,11 +15,7 @@
       user-select: none;
 }
 
-#room {
-    padding:110px 0;
-    padding-left:40px;
 
-}
 
 h3{
     color:black;
@@ -35,16 +28,11 @@ h3{
     margin: 30px;
 }
 
-#menu{
-    margin: 30px;
-}
 
-#loadingBox{
-    text-align: center;
-}
 
-#loading{
-    display: inline-block;
+.slider{
+    width:1850px;
+    display:inline-block;
 }
 
 

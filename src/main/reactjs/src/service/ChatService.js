@@ -9,6 +9,10 @@ class ChatService {
             },
         });
     }
+
+    getChatList(roomId){
+        return axios.get("/api/chatList",{params: { room_id: roomId,}})
+    }
 }
 
 

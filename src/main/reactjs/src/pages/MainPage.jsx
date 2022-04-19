@@ -27,9 +27,7 @@ function MainPage() {
         window.alert("방 참여완료!")
     }
 
-    useEffect(() => {
 
-    })
 
     return (
         <div className="mainPage">
@@ -42,6 +40,14 @@ function MainPage() {
                 <br/><br/><br/>
                 <div>
                     <RoomListComponent />
+                </div>
+                <div className="menu">
+                    <div className="recruit">
+                        모집게시판
+                    </div>
+                    <div className="mypage">
+                        마이페이지
+                    </div>
                 </div>
             </div>
         </div>
