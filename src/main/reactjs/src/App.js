@@ -7,7 +7,7 @@ import LoginComponent from './components/LoginComponent'
 import SignupComponent from './components/SignupComponent'
 import RoomEnter from './pages/RoomEnter'
 import Openvidu from './components/stream/VideoRoomComponent'
-import Chat from './pages/ChatPage'
+import Chat from './components/chat/GroupChatComponent'
 import Calendar from './pages/Calendar'
 
 import { Route } from "react-router-dom";

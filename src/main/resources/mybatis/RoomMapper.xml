@@ -5,8 +5,8 @@
 <mapper namespace="com.example.ProdyTalk.mapper.RoomMapper">
 
     <insert id="insertRoom" parameterType="com.example.ProdyTalk.vo.RoomListVO">
-        INSERT INTO room_list(room_name,room_type)
-        values(#{room_name},#{room_type})
+        INSERT INTO room_list(room_name,room_type,room_info,room_total)
+        values(#{room_name},#{room_type},#{room_info},#{room_total})
     </insert>
 
     <select id="findAll" resultType="com.example.ProdyTalk.vo.RoomListVO">
@@ -35,5 +35,26 @@
             <foreach collection="array" item="room_id"  open="(" close=")" separator=",">
                 #{room_id}
             </foreach>
+    </select>
+
+    <select id="getRoomTotal" resultType="int">
+        SELECT room_total FROM room_list
+        WHERE room_id = #{room_id}
+    </select>
+
+    <update id="setRoomTotal" parameterType="com.example.ProdyTalk.vo.RoomListVO">
+        update room_list
+        set room_total = #{room_total}
+        where room_id = #{room_id}
+    </update>
+
+    <select id="getRoomById" resultType="com.example.ProdyTalk.vo.RoomListVO">
+        select * from room_list
+        where room_id = #{room_id}
+    </select>
+
+    <select id="getMemberById"  resultType="com.example.ProdyTalk.vo.RoomJoinVO">
+        select * from room_join
+        where room_id = #{room_id}
     </select>
 </mapper>

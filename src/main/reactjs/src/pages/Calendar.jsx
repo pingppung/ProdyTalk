@@ -15,6 +15,7 @@ function Calender(props) {
 
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const[calId, setCalId] = useState(0);
 
@@ -67,31 +68,27 @@ function Calender(props) {
   return (
     <div className="Calendar">
 
-      <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요.">
-      </Modal>
+          <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요." />
+            <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
 
-      <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제">
-      </DetailModal>
+            <FullCalendar
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                initialView="dayGridMonth" // 기본 : 월 달력
+                headerToolbar={{ // 월, 주, 일 버튼 클릭 시 달력 보기 변경
+                    center: 'dayGridMonth,timeGridWeek,timeGridDay new',
+                }}
 
-      <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView="dayGridMonth" // 기본 : 월 달력
-            headerToolbar={{ // 월, 주, 일 버튼 클릭 시 달력 보기 변경
-                center: 'dayGridMonth,timeGridWeek,timeGridDay new',
-            }}
+                displayEventTime={false}
 
-            displayEventTime={false}
+                customButtons = {{
+                new : {
+                    text : "new",
 
-        customButtons = {{
-            new : {
-                text : "new",
-
-                click : function() {
-                    openModal();
-                }
-
-            }
-        }}
+                    click : function() {
+                        openModal();
+                    }
+                    }
+                }}
         events={events} // event 전달
 
 
