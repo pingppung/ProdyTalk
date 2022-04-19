@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import RecruitService from '../service/RecruitService'
 import './css/Recruit.css';
 
+import ChatPage from '../pages/ChatPage'
+
 class ReadRecruitComponent extends Component {
     constructor(props) {
         super(props)
@@ -9,7 +11,8 @@ class ReadRecruitComponent extends Component {
         // 상세보기에 사용될 파라미터 정의
         this.state = {
             recruit_id : this.props.match.params.recruit_id,
-            recruit: {}
+            recruit: {},
+            chatCondition : false
         }
     }
 
@@ -35,7 +38,7 @@ class ReadRecruitComponent extends Component {
             }
 
             return (
-                <div className="row">
+                <div className="readRow">
                     <label> Recruit Type : {type} </label>
                 </div>
             )
@@ -83,20 +86,22 @@ class ReadRecruitComponent extends Component {
             <div>
                 <div className = "card col-md-6 offset-md-3">
                     <h3 className ="text-center"> Read Detail
-                        <button className="btn btn-info" onClick={this.goToChat} style={{marginLeft:"10px"}}> 채팅 </button>
+                        <button className="btn btn-info"
+                            onClick={ () => this.setState({ chatCondition : true })}
+                            style={{marginLeft:"10px"}}> 채팅 </button>
                     </h3>
                     <div className = "card-body">
                             {this.returnRecruitType(this.state.recruit.room_type)}
-                            <div className = "row">
+                            <div className = "readRow">
                                 <label> Title : {this.state.recruit.title} </label>
                             </div>
 
-                            <div className = "row">
+                            <div className = "readRow">
                                 <label> Content : </label> <br></br>
                                 <textarea value={this.state.recruit.content} readOnly/>
                             </div >
 
-                            <div className = "row">
+                            <div className = "readRow">
                                 <label> UserId : {this.state.recruit.user_id} </label>
                             </div>
 
@@ -105,7 +110,10 @@ class ReadRecruitComponent extends Component {
                             <button className="btn btn-danger" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>글 삭제</button>
                     </div>
                 </div>
-
+                <div>
+                <div className="chatComponent">
+                    { this.state.chatCondition ? <ChatPage/> : null }
+                </div></div>
             </div>
         );
     }

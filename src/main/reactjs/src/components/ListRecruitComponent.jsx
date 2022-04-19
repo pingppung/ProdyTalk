@@ -43,6 +43,7 @@ class ListRecruitComponent extends Component {
                             <thead>
                                 <tr>
                                     <th>글 번호</th>
+                                    <th>Type </th>
                                     <th>제목 </th>
                                     <th>작성자 </th>
                                     <th>작성일 </th>
@@ -54,6 +55,7 @@ class ListRecruitComponent extends Component {
                                         recruit =>
                                         <tr key = {recruit.recruit_id}>
                                             <td> {recruit.recruit_id} </td>
+                                            <td> {recruit.room_type} </td>
                                             <td> <a onClick = { () => this.readRecruit(recruit.recruit_id)}> {recruit.title} </a></td>
                                             <td> {recruit.user_id} </td>
                                             <td> {recruit.date} </td>
