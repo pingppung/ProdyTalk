@@ -78,7 +78,7 @@ class CreateRecruitComponent extends Component {
             return <h3 className="text-center">새 글을 작성해주세요</h3>
         }
         else {
-            return <h3 className="text-center">{this.state.recruit_id}글을 수정 합니다</h3>
+            return <h3 className="text-center">글을 수정 합니다</h3>
         }
     }
 
@@ -98,7 +98,6 @@ class CreateRecruitComponent extends Component {
 
         // UserService에서 user_id 가져오기
         UserService.getUserName().then(res => {
-            console.log(res.data.id);
             this.setState({
                 user_id: res.data.id,
             })
@@ -128,7 +127,7 @@ class CreateRecruitComponent extends Component {
                             <div className = "container">
                                 <div className = "row">
                                     <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                        <h3 className="text-center">새글을 작성해주세요</h3>
+                                        <h3 className="text-center"> {this.getTitle()} </h3>
                                         <div className = "card-body">
                                             <form id="createRecruitForm">
                                                 <div className = "form-group">
@@ -136,7 +135,7 @@ class CreateRecruitComponent extends Component {
                                                     <select placeholder="type" name="type" className="form-control"
                                                     value={this.state.room_type} onChange={this.changeTypeHandler}>
                                                         <option value="스터디">스터디</option>
-                                                        <option value="프로젝트">프로젝트</option>
+                                                        <option value="프로 젝트">프로젝트</option>
                                                     </select>
                                                 </div>
                                                 <div className = "form-group">
