@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import {Button} from '@material-ui/core';
 import RoomCircle from '../components/room/RoomCircle.jsx'
 import RoomListComponent from '../components/room/RoomListComponent.jsx'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import HomeIcon from '@mui/icons-material/Home';
+import base64 from 'base-64';
 import axios from 'axios';
 
 function MainPage() {
@@ -19,7 +22,7 @@ function MainPage() {
     }
 
     const onLink = () => {
-        axios.get(input, {
+        axios.get(base64.decode(input), {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
@@ -38,18 +41,26 @@ function MainPage() {
                     <Button variant="contained" color="primary" onClick={onLink}>참여</Button>
                 </div>
                 <br/><br/><br/>
+            </div>
+
                 <div>
                     <RoomListComponent />
                 </div>
+                <br />
                 <div className="menu">
-                    <div className="recruit">
-                        모집게시판
-                    </div>
-                    <div className="mypage">
-                        마이페이지
-                    </div>
+                    <Link to="/recruit" style={{ textDecoration: 'none', color:'black' }} >
+                        <div className="recruit">
+                            <PeopleAltIcon fontSize="large" /><br />
+                            모집게시판
+                        </div>
+                    </Link>
+                    <Link to="/mypage" style={{ textDecoration: 'none', color:'black' }}>
+                        <div className="mypage">
+                            <HomeIcon fontSize="large" /><br />
+                            마이페이지
+                        </div>
+                    </Link>
                 </div>
-            </div>
         </div>
     );
 }

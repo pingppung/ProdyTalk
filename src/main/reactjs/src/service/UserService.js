@@ -23,6 +23,22 @@ class UserService {
         })
     }
 
+    getUserById(id){
+        return axios.get("api/getUser", {
+            params: { user_id: id, }
+            })
+    }
+
+    editUser(user_id,user_name,user_pwd,user_email,user_phone){
+        return axios.post("/api/editUser", {
+                    user_id: user_id,
+                    user_name: user_name,
+                    user_pwd: user_pwd,
+                    user_email: user_email,
+                    user_phone: user_phone,
+                });
+    }
+
 }
 
 export default new UserService();

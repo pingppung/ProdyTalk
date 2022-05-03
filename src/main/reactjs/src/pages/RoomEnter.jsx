@@ -5,7 +5,12 @@ import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
 import Calendar from './Calendar';
+import Header from '../components/HeaderComponent'
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import {Button} from '@material-ui/core';
+import base64 from 'base-64';
 import './css/RoomEnter.css';
 
 function RoomEnter() {
@@ -17,54 +22,35 @@ function RoomEnter() {
     const [file,setFile]=useState(false)
     const [link,setLink]=useState(false)
     const [info,setInfo]=useState(false)
+    const [value, setValue] = useState(0);
     const [buttonText,setButtonText]=useState("코드 보기")
     const inviteLink = "/api/enterRoom?roomId="+id
+    const encodeLink = base64.encode(inviteLink)
 
-    const onChat = () => {
-        if(chat===false){
-            setChat(true)
-            setCalendar(false)
-            setFile(false)
-            setInfo(false)
-        }else {
-            setChat(false);
-        }
-    }
-
-    const onCalendar = () => {
-        if(calendar===false){
-            setCalendar(true)
-            setChat(false)
-            setFile(false)
-            setInfo(false)
-
-        }else{
-         setCalendar(false)
-        }
-    }
-
-    const onFile = () => {
-        if(file===false){
-            setFile(true)
-            setCalendar(false)
-            setChat(false)
-            setInfo(false)
-
-        }else{
-            setFile(false)
-        }
-    }
-
-    const onInfo = () => {
-        if(info==false){
+    useEffect(() => {
+        if(value == 0){
             setInfo(true)
-            setFile(false)
             setCalendar(false)
+            setFile(false)
             setChat(false)
-        }else{
+        }else if(value == 1){
             setInfo(false)
+            setCalendar(true)
+            setFile(false)
+            setChat(false)
+        }else if(value == 2) {
+            setInfo(false)
+            setCalendar(false)
+            setFile(true)
+            setChat(false)
+        }else if(value == 3){
+            setInfo(false)
+            setCalendar(false)
+            setFile(false)
+            setChat(true)
         }
-    }
+    },[value])
+
 
     const onCopy = () => {
         if(buttonText==="코드 보기"){
@@ -72,7 +58,7 @@ function RoomEnter() {
             setButtonText("코드 복사")
         }
         else if(buttonText==="코드 복사"){
-            navigator.clipboard.writeText(inviteLink)
+            navigator.clipboard.writeText(encodeLink)
             window.alert("코드가 복사되었습니다!")
         }
     }
@@ -81,24 +67,43 @@ function RoomEnter() {
 
 
     return(
-        <div>
+        <div className="roomEnterBack">
+            <Header />
             <div id="inviteLink">
-                {link && inviteLink}
+                {link && encodeLink}
                 <Button variant="contained" color="primary" onClick={onCopy}>{buttonText}</Button>
             </div>
+
+            <Box sx={{ width: 1000, marginLeft:55, marginTop: 5 }}>
+                  <BottomNavigation
+                    showLabels
+                    value={value}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  >
+                    <BottomNavigationAction label="프로젝트/스터디 정보" />
+                    <BottomNavigationAction label="캘린더" />
+                    <BottomNavigationAction label="파일 공유"  />
+                    <BottomNavigationAction label="그룹 채팅"  />
+                    <BottomNavigationAction label="화상 채팅"  />
+                  </BottomNavigation>
+            </Box>
+
             <div id="menu">
-                <Button variant="contained" color="primary" onClick={onInfo}>프로젝트 정보</Button>
-                <Button variant="contained" color="primary" onClick={onCalendar}>팀별 캘린더</Button>
-                <Button variant="contained" color="primary" onClick={onFile}>파일공유</Button>
-                <Button>화상채팅</Button>
-                <Button variant="contained" color="primary" onClick={onChat}>그룹채팅</Button>
-                {file && <FileComponent roomId={id} />}
-                {chat && <GroupChatComponent id={id}/>}
-                {info && <InfoComponent roomId={id} />}
+                <div className="menuitem">
+                    {file && <FileComponent roomId={id} />}
+                    <div className="chat">
+                        {chat && <GroupChatComponent id={id}/>}
+                    </div>
+                    {info && <InfoComponent roomId={id} />}
+                </div>
                 <div className="calendar">
                     {calendar && <Calendar roomId={id}/>}
                 </div>
             </div>
+
+
         </div>
     )
 }
