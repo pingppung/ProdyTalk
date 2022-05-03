@@ -49,7 +49,7 @@ class LoginComponent extends Component {
     render(){
         return (
             <div className="form">
-                <form>
+                <form id="loginForm">
                 <h1 className="loginText">
                     로그인
                 </h1>
@@ -61,7 +61,6 @@ class LoginComponent extends Component {
                             error={this.state.user_id === "" ? true: false}
                             id="outlined-required"
                             label="아이디"
-                            onChange={this.handleIdChange}
                         />
                     </div>
 
@@ -72,7 +71,6 @@ class LoginComponent extends Component {
                             error={this.state.user_pwd === "" ? true: false}
                             id="outlined-required"
                             label="비밀번호"
-                            onChange={this.handlePwdChange}
                         />
                     </div>
 
