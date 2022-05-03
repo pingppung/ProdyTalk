@@ -26,10 +26,15 @@ class HeaderComponent extends Component {
 
     render(){
 
+        var isLogin=false
         const imagestyle = {
          height:200,
          width:180
         };
+
+        const onLogout = () => {
+
+        }
 
         const isLoggedIn = this.state.isLoggedIn;
         let username;
@@ -38,9 +43,6 @@ class HeaderComponent extends Component {
             <div className="body">
                 <div className="mainlogo">
                     <Link to="/main"><img src={Logo} alt="logo" style={imagestyle}/></Link>
-                </div>
-                <div className="navi">
-                    {username}
                 </div>
             </div>
         );
