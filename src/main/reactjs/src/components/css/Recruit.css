@@ -1,0 +1,239 @@
+table {
+    text-align: center;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table thead th {
+    color: #333;
+    border-bottom: 1px solid #444;
+    padding: 10px 0
+}
+
+.listTable td {
+    padding: 15px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.listRecruit {
+    margin-top: 10px;
+    font-family: 'Nanum Gothic400', sans-serif;
+}
+
+.listRecruit h2{
+    font-family: 'Nanum Gothic', sans-serif;
+    color: #333;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.createDiv {
+    position: absolute;
+    top: 35%;
+    left: 40%;
+    margin: -260px 0 0 -210px;
+}
+
+#createRecruitForm {
+    margin-top: 20px;
+}
+
+.row {
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+form > button {
+    margin-top: 20px;
+}
+
+.chatComponent {
+    margin-top: 20px;
+    margin-left: 380px;
+}
+
+.title {
+    text-align: left;
+}
+
+.titleInp {
+    width : 800px;
+    height : 50px;
+    border:0px;
+    border-bottom: 1px solid #808080;
+}
+
+#writeBtn {
+    margin-top: 15px;
+    margin-left: 84%;
+    border-radius: 15px;
+}
+
+#saveBtn {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
+#cancelBtn {
+    border-radius: 15px;
+}
+
+.post-title {
+    margin-top: 15px;
+}
+
+.post-content {
+    margin-top: 15px;
+}
+
+select {
+    width: 120px; /* 원하는 너비설정 */
+    padding: .3em .3em; /* 여백으로 높이 설정 */
+    font-family: 'inherit';  /* 폰트 상속 */
+    color: #555;
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+    border: 1px solid #D3D3D3;
+    border-radius: 0px; /* iOS 둥근모서리 제거 */
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.readRecruit {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    margin: -260px 0 0 -210px;
+}
+
+.readRow {
+    margin-left: -15px;
+    margin-bottom: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.category {
+    margin-left: 15px;
+    margin-bottom: 16px;
+    padding-top: 5px;
+    border-bottom: 1px solid #a3a3a3;
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 17px;
+    color: #808080;
+}
+
+.readRecruit h1 {
+    display: block;
+    margin-bottom: 9px;
+    font-weight: 700;
+    font-size: 2em;
+    line-height: 1.4444em;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+#author {
+    display: block;
+    font-size: 0.9125em;
+    color: #808080;
+}
+
+#bo_v_img {
+    margin: 0 0 10px;
+    width: 100%;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.contentLabel {
+    border: 1px solid #dee2e6;
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 45px;
+}
+
+.contentLabel pre {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+#author a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+#chatBtn {
+    background: no-repeat;
+    border: none;
+    margin-top: 10px;
+    margin-left: 75px;
+}
+
+#floatingBtn {
+    background: no-repeat;
+    border: none;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+
+#homeBtn {
+    background: no-repeat;
+    border: none;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+
+#listTitle {
+    font-family: 'S-CoreDream-5Medium';
+}
+
+#getTitle {
+    font-family: 'S-CoreDream-6Bold';
+}
+
+#createRecruitForm {
+  font-family: 'Nanum Gothic400';
+}
+
+@font-face {
+  font-family: 'Nanum Gothic400';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Nanum Gothic800';
+  font-style: normal;
+  font-weight: 800;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.ttf) format('truetype');
+}
+
+@font-face {
+     font-family: 'S-CoreDream-5Medium';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+     font-size: 40px;
+     font-weight: 400;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-6Bold';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
