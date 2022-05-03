@@ -3,9 +3,11 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
-import UserService from '../../service/UserService'
+import UserService from '../../service/UserService';
+import Logo from '../image/LogoWhite.png';
 const OPENVIDU_SERVER_URL = 'https://prody.xyz:4443';
 const OPENVIDU_SERVER_SECRET = '12341234';
+
 
 class VideoRoomComponent extends Component {
     constructor(props) {
@@ -18,29 +20,45 @@ class VideoRoomComponent extends Component {
             mainStreamManager: undefined,
             publisher: undefined,
             subscribers: [],
+            videoDevices: [],
+            audioDevices: [],
+            videoEnable: true,
+            audioEnable: true,
+            shareEnable: false,
+            audioText: '음소거',
+            videoText: '카메라 끄기',
+            shareText: '화면공유',
+            videoRef: undefined,
         };
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
         this.switchCamera = this.switchCamera.bind(this);
+        this.onoffVideo = this.onoffVideo.bind(this);
+        this.muteAudio = this.muteAudio.bind(this);
+        this.screenShare = this.screenShare.bind(this);
+        this.getWebcam = this.getWebcam.bind(this);
         this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
+        this.handleVideoSelect = this.handleVideoSelect.bind(this);
+        this.handleAudioSelect = this.handleAudioSelect.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
     }
     componentDidMount() {
-        //roomid로
-       /* const location=useLocation()
-        this.setState({
-            mySessionId: location.state,
-        });*/
-        console.log(window.location.href);
+        const { params } = this.props.match;
+        this.videoRef = React.createRef();
+
         UserService.getUserName().then(res => {
-            console.log(res.data.id);
             this.setState({
-                myUserName: res.data.id
+                myUserName: res.data.id,
+                mySessionId: params.id,
             });
         });
+        this.getWebcam((stream => {
+            this.videoRef.current.srcObject = stream;
+        }));
+
         window.addEventListener('beforeunload', this.onbeforeunload);
     }
 
@@ -72,6 +90,27 @@ class VideoRoomComponent extends Component {
         }
     }
 
+    handleVideoSelect(e) {
+
+    }
+
+    handleAudioSelect(e){
+
+    }
+
+    getWebcam(callback) {
+      try {
+        const constraints = {
+          'video': true,
+          'audio': false
+        }
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(callback);
+      } catch (err) {
+        console.log(err);
+        return undefined;
+      }
+    }
     deleteSubscriber(streamManager) {
         let subscribers = this.state.subscribers;
         let index = subscribers.indexOf(streamManager, 0);
@@ -151,7 +190,6 @@ class VideoRoomComponent extends Component {
                             var videoDevices = devices.filter(device => device.kind === 'videoinput');
 
                             // --- 5) Get your own camera stream ---
-
                             // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
                             // element: we will manage it on our own) and with the desired properties
                             let publisher = this.OV.initPublisher(undefined, {
@@ -175,6 +213,9 @@ class VideoRoomComponent extends Component {
                                 mainStreamManager: publisher,
                                 publisher: publisher,
                             });
+
+                            console.log(this.state.publisher.publishAudio);
+                            console.log(this.state.publisher.publishVideo);
                         })
                         .catch((error) => {
                             console.log('There was an error connecting to the session:', error.code, error.message);
@@ -239,22 +280,134 @@ class VideoRoomComponent extends Component {
             console.error(e);
           }
     }
+
+    muteAudio() {
+        if(this.state.audioEnable === true){
+            this.state.publisher.publishAudio(false);
+            this.setState({
+                audioText: "음소거 해제",
+                audioEnable: false,
+            });
+
+        }
+        else{
+            this.state.publisher.publishAudio(true);
+            this.setState({
+                audioText: "음소거",
+                audioEnable: true,
+            });
+        }
+    }
+
+    onoffVideo() {
+        if(this.state.videoEnable === true){
+            this.state.publisher.publishVideo(false);
+            this.setState({
+                videoText: "카메라 켜기",
+                videoEnable: false,
+            });
+        }
+        else{
+            this.state.publisher.publishVideo(true);
+            this.setState({
+                videoText: "카메라 끄기",
+                videoEnable: true,
+            });
+        };
+    }
+
+    async screenShare() {
+        var videMode = null;
+        var videoDevices;
+        if(this.state.shareEnable === false){
+            this.videoMode = "screen";
+            this.setState({
+                shareText: "화면공유 중지",
+                shareEnable: true,
+            });
+        }
+        else{
+            var devices = await this.OV.getDevices();
+            this.videoDevices = devices.filter(device => device.kind === 'videoinput');
+            this.videoMode = this.videoDevices[0].deviceId;
+            this.setState({
+                shareText: "화면공유",
+                shareEnable: false,
+            });
+        }
+
+        try{
+            // Creating a new publisher with specific videoSource
+            // In mobile devices the default and first camera is the front one
+            var sharePublisher = this.OV.initPublisher(undefined, {
+                videoSource: this.videoMode,
+                publishAudio: true,
+                publishVideo: true,
+            });
+
+            //newPublisher.once("accessAllowed", () => {
+            await this.state.session.unpublish(this.state.mainStreamManager)
+
+            await this.state.session.publish(sharePublisher)
+            this.setState({
+                mainStreamManager: sharePublisher,
+                publisher: sharePublisher,
+            });
+            if(this.state.shareEnable === false){
+                this.setState({
+                    currentVideoDevice: this.videoDevices[0],
+                });
+            }
+        } catch (e) {
+            console.error(e);
+        }
+
+
+    }
+
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
-
+        const audioText = this.state.audioText;
+        const videoText = this.state.videoText;
+        const shareText = this.state.shareText;
+        const audioDevices = this.state.audioDevices;
+        const videoDevices = this.state.videoDevices;
         return (
             <div className="container">
                 {this.state.session === undefined ? (
                     <div id="join">
                         <div id="img-div">
-                            <img src="resources/images/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu logo" />
+                            <img src={Logo} alt="ProdyTalk logo"/>
                         </div>
+                        <br />
                         <div id="join-dialog" className="jumbotron vertical-center">
-                            <h1> Join a video session </h1>
                             <form className="form-group" onSubmit={this.joinSession}>
                                 <p>
-                                    <label>Participant: </label>
+                                    <video ref={this.videoRef} autoPlay/>
+                                </p>
+                                <p>
+                                    <label>카메라: </label>
+                                    <select onChange={this.handleVideoSelect}>
+                                        {videoDevices.map((videoDevice, index) => (
+                                            <option key={videoDevice.deviceId} value={videoDevice.label}>
+                                                {videoDevice.label}
+                                            </option>
+                                         ))}
+                                    </select>
+                                </p>
+                                <p>
+                                    <label>마이크: </label>
+                                    <select onChange={this.handleAudioSelect}>
+                                        {audioDevices.map((audioDevice, index) => (
+                                            <option key={audioDevice.deviceId} value={audioDevice.label}>
+                                                {audioDevice.label}
+                                            </option>
+                                         ))}
+                                    </select>
+                                </p>
+                                <p>
+                                    <label>Username: </label>
                                     <input
                                         className="form-control"
                                         type="text"
@@ -282,7 +435,6 @@ class VideoRoomComponent extends Component {
                         </div>
                     </div>
                 ) : null}
-
                 {this.state.session !== undefined ? (
                     <div id="session">
                         <div id="session-header">
@@ -305,6 +457,27 @@ class VideoRoomComponent extends Component {
                                     id="buttonSwitchCamera"
                                     onClick={this.switchCamera}
                                     value="Switch Camera"
+                                />
+                                <input
+                                    className="btn btn-large btn-success"
+                                    type="button"
+                                    id="buttonMuteAudio"
+                                    onClick={this.muteAudio}
+                                    value={audioText}
+                                />
+                                <input
+                                    className="btn btn-large btn-success"
+                                    type="button"
+                                    id="buttonOnOffVideo"
+                                    onClick={this.onoffVideo}
+                                    value={videoText}
+                                />
+                                <input
+                                    className="btn btn-large btn-success"
+                                    type="button"
+                                    id="buttonOnOffVideo"
+                                    onClick={this.screenShare}
+                                    value={shareText}
                                 />
                             </div>
                         ) : null}

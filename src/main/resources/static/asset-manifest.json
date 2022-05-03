@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.527e0f49.css",
-    "main.js": "/static/js/main.917a330f.js",
+    "main.js": "/static/js/main.ca488650.js",
     "static/js/787.fade2e9e.chunk.js": "/static/js/787.fade2e9e.chunk.js",
     "static/media/LeferiBaseBold.ttf": "/static/media/LeferiBaseBold.c840b4ebf33a48be5eac.ttf",
     "static/media/LogoWhite.png": "/static/media/LogoWhite.f8cb7dd5f943d67482f9.png",
     "static/media/background.png": "/static/media/background.e856c94eab1f73bbf440.png",
     "index.html": "/index.html",
     "main.527e0f49.css.map": "/static/css/main.527e0f49.css.map",
-    "main.917a330f.js.map": "/static/js/main.917a330f.js.map",
+    "main.ca488650.js.map": "/static/js/main.ca488650.js.map",
     "787.fade2e9e.chunk.js.map": "/static/js/787.fade2e9e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.527e0f49.css",
-    "static/js/main.917a330f.js"
+    "static/js/main.ca488650.js"
   ]
 }
