@@ -70,7 +70,7 @@ const MyPageModal = (props) => {
                     <input type="text" onChange={changeUserEmail} className="form-control" value={userEmail} id="user_email" name="user_email"/>
 
                     <label htmlFor="taskId" className="col-form-label">핸드폰</label>
-                    <input typ="text" onChange={changeUserPhone} className="form-control" value={userPhone} id="user_phone" name="user_phonre"/>
+                    <input typ="text" onChange={changeUserPhone} className="form-control" value={userPhone} id="user_phone" name="user_phone"/>
 
                 </div>
               </div>

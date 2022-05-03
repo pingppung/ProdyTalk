@@ -14,7 +14,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import base64 from 'base-64';
 import axios from 'axios';
 
-function MainPage() {
+function MainPage({history}) {
     const [input,setInput] = useState("")
 
     const onChangeLink = (e) => {
@@ -28,8 +28,17 @@ function MainPage() {
             },
         });
         window.alert("방 참여완료!")
+        window.location.reload();
     }
 
+    useEffect(() => {
+        return history.listen((location) => {
+            if(history.action === "POP"){
+                history.push("/")
+            }
+        })
+
+    },[window.history])
 
 
     return (

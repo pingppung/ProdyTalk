@@ -26,14 +26,7 @@ function App() {
            <Route exact path="/video" component={Openvidu} />
            <Route exact path="/chat" component={Chat} />
            <Route exact path="/calendar" component={Calendar} />
-<<<<<<< Updated upstream
-
-=======
-           <Route exact path="/recruit" component={ListRecruitComponent} />
            <Route exact path="/mypage" component={MyPage} />
-           <Route exact path="/createRecruit/:recruit_id" component={CreateRecruitComponent} />
-           <Route exact path="/readRecruit/:recruit_id" component={ReadRecruitComponent} />
->>>>>>> Stashed changes
         </div>
 
     );

@@ -28,13 +28,14 @@ function MyPage() {
         setModalOpen(true); // modal open
     };
 
-        const closeModal = () => {
-            setModalOpen(false); // modal close
-        };
+    const closeModal = () => {
+        setModalOpen(false); // modal close
+    };
 
         const addModal = (user_id,user_name,user_pwd,user_email,user_phone) => {
-            UserService.editUser(user_id,user_name,user_email,user_phone)
+            UserService.editUser(user_id,user_name,user_pwd,user_email,user_phone)
             setModalOpen(false); // Modal 닫아주기
+            window.alert("수정 완료!")
         };
 
 
@@ -46,8 +47,8 @@ function MyPage() {
                         setUserId(res.data.user_id)
                         setUserPwd(res.data.user_pwd)
                         setUserName(res.data.user_name)
-                        setUserEmail(res.data.userEmail)
-                        setUserPhone(res.data.userPhone)
+                        setUserEmail(res.data.user_email)
+                        setUserPhone(res.data.user_phone)
                         setLoading(false)
                     })
             })
@@ -63,7 +64,7 @@ function MyPage() {
 
     useEffect(() => {
         getData()
-    },[])
+    },)
 
     return (
     <div>

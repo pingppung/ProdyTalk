@@ -87,8 +87,7 @@ public class UserController {
 
     @PostMapping("/api/editUser")
     public void insertUser(@RequestBody UserVO userVO) {
-
         userService.editUser(userVO);
+        System.out.println(userVO);
     }
-
 }

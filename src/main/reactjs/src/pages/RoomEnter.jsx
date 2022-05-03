@@ -4,6 +4,7 @@ import {useEffect} from 'react';
 import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
+import roomService from '../service/RoomService'
 import Calendar from './Calendar';
 import Header from '../components/HeaderComponent'
 import Box from '@mui/material/Box';
@@ -63,6 +64,19 @@ function RoomEnter() {
         }
     }
 
+    const onDeleteRoom = () => {
+        if(window.confirm("정말 방을 나가시겠습니까?")){
+            roomService.deleteRoom(id)
+
+            setTimeout(() => {
+                window.location.href="http://localhost:3000/main"
+            },1000);
+
+        } else {
+        }
+
+    }
+
     console.log(`${id}번 방입니다!`)
 
 
@@ -72,6 +86,10 @@ function RoomEnter() {
             <div id="inviteLink">
                 {link && encodeLink}
                 <Button variant="contained" color="primary" onClick={onCopy}>{buttonText}</Button>
+            </div>
+
+            <div id="deleteRoom">
+                <Button variant="contained" color="secondary" onClick={onDeleteRoom}>방 나가기</Button>
             </div>
 
             <Box sx={{ width: 1000, marginLeft:55, marginTop: 5 }}>
