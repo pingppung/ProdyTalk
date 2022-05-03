@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
+import { Link,withRouter } from "react-router-dom";
 import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
@@ -11,6 +12,7 @@ import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import {Button} from '@material-ui/core';
+import Home from "../components/image/Home.png";
 import base64 from 'base-64';
 import './css/RoomEnter.css';
 
@@ -53,6 +55,11 @@ function RoomEnter() {
     },[value])
 
 
+    const homeImageStyle = {
+        height:45,
+        width:45
+    };
+
     const onCopy = () => {
         if(buttonText==="코드 보기"){
             setLink(true)
@@ -64,19 +71,6 @@ function RoomEnter() {
         }
     }
 
-    const onDeleteRoom = () => {
-        if(window.confirm("정말 방을 나가시겠습니까?")){
-            roomService.deleteRoom(id)
-
-            setTimeout(() => {
-                window.location.href="http://localhost:3000/main"
-            },1000);
-
-        } else {
-        }
-
-    }
-
     console.log(`${id}번 방입니다!`)
 
 
@@ -84,13 +78,18 @@ function RoomEnter() {
         <div className="roomEnterBack">
             <Header />
             <div id="inviteLink">
-                {link && encodeLink}
-                <Button variant="contained" color="primary" onClick={onCopy}>{buttonText}</Button>
+                { (link === true)
+                ?
+                <div className="showLink">
+                    {encodeLink}
+                </div>
+                : <div></div>
+                }
+                <div className="copyButton">
+                    <Button variant="outlined" color="primary" onClick={onCopy}>{buttonText}</Button>
+                </div>
             </div>
 
-            <div id="deleteRoom">
-                <Button variant="contained" color="secondary" onClick={onDeleteRoom}>방 나가기</Button>
-            </div>
 
             <Box sx={{ width: 1000, marginLeft:55, marginTop: 5 }}>
                   <BottomNavigation
@@ -121,7 +120,7 @@ function RoomEnter() {
                 </div>
             </div>
 
-
+        <Link to="/main" id="homeBtn"><img src={Home} style={homeImageStyle}/></Link>
         </div>
     )
 }
