@@ -82,7 +82,6 @@ const RoomModal = (props) => {
                   close
                 </button>
               </footer>
-
             </section>
           ) : null}
         </div>
