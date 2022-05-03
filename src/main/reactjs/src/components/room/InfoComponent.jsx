@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import RoomService from '../../service/RoomService'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import '../css/RoomInfo.css'
 import {useAsync} from 'react-async';
 
 
@@ -44,15 +45,26 @@ function InfoComponent(props) {
      },[])
 
  return (
-    <div>
+    <div style={{textAlign: 'center'}}>
     {
         loading === true
         ? <div>
-            방 id = {props.roomId}
-            인원수 = {total}
-            현재 멤버 = {member.map(mem =>
-                mem.user_id +", ")}
-            프로젝트 설명 = {info}
+            <div className="infoBigDiv">
+                <div className="smallDiv">
+                    <p className="total">팀원 인원수</p>
+                    <p className="totalNum">{total}</p>
+                </div>
+                <div className="smallDiv">
+                    <p className="total">팀원 아이디</p>
+                    <p className="teamId"> {member.map(mem => (<li>{mem.user_id} <hr className="member" /></li>))}  </p>
+
+                </div>
+                <div className="smallDiv">
+                    <p className="total">프로젝트 요약</p>
+                    <p className="projectInfo">{info}</p>
+                </div>
+            </div>
+
         </div>
         : <div>
             <CircularProgress />

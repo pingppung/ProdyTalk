@@ -5,6 +5,9 @@ import Button from '@mui/material/Button';
 import FileService from '../../service/FileService';
 import FileList from './FileList';
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+import { blue} from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
 
 function FileComponent(props) {
     const [fileList,setFileList] = useState([]);
@@ -57,6 +60,14 @@ function FileComponent(props) {
         setFileInfo(e.target.value);
      }
 
+     const ColorButton = styled(Button)(({ theme }) => ({
+       color: blue[700],
+       backgroundColor: 'white',
+       '&:hover': {
+         backgroundColor: blue[300],
+       },
+     }));
+
     return (
         <div>
         { loading === true
@@ -66,10 +77,17 @@ function FileComponent(props) {
                 <FileList name={file.origin_name} extension={file.extension} info={file.file_info}
                     id={file.file_id} size={file.file_size} propFunction={changeState}/>
             )}
-            <input type="file" multiple name="uploadFile" onChange={onChangeFile} />
             <br />
-            <input type="text" name="fileInfo" onChange={onFileInfo} />
-            <Button variant="contained" color="primary" onClick={uploadFile}> 업로드 </Button>
+            <input type="file" multiple required name="uploadFile" onChange={onChangeFile} />
+            <TextField
+                style={{width:300}}
+                required
+                id="filled-basic"
+                label="파일 정보"
+                variant="filled"
+                onChange={onFileInfo}
+            />
+            <ColorButton type="submit" variant="outlined" onClick={uploadFile}> 업로드 </ColorButton>
         </div>
         : <CircularProgress />
         }

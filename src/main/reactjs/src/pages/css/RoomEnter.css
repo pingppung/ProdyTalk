@@ -1,8 +1,6 @@
 .calendar{
-    height:100px;
-    width:100vh;
-    padding:50px;
-
+    width:1200px;
+    display:inline-block;
     cursor: default;
               -webkit-touch-callout: none;
               -webkit-user-select: none;
@@ -10,4 +8,26 @@
               -moz-user-select: none;
               -ms-user-select: none;
               user-select: none;
+}
+
+.roomEnterBack{
+    background-color: #cfe8fc;
+    height:1500px;
+
+}
+
+#menu{
+    text-align: center;
+}
+
+.chat{
+    margin-top:20px;
+    margin-left: 300px;
+    width: 100%;
+
+}
+
+.menuitem{
+    text-align:center;
+    padding:20px;
 }
