@@ -30,6 +30,19 @@ function InfoComponent(props) {
             })
      }
 
+     const onDeleteRoom = () => {
+             if(window.confirm("정말 방을 나가시겠습니까?")){
+                 RoomService.deleteRoom(props.roomId)
+
+                 setTimeout(() => {
+                     window.location.href="http://localhost:3000/main"
+                 },1000);
+
+             } else {
+             }
+
+         }
+
      useEffect(() => {
         setLoading(false)
         console.log("false")
@@ -62,6 +75,10 @@ function InfoComponent(props) {
                 <div className="smallDiv">
                     <p className="total">프로젝트 요약</p>
                     <p className="projectInfo">{info}</p>
+                    <div className="deleteRoom">
+                        <Button variant="contained" color="error" onClick={onDeleteRoom}>방 나가기</Button>
+                    </div>
+
                 </div>
             </div>
 

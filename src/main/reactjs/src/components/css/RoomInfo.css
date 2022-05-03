@@ -24,6 +24,7 @@
     margin:5px;
     margin-left:11px;
     margin-top:14px;
+    text-align:center;
 
 
 }
@@ -58,6 +59,13 @@ li{
 hr.member{
     margin-left:25px;
     width:260px;
+}
+
+.deleteRoom{
+    position:relative;
+    margin-top:330px;
+    margin-right:40px;
+    display:inline-block;
 }
 
 @font-face {

@@ -61,6 +61,7 @@ class LoginComponent extends Component {
                             error={this.state.user_id === "" ? true: false}
                             id="outlined-required"
                             label="아이디"
+                            onChange={this.handleIdChange}
                         />
                     </div>
 
@@ -71,6 +72,7 @@ class LoginComponent extends Component {
                             error={this.state.user_pwd === "" ? true: false}
                             id="outlined-required"
                             label="비밀번호"
+                            onChange={this.handlePwdChange}
                         />
                     </div>
 

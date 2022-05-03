@@ -10,7 +10,7 @@ import { blue} from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 
 function FileComponent(props) {
-    const [fileList,setFileList] = useState([]);
+    const [fileList,setFileList] = useState(null);
     const [fileInfo,setFileInfo]=useState("");
     const [files,setFiles]=useState([]);
     const [loading,setLoading]=useState(false)
@@ -42,18 +42,24 @@ function FileComponent(props) {
      const uploadFile = () => {
         const formData = new FormData()
 
-        fileList.forEach((file) => {
-            // 파일 데이터 저장
-            formData.append('files', file);
-            formData.append('file_info',fileInfo);
-            formData.append('room_id',props.roomId);
-        });
+        if(fileInfo=="")
+            window.alert("파일 정보를 입력해주세요!")
+        else if(fileList==null)
+            window.alert("파일을 추가해주세요!")
+        else {
+            fileList.forEach((file) => {
+                        // 파일 데이터 저장
+                        formData.append('files', file);
+                        formData.append('file_info',fileInfo);
+                        formData.append('room_id',props.roomId);
+                    });
 
-        axios.post('/api/fileupload',formData)
-            .then(() => {
-                setState(!state)
-                window.alert("업로드 완료")
-            })
+            axios.post('/api/fileupload',formData)
+                .then(() => {
+                    setState(!state)
+                    window.alert("업로드 완료")
+                })
+            }
      }
 
      const onFileInfo = (e) => {
@@ -84,7 +90,7 @@ function FileComponent(props) {
                 required
                 id="filled-basic"
                 label="파일 정보"
-                variant="filled"
+                variant="standard"
                 onChange={onFileInfo}
             />
             <ColorButton type="submit" variant="outlined" onClick={uploadFile}> 업로드 </ColorButton>

@@ -6,11 +6,12 @@ import Header from '../components/HeaderComponent.jsx'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from "react-router-dom";
-import {Button} from '@material-ui/core';
+import Button from '@mui/material/Button';
 import RoomCircle from '../components/room/RoomCircle.jsx'
 import RoomListComponent from '../components/room/RoomListComponent.jsx'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import HomeIcon from '@mui/icons-material/Home';
+import TextField from '@mui/material/TextField';
 import base64 from 'base-64';
 import axios from 'axios';
 
@@ -22,13 +23,17 @@ function MainPage({history}) {
     }
 
     const onLink = () => {
-        axios.get(base64.decode(input), {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-        });
-        window.alert("방 참여완료!")
-        window.location.reload();
+        if(input=="") window.alert("코드를 입력해주세요!")
+        else {
+            axios.get(base64.decode(input), {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+            });
+            window.alert("방 참여완료!")
+            window.location.reload();
+            setInput("")
+        }
     }
 
     useEffect(() => {
@@ -46,8 +51,10 @@ function MainPage({history}) {
             <div className="smallBox">
             <Header />
                 <div id="putLink">
-                    <input type="text" onChange={onChangeLink} />
-                    <Button variant="contained" color="primary" onClick={onLink}>참여</Button>
+                    <TextField id="standard-basic" label="코드 입력" variant="standard" onChange={onChangeLink} />
+                    <div className="putLinkButton">
+                        <Button variant="outlined" color="primary" onClick={onLink}>참여</Button>
+                    </div>
                 </div>
                 <br/><br/><br/>
             </div>

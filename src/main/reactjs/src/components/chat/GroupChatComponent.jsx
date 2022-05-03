@@ -9,6 +9,7 @@ import LeftMessage from "./LeftMessage.js";
 import Connected from "./Connected";
 import ChatService from "../../service/ChatService.js";
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
 import '../css/Chat.css';
 
 function Chat(props) {
@@ -138,9 +139,10 @@ function Chat(props) {
                         {children.map(child => child)}
                     </div>
                     <div id="inputMessage">
-                        <label>메시지 입력</label>
-                        <input className="obj" onChange={changeMessage} value={chatMessage} placeholder="message.." />
-                        <Button variant="contained" color="primary" onClick={onChatMessage}>보내기</Button>
+                        <TextField id="standard-basic" label="메시지 입력" variant="standard" onChange={changeMessage} value={chatMessage} />
+                        <div className="inputButton">
+                            <Button variant="contained" color="primary" onClick={onChatMessage}>보내기</Button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,12 @@
     padding:50px;
 }
 
+.putLinkButton{
+    margin-top: 10px;
+    margin-left: 15px;
+    display:inline-block;
+}
+
 .menu{
     text-align:center;
     top:600px;

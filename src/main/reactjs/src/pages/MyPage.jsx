@@ -13,6 +13,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import MyPageModal from './MyPageModal';
 import { blue } from '@mui/material/colors';
+import Home from "../components/image/Home.png";
 import './css/myPage.css'
 function MyPage() {
 
@@ -55,6 +56,11 @@ function MyPage() {
         })
     }
 
+    const homeImageStyle = {
+                 height:45,
+                 width:45
+             };
+
     const imagestyle = {
                  height:150,
                  width:150,
@@ -89,6 +95,7 @@ function MyPage() {
                  </div>
             </div>
             }
+            <Link to="/main" id="homeBtn"><img src={Home} style={homeImageStyle}/></Link>
         </div>
 
     </div>
