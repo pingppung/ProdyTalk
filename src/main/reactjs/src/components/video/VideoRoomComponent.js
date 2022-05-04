@@ -3,9 +3,12 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
-import UserService from '../../service/UserService'
+import UserService from '../../service/UserService';
+import Logo from '../image/LogoWhite.png';
+import '../css/Video.css';
 const OPENVIDU_SERVER_URL = 'https://prody.xyz:4443';
 const OPENVIDU_SERVER_SECRET = '12341234';
+
 
 class VideoRoomComponent extends Component {
     constructor(props) {
@@ -18,29 +21,58 @@ class VideoRoomComponent extends Component {
             mainStreamManager: undefined,
             publisher: undefined,
             subscribers: [],
+            videoDeviceID: undefined,
+            audioDeviceID: undefined,
+            videoDevices: [],
+            audioDevices: [],
+            videoEnable: true,
+            audioEnable: true,
+            shareEnable: false,
+            audioText: '음소거',
+            videoText: '카메라 끄기',
+            shareText: '화면공유',
+            videoRef: undefined,
         };
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
         this.switchCamera = this.switchCamera.bind(this);
-        this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
-        this.handleChangeUserName = this.handleChangeUserName.bind(this);
+        this.onoffVideo = this.onoffVideo.bind(this);
+        this.muteAudio = this.muteAudio.bind(this);
+        this.screenShare = this.screenShare.bind(this);
+        this.getWebcam = this.getWebcam.bind(this);
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
+        this.handleVideoSelect = this.handleVideoSelect.bind(this);
+        this.handleAudioSelect = this.handleAudioSelect.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
     }
     componentDidMount() {
-        //roomid로
-       /* const location=useLocation()
-        this.setState({
-            mySessionId: location.state,
-        });*/
-        console.log(window.location.href);
+        const { params } = this.props.match;
+        this.videoRef = React.createRef();
+
         UserService.getUserName().then(res => {
-            console.log(res.data.id);
             this.setState({
-                myUserName: res.data.id
+                myUserName: res.data.id,
+                mySessionId: params.id,
             });
         });
+        navigator.mediaDevices.enumerateDevices()
+            .then(devices => {
+                const videoinput = devices.filter((device) => device.kind === "videoinput");
+                const audioinput = devices.filter((device) => device.kind === "audioinput");
+                this.setState({
+                     videoDevices: videoinput,
+                     audioDevices: audioinput,
+                     videoDeviceID: videoinput[0],  //일단 맨 videoDevices 맨 처음 껄로 저장
+                     audioDeviceID: audioinput[0],
+                });
+            });
+            console.log(this.videoDevices);
+            console.log(this.state.videoDevices);
+            this.getWebcam((stream => {
+                this.videoRef.current.srcObject = stream;
+        }));
+
         window.addEventListener('beforeunload', this.onbeforeunload);
     }
 
@@ -52,24 +84,41 @@ class VideoRoomComponent extends Component {
         this.leaveSession();
     }
 
-    handleChangeSessionId(e) {
-        this.setState({
-            mySessionId: e.target.value,
-        });
-    }
-
-    handleChangeUserName(e) {
-        this.setState({
-            myUserName: e.target.value,
-        });
-    }
-
     handleMainVideoStream(stream) {
         if (this.state.mainStreamManager !== stream) {
             this.setState({
                 mainStreamManager: stream
             });
         }
+    }
+
+    handleVideoSelect(e) {
+        this.setState({
+            videoDeviceID: e.target.value,
+        });
+    }
+
+    handleAudioSelect(e){
+        this.setState({
+            audioDeviceID: e.target.value,
+        });
+        console.log(e.target.value);
+        console.log(this.state.audioDeviceID);
+        console.log(this.audioDeviceID);
+    }
+
+    getWebcam(callback) {
+      try {
+        const constraints = {
+          'video': true,
+          'audio': false
+        }
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(callback);
+      } catch (err) {
+        console.log(err);
+        return undefined;
+      }
     }
 
     deleteSubscriber(streamManager) {
@@ -151,7 +200,6 @@ class VideoRoomComponent extends Component {
                             var videoDevices = devices.filter(device => device.kind === 'videoinput');
 
                             // --- 5) Get your own camera stream ---
-
                             // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
                             // element: we will manage it on our own) and with the desired properties
                             let publisher = this.OV.initPublisher(undefined, {
@@ -175,6 +223,9 @@ class VideoRoomComponent extends Component {
                                 mainStreamManager: publisher,
                                 publisher: publisher,
                             });
+
+                            console.log(this.state.publisher.publishAudio);
+                            console.log(this.state.publisher.publishVideo);
                         })
                         .catch((error) => {
                             console.log('There was an error connecting to the session:', error.code, error.message);
@@ -198,16 +249,18 @@ class VideoRoomComponent extends Component {
         this.setState({
             session: undefined,
             subscribers: [],
-            mySessionId: 'MySessionA',
-            myUserName: 'Participant' + Math.floor(Math.random() * 100),
             mainStreamManager: undefined,
             publisher: undefined
         });
+
+        this.getWebcam((stream => {
+            this.videoRef.current.srcObject = stream;
+        }));
     }
 
     async switchCamera() {
         try{
-            const devices = await this.OV.getDevices()
+            const devices = await this.OV.getDevices();
             var videoDevices = devices.filter(device => device.kind === 'videoinput');
 
             if(videoDevices && videoDevices.length > 1) {
@@ -221,7 +274,9 @@ class VideoRoomComponent extends Component {
                         videoSource: newVideoDevice[0].deviceId,
                         publishAudio: true,
                         publishVideo: true,
-                        mirror: true
+                        mirror: false,
+                        resolution: '640x480',
+                        insertMode: 'APPEND'
                     });
 
                     //newPublisher.once("accessAllowed", () => {
@@ -239,29 +294,148 @@ class VideoRoomComponent extends Component {
             console.error(e);
           }
     }
+
+    muteAudio() {
+        if(this.state.audioEnable === true){
+            this.state.publisher.publishAudio(false);
+            this.setState({
+                audioText: "음소거 해제",
+                audioEnable: false,
+            });
+        }
+        else{
+            this.state.publisher.publishAudio(true);
+            this.setState({
+                audioText: "음소거",
+                audioEnable: true,
+            });
+        }
+    }
+
+    onoffVideo() {
+        if(this.state.videoEnable === true){
+            this.state.publisher.publishVideo(false);
+            this.setState({
+                videoText: "카메라 켜기",
+                videoEnable: false,
+            });
+        }
+        else{
+            this.state.publisher.publishVideo(true);
+            this.setState({
+                videoText: "카메라 끄기",
+                videoEnable: true,
+            });
+        };
+    }
+
+    async screenShare() {
+        var videMode = null;
+        var videoDevices;
+        if(this.state.shareEnable === false){
+            this.videoMode = "screen";
+            this.setState({
+                shareText: "화면공유 중지",
+                shareEnable: true,
+            });
+        }
+        else{
+            var devices = await this.OV.getDevices();
+            this.videoDevices = devices.filter(device => device.kind === 'videoinput');
+            this.videoMode = this.videoDevices[0].deviceId;
+            this.setState({
+                shareText: "화면공유",
+                shareEnable: false,
+            });
+        }
+
+        try{
+            // Creating a new publisher with specific videoSource
+            // In mobile devices the default and first camera is the front one
+            var sharePublisher = this.OV.initPublisher(undefined, {
+                videoSource: this.videoMode,
+                publishAudio: true,
+                publishVideo: true,
+                mirror: false,
+                resolution: '640x480',
+                insertMode: 'APPEND',
+            });
+
+            sharePublisher.once("accessAllowed", () => {
+                this.state.session.unpublish(this.state.mainStreamManager)
+
+                this.state.session.publish(sharePublisher)
+                this.setState({
+                    mainStreamManager: sharePublisher,
+                    publisher: sharePublisher,
+                });
+            });
+            sharePublisher.once('accessDenied', () => {
+                console.error('Screen Share: Access Denied');
+                this.setState({
+                    shareText: "화면공유",
+                    shareEnable: false,
+                });
+            });
+            if(this.state.shareEnable === false){
+                this.setState({
+                    currentVideoDevice: this.videoDevices[0],
+                });
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
-
+        const audioText = this.state.audioText;
+        const videoText = this.state.videoText;
+        const shareText = this.state.shareText;
+        const audioDevices = this.state.audioDevices;
+        const videoDevices = this.state.videoDevices;
         return (
             <div className="container">
                 {this.state.session === undefined ? (
                     <div id="join">
                         <div id="img-div">
-                            <img src="resources/images/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu logo" />
+                            <img src={Logo} alt="ProdyTalk logo"/>
                         </div>
+                        <br />
                         <div id="join-dialog" className="jumbotron vertical-center">
-                            <h1> Join a video session </h1>
                             <form className="form-group" onSubmit={this.joinSession}>
                                 <p>
-                                    <label>Participant: </label>
+                                    <video ref={this.videoRef} autoPlay/>
+                                </p>
+                                <p>
+                                    <label>카메라: </label>
+                                    <select value={this.state.videoDeviceID} onChange={this.handleVideoSelect}>
+                                        {videoDevices.map((videoDevice, index) => (
+                                            <option key={videoDevice.deviceId} value={videoDevice.label}>
+                                                {videoDevice.label}
+                                            </option>
+                                         ))}
+                                    </select>
+                                </p>
+                                <p>
+                                    <label>마이크: </label>
+                                    <select value={this.state.audioDeviceID} onChange={this.handleAudioSelect}>
+                                        {audioDevices.map((audioDevice, index) => (
+                                            <option key={audioDevice.deviceId} value={audioDevice.label}>
+                                                {audioDevice.label}
+                                            </option>
+                                         ))}
+                                    </select>
+                                </p>
+                                <p>
+                                    <label>Username: </label>
                                     <input
                                         className="form-control"
                                         type="text"
                                         id="userName"
                                         value={myUserName}
-                                        onChange={this.handleChangeUserName}
-                                        required
+                                        disabled
                                     />
                                 </p>
                                 <p>
@@ -271,8 +445,7 @@ class VideoRoomComponent extends Component {
                                         type="text"
                                         id="sessionId"
                                         value={mySessionId}
-                                        onChange={this.handleChangeSessionId}
-                                        required
+                                        disabled
                                     />
                                 </p>
                                 <p className="text-center">
@@ -282,41 +455,56 @@ class VideoRoomComponent extends Component {
                         </div>
                     </div>
                 ) : null}
-
                 {this.state.session !== undefined ? (
-                    <div id="session">
-                        <div id="session-header">
-                            <h1 id="session-title">{mySessionId}</h1>
+                 <div id="videoroom">
+                    <div id="footer">
+                        <h1 id="session-title">{mySessionId}</h1>
                             <input
-                                className="btn btn-large btn-danger"
                                 type="button"
                                 id="buttonLeaveSession"
                                 onClick={this.leaveSession}
-                                value="Leave session"
+                                value="나가기"
+                            />
+                            <input
+                                type="button"
+                                id="buttonSwitchCamera"
+                                onClick={this.switchCamera}
+                                value="카메라 전환"
+                            />
+                            <input
+                                type="button"
+                                id="buttonMuteAudio"
+                                onClick={this.muteAudio}
+                                value={audioText}
+                            />
+                            <input
+                                type="button"
+                                id="buttonOnOffVideo"
+                                onClick={this.onoffVideo}
+                                value={videoText}
+                            />
+                            <input
+                                type="button"
+                                id="buttonOnOffVideo"
+                                onClick={this.screenShare}
+                                value={shareText}
                             />
                         </div>
 
                         {this.state.mainStreamManager !== undefined ? (
                             <div id="main-video" className="col-md-6">
                                 <UserVideoComponent streamManager={this.state.mainStreamManager} />
-                                <input
-                                    className="btn btn-large btn-success"
-                                    type="button"
-                                    id="buttonSwitchCamera"
-                                    onClick={this.switchCamera}
-                                    value="Switch Camera"
-                                />
                             </div>
                         ) : null}
-                        <div id="video-container" className="col-md-6">
+                        <div id="video-container">
                             {this.state.publisher !== undefined ? (
-                                <div className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
+                                <div className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
                                     <UserVideoComponent
                                         streamManager={this.state.publisher} />
                                 </div>
                             ) : null}
                             {this.state.subscribers.map((sub, i) => (
-                                <div key={i} className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
+                                <div key={i} className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
                                     <UserVideoComponent streamManager={sub} />
                                 </div>
                             ))}
