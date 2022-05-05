@@ -16,14 +16,16 @@ img{
   width: 400px;
 }
 
-select{
+.form-group select{
   height: 40px;
   border-radius: 0.25rem;
+  color: #000;
+  width: 320px;
 }
 
 #userName, #sessionId{
   display: inline;
-  width: 300px;
+  width: 220px;
   height: 40px;
 }
 

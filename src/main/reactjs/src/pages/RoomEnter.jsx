@@ -103,7 +103,9 @@ function RoomEnter() {
                     <BottomNavigationAction label="캘린더" />
                     <BottomNavigationAction label="파일 공유"  />
                     <BottomNavigationAction label="그룹 채팅"  />
-                    <BottomNavigationAction label="화상 채팅"  />
+                    <Link to={{pathname:`/video/${id}`, state: `${id}`}}>
+                      <BottomNavigationAction label="화상 채팅"  />
+                    </Link>
                   </BottomNavigation>
             </Box>
 
