@@ -2,6 +2,8 @@ package com.example.ProdyTalk.contoller;
 
 import com.example.ProdyTalk.mapper.UserMapper;
 import com.example.ProdyTalk.service.UserService;
+import com.example.ProdyTalk.vo.RoomJoinVO;
+import com.example.ProdyTalk.vo.RoomListVO;
 import com.example.ProdyTalk.vo.UserVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
@@ -68,5 +70,16 @@ public class UserController {
                 .setSigningKey("secret") // (3)
                 .parseClaimsJws(token) // (4)
                 .getBody();
+    }
+
+    @GetMapping("/api/getUser")
+    public UserVO getUserById(@RequestParam(value="user_id") String user_id) {
+        return userService.getUserById(user_id);
+    }
+
+    @PostMapping("/api/editUser")
+    public void insertUser(@RequestBody UserVO userVO) {
+        userService.editUser(userVO);
+        System.out.println(userVO);
     }
 }

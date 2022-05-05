@@ -19,4 +19,6 @@ public interface RoomMapper {
     void setRoomTotal(RoomListVO roomListVO);
     RoomListVO getRoomById(int room_id);
     List<RoomJoinVO> getMemberById(int room_id);
+
+    void deleteRoom(RoomJoinVO roomJoinVO);
 }

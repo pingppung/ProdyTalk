@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "base-64": "^1.0.0",
     "react-script-tag": "^1.1.2"
   }
 }

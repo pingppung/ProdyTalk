@@ -94,4 +94,19 @@ public class RoomController {
         return roomService.getMemberById(room_id);
     }
 
+    @PostMapping("/api/deleteRoom")
+    public void deleteRoom(@RequestBody RoomJoinVO roomJoinVO, HttpServletRequest request){
+        RoomListVO roomListVO = new RoomListVO();
+        int room_total = roomService.getRoomTotal(roomJoinVO.getRoom_id());
+        roomListVO.setRoom_id(roomJoinVO.getRoom_id());
+        roomListVO.setRoom_total(room_total-1);
+
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
+        String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id",String.class);
+        roomJoinVO.setUser_id(user_id);
+
+        roomService.setRoomTotal(roomListVO);
+        roomService.deleteRoom(roomJoinVO);
+    }
+
 }
