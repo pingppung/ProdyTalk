@@ -409,7 +409,7 @@ class VideoRoomComponent extends Component {
                                     <video ref={this.videoRef} autoPlay/>
                                 </p>
                                 <p>
-                                    <label>카메라: </label>
+                                    <label>Camera: </label>
                                     <select value={this.state.videoDeviceID} onChange={this.handleVideoSelect}>
                                         {videoDevices.map((videoDevice, index) => (
                                             <option key={videoDevice.deviceId} value={videoDevice.label}>
@@ -419,7 +419,7 @@ class VideoRoomComponent extends Component {
                                     </select>
                                 </p>
                                 <p>
-                                    <label>마이크: </label>
+                                    <label>Audio: </label>
                                     <select value={this.state.audioDeviceID} onChange={this.handleAudioSelect}>
                                         {audioDevices.map((audioDevice, index) => (
                                             <option key={audioDevice.deviceId} value={audioDevice.label}>
@@ -449,7 +449,7 @@ class VideoRoomComponent extends Component {
                                     />
                                 </p>
                                 <p className="text-center">
-                                    <input className="btn btn-lg btn-success" name="commit" type="submit" value="JOIN" />
+                                    <input className="btn btn-lg btn-success" id="buttonJoin" name="commit" type="submit" value="JOIN" />
                                 </p>
                             </form>
                         </div>
