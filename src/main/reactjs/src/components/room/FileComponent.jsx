@@ -5,9 +5,12 @@ import Button from '@mui/material/Button';
 import FileService from '../../service/FileService';
 import FileList from './FileList';
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+import { blue} from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
 
 function FileComponent(props) {
-    const [fileList,setFileList] = useState([]);
+    const [fileList,setFileList] = useState(null);
     const [fileInfo,setFileInfo]=useState("");
     const [files,setFiles]=useState([]);
     const [loading,setLoading]=useState(false)
@@ -39,23 +42,37 @@ function FileComponent(props) {
      const uploadFile = () => {
         const formData = new FormData()
 
-        fileList.forEach((file) => {
-            // 파일 데이터 저장
-            formData.append('files', file);
-            formData.append('file_info',fileInfo);
-            formData.append('room_id',props.roomId);
-        });
+        if(fileInfo=="")
+            window.alert("파일 정보를 입력해주세요!")
+        else if(fileList==null)
+            window.alert("파일을 추가해주세요!")
+        else {
+            fileList.forEach((file) => {
+                        // 파일 데이터 저장
+                        formData.append('files', file);
+                        formData.append('file_info',fileInfo);
+                        formData.append('room_id',props.roomId);
+                    });
 
-        axios.post('/api/fileupload',formData)
-            .then(() => {
-                setState(!state)
-                window.alert("업로드 완료")
-            })
+            axios.post('/api/fileupload',formData)
+                .then(() => {
+                    setState(!state)
+                    window.alert("업로드 완료")
+                })
+            }
      }
 
      const onFileInfo = (e) => {
         setFileInfo(e.target.value);
      }
+
+     const ColorButton = styled(Button)(({ theme }) => ({
+       color: blue[700],
+       backgroundColor: 'white',
+       '&:hover': {
+         backgroundColor: blue[300],
+       },
+     }));
 
     return (
         <div>
@@ -66,10 +83,17 @@ function FileComponent(props) {
                 <FileList name={file.origin_name} extension={file.extension} info={file.file_info}
                     id={file.file_id} size={file.file_size} propFunction={changeState}/>
             )}
-            <input type="file" multiple name="uploadFile" onChange={onChangeFile} />
             <br />
-            <input type="text" name="fileInfo" onChange={onFileInfo} />
-            <Button variant="contained" color="primary" onClick={uploadFile}> 업로드 </Button>
+            <input type="file" multiple required name="uploadFile" onChange={onChangeFile} />
+            <TextField
+                style={{width:300}}
+                required
+                id="filled-basic"
+                label="파일 정보"
+                variant="standard"
+                onChange={onFileInfo}
+            />
+            <ColorButton type="submit" variant="outlined" onClick={uploadFile}> 업로드 </ColorButton>
         </div>
         : <CircularProgress />
         }

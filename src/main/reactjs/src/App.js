@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/HeaderComponent'
 import FirstPage from './pages/FirstPage'
+import MyPage from './pages/MyPage'
 import Main from './pages/MainPage'
 import LoginComponent from './components/LoginComponent'
 import SignupComponent from './components/SignupComponent'
@@ -12,6 +13,10 @@ import Calendar from './pages/Calendar'
 
 import { Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import ListRecruitComponent from './components/ListRecruitComponent'
+import CreateRecruitComponent from './components/CreateRecruitComponent'
+import ReadRecruitComponent from './components/ReadRecruitComponent'
 
 function App() {
   return (
@@ -25,7 +30,10 @@ function App() {
            <Route exact path="/video/:id" component={Video} />
            <Route exact path="/chat" component={Chat} />
            <Route exact path="/calendar" component={Calendar} />
-
+           <Route exact path="/mypage" component={MyPage} />
+           <Route exact path="/recruit" component={ListRecruitComponent} />
+           <Route exact path="/createRecruit/:recruit_id" component={CreateRecruitComponent} />
+           <Route exact path="/readRecruit/:recruit_id" component={ReadRecruitComponent} />
         </div>
 
     );

@@ -2,9 +2,90 @@
     background-color:#cfe8fc;
     background-color:#cfe8fd;
     background-blend-mode:multiply;
+    width:100%;
+    text-align:center;
+    cursor: default;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
 }
 
 .mainPage{
     background-color:#cfe8fc;
-    height:950px;
+    min-height:100vh;
+    text-align:center;
+}
+
+
+#putLink{
+    float:right;
+    padding:50px;
+}
+
+.putLinkButton{
+    margin-top: 10px;
+    margin-left: 15px;
+    display:inline-block;
+}
+
+.menu{
+    text-align:center;
+    top:600px;
+    left:590px;
+    position:absolute;
+}
+.recruit{
+    padding:40px;
+    display:inline-block;
+    margin-right:150px;
+    width : 300px;
+    height : 200px;
+    border-radius: 10%;
+    font-family:'lefery';
+    font-size: 30px;
+
+    -webkit-animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    	        animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.mypage{
+    display:inline-block;
+    padding:40px;
+    width : 300px;
+    height : 200px;
+    border-radius: 10%;
+    font-family:'lefery';
+    font-size: 30px;
+
+    -webkit-animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    	        animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@font-face {
+    font-family: 'lefery';
+    src: url('./LeferiBaseBold.ttf') format('truetype');
+}
+
+@-webkit-keyframes shadow-drop-center {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+  }
+}
+@keyframes shadow-drop-center {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+  }
 }
