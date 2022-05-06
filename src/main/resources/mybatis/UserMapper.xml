@@ -13,4 +13,15 @@
         SELECT * FROM users
         WHERE user_id = #{user_id} AND user_pwd=#{user_pwd}
     </select>
+
+    <select id="getUserById" resultType="com.example.ProdyTalk.vo.UserVO">
+        select * from users
+        where user_id = #{user_id}
+    </select>
+
+    <update id="editUser" parameterType="com.example.ProdyTalk.vo.UserVO">
+        update users
+        set user_name=#{user_name}, user_pwd=#{user_pwd}, user_email=#{user_email}, user_phone=#{user_phone}
+        where user_id=#{user_id}
+    </update>
 </mapper>

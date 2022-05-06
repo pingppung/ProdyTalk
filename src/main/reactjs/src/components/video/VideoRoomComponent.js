@@ -5,6 +5,7 @@ import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
 import UserService from '../../service/UserService';
 import Logo from '../image/LogoWhite.png';
+import '../css/Video.css';
 const OPENVIDU_SERVER_URL = 'https://prody.xyz:4443';
 const OPENVIDU_SERVER_SECRET = '12341234';
 
@@ -20,6 +21,8 @@ class VideoRoomComponent extends Component {
             mainStreamManager: undefined,
             publisher: undefined,
             subscribers: [],
+            videoDeviceID: undefined,
+            audioDeviceID: undefined,
             videoDevices: [],
             audioDevices: [],
             videoEnable: true,
@@ -38,8 +41,6 @@ class VideoRoomComponent extends Component {
         this.muteAudio = this.muteAudio.bind(this);
         this.screenShare = this.screenShare.bind(this);
         this.getWebcam = this.getWebcam.bind(this);
-        this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
-        this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
         this.handleVideoSelect = this.handleVideoSelect.bind(this);
         this.handleAudioSelect = this.handleAudioSelect.bind(this);
@@ -55,9 +56,10 @@ class VideoRoomComponent extends Component {
                 mySessionId: params.id,
             });
         });
-        this.getWebcam((stream => {
+
+        this.getWebcam((stream) => {
             this.videoRef.current.srcObject = stream;
-        }));
+        };
 
         window.addEventListener('beforeunload', this.onbeforeunload);
     }
@@ -70,18 +72,6 @@ class VideoRoomComponent extends Component {
         this.leaveSession();
     }
 
-    handleChangeSessionId(e) {
-        this.setState({
-            mySessionId: e.target.value,
-        });
-    }
-
-    handleChangeUserName(e) {
-        this.setState({
-            myUserName: e.target.value,
-        });
-    }
-
     handleMainVideoStream(stream) {
         if (this.state.mainStreamManager !== stream) {
             this.setState({
@@ -91,18 +81,22 @@ class VideoRoomComponent extends Component {
     }
 
     handleVideoSelect(e) {
-
+        this.setState({
+            videoDeviceID: e.target.value,
+        });
     }
 
     handleAudioSelect(e){
-
+        this.setState({
+            audioDeviceID: e.target.value,
+        });
     }
 
     getWebcam(callback) {
       try {
         const constraints = {
           'video': true,
-          'audio': false
+          'audio': false,
         }
         navigator.mediaDevices.getUserMedia(constraints)
           .then(callback);
@@ -111,6 +105,7 @@ class VideoRoomComponent extends Component {
         return undefined;
       }
     }
+
     deleteSubscriber(streamManager) {
         let subscribers = this.state.subscribers;
         let index = subscribers.indexOf(streamManager, 0);
@@ -239,16 +234,18 @@ class VideoRoomComponent extends Component {
         this.setState({
             session: undefined,
             subscribers: [],
-            mySessionId: 'MySessionA',
-            myUserName: 'Participant' + Math.floor(Math.random() * 100),
             mainStreamManager: undefined,
             publisher: undefined
         });
+
+        this.getWebcam((stream => {
+            this.videoRef.current.srcObject = stream;
+        }));
     }
 
     async switchCamera() {
         try{
-            const devices = await this.OV.getDevices()
+            const devices = await this.OV.getDevices();
             var videoDevices = devices.filter(device => device.kind === 'videoinput');
 
             if(videoDevices && videoDevices.length > 1) {
@@ -262,7 +259,9 @@ class VideoRoomComponent extends Component {
                         videoSource: newVideoDevice[0].deviceId,
                         publishAudio: true,
                         publishVideo: true,
-                        mirror: true
+                        mirror: false,
+                        resolution: '640x480',
+                        insertMode: 'APPEND'
                     });
 
                     //newPublisher.once("accessAllowed", () => {
@@ -288,7 +287,6 @@ class VideoRoomComponent extends Component {
                 audioText: "음소거 해제",
                 audioEnable: false,
             });
-
         }
         else{
             this.state.publisher.publishAudio(true);
@@ -352,6 +350,26 @@ class VideoRoomComponent extends Component {
             this.setState({
                 mainStreamManager: sharePublisher,
                 publisher: sharePublisher,
+                mirror: false,
+                resolution: '640x480',
+                insertMode: 'APPEND',
+            });
+
+            sharePublisher.once("accessAllowed", () => {
+                this.state.session.unpublish(this.state.mainStreamManager)
+
+                this.state.session.publish(sharePublisher)
+                this.setState({
+                    mainStreamManager: sharePublisher,
+                    publisher: sharePublisher,
+                });
+            });
+            sharePublisher.once('accessDenied', () => {
+                console.error('Screen Share: Access Denied');
+                this.setState({
+                    shareText: "화면공유",
+                    shareEnable: false,
+                });
             });
             if(this.state.shareEnable === false){
                 this.setState({
@@ -361,8 +379,6 @@ class VideoRoomComponent extends Component {
         } catch (e) {
             console.error(e);
         }
-
-
     }
 
     render() {
@@ -387,8 +403,8 @@ class VideoRoomComponent extends Component {
                                     <video ref={this.videoRef} autoPlay/>
                                 </p>
                                 <p>
-                                    <label>카메라: </label>
-                                    <select onChange={this.handleVideoSelect}>
+                                    <label>Camera: </label>
+                                    <select value={this.state.videoDeviceID} onChange={this.handleVideoSelect}>
                                         {videoDevices.map((videoDevice, index) => (
                                             <option key={videoDevice.deviceId} value={videoDevice.label}>
                                                 {videoDevice.label}
@@ -397,8 +413,8 @@ class VideoRoomComponent extends Component {
                                     </select>
                                 </p>
                                 <p>
-                                    <label>마이크: </label>
-                                    <select onChange={this.handleAudioSelect}>
+                                    <label>Audio: </label>
+                                    <select value={this.state.audioDeviceID} onChange={this.handleAudioSelect}>
                                         {audioDevices.map((audioDevice, index) => (
                                             <option key={audioDevice.deviceId} value={audioDevice.label}>
                                                 {audioDevice.label}
@@ -413,8 +429,7 @@ class VideoRoomComponent extends Component {
                                         type="text"
                                         id="userName"
                                         value={myUserName}
-                                        onChange={this.handleChangeUserName}
-                                        required
+                                        disabled
                                     />
                                 </p>
                                 <p>
@@ -424,27 +439,49 @@ class VideoRoomComponent extends Component {
                                         type="text"
                                         id="sessionId"
                                         value={mySessionId}
-                                        onChange={this.handleChangeSessionId}
-                                        required
+                                        disabled
                                     />
                                 </p>
                                 <p className="text-center">
-                                    <input className="btn btn-lg btn-success" name="commit" type="submit" value="JOIN" />
+                                    <input className="btn btn-lg btn-success" id="buttonJoin" name="commit" type="submit" value="JOIN" />
                                 </p>
                             </form>
                         </div>
                     </div>
                 ) : null}
                 {this.state.session !== undefined ? (
-                    <div id="session">
-                        <div id="session-header">
-                            <h1 id="session-title">{mySessionId}</h1>
+                 <div id="videoroom">
+                    <div id="footer">
+                        <h1 id="session-title">{mySessionId}</h1>
                             <input
-                                className="btn btn-large btn-danger"
                                 type="button"
                                 id="buttonLeaveSession"
                                 onClick={this.leaveSession}
-                                value="Leave session"
+                                value="나가기"
+                            />
+                            <input
+                                type="button"
+                                id="buttonSwitchCamera"
+                                onClick={this.switchCamera}
+                                value="카메라 전환"
+                            />
+                            <input
+                                type="button"
+                                id="buttonMuteAudio"
+                                onClick={this.muteAudio}
+                                value={audioText}
+                            />
+                            <input
+                                type="button"
+                                id="buttonOnOffVideo"
+                                onClick={this.onoffVideo}
+                                value={videoText}
+                            />
+                            <input
+                                type="button"
+                                id="buttonOnOffVideo"
+                                onClick={this.screenShare}
+                                value={shareText}
                             />
                         </div>
 
@@ -479,17 +516,18 @@ class VideoRoomComponent extends Component {
                                     onClick={this.screenShare}
                                     value={shareText}
                                 />
+
                             </div>
                         ) : null}
-                        <div id="video-container" className="col-md-6">
+                        <div id="video-container">
                             {this.state.publisher !== undefined ? (
-                                <div className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
+                                <div className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
                                     <UserVideoComponent
                                         streamManager={this.state.publisher} />
                                 </div>
                             ) : null}
                             {this.state.subscribers.map((sub, i) => (
-                                <div key={i} className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
+                                <div key={i} className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
                                     <UserVideoComponent streamManager={sub} />
                                 </div>
                             ))}
