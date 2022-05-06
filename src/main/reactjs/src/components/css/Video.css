@@ -1,0 +1,137 @@
+#img-div{
+  text-align: center;
+}
+
+img{
+  width: 90px;
+}
+
+.form-group{
+  text-align: center;
+  margin: -40px 0 0 0;
+  position: inherit;
+}
+
+.form-group video{
+  width: 400px;
+}
+
+.form-group select{
+  height: 40px;
+  border-radius: 0.25rem;
+  color: #000;
+  width: 320px;
+}
+
+#userName, #sessionId{
+  display: inline;
+  width: 220px;
+  height: 40px;
+}
+
+/*video enter*/
+#main-video {
+  position: fixed;
+  height: 85%;
+  width: 70%;
+  top: 0%;
+  left: 1.5%;
+  text-align: center;
+}
+
+#main-video video{
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+#main-video p{
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  left: 0px;
+  background-color: #bfc8e1;
+  height: 26px;
+}
+
+#main-video .streamcomponent div{
+  position: fixed;
+}
+
+#video-container {
+  height: 81%;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  top: 6.5%;
+  width: 27%;
+}
+
+#video-container::-webkit-scrollbar{
+  width: 10px;
+  height: 10px
+}
+#video-container::-webkit-scrollbar-thumb{
+  background: linear-gradient(#bfc8e1, #bfc8e1);
+  border-radius: 5px;
+}
+#video-container::-webkit-scrollbar-track{
+  background: grey;
+  border-radius: 5px;
+}
+#video-container::-webkit-scrollbar-corner{
+  background: #282828;
+}
+
+video {
+  height: 100%;
+  width: 75%;
+  top: 5%;
+}
+
+#videoroom{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #282828;
+  text-align: center;
+}
+
+#videoroom p{
+  color: #fff;
+}
+
+#footer{
+  width: 100%;
+  height: 80px;
+  bottom: 0px;
+  position: fixed;
+  text-align: center;
+  left: 0px;
+}
+
+#session-title{
+  display: inline;
+  vertical-align: middle;
+  color: #bfc8e1;
+}
+
+#buttonLeaveSession, #buttonSwitchCamera, #buttonMuteAudio, #buttonOnOffVideo, #buttonOnOffVideo, #buttonJoin{
+  width: 80px;
+  border-radius: 6px;
+  border: solid 1px rgba(0,0,0,.15);
+  background-color: #bfc8e1;
+  margin: 20px 2px;
+  font-size: 13px;
+  color: #fff;
+  height: 40px;
+  padding: 0px 0 0px;
+}
+
+#buttonLeaveSession:hover, #buttonSwitchCamera:hover, #buttonMuteAudio:hover, #buttonOnOffVideo:hover, #buttonOnOffVideo:hover, #buttonJoin:hover{
+  color: #fff;
+  background-color: #939fbe;
+  opacity: 0.9;
+}

@@ -66,4 +66,9 @@ public class RoomServicelmpl implements RoomService {
     public List<RoomJoinVO> getMemberById(int room_id){
         return roomMapper.getMemberById(room_id);
     }
+
+    @Override
+    public void deleteRoom(RoomJoinVO roomJoinVO) {
+        roomMapper.deleteRoom(roomJoinVO);
+    }
 }

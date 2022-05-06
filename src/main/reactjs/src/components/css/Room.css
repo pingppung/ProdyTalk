@@ -5,9 +5,6 @@
   border-radius: 50%;
   background-color: ivory;
   text-align:center;
-  margin:20px;
-  margin-top:40px;
-
 
     cursor: default;
       -webkit-touch-callout: none;
@@ -18,11 +15,7 @@
       user-select: none;
 }
 
-#room {
-    padding:110px 0;
-    padding-left:40px;
 
-}
 
 h3{
     color:black;
@@ -35,16 +28,27 @@ h3{
     margin: 30px;
 }
 
-#menu{
-    margin: 30px;
+
+
+div.slider{
+    width:1850px;
+    display:inline-block;
+    cursor: default;
+              -webkit-touch-callout: none;
+              -webkit-user-select: none;
+              -khtml-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
 }
 
-#loadingBox{
-    text-align: center;
+.roomlist{
+    text-align:center;
+
 }
 
-#loading{
-    display: inline-block;
+.circular{
+    margin-top:100px;
 }
 
 
