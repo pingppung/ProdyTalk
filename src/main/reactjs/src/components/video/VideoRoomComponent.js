@@ -37,6 +37,8 @@ class VideoRoomComponent extends Component {
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
         this.switchCamera = this.switchCamera.bind(this);
+        this.setAudio = this.setAudio.bind(this);
+        this.setVideo = this.setVideo.bind(this);
         this.onoffVideo = this.onoffVideo.bind(this);
         this.muteAudio = this.muteAudio.bind(this);
         this.screenShare = this.screenShare.bind(this);
@@ -56,10 +58,21 @@ class VideoRoomComponent extends Component {
                 mySessionId: params.id,
             });
         });
-
-        this.getWebcam((stream) => {
-            this.videoRef.current.srcObject = stream;
-        };
+        navigator.mediaDevices.enumerateDevices()
+            .then(devices => {
+                const videoinput = devices.filter((device) => device.kind === "videoinput");
+                const audioinput = devices.filter((device) => device.kind === "audioinput");
+                this.setState({
+                     videoDevices: videoinput,
+                     audioDevices: audioinput,
+                     videoDeviceID: videoinput[0],  //일단 맨 videoDevices 맨 처음 껄로 저장
+                     audioDeviceID: audioinput[0],
+                });
+            });
+            this.getWebcam((stream => {
+                this.videoRef.current.srcObject = stream;
+                this.videoRef.current.play();
+        }));
 
         window.addEventListener('beforeunload', this.onbeforeunload);
     }
@@ -69,6 +82,7 @@ class VideoRoomComponent extends Component {
     }
 
     onbeforeunload(event) {
+        console.log("onbeforeunload");
         this.leaveSession();
     }
 
@@ -79,7 +93,42 @@ class VideoRoomComponent extends Component {
             });
         }
     }
+    setVideo() {
+        if(this.state.videoEnable === true){
+            this.setState({
+                videoText: "카메라 켜기",
+                videoEnable: false,
+            });
+            //this.videoRef.current.srcObject = null;
+            this.videoRef.current.pause();
 
+        }
+        else{
+            this.setState({
+                videoText: "카메라 끄기",
+                videoEnable: true,
+            });
+            this.getWebcam((stream => {
+                this.videoRef.current.srcObject = stream;
+                this.videoRef.current.play();
+            }));
+        }
+    }
+
+    setAudio() {
+        if(this.state.audioEnable === true){
+            this.setState({
+                audioText: "음소거 해제",
+                audioEnable: false,
+            });
+        }
+        else{
+            this.setState({
+                audioText: "음소거",
+                audioEnable: true,
+            });
+        }
+    }
     handleVideoSelect(e) {
         this.setState({
             videoDeviceID: e.target.value,
@@ -96,12 +145,13 @@ class VideoRoomComponent extends Component {
       try {
         const constraints = {
           'video': true,
-          'audio': false,
+          'audio': false
         }
         navigator.mediaDevices.getUserMedia(constraints)
           .then(callback);
       } catch (err) {
         console.log(err);
+        alert("카메라 접근이 거절되었습니다. 설정에서 승인하세요")
         return undefined;
       }
     }
@@ -168,13 +218,8 @@ class VideoRoomComponent extends Component {
                     console.warn(exception);
                 });
 
-                // --- 4) Connect to the session with a valid user token ---
 
-                // 'getToken' method is simulating what your server-side should do.
-                // 'token' parameter should be retrieved and returned by your own backend
                 this.getToken().then((token) => {
-                    // First param is the token got from OpenVidu Server. Second param can be retrieved by every user on event
-                    // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
                     mySession
                         .connect(
                             token,
@@ -184,14 +229,11 @@ class VideoRoomComponent extends Component {
                             var devices = await this.OV.getDevices();
                             var videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-                            // --- 5) Get your own camera stream ---
-                            // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
-                            // element: we will manage it on our own) and with the desired properties
                             let publisher = this.OV.initPublisher(undefined, {
                                 audioSource: undefined, // The source of audio. If undefined default microphone
                                 videoSource: videoDevices[0].deviceId, // The source of video. If undefined default webcam
-                                publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
-                                publishVideo: true, // Whether you want to start publishing with your video enabled or not
+                                publishAudio: this.state.videoEnable, // Whether you want to start publishing with your audio unmuted or not
+                                publishVideo: this.state.audioEnable, // Whether you want to start publishing with your video enabled or not
                                 resolution: '640x480', // The resolution of your video
                                 frameRate: 30, // The frame rate of your video
                                 insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
@@ -240,6 +282,7 @@ class VideoRoomComponent extends Component {
 
         this.getWebcam((stream => {
             this.videoRef.current.srcObject = stream;
+            this.videoRef.current.play();
         }));
     }
 
@@ -253,8 +296,6 @@ class VideoRoomComponent extends Component {
                 var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
 
                 if (newVideoDevice.length > 0){
-                    // Creating a new publisher with specific videoSource
-                    // In mobile devices the default and first camera is the front one
                     var newPublisher = this.OV.initPublisher(undefined, {
                         videoSource: newVideoDevice[0].deviceId,
                         publishAudio: true,
@@ -335,21 +376,10 @@ class VideoRoomComponent extends Component {
         }
 
         try{
-            // Creating a new publisher with specific videoSource
-            // In mobile devices the default and first camera is the front one
             var sharePublisher = this.OV.initPublisher(undefined, {
                 videoSource: this.videoMode,
                 publishAudio: true,
                 publishVideo: true,
-            });
-
-            //newPublisher.once("accessAllowed", () => {
-            await this.state.session.unpublish(this.state.mainStreamManager)
-
-            await this.state.session.publish(sharePublisher)
-            this.setState({
-                mainStreamManager: sharePublisher,
-                publisher: sharePublisher,
                 mirror: false,
                 resolution: '640x480',
                 insertMode: 'APPEND',
@@ -389,6 +419,13 @@ class VideoRoomComponent extends Component {
         const shareText = this.state.shareText;
         const audioDevices = this.state.audioDevices;
         const videoDevices = this.state.videoDevices;
+        let video;
+        if(this.state.videoEnable === false){
+            video = <div>화면 꺼진 상태</div>;
+        }
+        else if(this.state.videoEnable === true){
+            video = <video ref={this.videoRef} />;
+        }
         return (
             <div className="container">
                 {this.state.session === undefined ? (
@@ -400,8 +437,22 @@ class VideoRoomComponent extends Component {
                         <div id="join-dialog" className="jumbotron vertical-center">
                             <form className="form-group" onSubmit={this.joinSession}>
                                 <p>
-                                    <video ref={this.videoRef} autoPlay/>
+                                    {video}
                                 </p>
+                                <div>
+                                    <input
+                                        type="button"
+                                        id="buttonSetAudio"
+                                        onClick={this.setAudio}
+                                        value={audioText}
+                                    />
+                                    <input
+                                        type="button"
+                                        id="buttonSetVideo"
+                                        onClick={this.setVideo}
+                                        value={videoText}
+                                    />
+                                </div>
                                 <p>
                                     <label>Camera: </label>
                                     <select value={this.state.videoDeviceID} onChange={this.handleVideoSelect}>
@@ -479,7 +530,7 @@ class VideoRoomComponent extends Component {
                             />
                             <input
                                 type="button"
-                                id="buttonOnOffVideo"
+                                id="buttonScreenShare"
                                 onClick={this.screenShare}
                                 value={shareText}
                             />
@@ -488,42 +539,12 @@ class VideoRoomComponent extends Component {
                         {this.state.mainStreamManager !== undefined ? (
                             <div id="main-video" className="col-md-6">
                                 <UserVideoComponent streamManager={this.state.mainStreamManager} />
-                                <input
-                                    className="btn btn-large btn-success"
-                                    type="button"
-                                    id="buttonSwitchCamera"
-                                    onClick={this.switchCamera}
-                                    value="Switch Camera"
-                                />
-                                <input
-                                    className="btn btn-large btn-success"
-                                    type="button"
-                                    id="buttonMuteAudio"
-                                    onClick={this.muteAudio}
-                                    value={audioText}
-                                />
-                                <input
-                                    className="btn btn-large btn-success"
-                                    type="button"
-                                    id="buttonOnOffVideo"
-                                    onClick={this.onoffVideo}
-                                    value={videoText}
-                                />
-                                <input
-                                    className="btn btn-large btn-success"
-                                    type="button"
-                                    id="buttonOnOffVideo"
-                                    onClick={this.screenShare}
-                                    value={shareText}
-                                />
-
                             </div>
                         ) : null}
                         <div id="video-container">
                             {this.state.publisher !== undefined ? (
                                 <div className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
-                                    <UserVideoComponent
-                                        streamManager={this.state.publisher} />
+                                    <UserVideoComponent streamManager={this.state.publisher} />
                                 </div>
                             ) : null}
                             {this.state.subscribers.map((sub, i) => (
