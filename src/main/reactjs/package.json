@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://prody.xyz:8080",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@fullcalendar/daygrid": "^5.10.1",
