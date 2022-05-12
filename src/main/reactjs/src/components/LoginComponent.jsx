@@ -54,27 +54,25 @@ class LoginComponent extends Component {
                     로그인
                 </h1>
                 <div>
-                    <div className="login">
-                        <label>아이디</label>
-                    </div>
                     <div className="loginField">
-                        <input type="text"
-                            required="required"
-                            autofocus="autofocus"
-                            name="user_id"
-                            placeholder="  아이디"
+                        <TextField
+                            required
+                            fullWidth
+                            error={this.state.user_id === "" ? true: false}
+                            id="outlined-required"
+                            label="아이디"
                             onChange={this.handleIdChange}
                         />
                     </div>
 
-                    <div className="password">
-                        <label>비밀번호</label>
-                    </div>
                     <div className="passwordField">
-                        <input type="text"
-                            required="required"
-                            name="user_pwd"
-                            placeholder="  비밀번호"
+                        <TextField
+                            required
+                            fullWidth
+                            error={this.state.user_pwd === "" ? true: false}
+                            id="outlined-required"
+                            label="비밀번호"
+                            type="password"
                             onChange={this.handlePwdChange}
                         />
                     </div>
@@ -82,7 +80,6 @@ class LoginComponent extends Component {
                      <div className="loginBtn">
                          <button type="submit" onClick={this.gotoHome} >로그인 하기</button>
                      </div>
-
                      <div className="signupBtn">
                          아직 계정이 없으신가요?
                          <a href="/signup">회원 가입</a>

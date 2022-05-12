@@ -1,0 +1,81 @@
+.infoBigDiv{
+    text-align:center;
+    display:inline-block;
+    margin-right:23px;
+    background-color: #9fc5e8;
+    width: 1000px;
+    height: 500px;
+
+    cursor: default;
+              -webkit-touch-callout: none;
+              -webkit-user-select: none;
+              -khtml-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+}
+
+.smallDiv{
+
+    float:left;
+    width:315px;
+    height:470px;
+    background-color: #FFFFFF;
+    margin:5px;
+    margin-left:11px;
+    margin-top:14px;
+    text-align:center;
+
+
+}
+
+p.total{
+    font-size:25px;
+    margin: 10px;
+    font-family:'lefery';
+    text-align:center;
+}
+
+p.totalNum{
+    font-size:200px;
+    color:#3d85c6;
+    font-family:'lefery';
+}
+
+p.projectInfo{
+    margin:20px;
+    font-family: 'ChungbukNationalUniversity-Regular';
+
+    font-size:25px;
+}
+
+li{
+    font-size:40px;
+    list-style:none;
+    font-family: 'ChungbukNationalUniversity-Regular';
+
+}
+
+hr.member{
+    margin-left:25px;
+    width:260px;
+}
+
+.deleteRoom{
+    position:absolute;
+    top:700px;
+    left:1225px;
+
+}
+
+@font-face {
+    font-family: 'lefery';
+    src: url('../../pages/css/LeferiBaseBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'ChungbukNationalUniversity-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/ChungbukNationalUniversity-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

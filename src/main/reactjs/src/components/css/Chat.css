@@ -77,6 +77,14 @@
     text-align: left;
 }
 
+.inputButton {
+    display:inline-block;
+    margin:15px;
+}
+
+#inputMessage{
+    margin:15px;
+}
 
 
 @keyframes tracking-in-contract-bck {
@@ -92,6 +100,25 @@
     transform: translateZ(0);
     opacity: 1;
   }
+}
+
+.main-content{
+    @include flex-center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:#00000000;
+    z-index: 10000;
+}
+
+#row{
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    left:50%;
+    top:50%;
 }
 
 

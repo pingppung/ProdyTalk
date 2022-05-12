@@ -34,6 +34,17 @@ class RoomService {
         })
     }
 
+    deleteRoom(roomId){
+        return axios.post("/api/deleteRoom", {
+            room_id: roomId,
+            }, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    "Content-Type": 'application/json',
+                },
+            });
+    }
+
 }
 
 export default new RoomService();

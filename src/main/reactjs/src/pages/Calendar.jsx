@@ -8,6 +8,7 @@ import CalendarService from '../service/CalendarService';
 import moment from 'moment';
 import DetailModal from '../components/calendar/DetailModal'
 import Modal from '../components/calendar/Modal'
+import './css/calendar.css'
 
 
 
