@@ -62,10 +62,10 @@ hr.member{
 }
 
 .deleteRoom{
-    position:relative;
-    margin-top:330px;
-    margin-right:40px;
-    display:inline-block;
+    position:absolute;
+    top:700px;
+    left:1225px;
+
 }
 
 @font-face {

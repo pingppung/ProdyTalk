@@ -1,6 +1,5 @@
 import React,{useEffect} from 'react';
 import {useState} from 'react';
-import '../components/css/Modal.css';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
