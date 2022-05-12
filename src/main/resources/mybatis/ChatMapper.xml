@@ -16,5 +16,19 @@
     <select id="getChatList" parameterType="int" resultType="com.example.ProdyTalk.chat.vo.MessageVO">
         select * from message where conversation_id=#{conversation_id}
     </select>
+
+    <select id="searchPersonalLast" resultType="int">
+        SELECT message_id FROM personal_message ORDER BY message_id DESC LIMIT 1;
+    </select>
+
+    <insert id="insertPersonalMessage" parameterType="com.example.ProdyTalk.chat.vo.MessageVO">
+        INSERT INTO personal_message(message_id,content,user_id,conversation_id)
+        values(#{message_id},#{content},#{user_id},#{conversation_id})
+    </insert>
+
+    <select id="getPersonalChatList" parameterType="int" resultType="com.example.ProdyTalk.chat.vo.MessageVO">
+        select * from personal_message where conversation_id=#{conversation_id}
+    </select>
+
 </mapper>
 

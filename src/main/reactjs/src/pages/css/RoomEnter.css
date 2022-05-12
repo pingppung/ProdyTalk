@@ -1,8 +1,6 @@
 .calendar{
-    height:100px;
-    width:100vh;
-    padding:50px;
-
+    width:1200px;
+    display:inline-block;
     cursor: default;
               -webkit-touch-callout: none;
               -webkit-user-select: none;
@@ -10,4 +8,50 @@
               -moz-user-select: none;
               -ms-user-select: none;
               user-select: none;
+}
+
+.roomEnterBack{
+    background-color: #cfe8fc;
+    height:1500px;
+
+}
+
+#menu{
+    text-align: center;
+}
+
+.chat{
+    margin-top:20px;
+    margin-left: 300px;
+    width: 100%;
+
+}
+
+.menuitem{
+    text-align:center;
+    padding:20px;
+}
+
+.copyButton{
+    margin-left: 10px;
+    display:inline-block;
+}
+
+.showLink{
+    display:inline-block;
+    background-color: #ffffff;
+    width: 290px;
+    height:30px;
+    text-align:center;
+    padding-top:3px;
+    border-radius: 5% / 20%;
+    font-family: 'ChungbukNationalUniversity-Regular';
+}
+
+
+@font-face {
+    font-family: 'ChungbukNationalUniversity-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/ChungbukNationalUniversity-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }

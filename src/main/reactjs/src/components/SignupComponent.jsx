@@ -73,6 +73,7 @@ class SignupComponent extends Component {
                      </div>
                      <div className="field">
                          <input
+                            className="loginInp"
                             required="required"
                             type="text"
                             name="user_id"
@@ -87,6 +88,7 @@ class SignupComponent extends Component {
                      </div>
                      <div className="field">
                          <input
+                            className="loginInp"
                             required="required"
                             type="text"
                             name="user_pwd"
@@ -99,6 +101,7 @@ class SignupComponent extends Component {
                      </div>
                      <div className="field">
                          <input
+                            className="loginInp"
                             required="required"
                             type="text"
                             name="user_name"
@@ -111,6 +114,7 @@ class SignupComponent extends Component {
                      </div>
                      <div className="field">
                           <input
+                            className="loginInp"
                              type="email"
                              name="user_email"
                              placeholder="  이메일"
@@ -122,6 +126,7 @@ class SignupComponent extends Component {
                      </div>
                      <div className="field">
                           <input
+                            className="loginInp"
                              type="text"
                              name="user_phone"
                              placeholder="  전화번호"

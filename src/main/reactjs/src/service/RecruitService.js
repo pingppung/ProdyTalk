@@ -18,8 +18,9 @@ class RecruitService {
     }
 
     // 글 수정
-    updateRecruit(recruit_id, title, content, user_id) {
+    updateRecruit(recruit_id, room_type, title, content, user_id) {
         return axios.post("/recruit/update", {
+            room_type: room_type,
             recruit_id: recruit_id,
             title: title,
             content: content,

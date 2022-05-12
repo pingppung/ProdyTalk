@@ -16,6 +16,17 @@ public class UserServicelmpl implements UserService {
     public void insertUser(UserVO user) {
         userMapper.insertUser(user);
     }
+
+    @Override
+    public UserVO getUserById(String user_id) {
+        return userMapper.getUserById(user_id);
+    }
+
+    @Override
+    public void editUser(UserVO userVO) {
+        userMapper.editUser(userVO);
+    }
+
     @Override
     public UserVO findUser(UserVO user) {
         return userMapper.findUser(user);

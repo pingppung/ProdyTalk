@@ -19,7 +19,11 @@ form {
 }
 
 .loginField {
-    margin-top: 10px;
+    margin-top: 50px;
+}
+
+TextField{
+    width:500px;
 }
 
 .password {
@@ -46,7 +50,7 @@ form {
     color: #263747;
 }
 
-input {
+.loginInp {
     width : 400px;
     height : 50px;
     border : 1px solid #EEE6FA;
