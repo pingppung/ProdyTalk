@@ -59,6 +59,7 @@ class LoginComponent extends Component {
                     </div>
                     <div className="loginField">
                         <input type="text"
+                            className="loginInp"
                             required="required"
                             autofocus="autofocus"
                             name="user_id"
@@ -72,6 +73,7 @@ class LoginComponent extends Component {
                     </div>
                     <div className="passwordField">
                         <input type="text"
+                            className="loginInp"
                             required="required"
                             name="user_pwd"
                             placeholder="  비밀번호"
