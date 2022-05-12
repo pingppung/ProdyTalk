@@ -61,9 +61,26 @@ public class GreetingController {
         this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/group/" + conversationId, messageVO);
     }
 
-    @GetMapping("/api/chatList")
+    @MessageMapping("/chat/personal/{conversationId}")
+    public void sendPersonalMessage(MessageVO messageVO, @DestinationVariable int conversationId) {
+        int messageId = chatService.searchPersonalLast();
+        messageVO.setMessage_id(messageId + 1);
+        messageVO.setConversation_id(conversationId);
+        chatService.insertPersonalMessage(messageVO);
+
+        System.out.println("메시지 내용 저장 성공");
+
+        this.simpMessagingTemplate.convertAndSend("/queue/addChatToClient/personal/" + conversationId, messageVO);
+    }
+
+    @GetMapping("/api/group/chatList")
     public List<MessageVO> getChatList(@RequestParam(value = "room_id") int conversation_id) throws Exception {
         return chatService.getChatList(conversation_id);
+    }
+
+    @GetMapping("/api/personal/chatList")
+    public List<MessageVO> getPersonalChatList(@RequestParam(value = "room_id") int conversation_id) throws Exception {
+        return chatService.getPersonalChatList(conversation_id);
     }
 
 

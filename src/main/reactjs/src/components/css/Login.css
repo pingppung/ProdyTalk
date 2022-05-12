@@ -19,7 +19,11 @@ form {
 }
 
 .loginField {
-    margin-top: 10px;
+    margin-top: 50px;
+}
+
+TextField{
+    width:500px;
 }
 
 .password {
