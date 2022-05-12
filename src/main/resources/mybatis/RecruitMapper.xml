@@ -8,6 +8,14 @@
         SELECT * from recruit
     </select>
 
+    <select id="findStudy" resultType="com.example.ProdyTalk.vo.RecruitVO">
+        SELECT * from recruit where room_type = '스터디';
+    </select>
+
+    <select id="findProject" resultType="com.example.ProdyTalk.vo.RecruitVO">
+        SELECT * from recruit where room_type = '프로젝트';
+    </select>
+
     <insert id="save" parameterType="com.example.ProdyTalk.vo.RecruitVO">
         insert into recruit (room_type,title,content,user_id,date)
         values (#{room_type},#{title},#{content},#{user_id},#{date})
