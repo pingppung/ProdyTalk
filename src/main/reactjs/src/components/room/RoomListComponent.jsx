@@ -32,7 +32,7 @@ function RoomListComponent() {
     },[state]);
 
     return (
-    <div>
+    <div className="roomlist">
         { loading === true
          ? <div className="slider">
             <Slider {...settings}>
@@ -43,7 +43,7 @@ function RoomListComponent() {
 
             </Slider>
           </div>
-         : <CircularProgress/>
+         : <div className="circular"><CircularProgress /></div>
 
          }
 

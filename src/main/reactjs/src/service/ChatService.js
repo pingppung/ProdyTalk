@@ -11,7 +11,11 @@ class ChatService {
     }
 
     getChatList(roomId){
-        return axios.get("/api/chatList",{params: { room_id: roomId,}})
+        return axios.get("/api/group/chatList",{params: { room_id: roomId,}})
+    }
+
+    getPersonalChatList(roomId){
+        return axios.get("/api/personal/chatList",{params: { room_id: roomId}})
     }
 }
 

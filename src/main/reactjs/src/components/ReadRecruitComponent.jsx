@@ -60,6 +60,7 @@ class ReadRecruitComponent extends Component {
             }
             else if(typeNo == '프로젝트') {
                 type = "Project"
+
             }
             else {
                 type = "타입 미지정"; // 수정하기 (자유게시판 등)
@@ -120,7 +121,6 @@ class ReadRecruitComponent extends Component {
         }
 
     render() {
-
         const imagestyle = {
             height:45,
             width:45
@@ -159,6 +159,7 @@ class ReadRecruitComponent extends Component {
                     { this.state.chatCondition ? <ChatPage/> : null }
                 </div> */}
                 </div>
+
             </div>
         );
     }

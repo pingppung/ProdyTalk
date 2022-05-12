@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.a067dc67.css",
-    "main.js": "/static/js/main.6b0395bc.js",
+    "main.css": "/static/css/main.5bf85c70.css",
+    "main.js": "/static/js/main.e3b484e2.js",
     "static/js/787.fade2e9e.chunk.js": "/static/js/787.fade2e9e.chunk.js",
     "static/media/LeferiBaseBold.ttf": "/static/media/LeferiBaseBold.c840b4ebf33a48be5eac.ttf",
+    "static/media/basicProfile.png": "/static/media/basicProfile.af6eccf9ab9656c9be96.png",
     "static/media/LogoWhite.png": "/static/media/LogoWhite.f8cb7dd5f943d67482f9.png",
     "static/media/background.png": "/static/media/background.e856c94eab1f73bbf440.png",
     "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -11,12 +12,12 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/index.html",
-    "main.a067dc67.css.map": "/static/css/main.a067dc67.css.map",
-    "main.6b0395bc.js.map": "/static/js/main.6b0395bc.js.map",
+    "main.5bf85c70.css.map": "/static/css/main.5bf85c70.css.map",
+    "main.e3b484e2.js.map": "/static/js/main.e3b484e2.js.map",
     "787.fade2e9e.chunk.js.map": "/static/js/787.fade2e9e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a067dc67.css",
-    "static/js/main.6b0395bc.js"
+    "static/css/main.5bf85c70.css",
+    "static/js/main.e3b484e2.js"
   ]
 }

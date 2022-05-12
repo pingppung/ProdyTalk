@@ -9,10 +9,13 @@ import ChatService from "../service/ChatService.js";
 import Button from '@mui/material/Button';
 import { pink} from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
+import {useLocation} from 'react-router-dom';
 import './css/firstPage.css';
 function FirstPage() {
 
     const [isLogin,setIsLogin] = useState(false)
+    const [logout,setLogout] = useState(false)
+    const location=useLocation()
     const imagestyle = {
              height:200,
              width:180,
@@ -25,12 +28,18 @@ function FirstPage() {
       },
     }));
 
+    const onLogout = () => {
+        setLogout(true)
+        setIsLogin(false)
+    }
+
     useEffect(() => {
         ChatService.getUserName().then(res => {
-                    if(res!=null) setIsLogin(true)
-                    console.log(res)
-                })
-    },[])
+            if(res!=null && logout==false) setIsLogin(true)
+
+        })
+
+    },[logout])
 
     return (
         <div className="background">
@@ -49,12 +58,18 @@ function FirstPage() {
                     </ColorButton>
                 </Link>
              </div>
-             :<div className="button">
-                <Link to="/main" style={{ textDecoration: 'none' }}>
-                    <ColorButton variant="contained" size="large">
-                        <div className="smallfont">메인으로</div>
-                    </ColorButton>
-                </Link>
+             :<div className="gotomain">
+                <div className="button">
+                    <Link to="/main" style={{ textDecoration: 'none' }}>
+                        <ColorButton variant="contained" size="large">
+                            <div className="smallfont">메인으로</div>
+                        </ColorButton>
+                    </Link>
+                </div>
+                <div className="logout">
+                    <Button variant="contained" color="secondary" onClick={onLogout}>로그아웃</Button>
+                </div>
+
              </div>
 
              }

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/HeaderComponent'
 import FirstPage from './pages/FirstPage'
+import MyPage from './pages/MyPage'
 import Main from './pages/MainPage'
 import LoginComponent from './components/LoginComponent'
 import SignupComponent from './components/SignupComponent'
@@ -29,6 +30,7 @@ function App() {
            <Route exact path="/video" component={Openvidu} />
            <Route exact path="/chat" component={Chat} />
            <Route exact path="/calendar" component={Calendar} />
+           <Route exact path="/mypage" component={MyPage} />
            <Route exact path="/recruit" component={ListRecruitComponent} />
            <Route exact path="/createRecruit/:recruit_id" component={CreateRecruitComponent} />
            <Route exact path="/readRecruit/:recruit_id" component={ReadRecruitComponent} />
