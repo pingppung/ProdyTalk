@@ -11,7 +11,7 @@ div.box{
 div.miniBox{
     width: 1500px;
     height:700px;
-    background: #9fc5e8;
+    background: white;
     position: absolute;
     cursor: default;
                   -webkit-touch-callout: none;
