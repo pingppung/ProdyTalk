@@ -1,23 +1,38 @@
 #circle {
 
-  width : 200px;
+  width : 300px;
   height : 200px;
-  border-radius: 50%;
-  background-color: ivory;
+  border-radius: 10%;
   text-align:center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 
-    cursor: default;
+  cursor: default;
       -webkit-touch-callout: none;
       -webkit-user-select: none;
       -khtml-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+
+  box-shadow: 0 0.0625rem 0.25rem 0.0625rem #d7e2eb;
+  border-radius: 0.5rem;
+
+  color: #263747;
+  width: 130%;
+  box-shadow: 0 0.0625rem 0.25rem 0.0625rem #d7e2eb;
+  border-radius: 0.5rem;
 }
 
+#project, #study{
+    background: black;
+    width: 90px;
+    color: white;
+    transform: translate(10px, 10px);
+    text-align:center;
+}
 
-
-h3{
+h3, h2, h{
     color:black;
     font-family:'lefery';
 
