@@ -12,6 +12,7 @@ import RoomListComponent from '../components/room/RoomListComponent.jsx'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import HomeIcon from '@mui/icons-material/Home';
 import TextField from '@mui/material/TextField';
+import RoomCreate from '../components/room/RoomCreate'
 import base64 from 'base-64';
 import axios from 'axios';
 
@@ -60,6 +61,7 @@ function MainPage({history}) {
             </div>
 
                 <div>
+                    <RoomCreate />
                     <RoomListComponent />
                 </div>
                 <br />

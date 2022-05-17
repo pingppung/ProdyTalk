@@ -72,6 +72,7 @@ class LoginComponent extends Component {
                             error={this.state.user_pwd === "" ? true: false}
                             id="outlined-required"
                             label="비밀번호"
+                            type="password"
                             onChange={this.handlePwdChange}
                         />
                     </div>
