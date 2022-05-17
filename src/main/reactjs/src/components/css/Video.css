@@ -11,6 +11,18 @@ img{
   margin: -40px 0 0 0;
   position: inherit;
 }
+.avatar_area {
+    transform: translateX(50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 250px;
+    border-radius: 10px;
+    background-color:#4e4e4e;
+    z-index: 100;
+    margin-bottom: 1rem;
+}
 
 .form-group video{
   width: 400px;
@@ -118,20 +130,40 @@ video {
   color: #bfc8e1;
 }
 
-#buttonLeaveSession, #buttonSwitchCamera, #buttonMuteAudio, #buttonOnOffVideo, #buttonScreenShare, #buttonJoin{
-  width: 80px;
+#footer button span{
+  font-size: 25px;
+}
+#buttonMuteAudio, #buttonOnVideo, #buttonShare, #buttonLeaveSession {
+    background-color: red!important;
+}
+#footer button, #buttonJoin{
+  width: 50px;
   border-radius: 6px;
   border: solid 1px rgba(0,0,0,.15);
   background-color: #bfc8e1;
   margin: 20px 2px;
   font-size: 13px;
   color: #fff;
-  height: 40px;
+  height: 50px;
   padding: 0px 0 0px;
 }
 
-#buttonLeaveSession:hover, #buttonSwitchCamera:hover, #buttonMuteAudio:hover, #buttonOnOffVideo:hover, #buttonOnOffVideo:hover, #buttonJoin:hover{
+#buttonSwitchCamera:hover, #buttonMuteAudio:hover, #buttonOffVideo:hover, #buttonNotShare:hover, #buttonJoin:hover{
   color: #fff;
   background-color: #939fbe;
   opacity: 0.9;
+}
+#buttonSwitchCamera:hover .button-text{
+  display: block;
+}
+.button-text {
+  display: none;
+  position: absolute;
+  max-width: auto;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 15px!important;
+  color: white;
+  background: gray;
+  transform: translate(-15px, -50px)
 }
