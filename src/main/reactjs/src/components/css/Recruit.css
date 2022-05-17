@@ -197,8 +197,27 @@ select {
     font-family: 'S-CoreDream-6Bold';
 }
 
+.categoryDiv {
+    margin-left: 175px;
+    margin-bottom: 20px;
+}
+
 #createRecruitForm {
   font-family: 'Nanum Gothic400';
+}
+
+#category a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#category a:active {
+    color: gray;
+    font-weight: bold;
+}
+
+#cateLine {
+    color: lightgray;
 }
 
 .pagination { display: flex; justify-content: center; margin-top: 15px; }
