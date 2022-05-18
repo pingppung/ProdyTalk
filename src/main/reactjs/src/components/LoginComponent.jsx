@@ -73,6 +73,7 @@ class LoginComponent extends Component {
                             id="outlined-required"
                             label="비밀번호"
                             onChange={this.handlePwdChange}
+                            type="password"
                         />
                     </div>
 

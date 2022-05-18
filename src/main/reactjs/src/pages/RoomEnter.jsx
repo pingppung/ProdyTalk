@@ -5,6 +5,7 @@ import { Link,withRouter } from "react-router-dom";
 import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
+
 import roomService from '../service/RoomService'
 import Calendar from './Calendar';
 import Header from '../components/HeaderComponent'
@@ -62,8 +63,8 @@ function RoomEnter() {
 
     const onCopy = () => {
         if(buttonText==="코드 보기"){
-            setLink(true)
-            setButtonText("코드 복사")
+            setLink(true);
+            setButtonText("코드 복사");
         }
         else if(buttonText==="코드 복사"){
             navigator.clipboard.writeText(encodeLink)
@@ -103,12 +104,9 @@ function RoomEnter() {
                     <BottomNavigationAction label="캘린더" />
                     <BottomNavigationAction label="파일 공유"  />
                     <BottomNavigationAction label="그룹 채팅"  />
-                    <Link to={{pathname:`/video/${id}`, state: `${id}`}}>
-                      <BottomNavigationAction label="화상 채팅"  />
-                    </Link>
+                    <BottomNavigationAction component={Link} to={{pathname:`/video/${id}`, state: `${id}`}} label="화상 채팅"  />
                   </BottomNavigation>
             </Box>
-
             <div id="menu">
                 <div className="menuitem">
                     {file && <FileComponent roomId={id} />}
