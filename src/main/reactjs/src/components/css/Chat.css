@@ -102,6 +102,25 @@
   }
 }
 
+.main-content{
+    @include flex-center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:#00000000;
+    z-index: 10000;
+}
+
+#row{
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    left:50%;
+    top:50%;
+}
+
 
 @font-face {
     font-family: 'lefery';

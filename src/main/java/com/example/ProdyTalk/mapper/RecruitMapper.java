@@ -11,6 +11,8 @@ import java.util.Optional;
 @Mapper
 public interface RecruitMapper {
     List<RecruitVO> findAll();
+    List<RecruitVO> findStudy();
+    List<RecruitVO> findProject();
     void save(RecruitVO recruit);
     Optional<Object> findById(Integer recruit_id);
     void update(RecruitVO recruit);

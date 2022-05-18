@@ -1,6 +1,4 @@
 .smallBox{
-    background-color:#cfe8fc;
-    background-color:#cfe8fd;
     background-blend-mode:multiply;
     width:100%;
     text-align:center;
@@ -14,7 +12,6 @@
 }
 
 .mainPage{
-    background-color:#cfe8fc;
     min-height:100vh;
     text-align:center;
     height: 100%;
