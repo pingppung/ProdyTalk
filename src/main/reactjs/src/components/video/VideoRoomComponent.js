@@ -111,7 +111,7 @@ class VideoRoomComponent extends Component {
       try {
         const constraints = {
           'video': true,
-          'audio': false
+          'audio': true
         }
         navigator.mediaDevices.getUserMedia(constraints)
           .then(callback);
@@ -131,6 +131,7 @@ class VideoRoomComponent extends Component {
             });
         }
     }
+
     joinSession() {
         // --- 1) Get an OpenVidu object ---
         this.OV = new OpenVidu();
@@ -335,7 +336,7 @@ class VideoRoomComponent extends Component {
         if(this.state.shareEnable === false){
             this.videoMode = "screen";
             this.setState({
-                shareText: "화면공유 중지",
+                shareText: "화면공유중지",
                 shareEnable: true,
             });
         }
