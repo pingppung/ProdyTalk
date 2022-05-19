@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
-import { Link,withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
-import roomService from '../service/RoomService'
+import ToDoListComponent from '../components/TodoListComponent'
 import Calendar from './Calendar';
 import Header from '../components/HeaderComponent'
 import Box from '@mui/material/Box';
@@ -25,32 +25,43 @@ function RoomEnter() {
     const [file,setFile]=useState(false)
     const [link,setLink]=useState(false)
     const [info,setInfo]=useState(false)
+    const [todolist,setToDoList]=useState(false)
     const [value, setValue] = useState(0);
     const [buttonText,setButtonText]=useState("코드 보기")
     const inviteLink = "/api/enterRoom?roomId="+id
     const encodeLink = base64.encode(inviteLink)
 
     useEffect(() => {
-        if(value == 0){
+        if(value === 0){
             setInfo(true)
             setCalendar(false)
             setFile(false)
             setChat(false)
-        }else if(value == 1){
+            setToDoList(false)
+        }else if(value === 1){
             setInfo(false)
             setCalendar(true)
             setFile(false)
             setChat(false)
-        }else if(value == 2) {
+            setToDoList(false)
+        }else if(value === 2) {
             setInfo(false)
             setCalendar(false)
             setFile(true)
             setChat(false)
-        }else if(value == 3){
+            setToDoList(false)
+        }else if(value === 3){
             setInfo(false)
             setCalendar(false)
             setFile(false)
             setChat(true)
+            setToDoList(false)
+        }else if(value === 4){
+            setToDoList(true)
+            setCalendar(false)
+            setFile(false)
+            setChat(false)
+            setInfo(false)
         }
     },[value])
 
@@ -104,6 +115,7 @@ function RoomEnter() {
                     <BottomNavigationAction label="파일 공유"  />
                     <BottomNavigationAction label="그룹 채팅"  />
                     <BottomNavigationAction label="화상 채팅"  />
+                    <BottomNavigationAction label="ToDoList" />
                   </BottomNavigation>
             </Box>
 
@@ -117,6 +129,9 @@ function RoomEnter() {
                 </div>
                 <div className="calendar">
                     {calendar && <Calendar roomId={id}/>}
+                </div>
+                <div className="todolist">
+                    <ToDoListComponent roomId={id} />
                 </div>
             </div>
 
