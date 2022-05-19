@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface RecruitService {
     public List<RecruitVO> getAllRecruit();
+    public List<RecruitVO> getStudyRecruit();
+    public List<RecruitVO> getProjectRecruit();
     public void createRecruit(RecruitVO recruit);
     public ResponseEntity<RecruitVO> getRecruit(Integer recruit_id);
     public void updateRecruit(RecruitVO updateRecruit);
