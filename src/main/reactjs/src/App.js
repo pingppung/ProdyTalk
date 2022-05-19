@@ -15,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ListRecruitComponent from './components/ListRecruitComponent'
 import CreateRecruitComponent from './components/CreateRecruitComponent'
 import ReadRecruitComponent from './components/ReadRecruitComponent'
+import MyCalendar from './pages/MyCalendar'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
            <Route exact path="/recruit" component={ListRecruitComponent} />
            <Route exact path="/createRecruit/:recruit_id" component={CreateRecruitComponent} />
            <Route exact path="/readRecruit/:recruit_id" component={ReadRecruitComponent} />
+           <Route exact path="/myCalendar" component={MyCalendar} />
         </div>
 
     );
