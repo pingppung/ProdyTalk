@@ -14,10 +14,22 @@ import java.util.List;
 public class RecruitServiceImpl implements RecruitService{
     private final RecruitMapper recruitMapper;
 
-    // 글 목록
+    // 전체글 목록
     @Override
     public List<RecruitVO> getAllRecruit() {
         return recruitMapper.findAll();
+    }
+
+    // 스터디 글 목록
+    @Override
+    public List<RecruitVO> getStudyRecruit() {
+        return recruitMapper.findStudy();
+    }
+
+    // 프로젝트 글 목록
+    @Override
+    public List<RecruitVO> getProjectRecruit() {
+        return recruitMapper.findProject();
     }
 
     // 글 작성
