@@ -13,7 +13,12 @@
 .roomEnterBack{
     background-color: #cfe8fc;
     height:1500px;
+    width:100%;
 
+}
+
+.todolist_enter{
+    text-align:center;
 }
 
 #menu{

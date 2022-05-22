@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ProdyTalk.mapper.ToDoListMapper">
+
+    <select id="getToDoListById" resultType="com.example.ProdyTalk.vo.ToDoListVO">
+        SELECT * from todolist
+        WHERE room_id = #{room_id}
+    </select>
+
+    <update id="setChecked" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+    update todolist
+    set checked = #{checked}
+    where todolist_id = #{todolist_id}
+    </update>
+
+    <insert id="addToDoList" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+        INSERT INTO todolist(content,room_id,checked)
+        values(#{content},#{room_id},#{checked})
+    </insert>
+
+</mapper>

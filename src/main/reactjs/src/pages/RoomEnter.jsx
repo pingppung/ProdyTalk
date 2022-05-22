@@ -56,7 +56,7 @@ function RoomEnter() {
             setFile(false)
             setChat(true)
             setToDoList(false)
-        }else if(value === 4){
+        }else if(value === 5){
             setToDoList(true)
             setCalendar(false)
             setFile(false)
@@ -102,7 +102,7 @@ function RoomEnter() {
             </div>
 
 
-            <Box sx={{ width: 1000, marginLeft:55, marginTop: 5 }}>
+            <Box className="navigator">
                   <BottomNavigation
                     showLabels
                     value={value}
@@ -130,8 +130,8 @@ function RoomEnter() {
                 <div className="calendar">
                     {calendar && <Calendar roomId={id}/>}
                 </div>
-                <div className="todolist">
-                    <ToDoListComponent roomId={id} />
+                <div className="todolist_enter">
+                    {todolist&&<ToDoListComponent roomId={id} />}
                 </div>
             </div>
 
