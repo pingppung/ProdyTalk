@@ -42,7 +42,7 @@ class HeaderComponent extends Component {
         return (
             <div className="body">
                 <div className="mainlogo">
-                    <Link to="/main"><img src={Logo} alt="logo" style={imagestyle}/></Link>
+                    <Link to="/main"><img src={Logo} alt="logo" /></Link>
                 </div>
             </div>
         );

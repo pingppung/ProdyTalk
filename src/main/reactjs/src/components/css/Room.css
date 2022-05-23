@@ -15,27 +15,42 @@
       -ms-user-select: none;
       user-select: none;
 
-  box-shadow: 0 0.0625rem 0.25rem 0.0625rem #d7e2eb;
-  border-radius: 0.5rem;
-
   color: #263747;
-  width: 130%;
-  box-shadow: 0 0.0625rem 0.25rem 0.0625rem #d7e2eb;
+  width: 100%;
+  box-shadow: 0 0.0625rem 0.25rem 0.0625rem #d8d8d8;
   border-radius: 0.5rem;
 }
 
-#project, #study{
+#project{
     background: black;
-    width: 90px;
+    width: 60%;
+    max-width: 90px;
     color: white;
     transform: translate(10px, 10px);
     text-align:center;
+    font-family: 'Nanum Gothic400', sans-serif;
+    color: #d7ebfa;
 }
 
-h3, h2, h{
+#study{
+    background: black;
+    width: 60%;
+    max-width: 90px;
+    color: white;
+    transform: translate(10px, 10px);
+    text-align:center;
+    font-family: 'Nanum Gothic400', sans-serif;
+    color: #fffbc5;
+}
+
+#circle:hover {
+    background: #6c757d;
+}
+
+h5, h3, h2, h{
     color:black;
     font-family:'lefery';
-
+    font-family: 'Nanum Gothic400', sans-serif;
 }
 
 #inviteLink{
@@ -43,10 +58,19 @@ h3, h2, h{
     margin: 30px;
 }
 
-
+#explan, #title{
+margin: 10px;
+text-overflow: ellipsis;
+    overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2 ;
+            -webkit-box-orient: vertical;
+            word-break:break-all;
+            line-height: 1.4;
+}
 
 div.slider{
-    width:1850px;
+    width:100%;
     display:inline-block;
     cursor: default;
               -webkit-touch-callout: none;
