@@ -8,10 +8,11 @@ import CalendarService from '../service/CalendarService';
 import moment from 'moment';
 import DetailModal from '../components/calendar/DetailModal'
 import Modal from '../components/calendar/Modal'
+import UserService from '../service/UserService'
 import './css/calendar.css'
 
-function Calender(props) {
-
+function MyCalender(props) {
+    const[userId, setUserId] = useState('');
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -38,13 +39,13 @@ function Calender(props) {
 
     // Modal에서 add 버튼 클릭 시 실행
     const addModal = (content, startDate, endDate, color) => {
-        CalendarService.addEvent(content, startDate, endDate, color, props.roomId); // events에 전달받은 이벤트 추가해주기
+        CalendarService.addMyEvent(content, startDate, endDate, color, userId); // events에 전달받은 이벤트 추가해주기
         setModalOpen(false); // Modal 닫아주기
     };
 
     // DetailModal에서 수정 버튼 클릭 시 실행
     const editEvent = (editTitle, startDate, endDate, color) => {
-        CalendarService.editEvent(calId, editTitle, startDate, endDate, color); // events에 수정할 calId, title 전달
+        CalendarService.editMyEvent(calId, editTitle, startDate, endDate, color); // events에 수정할 calId, title 전달
         setDetailModalOpen(false); // Modal 닫아주기
     };
 
@@ -53,18 +54,22 @@ function Calender(props) {
         console.log(calId);
         console.log('를 삭제');
 
-        CalendarService.deleteEvent(calId); // 삭제할 event id 전달
+        CalendarService.deleteMyEvent(calId); // 삭제할 event id 전달
         setDetailModalOpen(false); // Modal 닫아주기
     };
 
     useEffect(()=> {
-        CalendarService.getCalendar(props.roomId).then((res) => {
+        CalendarService.getMyCalendar(userId).then((res) => {
             setEvents(res.data)
+        });
+
+        UserService.getUserName().then(res => {
+            setUserId(res.data.id)
         })
     }, [events]);
 
   return (
-    <div className="Calendar">
+    <div className="MyCalender">
 
           <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요." />
             <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
@@ -113,4 +118,4 @@ function Calender(props) {
   ); // return 끝
 }
 
-export default Calender
+export default MyCalender
