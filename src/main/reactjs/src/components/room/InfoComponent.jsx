@@ -73,7 +73,7 @@ function InfoComponent(props) {
 
                 </div>
                 <div className="smallDiv">
-                    <p className="total">프로젝트 요약</p>
+                    <p className="total">프로젝트 설명</p>
                     <p className="projectInfo">{info}</p>
                     <div className="deleteRoom">
                         <Button variant="contained" color="error" onClick={onDeleteRoom}>방 나가기</Button>

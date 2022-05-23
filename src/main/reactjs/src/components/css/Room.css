@@ -90,6 +90,11 @@ div.slider{
     margin-top:100px;
 }
 
+.navigator{
+    width:90%;
+    margin-left: 150px;
+    margin-top: 40px;
+}
 
 @font-face {
     font-family: 'lefery';
