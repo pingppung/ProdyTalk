@@ -61,21 +61,23 @@ function MainPage({history}) {
             </div>
 
                 <div>
-                    <RoomCreate />
+                     <div id="myroomlist">마이룸 목록</div>
+                    <hr style={{ height: '5px', color: '#6c757d', opacity: '1', margin: '0 1000px 0 25px' }}></hr>
                     <RoomListComponent />
                 </div>
                 <br />
                 <div className="menu">
-                    <Link to="/recruit" style={{ textDecoration: 'none', color:'black' }} >
-                        <div className="recruit">
-                            <PeopleAltIcon fontSize="large" /><br />
-                            모집게시판
-                        </div>
-                    </Link>
+                    <RoomCreate />
+                                        <Link to="/recruit" style={{ textDecoration: 'none', color:'black' }} >
+                                            <div className="recruit">
+                                                <PeopleAltIcon fontSize="large" /><br />
+                                                <h3>모집게시판</h3>
+                                            </div>
+                                        </Link>
                     <Link to="/mypage" style={{ textDecoration: 'none', color:'black' }}>
                         <div className="mypage">
                             <HomeIcon fontSize="large" /><br />
-                            마이페이지
+                            <h3>마이페이지</h3>
                         </div>
                     </Link>
                 </div>
