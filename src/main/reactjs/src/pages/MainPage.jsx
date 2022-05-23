@@ -80,6 +80,11 @@ function MainPage({history}) {
                             <h3>마이페이지</h3>
                         </div>
                     </Link>
+                    <Link to="/myCalendar" style={{ textDecoration: 'none', color:'black' }}>
+                        <div className="myCalendar">
+                        캘린더
+                        </div>
+                    </Link>
                 </div>
         </div>
     );

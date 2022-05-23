@@ -10,14 +10,11 @@ import DetailModal from '../components/calendar/DetailModal'
 import Modal from '../components/calendar/Modal'
 import './css/calendar.css'
 
-
-
 function Calender(props) {
 
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const[calId, setCalId] = useState(0);
 
     const openModal = () => {
