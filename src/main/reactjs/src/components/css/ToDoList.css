@@ -1,0 +1,115 @@
+.todolist{
+    width: 600px;
+    height:1000px;
+    background: white;
+    display: inline-block;
+    border-radius: 4%/ 3%;
+    box-shadow: 0.5px 0.5px 10px 0.2px #b6b6b6;
+
+    cursor: default;
+                          -webkit-touch-callout: none;
+                          -webkit-user-select: none;
+                          -khtml-user-select: none;
+                          -moz-user-select: none;
+                          -ms-user-select: none;
+                          user-select: none;
+}
+
+.todolist_add{
+    float: right;
+    display: inline-block;
+    width: 20%;
+    margin-top:50px;
+    margin-right: 20px;
+}
+
+.todolist_content{
+    font-family: 'Nanum Gothic500';
+    display: inline-block;
+    margin-left:5px;
+    font-size:18px;
+
+}
+
+.todolist_gray{
+    font-family: 'Nanum Gothic500';
+    display: inline-block;
+    margin-left:5px;
+    font-size:18px;
+    color: gray;
+    text-decoration:line-through
+}
+
+.todolist_title{
+    font-family: 'lefery';
+    font-size: 30px;
+    margin-top: -20px;
+}
+
+.todolist-day{
+    font-family: 'Nanum Gothic500';
+    color:gray;
+    font-size: 20px;
+    margin-left: -190px;
+    margin-top: -15px;
+}
+
+.todolist-num{
+    font-family: 'Nanum Gothic500';
+    margin-right:160px;
+    font-size: 15px;
+    color: green;
+}
+
+.todolist_header{
+    margin-top: 50px;
+    width: 60%;
+    margin-left: -150px;
+    display: inline-block;
+    margin-bottom: -30px;
+}
+
+.todolist_delete{
+    display: inline-block;
+}
+
+.todolist_hr{
+    width: 100%;
+}
+
+.todolist_item{
+    height: 40px;
+    float: left;
+    margin: 10px;
+    margin-left: 25px;
+    display:block;
+    margin-right: 200px;
+}
+
+.todolist_true{
+    position:static;
+    overflow:hidden;
+    height:auto;
+}
+
+.todolist_false{
+    position:static;
+    overflow:hidden;
+    height:auto;
+}
+
+@font-face {
+  font-family: 'Nanum Gothic500';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'lefery';
+    src: url('../../pages/css/LeferiBaseBold.ttf') format('truetype');
+}
