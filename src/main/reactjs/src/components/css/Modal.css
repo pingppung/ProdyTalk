@@ -7,6 +7,7 @@
   left: 0;
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.6);
+  font-family: 'Nanum Gothic400', sans-serif;
 }
 .modal button {
   outline: none;
@@ -24,10 +25,11 @@
   overflow: hidden;
 }
 .modal > section > header {
-  position: relative;
-  padding: 16px 64px 16px 16px;
-  background-color: #f1f1f1;
-  font-weight: 700;
+position: relative;
+    padding: 16px 0px 16px 16px;
+    background-color: #f1f1f1;
+    font-weight: 700;
+    font-family: 'Nanum Gothic400', sans-serif;
 }
 .modal > section > header button {
   position: absolute;
@@ -53,7 +55,7 @@
 .add {
   padding: 6px 12px;
   color: #000000;
-  background-color: #FFD700;
+  background-color: #97aaca;
   border-radius: 5px;
   font-size: 13px;
 }
@@ -61,7 +63,7 @@
 .close {
   padding: 6px 12px;
   color: #fff;
-  background-color: #6c757d;
+  background-color: black;
   border-radius: 5px;
   font-size: 13px;
   margin-left: 10px;
@@ -70,7 +72,7 @@
 .edit {
   padding: 6px 12px;
   color: #000000;
-  background-color: #FFD700;
+  background-color: #97aaca;
   border-radius: 5px;
   font-size: 13px;
 }
@@ -78,10 +80,29 @@
 .delete {
   padding: 6px 12px;
   color: #fff;
-  background-color: #6c757d;
+  background-color: black;
   border-radius: 5px;
   font-size: 13px;
   margin-left: 10px;
+}
+
+#openmodal{
+background: #97aaca;
+    padding: 40px;
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+    font-size: 30px;
+    margin: 30px 25px 0 25px;
+    animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    border-radius: 0;
+    vertical-align: unset;
+    font-family: 'S-CoreDream-5Medium';
+    border-radius: 0.5rem;
+}
+
+.col-form-label{
+padding: 0 0 0 0;
 }
 
 .modal.openModal {
@@ -112,4 +133,13 @@
 label {
     padding-left: 20px;
 
+}
+
+#roomInfo {
+    margin-top: 15px;
+}
+
+#roomType {
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
