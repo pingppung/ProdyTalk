@@ -58,10 +58,10 @@ function InfoComponent(props) {
      },[])
 
  return (
-    <div style={{textAlign: 'center', background: '#7a8ba7'}}>
+    <div style={{textAlign: 'center'}}>
     {
         loading === true
-        ? <div>
+        ? <div className="infoBack">
             <div className="infoBigDiv">
                 <div className="smallDiv">
                     <p className="total">팀원 인원수</p>

@@ -57,16 +57,22 @@ return(
         { (calendar == true)
         ? <div className="mySchedule_calendar">
             <div className="mySchedule_content">
-                <MyCalendar />}
+                <MyCalendar />
             </div>
          </div>
         :<div></div>
         }
         </div>
 
-        <div className="mySchedule_todolist">
-            {toDoList && <MyTodolist />}
+        <div>
+        {(toDoList == true)
+        ? <div className="mySchedule_todolist">
+            <MyTodolist />}
+         </div>
+        : <div></div>
+        }
         </div>
+
 
         <Link to="/main" id="homeBtn"><img src={Home} style={homeImageStyle}/></Link>
     </div>

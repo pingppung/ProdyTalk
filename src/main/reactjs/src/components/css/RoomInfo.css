@@ -1,5 +1,11 @@
-.infoBigDiv{
+.infoBack{
     background: #7a8ba7;
+    width: 50%;
+    margin-left:460px;
+}
+
+.infoBigDiv{
+    height: auto;
     width: 300px;
     display: inline;
 }
