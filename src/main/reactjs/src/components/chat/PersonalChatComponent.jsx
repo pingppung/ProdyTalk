@@ -9,6 +9,11 @@ import LeftMessage from "./LeftMessage.js";
 import Connected from "./Connected";
 import ChatService from "../../service/ChatService.js";
 import CircularProgress from '@mui/material/CircularProgress';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import '../css/Modal.css';
+
 import '../css/Chat.css';
 
 function PersonalChatComponent(props) {
@@ -16,7 +21,7 @@ function PersonalChatComponent(props) {
     //const sock = new SockJS('http://localhost:8080/chat')
     const sock = new SockJS('https://pingppung.xyz:3000/chat')
     const client=Stomp.over(sock);
-
+    const {open, close, header} = props;
     const [list,setList]=useState(null)
     const [id,setId]=useState(null);
     const [userId,setUserId]=useState("");
@@ -59,12 +64,15 @@ function PersonalChatComponent(props) {
             }) //글 번호로 구독!
         })
 
+
+
         return () => {
             client.disconnect(()=>{
                 client.unsubscribe('sub-0');
             })
         }
     }, [])
+
 
     useEffect(() => {
         if(id!=null){
@@ -131,9 +139,17 @@ function PersonalChatComponent(props) {
 
 
     return (
-        <div id="main-content" className="container">
-            <div className="row">
-                <div className="col-md-6">
+        <div className={props.open ? 'openModal modal' : 'modal'}>
+            {props.open ? (
+                <section>
+                    <header>
+                        {header}
+                        <button className="close" onClick={close}>
+                        </button>
+                    </header>
+
+            <div className="modal-body">
+                <div className="form-group">
                     <div id="chatList">
                         {children.map(child => child)}
                     </div>
@@ -144,6 +160,16 @@ function PersonalChatComponent(props) {
                     </div>
                 </div>
             </div>
+            <footer>
+                <button className="close" onClick={close}>
+                    닫기
+                </button>
+            </footer>
+        </section>
+        )
+        : null
+        }
+
         </div>
     );
 }

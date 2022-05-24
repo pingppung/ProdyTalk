@@ -13,28 +13,31 @@
           user-select: none;
 }
 
- .logo {
-        margin:50px;
-        text-align: center;
-        display: inline-block;
-        width:220px;
-        height: 200px;
-        border: 6px solid white;
-    }
-.font{
-    font-size:50px;
-    color:white;
-    font-family:'lefery';
+.background img{
+    width: 180px;
+}
 
+ .logo {
+    border: 6px solid #fff;
+    display: inline-block;
+    text-align: center;
+    width: 250px;
+    margin: 80px 0 50px;
+    }
+
+.font{
+    color: #fff;
+    font-family: Nanum Gothic400,sans-serif;
+    font-size: 50px;
   }
+
 .button{
     margin:50px;
-
 }
 .smallfont{
-    font-family:'lefery';
-    font-size:20px;
-
+    font-size: 20px;
+    font-family: Nanum Gothic400,sans-serif;
+    color: #795da9;
 }
 
 

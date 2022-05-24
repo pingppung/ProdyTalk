@@ -22,8 +22,8 @@ function RoomCircle(props) {
             <div id="circle">
             {
                 props.type === "프로젝트"
-                ? <img src={P} alt="p" style={imagestyle} />
-                : <img src={S} alt="s" style={imagestyle} />
+                ? <p id="project">프로젝트</p>
+                : <p id="study">스터디</p>
                 }
                 <Link to={{
                         pathname:`/roomenter/${props.id}`,
@@ -32,6 +32,7 @@ function RoomCircle(props) {
                     style={{ textDecoration: 'none' }}>
                 <h3>{props.title}</h3>
                 </Link>
+                <h5>프로젝트 설명 불러오기</h5>
             </div>
         </label>
     );
