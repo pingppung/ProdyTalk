@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import RecruitService from '../service/RecruitService'
 import './css/Recruit.css';
 import Back from "./image/Back.png";
-import Chat from "./image/Chat.png";
+import ChatPage from "./chat/PersonalChatComponent";
+import Chat from './image/Chat.png';
 
 import UserService from '../service/UserService'
 
 class ReadRecruitComponent extends Component {
     constructor(props) {
         super(props)
-
         // 상세보기에 사용될 파라미터 정의
         this.state = {
             recruit_id : this.props.match.params.recruit_id,
             recruit: {},
-            chatCondition : false,
             roleCondition: false,
+            isModalOn: false,
         }
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this)
     }
 
         // 페이지 로딩될 때 api와 통신해 글 객체 가져옴
@@ -25,7 +27,6 @@ class ReadRecruitComponent extends Component {
                 this.setState({ recruit: res.data });
                 this.getRoleCondition(this.state.recruit.user_id);
             });
-
             // UserService에서 user_id 가져오기
             UserService.getUserName().then(res => {
                 this.setState({
@@ -48,7 +49,7 @@ class ReadRecruitComponent extends Component {
                     roleCondition: false,
                 })
             }
-            console.log(this.state.roleCondition);
+
         }
 
         // 파라미터 값에 따라 페이지에 표시할 내용 변경
@@ -99,6 +100,14 @@ class ReadRecruitComponent extends Component {
             }
         }
 
+        openModal(){
+            this.setState({isModalOn:true})
+        };
+
+        closeModal() {
+            this.setState({isModalOn: false})
+        };
+
         deleteView = async function () {
             if(this.state.roleCondition) {
                 if(window.confirm("글을 삭제하시겠습니까?\n삭제된 글은 복구 할 수 없습니다.")) {
@@ -134,12 +143,13 @@ class ReadRecruitComponent extends Component {
         return (
             <div>
                 <div className="readRecruit">
+                     <ChatPage id={this.recruit_id} open={this.state.isModalOn} close={this.closeModal}  header="채팅"> </ChatPage>
                     <div>
                         {this.returnRecruitType(this.state.recruit.room_type)}
                         <h1> {this.state.recruit.title}</h1>
-                            <button id="chatBtn"
-                                onClick={ () => this.setState({ chatCondition : true })}>
-                                <img src={Chat} style={imagestyle2}/></button>
+                            <button id="chatBtn" onClick={this.openModal}>
+                                <img src={Chat} style={imagestyle2}/>
+                            </button>
                             <div className = "readRow" id="author">
                                 <label> 작성자 : {this.state.recruit.user_id} </label>
                                 <label style={{marginLeft:"15px"}}> {this.state.recruit.date} </label>
@@ -154,12 +164,6 @@ class ReadRecruitComponent extends Component {
                             <button id="floatingBtn" onClick={this.goToList.bind(this)}><img src={Back} style={imagestyle}/></button>
                     </div>
                 </div>
-                <div>
-                {/* <div className="chatComponent">
-                    { this.state.chatCondition ? <ChatPage/> : null }
-                </div> */}
-                </div>
-
             </div>
         );
     }

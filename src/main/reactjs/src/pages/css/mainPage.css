@@ -1,6 +1,4 @@
 .smallBox{
-    background-color:#cfe8fc;
-    background-color:#cfe8fd;
     background-blend-mode:multiply;
     width:100%;
     text-align:center;
@@ -14,15 +12,20 @@
 }
 
 .mainPage{
-    background-color:#cfe8fc;
     min-height:100vh;
     text-align:center;
+    height: 100%;
+    overflow: hidden;
 }
 
+.mainlogo img{
+    height: 160px;
+    width: 140px;
+}
 
 #putLink{
     float:right;
-    padding:50px;
+    padding: 0 50px 0 0;
 }
 
 .putLinkButton{
@@ -31,12 +34,6 @@
     display:inline-block;
 }
 
-.menu{
-    text-align:center;
-    top:600px;
-    left:590px;
-    position:absolute;
-}
 .recruit{
     padding:40px;
     display:inline-block;

@@ -95,7 +95,28 @@ class VideoRoomComponent extends Component {
     }
 
 
+    handleAudioSelect(e){
+        this.setState({
+            audioDeviceID: e.target.value,
+        });
+        console.log(e.target.value);
+        console.log(this.state.audioDeviceID);
+        console.log(this.audioDeviceID);
+    }
 
+    getWebcam(callback) {
+      try {
+        const constraints = {
+          'video': true,
+          'audio': true
+        }
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(callback);
+      } catch (err) {
+        console.log(err);
+        return undefined;
+      }
+    }
     deleteSubscriber(streamManager) {
         let subscribers = this.state.subscribers;
         let index = subscribers.indexOf(streamManager, 0);
@@ -106,6 +127,7 @@ class VideoRoomComponent extends Component {
             });
         }
     }
+
     joinSession() {
         // --- 1) Get an OpenVidu object ---
         this.OV = new OpenVidu();
