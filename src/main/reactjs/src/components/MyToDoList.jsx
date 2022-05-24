@@ -4,9 +4,11 @@ import TodoListItem from './todolist/TodoListItem'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import ToDoListService from '../service/ToDoListService';
-import ToDoListModal from './todolist/ToDoListModal';
+import ToDoListModal from './todolist/ToDoListModal'
+import UserService from '../service/UserService';
+import './css/ToDoList.css';
 
-function TodoListComponent(props) {
+function MyToDoList(props) {
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
@@ -16,6 +18,7 @@ function TodoListComponent(props) {
     const [modalOpen, setModalOpen] = useState(false);
     const [todolist,setToDoList] = useState([]);
     const [checked, setChecked] = useState(false);
+    const [userName,setUserName] = useState("");
 
 
     const openModal = () => {
@@ -28,7 +31,7 @@ function TodoListComponent(props) {
 
     const addModal = (content) => {
         setModalOpen(false); // Modal 닫아주기
-        ToDoListService.addToDoList(content,props.roomId)
+        ToDoListService.addToDoListByUser(content,userName)
             .then(()=> setChecked(!checked))
     };
 
@@ -37,9 +40,13 @@ function TodoListComponent(props) {
     }
 
     useEffect(() => {
-        ToDoListService.getTodoListById(props.roomId).then((res) => {
-            setToDoList(res.data)
-            console.log(res.data)
+        UserService.getUserName().then(res => {
+            setUserName(res.data.id)
+            console.log(res.data.id)
+            ToDoListService.getTodoListByUser(res.data.id).then((res) => {
+                setToDoList(res.data)
+            })
+
         })
     },[checked]);
 
@@ -72,4 +79,4 @@ function TodoListComponent(props) {
     );
 }
 
-export default TodoListComponent;
+export default MyToDoList;

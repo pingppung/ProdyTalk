@@ -42,4 +42,15 @@ public class ToDoListController {
         toDoListService.deleteToDoList(toDoListVO);
     }
 
+    @GetMapping("/api/todolist/user")
+    public List<ToDoListVO> getToDoListByUser(@RequestParam(value="user_id") String user_id) {
+        return toDoListService.getToDoListByUser(user_id);
+    }
+
+    @PostMapping("/api/todolist/addByUser")
+    public void addToDoListByUser(@RequestBody ToDoListVO toDoListVO){
+        toDoListVO.setChecked(false);
+        toDoListService.addToDoListByUser(toDoListVO);
+    }
+
 }

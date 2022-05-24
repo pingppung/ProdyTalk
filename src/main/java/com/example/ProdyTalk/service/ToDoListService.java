@@ -10,4 +10,7 @@ public interface ToDoListService {
     void setChecked(ToDoListVO todoListVO);
     void addToDoList(ToDoListVO todoListVO);
     void deleteToDoList(ToDoListVO todoListVO);
+
+    List<ToDoListVO> getToDoListByUser(String user_id);
+    void addToDoListByUser(ToDoListVO todoListVO);
 }
