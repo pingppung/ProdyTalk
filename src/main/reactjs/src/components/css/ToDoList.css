@@ -1,18 +1,10 @@
 .todolist{
-    width: 600px;
-    height:1000px;
+
+height: 100%;
+    width: 80%;
+    max-width: 600px;
     background: white;
     display: inline-block;
-    border-radius: 4%/ 3%;
-    box-shadow: 0.5px 0.5px 10px 0.2px #b6b6b6;
-
-    cursor: default;
-                          -webkit-touch-callout: none;
-                          -webkit-user-select: none;
-                          -khtml-user-select: none;
-                          -moz-user-select: none;
-                          -ms-user-select: none;
-                          user-select: none;
 }
 
 .todolist_add{
@@ -41,7 +33,7 @@
 }
 
 .todolist_title{
-    font-family: 'lefery';
+    font-family: 'S-CoreDream-5Medium';
     font-size: 30px;
     margin-top: -20px;
 }
@@ -63,8 +55,6 @@
 
 .todolist_header{
     margin-top: 50px;
-    width: 60%;
-    margin-left: -150px;
     display: inline-block;
     margin-bottom: -30px;
 }
@@ -78,12 +68,10 @@
 }
 
 .todolist_item{
-    height: 40px;
-    float: left;
+text-align: left;
     margin: 10px;
     margin-left: 25px;
-    display:block;
-    margin-right: 200px;
+    display: block;
 }
 
 .todolist_true{
