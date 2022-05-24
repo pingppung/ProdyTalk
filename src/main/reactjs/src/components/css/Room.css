@@ -1,7 +1,4 @@
 #circle {
-
-  width : 300px;
-  height : 200px;
   border-radius: 10%;
   text-align:center;
   margin-top: 30px;
@@ -56,7 +53,12 @@ h5, h3, h2, h{
 margin-top: 23px;
 }
 
-#explan, #title{
+#explain {
+    width: 250px;
+    height: 100px
+}
+
+#explain, #title{
 margin: 10px;
 text-overflow: ellipsis;
     overflow: hidden;

@@ -34,7 +34,7 @@ function RoomCircle(props) {
 
                     <h5 id="title">{props.title}</h5>
 
-                    <p id="explan">프로젝트 설명 불러오기 할거얌 나는 바보야 안녕 </p>
+                    <p id="explain">{props.roomInfo}</p>
                 </div>
             </Link>
         </label>

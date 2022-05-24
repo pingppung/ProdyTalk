@@ -9,6 +9,11 @@
         WHERE room_id = #{room_id}
     </select>
 
+    <select id="getToDoListByUser" resultType="com.example.ProdyTalk.vo.ToDoListVO">
+        SELECT * from todolist
+        WHERE user_id = #{user_id}
+    </select>
+
     <update id="setChecked" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
     update todolist
     set checked = #{checked}
@@ -20,4 +25,15 @@
         values(#{content},#{room_id},#{checked})
     </insert>
 
+    <insert id="addToDoListByUser" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+        INSERT INTO todolist(content,user_id,checked)
+        values(#{content},#{user_id},#{checked})
+    </insert>
+
+    <delete id="deleteToDoList" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+        delete from todolist
+        where todolist_id = #{todolist_id}
+    </delete>
+
 </mapper>
+
