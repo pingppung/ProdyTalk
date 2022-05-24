@@ -21,8 +21,8 @@ function FirstPage(props) {
     const imagestyle = {
              height:550,
              width:550,
-             "margin-left": 50,
-                 "margin-top": 90,
+             "margin-left": 130,
+                 "margin-top": 160,
                  position: "absolute"
             };
     const ColorButton = styled(Button)(({ theme }) => ({
