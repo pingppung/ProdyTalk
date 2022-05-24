@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import {useState} from 'react';
-import {Button} from '@material-ui/core';
+import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';

@@ -6,7 +6,7 @@ import Header from '../components/HeaderComponent'
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import {Button} from '@material-ui/core';
+import Button from '@mui/material/Button';
 import Home from "../components/image/Home.png";
 import MyCalendar from "./MyCalendar";
 import MyTodolist from "../components/MyToDoList"
