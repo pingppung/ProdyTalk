@@ -7,6 +7,10 @@ class VideoService {
             sessionId: SessionId,
         })
     }
+
+    changeAudioState(){
+
+    }
 }
 
 export default new VideoService();
