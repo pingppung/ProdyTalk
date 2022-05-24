@@ -37,4 +37,9 @@ public class ToDoListController {
         toDoListService.addToDoList(toDoListVO);
     }
 
+    @PostMapping("/api/todolist/delete")
+    public void deleteToDoList(@RequestBody ToDoListVO toDoListVO){
+        toDoListService.deleteToDoList(toDoListVO);
+    }
+
 }

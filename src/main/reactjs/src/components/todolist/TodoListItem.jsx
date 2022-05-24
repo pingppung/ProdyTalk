@@ -16,8 +16,10 @@ function TodoListItem(props) {
     }
 
     const onDelete = () => {
-        ToDoListService.deleteToDoList(props.id)
-            .then(() => props.propFunction())
+        if(window.confirm("삭제하시겠습니까?")){
+            ToDoListService.deleteToDoList(props.id)
+                .then(() => props.propFunction())
+        }
     }
 
     useEffect(() => {
