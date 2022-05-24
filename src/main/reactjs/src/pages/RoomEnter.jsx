@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import {useLocation} from 'react-router-dom';
-import {useEffect} from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from "react-router-dom";
 import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
@@ -20,6 +18,8 @@ function RoomEnter() {
 
     const location=useLocation()
     const id=location.state
+    console.log(id);
+    console.log(location);
     const [chat,setChat]=useState(false)
     const [calendar,setCalendar]=useState(false)
     const [file,setFile]=useState(false)

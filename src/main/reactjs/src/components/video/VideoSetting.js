@@ -25,7 +25,7 @@ class VideoSetting extends Component {
             audioEnable: true,
             videoRef: undefined,
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.setAudio = this.setAudio.bind(this);
         this.setVideo = this.setVideo.bind(this);
         this.getWebcam = this.getWebcam.bind(this);
@@ -58,11 +58,14 @@ class VideoSetting extends Component {
                 this.videoRef.current.play();
         }));
     }
-    handleSubmit() {
+    handleClick() {
          //const history = useHistory();
         this.props.history.push({
            pathname: "/video/"+this.state.mySessionId,
-           state: { videoDeviceID : this.state.videoDeviceID,
+           props: {
+                    myUserName : this.state.myUserName,
+                    mySessionId : this.state.mySessionId,
+                    videoDeviceID : this.state.videoDeviceID,
                     audioDeviceID : this.state.audioDeviceID,
                     videoEnable : this.state.videoEnable,
                     audioEnable : this.state.audioEnable,
@@ -158,7 +161,7 @@ class VideoSetting extends Component {
                         </div>
                         <br />
                         <div id="join-dialog" className="jumbotron vertical-center">
-                            <form className="form" onSubmit={this.handleSubmit}>
+                            <form className="form">
                                 {video}
                                 <div>
                                     <input
@@ -218,9 +221,9 @@ class VideoSetting extends Component {
                                     <input
                                         className="btn btn-lg btn-success"
                                         id="buttonJoin"
-                                        name="commit"
-                                        type="submit"
-                                        value="JOIN" />
+                                        type="button"
+                                        value="JOIN"
+                                        onClick={this.handleClick}/>
                                 </p>
                             </form>
                         </div>
