@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import LogoWhite from "../components/image/LogoWhite.png";
 import Header from '../components/HeaderComponent'
 import Background from '../components/image/background.png'
+import Computer from '../components/image/computer.png'
 import ChatService from "../service/ChatService.js";
 import Button from '@mui/material/Button';
 import { pink} from '@mui/material/colors';
@@ -17,8 +18,11 @@ function FirstPage() {
     const [logout,setLogout] = useState(false)
     const location=useLocation()
     const imagestyle = {
-             height:200,
-             width:180,
+             height:550,
+             width:550,
+             "margin-left": 50,
+                 "margin-top": 90,
+                 position: "absolute"
             };
     const ColorButton = styled(Button)(({ theme }) => ({
       color: theme.palette.getContrastText("#ffffff"),
@@ -44,12 +48,13 @@ function FirstPage() {
     return (
         <div className="background">
             <div className="logo">
-                <img src={LogoWhite} alt="logowhite" style={imagestyle}/>
+                          ProdyTalk
             </div>
-            <div className="font">더욱 더 쉬워진 프로젝트를 <br/>
-             경험해보세요
-             </div>
+            <img src={Computer} alt="computer" style={imagestyle}/>
 
+            <div className="font">ProdyTalk은 WebRTC 기반 화상채팅 프로젝트/스터디 플랫폼입니다.<br/><br/>
+             팀원들과 진행상황들을 공유할 수 있고, <br /> 자기개발을 가능하게해 프로젝트나 스터디를 효율적으로 관리할 수 있습니다.
+             </div>
              { isLogin === false
              ? <div className="button">
                 <Link to="/login" style={{ textDecoration: 'none' }}>

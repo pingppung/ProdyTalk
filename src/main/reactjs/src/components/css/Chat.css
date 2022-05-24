@@ -1,6 +1,6 @@
 #chatList{
     overflow: scroll;
-    height: 430px;
+    height: 377px;
     text-align:center;
     overflow-x: hidden;
     background: #7a8ba7;
@@ -35,7 +35,7 @@
     padding: 10px;
     margin-right:20px;
     margin-left:20px;
-    background: #ffd968;
+    background: #ffffff;
     -webkit-border-radius: 14px;
     -moz-border-radius: 14px;
     border-radius: 14px;
@@ -46,7 +46,7 @@
     position: absolute;
     border-style: solid;
     border-width: 12px 0 12px 15px;
-    border-color: transparent #ffd968;
+    border-color: transparent #ffffff;
     display: block;
     width: 0;
     z-index: 1;
