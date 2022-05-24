@@ -5,6 +5,7 @@ import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
 import MemberListComponent from './MemberList';
 import UserService from '../../service/UserService';
+import VideoService from '../../service/VideoService';
 import Logo from '../image/LogoWhite.png';
 import { UserOutlined, AudioOutlined, AudioMutedOutlined, SoundOutlined, ExportOutlined, VideoCameraFilled
         ,LaptopOutlined, SettingFilled, TeamOutlined, AppstoreOutlined, BorderOutlined} from '@ant-design/icons';
@@ -36,54 +37,36 @@ class VideoRoomComponent extends Component {
             shareEnable: false,
             memberlistEnable: false,
             layoutState: 'Focus',
-            audioState: 'OnVideo',
-            videoState: 'UnMuteAudio',
+            audioState: 'UnMuteAudio',
+            videoState: 'OnVideo',
             shareState: 'NotShare',
-            videoRef: undefined,
         };
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
         this.switchCamera = this.switchCamera.bind(this);
-        this.setAudio = this.setAudio.bind(this);
-        this.setVideo = this.setVideo.bind(this);
         this.onoffVideo = this.onoffVideo.bind(this);
         this.muteAudio = this.muteAudio.bind(this);
         this.screenShare = this.screenShare.bind(this);
-        this.getWebcam = this.getWebcam.bind(this);
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
-        this.handleVideoSelect = this.handleVideoSelect.bind(this);
-        this.handleAudioSelect = this.handleAudioSelect.bind(this);
         this.memberList = this.memberList.bind(this);
         this.changeLayout = this.changeLayout.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
         this.onpopstate = this.onpopstate.bind(this);
     }
-    componentDidMount() {
+    componentDidMount() {    //여기서 setting페이지에서 설정한 값들 가져오기   videoEnable, audioEnable, mySessionId, myUserName, videoDeviceID, audioDeviceID
         const { params } = this.props.match;
-        this.videoRef = React.createRef();
-
+        console.log(this.props);
         UserService.getUserName().then(res => {
             this.setState({
                 myUserName: res.data.id,
                 mySessionId: params.id,
+                videoEnable: this.props.videoEnable,
+                audioEnable: this.props.audioEnable,
+                videoDeviceID: this.props.videoDeviceID,
+                audioDeviceID: this.props.audioDeviceID,
             });
         });
-        navigator.mediaDevices.enumerateDevices()
-            .then(devices => {
-                const videoinput = devices.filter((device) => device.kind === "videoinput");
-                const audioinput = devices.filter((device) => device.kind === "audioinput");
-                this.setState({
-                     videoDevices: videoinput,
-                     audioDevices: audioinput,
-                     videoDeviceID: videoinput[0],  //일단 맨 videoDevices 맨 처음 껄로 저장
-                     audioDeviceID: audioinput[0],
-                });
-            });
-            this.getWebcam((stream => {
-                this.videoRef.current.srcObject = stream;
-                this.videoRef.current.play();
-        }));
 
         window.addEventListener('beforeunload', this.onbeforeunload);
         window.addEventListener('popstate', this.onpopstate);
@@ -110,65 +93,8 @@ class VideoRoomComponent extends Component {
             });
         }
     }
-    setVideo() {
-        if(this.state.videoEnable === true){
-            this.setState({
-                videoState: "OffVideo",
-                videoEnable: false,
-            });
-            this.videoRef.current.srcObject = null;
-        }
-        else{
-            this.setState({
-                videoState: "OnVideo",
-                videoEnable: true,
-            });
-            this.getWebcam((stream => {
-                this.videoRef.current.srcObject = stream;
-                this.videoRef.current.play();
-            }));
-        }
-    }
 
-    setAudio() {
-        if(this.state.audioEnable === true){
-            this.setState({
-                audioState: "MuteAudio",
-                audioEnable: false,
-            });
-        }
-        else{
-            this.setState({
-                audioState: "UnMuteAudio",
-                audioEnable: true,
-            });
-        }
-    }
-    handleVideoSelect(e) {
-        this.setState({
-            videoDeviceID: e.target.value,
-        });
-    }
 
-    handleAudioSelect(e){
-        this.setState({
-            audioDeviceID: e.target.value,
-        });
-    }
-
-    getWebcam(callback) {
-      try {
-        const constraints = {
-          'video': true,
-          'audio': true
-        }
-        navigator.mediaDevices.getUserMedia(constraints)
-          .then(callback);
-      } catch (err) {
-        console.log(err);
-        return alert(err + ': 카메라, 마이크 허용해주세요!!');
-      }
-    }
 
     deleteSubscriber(streamManager) {
         let subscribers = this.state.subscribers;
@@ -465,96 +391,9 @@ class VideoRoomComponent extends Component {
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
-        const audioDevices = this.state.audioDevices;
-        const videoDevices = this.state.videoDevices;
-        let video;
-        if(this.state.videoEnable === false){
-            video = <div className="video-off">
-                        <Avatar size={120} icon={<UserOutlined />} />
-                        {this.state.audioEnable ? null : <AudioMutedOutlined /> }
-                    </div>;
-        }
-        else if(this.state.videoEnable === true){
-            video = <div className="video-on">
-                        <video ref={this.videoRef} />
-                        {this.state.audioEnable ? null : <AudioMutedOutlined /> }
-                    </div>;
-        }
-
-
 
         return (
             <div className="container">
-                {this.state.session === undefined ? (
-                    <div id="join">
-                        <div id="logo-img">
-                            <img src={Logo} alt="ProdyTalk logo"/>
-                        </div>
-                        <br />
-                        <div id="join-dialog" className="jumbotron vertical-center">
-                            <form className="form" onSubmit={this.joinSession}>
-                                {video}
-                                <div>
-                                    <input
-                                        type="button"
-                                        id="buttonSetAudio"
-                                        onClick={this.setAudio}
-                                        value={this.state.audioEnable ? "음소거" : "음소거 해제"}
-                                    />
-                                    <input
-                                        type="button"
-                                        id="buttonSetVideo"
-                                        onClick={this.setVideo}
-                                        value={this.state.videoEnable ? "카메라 끄기" : "카메라 켜기"}
-                                    />
-                                </div>
-                                <p>
-                                    <label>Camera: </label>
-                                    <select value={this.state.videoDeviceID} onChange={this.handleVideoSelect}>
-                                        {videoDevices.map((videoDevice, index) => (
-                                            <option key={videoDevice.deviceId} value={videoDevice.deviceId}>
-                                                {videoDevice.label}
-                                            </option>
-                                         ))}
-                                    </select>
-                                </p>
-                                <p>
-                                    <label>Audio: </label>
-                                    <select value={this.state.audioDeviceID} onChange={this.handleAudioSelect}>
-                                        {audioDevices.map((audioDevice, index) => (
-                                            <option key={audioDevice.deviceId} value={audioDevice.deviceId}>
-                                                {audioDevice.label}
-                                            </option>
-                                         ))}
-                                    </select>
-                                </p>
-                                <p>
-                                    <label>Username: </label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="userName"
-                                        value={myUserName}
-                                        disabled
-                                    />
-                                </p>
-                                <p>
-                                    <label> Session: </label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="sessionId"
-                                        value={mySessionId}
-                                        disabled
-                                    />
-                                </p>
-                                <p className="text-center">
-                                    <input className="btn btn-lg btn-success" id="buttonJoin" name="commit" type="submit" value="JOIN" />
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                ) : null}
                 {this.state.session !== undefined ? (
                  <div id="videoroom">
                     {this.state.memberlistEnable === true ?(
