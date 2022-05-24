@@ -38,7 +38,7 @@ function RoomListComponent() {
 
             <Slider {...settings}>
                 {rooms.map(room =>
-                    <div><RoomCircle title={room.room_name} type={room.room_type} id={room.room_id}/></div>)
+                    <div><RoomCircle title={room.room_name} type={room.room_type} id={room.room_id} roomInfo={room.room_info}/></div>)
                 }
 
             </Slider>
