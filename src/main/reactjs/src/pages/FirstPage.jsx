@@ -12,11 +12,12 @@ import { pink} from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import {useLocation} from 'react-router-dom';
 import './css/firstPage.css';
-function FirstPage() {
+function FirstPage(props) {
 
     const [isLogin,setIsLogin] = useState(false)
     const [logout,setLogout] = useState(false)
     const location=useLocation()
+    const login=location.state
     const imagestyle = {
              height:550,
              width:550,
@@ -38,12 +39,12 @@ function FirstPage() {
     }
 
     useEffect(() => {
-        ChatService.getUserName().then(res => {
-            if(res!=null && logout==false) setIsLogin(true)
+        if(login!=null){
+            setIsLogin(false)
+            console.log(login)}
+        else{ setIsLogin(true) }
 
-        })
-
-    },[logout])
+    },[])
 
     return (
         <div className="background">
@@ -70,9 +71,6 @@ function FirstPage() {
                             <div className="smallfont">메인으로</div>
                         </ColorButton>
                     </Link>
-                </div>
-                <div className="logout">
-                    <Button variant="contained" color="secondary" onClick={onLogout}>로그아웃</Button>
                 </div>
 
              </div>
