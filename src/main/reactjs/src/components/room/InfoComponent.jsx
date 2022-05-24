@@ -58,7 +58,7 @@ function InfoComponent(props) {
      },[])
 
  return (
-    <div style={{textAlign: 'center'}}>
+    <div style={{textAlign: 'center', background: '#7a8ba7'}}>
     {
         loading === true
         ? <div>

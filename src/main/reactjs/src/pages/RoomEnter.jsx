@@ -122,10 +122,12 @@ function RoomEnter() {
             <div id="menu">
                 <div className="menuitem">
                     {file && <FileComponent roomId={id} />}
-                    <div className="chat">
-                        {chat && <GroupChatComponent id={id}/>}
-                    </div>
-                    {info && <InfoComponent roomId={id} />}
+                </div>
+                <div className="chat">
+                     {chat && <GroupChatComponent id={id}/>}
+                </div>
+                <div>
+                      {info && <InfoComponent roomId={id} />}
                 </div>
                 <div className="calendar">
                     {calendar && <Calendar roomId={id}/>}

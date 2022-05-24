@@ -22,14 +22,13 @@
 }
 
 #project{
-    background: black;
+    background: #2c3e50;
     width: 60%;
     max-width: 90px;
     color: white;
     transform: translate(10px, 10px);
     text-align:center;
     font-family: 'Nanum Gothic400', sans-serif;
-    color: #d7ebfa;
 }
 
 #study{
@@ -40,11 +39,10 @@
     transform: translate(10px, 10px);
     text-align:center;
     font-family: 'Nanum Gothic400', sans-serif;
-    color: #fffbc5;
 }
 
 #circle:hover {
-    background: #6c757d;
+    background: #7a8ba7;
 }
 
 h5, h3, h2, h{
@@ -55,7 +53,7 @@ h5, h3, h2, h{
 
 #inviteLink{
     float: right;
-    margin: 30px;
+margin-top: 23px;
 }
 
 #explan, #title{
@@ -67,6 +65,7 @@ text-overflow: ellipsis;
             -webkit-box-orient: vertical;
             word-break:break-all;
             line-height: 1.4;
+            font-family: 'Nanum Gothic400', sans-serif;
 }
 
 div.slider{
@@ -91,13 +90,27 @@ div.slider{
 }
 
 .navigator{
-    width:90%;
-    margin-left: 150px;
-    margin-top: 40px;
+margin: 60px 0px 0 0px;
+}
+
+.navigator div{
+border-radius: 0.5rem;
+}
+
+.navigator button span{
+font-family: 'S-CoreDream-5Medium';
 }
 
 @font-face {
     font-family: 'lefery';
     src: url('../../pages/css/LeferiBaseBold.ttf') format('truetype');
+}
+
+@font-face {
+     font-family: 'S-CoreDream-5Medium';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+     font-size: 40px;
+     font-weight: 400;
+     font-style: normal;
 }
 

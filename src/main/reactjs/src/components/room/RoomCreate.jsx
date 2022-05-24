@@ -28,7 +28,8 @@ function RoomCreate(props) {
             </RoomModal>
 
             <div id="openmodal" onClick={openModal}>
-                <AddIcon />
+                <AddIcon fontSize="large" /><br />
+                방만들기
             </div>
         </div>
     );

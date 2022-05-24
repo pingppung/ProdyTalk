@@ -12,6 +12,7 @@ import RoomListComponent from '../components/room/RoomListComponent.jsx'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import HomeIcon from '@mui/icons-material/Home';
 import TextField from '@mui/material/TextField';
+import CalendarIcon from "../components/image/calendar.png"
 import RoomCreate from '../components/room/RoomCreate'
 import base64 from 'base-64';
 import axios from 'axios';
@@ -62,27 +63,28 @@ function MainPage({history}) {
 
                 <div>
                      <div id="myroomlist">마이룸 목록</div>
-                    <hr style={{ height: '5px', color: '#6c757d', opacity: '1', margin: '0 1000px 0 25px' }}></hr>
+                    <hr style={{ height: '5px', color: '#97aaca', opacity: '1', margin: '0 1000px 0 25px', width: '450px' }}></hr>
                     <RoomListComponent />
                 </div>
                 <br />
                 <div className="menu">
                     <RoomCreate />
-                                        <Link to="/recruit" style={{ textDecoration: 'none', color:'black' }} >
-                                            <div className="recruit">
-                                                <PeopleAltIcon fontSize="large" /><br />
-                                                <h3>모집게시판</h3>
-                                            </div>
-                                        </Link>
-                    <Link to="/mypage" style={{ textDecoration: 'none', color:'black' }}>
-                        <div className="mypage">
-                            <HomeIcon fontSize="large" /><br />
-                            <h3>마이페이지</h3>
-                        </div>
+                    <Link to="/recruit" style={{ textDecoration: 'none', color:'black' }} >
+                         <div className="recruit">
+                             <PeopleAltIcon fontSize="large" /><br />
+                             모집게시판
+                         </div>
                     </Link>
                     <Link to="/myCalendar" style={{ textDecoration: 'none', color:'black' }}>
                         <div className="myCalendar">
-                        캘린더
+                            <img src={CalendarIcon} alt="CalendarIcon" width= "25px"/><br />
+                            마이캘린더
+                        </div>
+                    </Link>
+                    <Link to="/mypage" style={{ textDecoration: 'none', color:'black' }}>
+                        <div className="mypage">
+                            <HomeIcon fontSize="large" /><br />
+                            마이페이지
                         </div>
                     </Link>
                 </div>
