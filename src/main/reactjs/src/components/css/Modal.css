@@ -72,7 +72,7 @@ position: relative;
 .edit {
   padding: 6px 12px;
   color: #000000;
-  background-color: #FFD700;
+  background-color: #97aaca;
   border-radius: 5px;
   font-size: 13px;
 }
@@ -80,7 +80,7 @@ position: relative;
 .delete {
   padding: 6px 12px;
   color: #fff;
-  background-color: #6c757d;
+  background-color: black;
   border-radius: 5px;
   font-size: 13px;
   margin-left: 10px;
@@ -133,4 +133,13 @@ padding: 0 0 0 0;
 label {
     padding-left: 20px;
 
+}
+
+#roomInfo {
+    margin-top: 15px;
+}
+
+#roomType {
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
