@@ -12,6 +12,12 @@
           user-select: none;
 }
 
+.logout{
+    float:right;
+    height: 100%;
+    margin-bottom: 200px;
+}
+
 .mainPage{
     min-height:100vh;
     text-align:center;

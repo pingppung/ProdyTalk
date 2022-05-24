@@ -67,7 +67,7 @@ return(
         <div>
         {(toDoList == true)
         ? <div className="mySchedule_todolist">
-            <MyTodolist />}
+            <MyTodolist />
          </div>
         : <div></div>
         }
