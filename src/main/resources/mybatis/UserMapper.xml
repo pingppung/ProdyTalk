@@ -24,4 +24,5 @@
         set user_name=#{user_name}, user_pwd=#{user_pwd}, user_email=#{user_email}, user_phone=#{user_phone}
         where user_id=#{user_id}
     </update>
+
 </mapper>

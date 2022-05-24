@@ -61,6 +61,6 @@
     <delete id="deleteRoom" parameterType="com.example.ProdyTalk.vo.RoomJoinVO">
         delete from room_join
         where room_id = #{room_id} and user_id=#{user_id}
-
     </delete>
+
 </mapper>

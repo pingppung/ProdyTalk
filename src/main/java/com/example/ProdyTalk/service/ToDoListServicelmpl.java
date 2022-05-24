@@ -27,4 +27,9 @@ public class ToDoListServicelmpl implements ToDoListService{
     public void addToDoList(ToDoListVO todoListVO) {
         toDoListMapper.addToDoList(todoListVO);
     }
+
+    @Override
+    public void deleteToDoList(ToDoListVO todoListVO){
+        toDoListMapper.deleteToDoList(todoListVO);
+    }
 }
