@@ -16,12 +16,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ListRecruitComponent from './components/ListRecruitComponent'
 import CreateRecruitComponent from './components/CreateRecruitComponent'
 import ReadRecruitComponent from './components/ReadRecruitComponent'
+import MySchedule from './pages/MySchedule'
 
 function App() {
   return (
         <div>
 
            <Route exact path="/" component={FirstPage} />
+           <Route exact path="/first/:isLogin" component={FirstPage} />
            <Route exact path="/main" component={Main} />
            <Route exact path="/signup" component={SignupComponent} />
            <Route exact path="/login" component={LoginComponent} />
@@ -34,6 +36,7 @@ function App() {
            <Route exact path="/recruit" component={ListRecruitComponent} />
            <Route exact path="/createRecruit/:recruit_id" component={CreateRecruitComponent} />
            <Route exact path="/readRecruit/:recruit_id" component={ReadRecruitComponent} />
+           <Route exact path="/myCalendar" component={MySchedule} />
         </div>
 
     );

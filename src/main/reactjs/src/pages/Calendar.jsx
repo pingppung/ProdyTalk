@@ -15,7 +15,6 @@ function Calender(props) {
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const[calId, setCalId] = useState(0);
 
     const openModal = () => {
@@ -71,6 +70,7 @@ function Calender(props) {
             <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
 
             <FullCalendar
+                contentHeight="auto" // 스크롤바 제거
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth" // 기본 : 월 달력
                 headerToolbar={{ // 월, 주, 일 버튼 클릭 시 달력 보기 변경
@@ -88,8 +88,8 @@ function Calender(props) {
                     }
                     }
                 }}
-        events={events} // event 전달
 
+        events={events} // event 전달
         eventColor="gray"
         nowIndicator
         // dateClick={(e) => console.log(e.dateStr)}

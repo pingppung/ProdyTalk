@@ -19,21 +19,23 @@ function RoomCircle(props) {
 
     return (
         <label>
-            <div id="circle">
-            {
-                props.type === "프로젝트"
-                ? <p id="project">프로젝트</p>
-                : <p id="study">스터디</p>
-                }
-                <Link to={{
-                        pathname:`/roomenter/${props.id}`,
-                        state:`${props.id}`
-                        }}
-                    style={{ textDecoration: 'none' }}>
-                <h3>{props.title}</h3>
-                </Link>
-                <h5>프로젝트 설명 불러오기</h5>
-            </div>
+            <Link to={{
+                pathname:`/roomenter/${props.id}`,
+                state:`${props.id}`
+                }}
+                style={{ textDecoration: 'none' }}>
+                <div id="circle">
+                {
+                    props.type === "프로젝트"
+                    ? <p id="project">프로젝트</p>
+                    : <p id="study">스터디</p>
+                    }
+
+                    <h5 id="title">{props.title}</h5>
+
+                    <p id="explain">{props.roomInfo}</p>
+                </div>
+            </Link>
         </label>
     );
 }

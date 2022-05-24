@@ -44,6 +44,7 @@ table thead th {
 .row {
     margin-left: 10px;
     margin-bottom: 20px;
+        --bs-gutter-x: 0rem;
 }
 
 form > button {
@@ -69,18 +70,22 @@ form > button {
 #writeBtn {
     margin-top: 15px;
     margin-left: 84%;
-    border-radius: 15px;
+    border-radius: 10px;
+        background: #97aaca;
+        border-color: #97aaca;
 }
 
 #saveBtn {
-    background-color: #000;
+    background: #97aaca;
     color: #fff;
-    border: 1px solid #000;
-    border-radius: 15px;
+    border: 1px solid #97aaca;
+    border-radius: 10px;
 }
 
 #cancelBtn {
-    border-radius: 15px;
+    border-radius: 10px;
+    background: black;
+    border: 1px solid black;
 }
 
 .post-title {
@@ -198,8 +203,12 @@ select {
 }
 
 .categoryDiv {
-    margin-left: 175px;
+    margin-left: 155px;
     margin-bottom: 20px;
+}
+
+.col-md-6{
+width: 100%;
 }
 
 #createRecruitForm {

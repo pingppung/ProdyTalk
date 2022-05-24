@@ -75,7 +75,7 @@ function FileComponent(props) {
      }));
 
     return (
-        <div>
+        <div style={{    height: "100%", "min-height": "493px"}}>
         { loading === true
         ? <div>
             <br />
