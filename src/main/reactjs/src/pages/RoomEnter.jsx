@@ -126,12 +126,26 @@ function RoomEnter() {
                 <div className="chat">
                      {chat && <GroupChatComponent id={id}/>}
                 </div>
+
                 <div>
-                      {info && <InfoComponent roomId={id} />}
+                    {(info == true)
+                    ? <InfoComponent roomId={id} />
+                    : <p></p>
+                    }
                 </div>
-                <div className="calendar">
-                    {calendar && <Calendar roomId={id}/>}
+
+                <div>
+                {(calendar == true)
+                ?<div className="menu_calendar">
+                    <div className="menu_content">
+                        <Calendar roomId={id}/>
+                    </div>
+                 </div>
+                :<div></div>
+                }
                 </div>
+
+
                 <div className="todolist_enter">
                     {todolist&&<ToDoListComponent roomId={id} />}
                 </div>
