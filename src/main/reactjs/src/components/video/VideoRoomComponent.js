@@ -52,39 +52,29 @@ class VideoRoomComponent extends Component {
         this.memberList = this.memberList.bind(this);
         this.changeLayout = this.changeLayout.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
-        this.onpopstate = this.onpopstate.bind(this);
     }
     componentDidMount() {    //여기서 setting페이지에서 설정한 값들 가져오기   videoEnable, audioEnable, mySessionId, myUserName, videoDeviceID, audioDeviceID
-        const { params } = this.props.match;
-        console.log(this.props);
-        UserService.getUserName().then(res => {
             this.setState({
-                myUserName: res.data.id,
-                mySessionId: params.id,
-                videoEnable: this.props.videoEnable,
-                audioEnable: this.props.audioEnable,
-                videoDeviceID: this.props.videoDeviceID,
-                audioDeviceID: this.props.audioDeviceID,
-            });
+                myUserName: this.props.location.props.myUserName,
+                mySessionId: this.props.location.props.mySessionId,
+                videoEnable: this.props.location.props.videoEnable,
+                audioEnable: this.props.location.props.audioEnable,
+                videoDeviceID: this.props.location.props.videoDeviceID,
+                audioDeviceID: this.props.location.props.audioDeviceID,
         });
-
+        this.joinSession();
         window.addEventListener('beforeunload', this.onbeforeunload);
-        window.addEventListener('popstate', this.onpopstate);
     }
 
     componentWillUnmount() {
         window.removeEventListener('beforeunload', this.onbeforeunload);
-        window.removeEventListener('popstate', this.onpopstate);
     }
 
     onbeforeunload(event) {
         console.log("onbeforeunload");
         this.leaveSession();
     }
-    onpopstate(event){
-        console.log("popstate");
-        this.leaveSession();
-    }
+
 
     handleMainVideoStream(stream) {
         if (this.state.mainStreamManager !== stream) {
@@ -94,29 +84,6 @@ class VideoRoomComponent extends Component {
         }
     }
 
-
-    handleAudioSelect(e){
-        this.setState({
-            audioDeviceID: e.target.value,
-        });
-        console.log(e.target.value);
-        console.log(this.state.audioDeviceID);
-        console.log(this.audioDeviceID);
-    }
-
-    getWebcam(callback) {
-      try {
-        const constraints = {
-          'video': true,
-          'audio': true
-        }
-        navigator.mediaDevices.getUserMedia(constraints)
-          .then(callback);
-      } catch (err) {
-        console.log(err);
-        return undefined;
-      }
-    }
     deleteSubscriber(streamManager) {
         let subscribers = this.state.subscribers;
         let index = subscribers.indexOf(streamManager, 0);
@@ -162,7 +129,7 @@ class VideoRoomComponent extends Component {
                     var subscriber = mySession.subscribe(event.stream, undefined);
                     var subscribers = this.state.subscribers;
                     subscribers.push(subscriber);
-
+                        console.log(subscriber);
                     // Update the state with the new subscribers
                     this.setState({
                         subscribers: subscribers,
@@ -215,8 +182,6 @@ class VideoRoomComponent extends Component {
                             });
 
                             // --- 6) Publish your stream ---
-                            console.log(publisher);
-                            console.log(videoDevices);
                             mySession.publish(publisher);
 
                             // Set the main video in the page to display our webcam and store our Publisher
@@ -248,10 +213,12 @@ class VideoRoomComponent extends Component {
             publisher: undefined
         });
 
-        this.getWebcam((stream => {
-            this.videoRef.current.srcObject = stream;
-            this.videoRef.current.play();
-        }));
+        console.log("popstate");
+        this.props.history.push({
+           pathname: `/roomenter/${this.state.mySessionId}`,
+           state: `${this.state.mySessionId}`
+         });
+        //window.location.href =`/roomenter/${this.state.mySessionId}`;
     }
 
     async switchCamera() {
@@ -486,13 +453,13 @@ class VideoRoomComponent extends Component {
                         ) : null}
                         <div id={"video-container-"+this.state.layoutState}>
                             {this.state.publisher !== undefined ? (
-                                <div className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
+                                <div className="stream-container col-xs-6 publisher" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
                                     <UserVideoComponent
                                         streamManager={this.state.publisher} />
                                 </div>
                             ) : null}
                             {this.state.subscribers.map((sub, i) => (
-                                <div key={i} className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
+                                <div key={i} className="stream-container col-xs-6 subscribers" onClick={() => this.handleMainVideoStream(sub)}>
                                     <UserVideoComponent streamManager={sub} />
                                 </div>
                             ))}
