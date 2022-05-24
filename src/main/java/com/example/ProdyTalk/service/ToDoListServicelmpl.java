@@ -32,4 +32,14 @@ public class ToDoListServicelmpl implements ToDoListService{
     public void deleteToDoList(ToDoListVO todoListVO){
         toDoListMapper.deleteToDoList(todoListVO);
     }
+
+    @Override
+    public List<ToDoListVO> getToDoListByUser(String user_id) {
+        return toDoListMapper.getToDoListByUser(user_id);
+    }
+
+    @Override
+    public void addToDoListByUser(ToDoListVO todoListVO) {
+        toDoListMapper.addToDoListByUser(todoListVO);
+    }
 }

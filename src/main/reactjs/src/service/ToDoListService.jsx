@@ -20,6 +20,18 @@ class ToDoListService {
     deleteToDoList(id){
         return axios.post("/api/todolist/delete",{ todolist_id: id})
     }
+
+    //이 밑으로 마이투두리스트
+
+    getTodoListByUser(username){
+        return axios.get("/api/todolist/user", {
+            params: { user_id: username }
+        })
+    }
+
+    addToDoListByUser(content, username){
+        return axios.post("/api/todolist/addByUser", { content: content, user_id: username })
+    }
 }
 
 export default new ToDoListService();

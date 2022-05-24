@@ -13,4 +13,7 @@ public interface ToDoListMapper {
     void setChecked(ToDoListVO toDoListVO);
     void addToDoList(ToDoListVO toDoListVO);
     void deleteToDoList(ToDoListVO toDoListVO);
+
+    List<ToDoListVO> getToDoListByUser(String user_id);
+    void addToDoListByUser(ToDoListVO toDoListVO);
 }
