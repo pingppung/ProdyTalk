@@ -41,9 +41,16 @@ class HeaderComponent extends Component {
 
         return (
             <div className="body">
+                <Link to={{
+                    pathname:`/first/${true}`,
+                    state:`${true}`
+                    }}
+                style={{ textDecoration: 'none' }}>
+
                 <div className="logout">
-                                <Button color="primary" >로그아웃</Button>
-                            </div>
+                    <Button variant="outlined" color="primary" >로그아웃</Button>
+                </div>
+                </Link>
                 <div className="mainlogo">
                     <Link to="/main"><img src={Logo} alt="logo" /></Link>
                 </div>

@@ -22,6 +22,7 @@ function App() {
         <div>
 
            <Route exact path="/" component={FirstPage} />
+           <Route exact path="/first/:isLogin" component={FirstPage} />
            <Route exact path="/main" component={Main} />
            <Route exact path="/signup" component={SignupComponent} />
            <Route exact path="/login" component={LoginComponent} />
