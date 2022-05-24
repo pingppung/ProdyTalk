@@ -78,7 +78,7 @@ function MainPage({history}) {
                     <Link to="/myCalendar" style={{ textDecoration: 'none', color:'black' }}>
                         <div className="myCalendar">
                             <img src={CalendarIcon} alt="CalendarIcon" width= "25px"/><br />
-                            마이캘린더
+                            스케줄
                         </div>
                     </Link>
                     <Link to="/mypage" style={{ textDecoration: 'none', color:'black' }}>
