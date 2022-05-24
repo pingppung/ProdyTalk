@@ -16,6 +16,10 @@ class ToDoListService {
     addToDoList(content,roomId){
         return axios.post("/api/todolist/add",{ content: content, room_id: roomId })
     }
+
+    deleteToDoList(id){
+        return axios.post("/api/todolist/delete",{ todolist_id: id})
+    }
 }
 
 export default new ToDoListService();

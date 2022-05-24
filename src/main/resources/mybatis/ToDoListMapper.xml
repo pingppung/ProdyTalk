@@ -20,4 +20,9 @@
         values(#{content},#{room_id},#{checked})
     </insert>
 
+    <delete id="deleteToDoList" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+        delete from todolist
+        where todolist_id = #{todolist_id}
+    </delete>
+
 </mapper>
