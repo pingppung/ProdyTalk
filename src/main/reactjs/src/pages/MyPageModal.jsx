@@ -1,11 +1,6 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import {useState} from 'react';
 import '../components/css/Modal.css';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 const MyPageModal = (props) => {
 
@@ -33,7 +28,6 @@ const MyPageModal = (props) => {
   const changeUserPhone = (e) => {
     setUserPhone(e.target.value);
   }
-
   const addEvent = () => {
     setChangeNum(changeNum+1); // add 버튼 누를 때 마다 changeNum + 1 해주기
 

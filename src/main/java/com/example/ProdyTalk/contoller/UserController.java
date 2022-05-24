@@ -2,8 +2,6 @@ package com.example.ProdyTalk.contoller;
 
 import com.example.ProdyTalk.mapper.UserMapper;
 import com.example.ProdyTalk.service.UserService;
-import com.example.ProdyTalk.vo.RoomJoinVO;
-import com.example.ProdyTalk.vo.RoomListVO;
 import com.example.ProdyTalk.vo.UserVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
