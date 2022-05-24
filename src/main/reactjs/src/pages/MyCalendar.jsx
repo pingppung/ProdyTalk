@@ -75,7 +75,8 @@ function MyCalender(props) {
             <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
 
             <FullCalendar
-                contentHeight="auto"
+                contentHeight="auto" // 스크롤바 제거
+
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth" // 기본 : 월 달력
                 headerToolbar={{ // 월, 주, 일 버튼 클릭 시 달력 보기 변경
