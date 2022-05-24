@@ -3,13 +3,15 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
+import MemberListComponent from './MemberList';
 import UserService from '../../service/UserService';
 import Logo from '../image/LogoWhite.png';
 import { UserOutlined, AudioOutlined, AudioMutedOutlined, SoundOutlined, ExportOutlined, VideoCameraFilled
-        ,LaptopOutlined, SettingFilled} from '@ant-design/icons';
+        ,LaptopOutlined, SettingFilled, TeamOutlined, AppstoreOutlined, BorderOutlined} from '@ant-design/icons';
 import { Avatar } from 'antd';
 import '../css/Video.css';
 const OPENVIDU_SERVER_URL = 'https://prody.xyz:4443';
+//const OPENVIDU_SERVER_URL = 'https://localhost:4443';
 const OPENVIDU_SERVER_SECRET = '12341234';
 
 
@@ -32,6 +34,8 @@ class VideoRoomComponent extends Component {
             videoEnable: true,
             audioEnable: true,
             shareEnable: false,
+            memberlistEnable: false,
+            layoutState: 'Focus',
             audioState: 'OnVideo',
             videoState: 'UnMuteAudio',
             shareState: 'NotShare',
@@ -50,6 +54,8 @@ class VideoRoomComponent extends Component {
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
         this.handleVideoSelect = this.handleVideoSelect.bind(this);
         this.handleAudioSelect = this.handleAudioSelect.bind(this);
+        this.memberList = this.memberList.bind(this);
+        this.changeLayout = this.changeLayout.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
         this.onpopstate = this.onpopstate.bind(this);
     }
@@ -184,6 +190,7 @@ class VideoRoomComponent extends Component {
             iceServers: [
                 {
                     urls: 'turn:prody.xyz:3478?transport=tcp',
+                    //urls: 'turn:localhost:3478?transport=tcp',
                     username: turnUsername,
                     credential: turnCredential
                 }
@@ -247,8 +254,10 @@ class VideoRoomComponent extends Component {
                             // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
                             // element: we will manage it on our own) and with the desired properties
                             let publisher = this.OV.initPublisher(undefined, {
-                                audioSource: undefined, // The source of audio. If undefined default microphone
-                                videoSource: videoDevices[0].deviceId, // The source of video. If undefined default webcam
+                                //audioSource: undefined, // The source of audio. If undefined default microphone
+                                audioSource: this.state.audioDeviceID,
+                                //videoSource: videoDevices[0].deviceId, // The source of video. If undefined default webcam
+                                videoSource: this.state.videoDeviceID,
                                 publishAudio: this.state.audioEnable, // Whether you want to start publishing with your audio unmuted or not
                                 publishVideo: this.state.videoEnable, // Whether you want to start publishing with your video enabled or not
                                 resolution: '640x480', // The resolution of your video
@@ -258,7 +267,8 @@ class VideoRoomComponent extends Component {
                             });
 
                             // --- 6) Publish your stream ---
-
+                            console.log(publisher);
+                            console.log(videoDevices);
                             mySession.publish(publisher);
 
                             // Set the main video in the page to display our webcam and store our Publisher
@@ -424,6 +434,33 @@ class VideoRoomComponent extends Component {
             console.error(e);
         }
     }
+    memberList() {
+        if(this.state.memberlistEnable === true){
+            this.setState({
+                memberlistEnable: false,
+            });
+        }
+        else{
+            this.setState({
+                memberlistEnable: true,
+            });
+        }
+
+    }
+    changeLayout() {
+        console.log(this.state.layoutState);
+        if(this.state.layoutState === 'Focus'){
+            this.setState({
+                layoutState: 'Grid',
+            });
+        }
+        else{
+            this.setState({
+                layoutState: 'Focus',
+            });
+        }
+
+    }
 
     render() {
         const mySessionId = this.state.mySessionId;
@@ -432,23 +469,30 @@ class VideoRoomComponent extends Component {
         const videoDevices = this.state.videoDevices;
         let video;
         if(this.state.videoEnable === false){
-            video = <div className="avatar_area">
+            video = <div className="video-off">
                         <Avatar size={120} icon={<UserOutlined />} />
+                        {this.state.audioEnable ? null : <AudioMutedOutlined /> }
                     </div>;
         }
         else if(this.state.videoEnable === true){
-            video = <video ref={this.videoRef} />;
+            video = <div className="video-on">
+                        <video ref={this.videoRef} />
+                        {this.state.audioEnable ? null : <AudioMutedOutlined /> }
+                    </div>;
         }
+
+
+
         return (
             <div className="container">
                 {this.state.session === undefined ? (
                     <div id="join">
-                        <div id="img-div">
+                        <div id="logo-img">
                             <img src={Logo} alt="ProdyTalk logo"/>
                         </div>
                         <br />
                         <div id="join-dialog" className="jumbotron vertical-center">
-                            <form className="form-group" onSubmit={this.joinSession}>
+                            <form className="form" onSubmit={this.joinSession}>
                                 {video}
                                 <div>
                                     <input
@@ -468,7 +512,7 @@ class VideoRoomComponent extends Component {
                                     <label>Camera: </label>
                                     <select value={this.state.videoDeviceID} onChange={this.handleVideoSelect}>
                                         {videoDevices.map((videoDevice, index) => (
-                                            <option key={videoDevice.deviceId} value={videoDevice.label}>
+                                            <option key={videoDevice.deviceId} value={videoDevice.deviceId}>
                                                 {videoDevice.label}
                                             </option>
                                          ))}
@@ -478,7 +522,7 @@ class VideoRoomComponent extends Component {
                                     <label>Audio: </label>
                                     <select value={this.state.audioDeviceID} onChange={this.handleAudioSelect}>
                                         {audioDevices.map((audioDevice, index) => (
-                                            <option key={audioDevice.deviceId} value={audioDevice.label}>
+                                            <option key={audioDevice.deviceId} value={audioDevice.deviceId}>
                                                 {audioDevice.label}
                                             </option>
                                          ))}
@@ -513,6 +557,20 @@ class VideoRoomComponent extends Component {
                 ) : null}
                 {this.state.session !== undefined ? (
                  <div id="videoroom">
+                    {this.state.memberlistEnable === true ?(
+                        <div className="memberList">
+                            {this.state.publisher !== undefined ? (
+                                    <div>
+                                        <MemberListComponent streamManager={this.state.publisher} />
+                                    </div>
+                            ) : null}
+                            {this.state.subscribers.map((sub, i) => (
+                                <div key={i}>
+                                    <MemberListComponent streamManager={sub} />
+                                </div>
+                            ))}
+                        </div>
+                    ): null}
                     <div id="footer">
                         <h1 id="session-title">{mySessionId}</h1>
                             <button
@@ -524,35 +582,48 @@ class VideoRoomComponent extends Component {
                             <button
                                 id={"button" + this.state.audioState}
                                 onClick={this.muteAudio}>
-                                <span class="tooltiptext">{this.state.audioEnable ? "음소거" : "음소거 해제"}</span>
+                                <span class="button-text">{this.state.audioEnable ? "음소거" : "음소거 해제"}</span>
                                 {this.state.audioEnable ? <AudioOutlined /> : <AudioMutedOutlined />}
                             </button>
                             <button
                                 id={"button" + this.state.videoState}
                                 onClick={this.onoffVideo}>
-                                <span class="tooltiptext">{this.state.videoEnable ? "카메라 끄기" : "카메라 켜기"}</span>
+                                <span class="button-text">{this.state.videoEnable ? "카메라 끄기" : "카메라 켜기"}</span>
                                 <VideoCameraFilled />
                             </button>
                             <button
                                 id={"button" + this.state.shareState}
                                 onClick={this.screenShare}>
-                                <span class="tooltiptext">{this.state.videoEnable ? "화면공유" : "화면공유 해제"}</span>
+                                <span class="button-text">{this.state.videoEnable ? "화면공유" : "화면공유 해제"}</span>
                                 <LaptopOutlined />
+                            </button>
+                            <button
+                                id={"button" + this.state.layoutState}
+                                onClick={this.changeLayout}>
+                                <span class="button-text">{this.state.layoutState === 'Focus' ? "Grid" : "Focus"}</span>
+                                {this.state.layoutState === 'Focus' ? <AppstoreOutlined /> : <BorderOutlined /> }
+                            </button>
+                            <button
+                                id="buttonMemberList"
+                                onClick={this.memberList}>
+                                <span class="button-text">{this.state.memberlistEnable ?  "멤버 목록 숨기기" : "멤버 목록 표시하기"}</span>
+                                <TeamOutlined />
                             </button>
                             <button
                                 id="buttonLeaveSession"
                                 onClick={this.leaveSession}>
-                                <span class="tooltiptext">나가기</span>
+                                <span class="button-text">나가기</span>
                                 <ExportOutlined />
                             </button>
+
                         </div>
 
-                        {this.state.mainStreamManager !== undefined ? (
+                        {this.state.layoutState === 'Focus' && this.state.mainStreamManager !== undefined ? (
                             <div id="main-video" className="col-md-6">
                                 <UserVideoComponent streamManager={this.state.mainStreamManager} />
                             </div>
                         ) : null}
-                        <div id="video-container">
+                        <div id={"video-container-"+this.state.layoutState}>
                             {this.state.publisher !== undefined ? (
                                 <div className="stream-container col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
                                     <UserVideoComponent
