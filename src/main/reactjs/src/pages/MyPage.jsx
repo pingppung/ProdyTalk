@@ -71,7 +71,7 @@ function MyPage() {
     useEffect(() => {
         getData()
     },)
-
+                    //<div className="userId"><KeyIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  비밀번호 : {userPwd}</div>
     return (
     <div>
         <div style={{height: '100vh', textAlign: 'center'}}>
@@ -86,7 +86,6 @@ function MyPage() {
                     <br /> {userId}님, 안녕하세요!</p>
                 <div className="infoBox">
                     <div className="userId"><AccountCircleIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  아이디 : {userId}</div>
-                    <div className="userId"><KeyIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  비밀번호 : {userPwd}</div>
                     <div className="userId"><BadgeIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  이름 : {userName}</div>
                     <div className="userId"><EmailIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  이메일 : {userEmail}</div>
                     <div className="userId"><LocalPhoneIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  핸드폰 : {userPhone}
