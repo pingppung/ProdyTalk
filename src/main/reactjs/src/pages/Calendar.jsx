@@ -61,12 +61,6 @@ function Calender(props) {
         setDetailModalOpen(false); // Modal 닫아주기
     };
 
-    useEffect(()=> {
-        CalendarService.getCalendar(props.roomId).then((res) => {
-            setEvents(res.data)
-        })
-    }, [events]);
-
     useEffect(() => {
         console.log(start);
         //setStart(start);
@@ -89,12 +83,12 @@ function Calender(props) {
                 displayEventTime={false}
 
                 customButtons = {{
-                new : {
-                    text : "new",
+                    new : {
+                        text : "new",
 
-                    click : function() {
-                        openModal();
-                    }
+                        click : function() {
+                            openModal();
+                        }
                     }
                 }}
 
@@ -107,7 +101,6 @@ function Calender(props) {
 
         dateClick={ (e) => {
             setStart(e.dateStr);
-
             console.log('dateClick : ' + start); // start에 제대로 들어갔는 지 확인
 
             openModal()
