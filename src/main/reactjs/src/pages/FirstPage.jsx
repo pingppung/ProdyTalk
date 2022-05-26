@@ -40,6 +40,7 @@ function FirstPage(props) {
     }
 
     useEffect(() => {
+        console.log(login)
         if(login!=null){ //리다이렉션으로 넘어왔을때
             setIsLogin(false) //다시 로그인하도록
             console.log(login)
@@ -47,7 +48,7 @@ function FirstPage(props) {
         UserService.getUserName().then(res => {
             if(res.data==null){
                 setIsLogin(false)
-            } else{
+            } else if(login==null&&res.data!=null){
                 setIsLogin(true)
             }
         })
