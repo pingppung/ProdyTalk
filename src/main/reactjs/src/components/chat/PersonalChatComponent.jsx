@@ -19,7 +19,7 @@ import '../css/Chat.css';
 function PersonalChatComponent(props) {
 
     //const sock = new SockJS('http://localhost:8080/chat')
-    const sock = new SockJS('https://pingppung.xyz:3000/chat')
+    const sock = new SockJS('https://prody.xyz:3000/chat')
     const client=Stomp.over(sock);
     const {open, close, header} = props;
     const [list,setList]=useState(null)

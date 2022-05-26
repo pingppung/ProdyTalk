@@ -54,14 +54,20 @@ class VideoRoomComponent extends Component {
         this.onbeforeunload = this.onbeforeunload.bind(this);
     }
     componentDidMount() {    //여기서 setting페이지에서 설정한 값들 가져오기   videoEnable, audioEnable, mySessionId, myUserName, videoDeviceID, audioDeviceID
-            this.setState({
-                myUserName: this.props.location.props.myUserName,
-                mySessionId: this.props.location.props.mySessionId,
-                videoEnable: this.props.location.props.videoEnable,
-                audioEnable: this.props.location.props.audioEnable,
-                videoDeviceID: this.props.location.props.videoDeviceID,
-                audioDeviceID: this.props.location.props.audioDeviceID,
+        this.setState({
+            myUserName: this.props.location.props.myUserName,
+            mySessionId: this.props.location.props.mySessionId,
+            videoEnable: this.props.location.props.videoEnable,
+            audioEnable: this.props.location.props.audioEnable,
+            videoDeviceID: this.props.location.props.videoDeviceID,
+            audioDeviceID: this.props.location.props.audioDeviceID,
         });
+        {this.state.audioEnable ?
+             this.setState({ audioState: "UnMuteAudio" }) : this.setState({ audioState: "MuteAudio" })
+        }
+        {this.state.videoEnable ?
+            this.setState({ videoState: "OnVideo" }) : this.setState({ videoState: "OffVideo" })
+        }
         this.joinSession();
         window.addEventListener('beforeunload', this.onbeforeunload);
     }
@@ -212,8 +218,6 @@ class VideoRoomComponent extends Component {
             mainStreamManager: undefined,
             publisher: undefined
         });
-
-        console.log("popstate");
         this.props.history.push({
            pathname: `/roomenter/${this.state.mySessionId}`,
            state: `${this.state.mySessionId}`
@@ -445,24 +449,25 @@ class VideoRoomComponent extends Component {
                             </button>
 
                         </div>
-
-                        {this.state.layoutState === 'Focus' && this.state.mainStreamManager !== undefined ? (
-                            <div id="main-video" className="col-md-6">
-                                <UserVideoComponent streamManager={this.state.mainStreamManager} />
-                            </div>
-                        ) : null}
-                        <div id={"video-container-"+this.state.layoutState}>
-                            {this.state.publisher !== undefined ? (
-                                <div className="stream-container col-xs-6 publisher" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
-                                    <UserVideoComponent
-                                        streamManager={this.state.publisher} />
+                        <div className="video-div">
+                            {this.state.layoutState === 'Focus' && this.state.mainStreamManager !== undefined ? (
+                                <div id="main-video" className="col-md-6">
+                                    <UserVideoComponent streamManager={this.state.mainStreamManager} />
                                 </div>
                             ) : null}
-                            {this.state.subscribers.map((sub, i) => (
-                                <div key={i} className="stream-container col-xs-6 subscribers" onClick={() => this.handleMainVideoStream(sub)}>
-                                    <UserVideoComponent streamManager={sub} />
-                                </div>
-                            ))}
+                            <div id={"video-container-"+this.state.layoutState}>
+                                {this.state.publisher !== undefined ? (
+                                    <div className="stream-container col-xs-6 publisher" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
+                                        <UserVideoComponent
+                                            streamManager={this.state.publisher} />
+                                    </div>
+                                ) : null}
+                                {this.state.subscribers.map((sub, i) => (
+                                    <div key={i} className="stream-container col-xs-6 subscribers" onClick={() => this.handleMainVideoStream(sub)}>
+                                        <UserVideoComponent streamManager={sub} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 ) : null}

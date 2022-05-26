@@ -42,14 +42,15 @@ li{
 }
 
 .deleteRoom button{
-background: #1976d2;
-font-family: 'Nanum Gothic400', sans-serif;
+    background: #97aaca;
+    border-color: #97aaca;
+    font-family: 'Nanum Gothic400', sans-serif;
 }
-
+/*
 .deleteRoom button:hover{
-background: #1466b5;
+    background: #1466b5;
 }
-
+*/
 hr.member{
     margin-left:25px;
     width:260px;
