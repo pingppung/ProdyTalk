@@ -32,6 +32,7 @@ public class CalendarController {
         calendar_id=calendarService.searchLast();
         calendarVO.setCalendar_id(++calendar_id);
         calendarService.addEvent(calendarVO); //캘린더 추가
+        System.out.println("add?");
     }
 
     @PostMapping("/calendar/edit")

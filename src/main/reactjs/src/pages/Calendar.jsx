@@ -66,6 +66,12 @@ function Calender(props) {
         //setStart(start);
     }, [start]);
 
+    useEffect(()=> {
+        CalendarService.getCalendar(props.roomId).then((res) => {
+                setEvents(res.data)
+            });
+        }, [events]);
+
   return (
     <div className="Calendar">
 
