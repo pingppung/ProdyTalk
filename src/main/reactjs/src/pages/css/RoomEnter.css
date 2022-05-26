@@ -1,9 +1,12 @@
 .menu_content{
     width:56%;
-        background-color:#ffffff;
-        display:inline-block;
-        padding:40px;
-        margin-top:20px;
+    background-color:#ffffff;
+    display:inline-block;
+    padding:30px;
+    padding-bottom: 30px;
+    margin-top:20px;
+    border-radius: 1rem;
+    margin-bottom: 30px;
 }
 
 .menu_calendar{
