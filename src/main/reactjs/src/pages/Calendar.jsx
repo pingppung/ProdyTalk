@@ -17,6 +17,9 @@ function Calender(props) {
     const [loading, setLoading] = useState(false);
     const[calId, setCalId] = useState(0);
 
+    // 날짜 클릭 해서 일정 추가하는 경우 날짜 setting
+    const[start, setStart] = useState('');
+
     const openModal = () => {
         setModalOpen(true);
     };
@@ -40,6 +43,8 @@ function Calender(props) {
     const addModal = (content, startDate, endDate, color) => {
         CalendarService.addEvent(content, startDate, endDate, color, props.roomId); // events에 전달받은 이벤트 추가해주기
         setModalOpen(false); // Modal 닫아주기
+
+        console.log('시작: ' + startDate + ' 종료 : ' + endDate);
     };
 
     // DetailModal에서 수정 버튼 클릭 시 실행
@@ -50,8 +55,7 @@ function Calender(props) {
 
     // DetailModal에서 삭제 버튼 클릭 시 실행
     const deleteEvent = () => {
-        console.log(calId);
-        console.log('를 삭제');
+        console.log(calId + ' 삭제');
 
         CalendarService.deleteEvent(calId); // 삭제할 event id 전달
         setDetailModalOpen(false); // Modal 닫아주기
@@ -63,10 +67,15 @@ function Calender(props) {
         })
     }, [events]);
 
+    useEffect(() => {
+        console.log(start);
+        //setStart(start);
+    }, [start]);
+
   return (
     <div className="Calendar">
 
-          <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요." />
+          <Modal open={modalOpen} close={closeModal} start={start} propFunction={addModal} header="일정을 입력해주세요." />
             <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
 
             <FullCalendar
@@ -95,11 +104,18 @@ function Calender(props) {
         // dateClick={(e) => console.log(e.dateStr)}
         // eventClick={(e) => console.log(e.event.id)}
 
-        dateClick={ (e) => openModal() }
+        dateClick={ (e) => {
+            setStart(e.dateStr);
+
+            console.log('dateClick : ' + start); // start에 제대로 들어갔는 지 확인
+
+            openModal()
+          }
+        }
 
         eventClick={ (e) => {
             // events 배열에서 선택한 event
-            var temp = events.find(function(data){ return (data.title==e.event.title)&&(data.start==moment(e.event.startStr).format("YYYY-MM-DD HH:mm:ss"))});
+            var temp = events.find(function(data){ return (data.title==e.event.title)&&(data.start==moment(e.event.startStr).format("YYYY-MM-DD"))});
 
             const calId = temp.calendar_id // 선택한 event의 calendar_id
             setCalId(calId)
