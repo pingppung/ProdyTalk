@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import './css/Login.css';
 
 //function LoginForm({ user_id, user_pwd, onChange,onCreate }) {
@@ -14,6 +15,7 @@ class LoginComponent extends Component {
         this.state = {
             user_id: '',
             user_pwd: '',
+            isLoading: false,
         }
 
         this.handleIdChange = this.handleIdChange.bind(this)
@@ -26,6 +28,7 @@ class LoginComponent extends Component {
         this.setState({ user_pwd: event.target.value })
     }
     gotoHome = (event) => {
+            this.setState({ isLoading: true })
             event.preventDefault();
             let User = {
                 user_id: this.state.user_id,
@@ -43,13 +46,15 @@ class LoginComponent extends Component {
                   .catch((error) => {
                     console.log("error");
                     window.alert("아이디나 비밀번호가 다릅니다")
+                    this.setState({ isLoading: false })
                   });
 
         }
     render(){
         return (
             <div className="form">
-                <form id="loginForm">
+                { (this.state.isLoading == false)
+                ? <form id="loginForm">
                 <h1 className="loginText">
                     로그인
                 </h1>
@@ -86,6 +91,11 @@ class LoginComponent extends Component {
                     </div>
                 </div>
                 </form>
+
+                : <div className="login_circular">
+                    <p className="login_content"><CircularProgress /></p>
+                  </div>
+                }
             </div>
         );
     }
