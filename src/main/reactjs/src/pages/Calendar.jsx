@@ -70,7 +70,7 @@ function Calender(props) {
         CalendarService.getCalendar(props.roomId).then((res) => {
                 setEvents(res.data)
             });
-        }, [events]);
+    }, [events]);
 
   return (
     <div className="Calendar">

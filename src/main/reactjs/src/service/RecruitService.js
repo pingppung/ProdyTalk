@@ -3,17 +3,17 @@ import axios from 'axios';
 class RecruitService {
 
     // 전체글 목록 데이터 가져옴
-    getRecruits() {
+    getRecruits(recruit_id) {
         return axios.get("/recruit");
     }
 
     // 스터디 글 목록 데이터 가져옴
-    getRecruitsStudy() {
+    getRecruitsStudy(recruit_id) {
         return axios.get("/recruit/study");
     }
 
     // 프로젝트 글 목록 데이터 가져옴
-    getRecruitsProject() {
+    getRecruitsProject(recruit_id) {
         return axios.get("/recruit/project");
     }
 
