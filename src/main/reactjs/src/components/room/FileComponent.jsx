@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 import { blue} from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
+import '../css/File.css'
 
 function FileComponent(props) {
     const [fileList,setFileList] = useState(null);
@@ -30,12 +31,12 @@ function FileComponent(props) {
     }
 
     const onChangeFile =  (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.preventDefault();
+      e.preventDefault()
+      setFileList(null)
 
       const uploadFiles = Array.prototype.slice.call(e.target.files);
-
       uploadFiles.forEach((uploadFile) => {
-        setFileList([...fileList,uploadFile])
+        setFileList(uploadFile)
         })
     }
 
@@ -47,19 +48,18 @@ function FileComponent(props) {
         else if(fileList==null)
             window.alert("파일을 추가해주세요!")
         else {
-            fileList.forEach((file) => {
-                        // 파일 데이터 저장
-                        formData.append('files', file);
-                        formData.append('file_info',fileInfo);
-                        formData.append('room_id',props.roomId);
-                    });
+            console.log(fileList)
+            formData.append('files', fileList);
+            formData.append('file_info',fileInfo);
+            formData.append('room_id',props.roomId);
+            }
 
             axios.post('/api/fileupload',formData)
                 .then(() => {
                     setState(!state)
                     window.alert("업로드 완료")
                 })
-            }
+
      }
 
      const onFileInfo = (e) => {
@@ -84,7 +84,7 @@ function FileComponent(props) {
                     id={file.file_id} size={file.file_size} propFunction={changeState}/>
             )}
             <br />
-            <input type="file" multiple required name="uploadFile" onChange={onChangeFile} />
+            <input type="file" multiple name="uploadFile" onChange={onChangeFile} />
             <TextField
                 style={{width:300}}
                 required
@@ -95,7 +95,9 @@ function FileComponent(props) {
             />
             <ColorButton type="submit" variant="outlined" onClick={uploadFile}> 업로드 </ColorButton>
         </div>
-        : <CircularProgress />
+        : <div className="file_circular">
+            <p className="file_content"><CircularProgress /></p>
+         </div>
         }
         </div>
 

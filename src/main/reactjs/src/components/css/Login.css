@@ -68,3 +68,16 @@ TextField{
     color: white;
 }
 
+.login_circular{
+    width: 100%;
+    height: 100vh;
+    display:table;
+    table-layout: fixed;
+    text-align: center;
+}
+
+.login_content{
+    display: table-cell;
+    vertical-align: middle;
+}
+
