@@ -62,7 +62,7 @@ const DetailModal = (props) => {
                             <label htmlFor="taskId" className="col-form-label">일정 내용</label>
                             <input type="text" onChange={changeTitle} className="form-control" value={editTitle} id="calendar_edit_title" name="calendar_edit_title"/>
                             <label htmlFor="taskId" className="col-form-label">시작 날짜</label>
-                            <input type="datetime-local" onChange={changeStart} className="form-control" value={startDate} id="calendar_start_date" name="calendar_start_date"/>
+                            <input type="date" onChange={changeStart} className="form-control" value={startDate} id="calendar_start_date" name="calendar_start_date"/>
                             <label htmlFor="taskId" className="col-form-label">종료 날짜</label>
                             <input type="datetime-local" onChange={changeEnd} className="form-control" value={endDate} id="calendar_end_date" name="calendar_end_date"/>
                             <br />

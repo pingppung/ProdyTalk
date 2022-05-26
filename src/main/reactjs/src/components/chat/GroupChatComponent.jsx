@@ -26,6 +26,11 @@ function Chat(props) {
     const [children, setChildren]=useState([]);
     const [chatMessage,setChatMessage] = useState("");
     const [changeNum,setChangeNum]=useState(1)
+    const [ScrollY, setScrollY] = useState(0);
+
+    const handleFollow = () => {
+        setScrollY(window.pageYOffset); // window 스크롤 값을 ScrollY에 저장
+      }
 
     const changeMessage = (e) => {
         setChatMessage(e.target.value);
@@ -42,6 +47,9 @@ function Chat(props) {
         }, 1)
     }
 
+    useEffect(() => {
+        console.log("ScrollY is ", ScrollY); // ScrollY가 변화할때마다 값을 콘솔에 출력
+      }, [ScrollY])
 
     useEffect(()=>{
         ChatService.getUserName().then(res => {

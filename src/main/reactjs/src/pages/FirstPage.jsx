@@ -7,6 +7,7 @@ import Header from '../components/HeaderComponent'
 import Background from '../components/image/background.png'
 import Computer from '../components/image/computer.png'
 import ChatService from "../service/ChatService.js";
+import UserService from "../service/UserService";
 import Button from '@mui/material/Button';
 import { pink} from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
@@ -40,10 +41,19 @@ function FirstPage(props) {
     }
 
     useEffect(() => {
-        if(login!=null){
-            setIsLogin(false)
-            console.log(login)}
-        else{ setIsLogin(true) }
+        console.log(login)
+        if(login!=null){ //리다이렉션으로 넘어왔을때
+            setIsLogin(false) //다시 로그인하도록
+            console.log(login)
+            }
+        UserService.getUserName().then(res => {
+            if(res.data==null){
+                setIsLogin(false)
+            } else if(login==null&&res.data!=null){
+                setIsLogin(true)
+            }
+        })
+
 
     },[])
 

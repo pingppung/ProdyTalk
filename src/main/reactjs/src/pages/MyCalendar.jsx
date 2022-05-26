@@ -18,6 +18,9 @@ function MyCalender(props) {
     const [loading, setLoading] = useState(false);
     const[calId, setCalId] = useState(0);
 
+    // 날짜 setting
+    const[start, setStart] = useState('');
+
     const openModal = () => {
         setModalOpen(true);
     };
@@ -71,7 +74,7 @@ function MyCalender(props) {
   return (
     <div className="MyCalender">
 
-          <Modal open={modalOpen} close={closeModal} propFunction={addModal} header="일정을 입력해주세요." />
+          <Modal open={modalOpen} close={closeModal} start={start} propFunction={addModal} header="일정을 입력해주세요." />
             <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
 
             <FullCalendar
@@ -102,11 +105,16 @@ function MyCalender(props) {
         // dateClick={(e) => console.log(e.dateStr)}
         // eventClick={(e) => console.log(e.event.id)}
 
-        dateClick={ (e) => openModal() }
+        dateClick={ (e) => {
+            setStart(e.dateStr);
+
+            openModal()
+          }
+        }
 
         eventClick={ (e) => {
             // events 배열에서 선택한 event
-            var temp = events.find(function(data){ return (data.title==e.event.title)&&(data.start==moment(e.event.startStr).format("YYYY-MM-DD HH:mm:ss"))});
+            var temp = events.find(function(data){ return (data.title==e.event.title)&&(data.start==moment(e.event.startStr).format("YYYY-MM-DD"))});
 
             const calId = temp.calendar_id // 선택한 event의 calendar_id
             setCalId(calId)
