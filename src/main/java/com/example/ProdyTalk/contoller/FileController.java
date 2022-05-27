@@ -83,8 +83,10 @@ public class FileController {
         String originName=fileVO.getOrigin_name()+"."+fileVO.getExtension();
         String fileName = fileVO.getFile_id()+"."+fileVO.getExtension();
         //String path="E:\\storage\\"+fileName;
-        String path="/home/ubuntu/uploadFile"+fileName;
 
+        String path="/home/ubuntu/uploadFile/"+fileName;
+
+        System.out.println(path);
         File file = new File(path);
 
         try(

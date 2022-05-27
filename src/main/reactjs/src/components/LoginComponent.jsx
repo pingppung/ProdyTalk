@@ -52,7 +52,7 @@ class LoginComponent extends Component {
         }
     render(){
         return (
-            <div className="form">
+            <div>
                 { (this.state.isLoading == false)
                 ? <form id="loginForm">
                     <h1 className="loginText">

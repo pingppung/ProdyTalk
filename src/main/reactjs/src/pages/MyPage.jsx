@@ -82,6 +82,7 @@ function MyPage() {
             <div id="mypage">마이페이지</div>
             <hr style={{ height: '5px', color: '#97aaca', opacity: '1', margin: '0 1000px 0 25px', width: '450px' }}></hr>
                 <div className="miniBox"></div>
+                <MyPageModal userId={userId} open={modalOpen} close={closeModal} propFunction={addModal} header="마이페이지 정보수정"> </MyPageModal>
                 <p className="basicProfile">
                     <br /> {userId}님, 안녕하세요!</p>
                 <div className="infoBox">
@@ -91,7 +92,6 @@ function MyPage() {
                     <div className="userId"><LocalPhoneIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  핸드폰 : {userPhone}
                         <div className="editButton"><Button variant="outlined" size="large" onClick={openModal}><p className="editButton">수정</p></Button></div>
                     </div>
-                    <MyPageModal userId={userId} open={modalOpen} close={closeModal} propFunction={addModal} header="마이페이지 정보수정"> </MyPageModal>
                  </div>
                  <Link to="/main" id="homeBtn"><img src={Home} style={homeImageStyle}/></Link>
             </div>
