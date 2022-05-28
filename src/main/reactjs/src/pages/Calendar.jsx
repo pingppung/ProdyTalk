@@ -20,6 +20,8 @@ function Calender(props) {
     // 날짜 클릭 해서 일정 추가하는 경우 날짜 setting
     const[start, setStart] = useState('');
 
+    const[title, setTitle] = useState('');
+
     const openModal = () => {
         setModalOpen(true);
     };
@@ -72,11 +74,15 @@ function Calender(props) {
             });
     }, [events]);
 
+    useEffect(() => {
+        console.log(title);
+    }, [title]);
+
   return (
     <div className="Calendar">
 
           <Modal open={modalOpen} close={closeModal} start={start} propFunction={addModal} header="일정을 입력해주세요." />
-            <DetailModal open={detailModalOpen} close={closeDetailModal} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
+            <DetailModal open={detailModalOpen} close={closeDetailModal} title={title} propFunction={editEvent} propFunction2={deleteEvent} header="Event 수정/삭제" />
 
             <FullCalendar
                 contentHeight="auto" // 스크롤바 제거
@@ -118,6 +124,13 @@ function Calender(props) {
 
             const calId = temp.calendar_id // 선택한 event의 calendar_id
             setCalId(calId)
+
+            // 선택한 이벤트의 제목, 시작 날짜, 종료 날짜 전달하기 위해 변수값 변경해줌
+
+            // console.log(e.event)
+            var tempStart = events.find(function(date) { return (date.start==moment(e.event.startStr).format("YYYY-MM-DD"))});
+
+            setTitle(e.event.title)
 
             openDetailModal()
           }
