@@ -5,7 +5,7 @@ import '../css/Modal.css';
 
 const DetailModal = (props) => {
 
-    const { open, close, add, header } = props;
+    const { open, close, add, header, title } = props;
 
     const[changeNum, setChangeNum] = useState(1);
     const[editTitle, setEditTitle] = useState('');
@@ -45,6 +45,11 @@ const DetailModal = (props) => {
         setStartDate('');
         setEndDate('');
     }, [changeNum])
+
+    // 추가
+    useEffect(() => {
+        setEditTitle(title);
+    }, [title])
 
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
