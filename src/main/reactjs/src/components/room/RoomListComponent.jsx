@@ -28,8 +28,7 @@ function RoomListComponent() {
             setRooms(res.data);
             setLoading(true)
         })
-
-    },[state]);
+    },[rooms]);
 
     return (
     <div className="roomlist">

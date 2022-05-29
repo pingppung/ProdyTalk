@@ -31,17 +31,19 @@ class VideoSetting extends Component {
         this.getWebcam = this.getWebcam.bind(this);
         this.handleVideoSelect = this.handleVideoSelect.bind(this);
         this.handleAudioSelect = this.handleAudioSelect.bind(this);
+        this.onbeforeunload = this.onbeforeunload.bind(this);
     }
     componentDidMount() {
         const { params } = this.props.match;
-        this.videoRef = React.createRef();
-
         UserService.getUserName().then(res => {
             this.setState({
                 myUserName: res.data.id,
                 mySessionId: params.id,
             });
         });
+
+
+        this.videoRef = React.createRef();
         navigator.mediaDevices.enumerateDevices()
             .then(devices => {
                 const videoinput = devices.filter((device) => device.kind === "videoinput");
@@ -57,7 +59,18 @@ class VideoSetting extends Component {
                 this.videoRef.current.srcObject = stream;
                 this.videoRef.current.play();
         }));
+        window.addEventListener('beforeunload', this.onbeforeunload);
     }
+
+
+    componentWillUnmount() {
+        window.removeEventListener('beforeunload', this.onbeforeunload);
+    }
+
+    onbeforeunload(event) {
+        console.log("onbeforeunload");
+    }
+
     handleClick() {
          //const history = useHistory();
         this.props.history.push({
@@ -87,8 +100,11 @@ class VideoSetting extends Component {
             this.getWebcam((stream => {
                 this.videoRef.current.srcObject = stream;
                 this.videoRef.current.play();
+                console.log(stream);
             }));
         }
+
+
     }
 
     setAudio() {
@@ -131,6 +147,8 @@ class VideoSetting extends Component {
         return alert(err + ': 카메라, 마이크 허용해주세요!!');
       }
     }
+
+
 
 
 

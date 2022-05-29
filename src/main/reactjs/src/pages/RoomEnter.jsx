@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useHistory } from "react-router-dom";
 import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
@@ -17,9 +17,12 @@ import './css/RoomEnter.css';
 function RoomEnter() {
 
     const location=useLocation()
-    const id=location.state
-    console.log(id);
-    console.log(location);
+    const history=useHistory()
+    console.log(location)
+    console.log(history)
+    const id=location.state.id
+    const prevPage = location.state.prevPage
+
     const [chat,setChat]=useState(false)
     const [calendar,setCalendar]=useState(false)
     const [file,setFile]=useState(false)
@@ -30,7 +33,23 @@ function RoomEnter() {
     const [buttonText,setButtonText]=useState("코드 보기")
     const inviteLink = "/api/enterRoom?roomId="+id
     const encodeLink = base64.encode(inviteLink)
+    useEffect(() => {
+        console.log(history)
+        if(prevPage === 'VideoChat'){
+            console.log("VideoChat")
+            if(window.name != 'reload'){
+                window.name='reload';
+                window.location.reload(true);
 
+            }
+            else window.name='';
+        }
+        history.listen((location) => {
+            if(history.action === "POP"){
+                window.location.reload()
+            }
+        })
+    },[history])
     useEffect(() => {
         if(value === 0){
             setInfo(true)

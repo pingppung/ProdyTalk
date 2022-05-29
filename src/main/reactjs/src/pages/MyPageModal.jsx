@@ -58,7 +58,7 @@ const MyPageModal = (props) => {
               <div className="modal-body">
                 <div className="form-group">
                     <label htmlFor="taskId" className="col-form-label">아이디</label>
-                    <input type="text" className="form-control" value={userId} disabled/>
+                    <input type="text" className="form-control" value={userId}/>
 
                     <label htmlFor="taskId" className="col-form-label">비밀번호</label>
                     <input type="text" onChange={changeUserPwd} className="form-control" value={userPwd} id="user_pwd" name="user_pwd"/>
