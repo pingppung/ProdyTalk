@@ -52,6 +52,7 @@ class VideoRoomComponent extends Component {
         this.memberList = this.memberList.bind(this);
         this.changeLayout = this.changeLayout.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
+        this.onpopstate = this.onpopstate.bind(this);
     }
     componentDidMount() {    //여기서 setting페이지에서 설정한 값들 가져오기   videoEnable, audioEnable, mySessionId, myUserName, videoDeviceID, audioDeviceID
         this.setState({
@@ -70,17 +71,26 @@ class VideoRoomComponent extends Component {
         }
         this.joinSession();
         window.addEventListener('beforeunload', this.onbeforeunload);
+        window.addEventListener('popstate', this.onpopstate);
     }
 
     componentWillUnmount() {
         window.removeEventListener('beforeunload', this.onbeforeunload);
+        window.removeEventListener('popstate', this.onpopstate);
     }
-
+    componentDidUpdate(_, prevState){
+        console.log(prevState.subscribers);
+        console.log(this.state.subscribers);
+    }
     onbeforeunload(event) {
+        event.preventDefault();
         console.log("onbeforeunload");
         this.leaveSession();
     }
-
+    onpopstate(event) {
+        console.log("onpopstate");
+        this.leaveSession();
+    }
 
     handleMainVideoStream(stream) {
         if (this.state.mainStreamManager !== stream) {
@@ -220,9 +230,12 @@ class VideoRoomComponent extends Component {
         });
         this.props.history.push({
            pathname: `/roomenter/${this.state.mySessionId}`,
-           state: `${this.state.mySessionId}`
+           //pathname: `/video/setting/${this.state.mySessionId}`,
+           state: {
+                id: `${this.state.mySessionId}`,
+                prevPage : 'VideoChat',
+           }
          });
-        //window.location.href =`/roomenter/${this.state.mySessionId}`;
     }
 
     async switchCamera() {
@@ -277,6 +290,8 @@ class VideoRoomComponent extends Component {
                 audioEnable: true,
             });
         }
+        console.log(this.state.publisher);
+        console.log(this.state.subscribers);
     }
 
     onoffVideo() {
@@ -426,7 +441,7 @@ class VideoRoomComponent extends Component {
                             <button
                                 id={"button" + this.state.shareState}
                                 onClick={this.screenShare}>
-                                <span class="button-text">{this.state.videoEnable ? "화면공유" : "화면공유 해제"}</span>
+                                <span class="button-text">{this.state.shareEnable ? "화면공유 해제" : "화면공유"}</span>
                                 <LaptopOutlined />
                             </button>
                             <button

@@ -36,8 +36,6 @@ const RoomModal = (props) => {
     setRoomName("");
     setRoomType("");
     setRoomInfo("");
-
-    window.location.reload();
   }
 
   return (

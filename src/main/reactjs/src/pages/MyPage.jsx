@@ -33,8 +33,8 @@ function MyPage() {
         setModalOpen(false); // modal close
     };
 
-        const addModal = (user_id,user_name,user_pwd,user_email,user_phone) => {
-            UserService.editUser(user_id,user_name,user_pwd,user_email,user_phone)
+        const addModal = (user_id, user_pwd, user_name,user_email,user_phone) => {
+            UserService.editUser(user_id,user_pwd, user_name,user_email,user_phone)
             setModalOpen(false); // Modal 닫아주기
             window.alert("수정 완료!")
         };

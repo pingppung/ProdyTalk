@@ -236,7 +236,7 @@ background-color: #97aaca;
   font-size: 25px;
 }
 #buttonMuteAudio, #buttonOnVideo, #buttonShare, #buttonLeaveSession {
-    background-color: #ce4f5b;
+    background-color: #ce4f5b!important;
 }
 
 .memberList {

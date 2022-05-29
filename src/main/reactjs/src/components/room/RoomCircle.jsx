@@ -20,8 +20,11 @@ function RoomCircle(props) {
     return (
         <label>
             <Link to={{
-                pathname:`/roomenter/${props.id}`,
-                state:`${props.id}`
+                    pathname:`/roomenter/${props.id}`,
+                    state: {
+                        id : `${props.id}`,
+                        prevPage : 'Main',
+                    }
                 }}
                 style={{ textDecoration: 'none' }}>
                 <div id="circle">
