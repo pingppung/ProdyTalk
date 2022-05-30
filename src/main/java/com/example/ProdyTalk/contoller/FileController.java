@@ -94,6 +94,8 @@ public class FileController {
         String fileName = fileVO.getFile_id()+"."+fileVO.getExtension();
         String path="E:\\storage\\"+fileName;
 
+        System.out.println(path);
+
         File file = new File(path);
 
         try(
