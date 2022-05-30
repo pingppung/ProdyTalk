@@ -20,8 +20,6 @@ function Calender(props) {
     // 날짜 클릭 해서 일정 추가하는 경우 날짜 setting
     const[start, setStart] = useState('');
     const [end, setEnd] = useState('');
-    const [title, setTitle] = useState('');
-
     const[title, setTitle] = useState('');
 
     const openModal = () => {
