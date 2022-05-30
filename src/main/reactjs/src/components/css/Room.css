@@ -27,6 +27,7 @@
     transform: translate(10px, 10px);
     text-align:center;
     font-family: 'Nanum Gothic400', sans-serif;
+    margin-bottom: 45px;
 }
 
 #study{
@@ -37,6 +38,7 @@
     transform: translate(10px, 10px);
     text-align:center;
     font-family: 'Nanum Gothic400', sans-serif;
+    margin-bottom: 45px;
 }
 
 #circle:hover {
@@ -51,19 +53,23 @@ h5, h3, h2, h{
 
 #inviteLink{
     float: right;
-margin-top: 23px;
+    margin-top: 23px;
+}
+
+#title {
+    font-weight: bold;
 }
 
 #explain, #title{
-margin: 10px;
-text-overflow: ellipsis;
+    margin: 10px;
+    text-overflow: ellipsis;
     overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2 ;
-            -webkit-box-orient: vertical;
-            word-break:break-all;
-            line-height: 1.4;
-            font-family: 'Nanum Gothic400', sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 2 ;
+    -webkit-box-orient: vertical;
+    word-break:break-all;
+    line-height: 1.4;
+    font-family: 'Nanum Gothic400', sans-serif;
 }
 
 div.slider{
@@ -112,3 +118,23 @@ font-family: 'S-CoreDream-5Medium';
      font-style: normal;
 }
 
+@font-face {
+     font-family: 'S-CoreDream-4Regular';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF_HailSnow';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HailSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

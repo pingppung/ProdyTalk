@@ -22,8 +22,6 @@ function Calender(props) {
     const [end, setEnd] = useState('');
     const [title, setTitle] = useState('');
 
-    const[title, setTitle] = useState('');
-
     const openModal = () => {
         setModalOpen(true);
     };
