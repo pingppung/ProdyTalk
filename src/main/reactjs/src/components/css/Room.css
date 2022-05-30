@@ -89,6 +89,11 @@ div.slider{
 
 }
 
+.roomlist_nothing{
+    font-family: 'S-CoreDream-5Medium';
+    margin: 130px;
+}
+
 .circular{
     margin-top:100px;
 }

@@ -20,6 +20,7 @@ function RoomCreate(props) {
     const addModal = (room_name, room_type, room_info) => {
         RoomService.createRoom(room_name,room_type,room_info)
         setModalOpen(false); // Modal 닫아주기
+        window.location.reload();
     };
 
     return (
