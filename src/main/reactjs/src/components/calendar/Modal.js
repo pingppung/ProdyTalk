@@ -30,7 +30,7 @@ const Modal = (props) => {
   const addEvent = () => {
     setChangeNum(changeNum+1); // add 버튼 누를 때 마다 changeNum + 1 해주기
 
-    props.propFunction(content, start, endDate, color.hex); // 바뀐 값 전달
+    props.propFunction(content, startDate, endDate, color.hex); // 바뀐 값 전달
   }
 
   // changeNum 변경마다 hello 출력 (add 버튼 누를 때 마다)
@@ -44,7 +44,7 @@ const Modal = (props) => {
 
   // start 변하면 그 값을 startDate에 넘겨주기
   useEffect(() => {
-    setStartDate(start);
+    if(start!=''){ setStartDate(start); }
   }, [start])
 
   // console.log('전달받은 시작날짜 : ' + start);

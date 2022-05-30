@@ -87,6 +87,7 @@ public class FileController {
         String path="/home/ubuntu/uploadFile/"+fileName;
 
         System.out.println(path);
+
         File file = new File(path);
 
         try(
