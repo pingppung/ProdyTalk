@@ -11,7 +11,7 @@ import '../css/Room.css';
 
 function RoomListComponent() {
 
-    const [rooms,setRooms]=useState([])
+    const [rooms,setRooms]=useState(null)
     const [loading,setLoading]=useState(false)
     const [state,setState]=useState(false)
     const settings = {
@@ -32,18 +32,21 @@ function RoomListComponent() {
 
     return (
     <div className="roomlist">
-        { loading === true
-         ? <div className="slider">
 
-            <Slider {...settings}>
+         { rooms === null
+         ? <h2 className="roomlist_nothing"> 참여한 방이 없습니다. 방을 생성,참여해주세요! </h2>
+         : ( loading === true
+            ? <div className="slider">
+
+                <Slider {...settings}>
                 {rooms.map(room =>
                     <div><RoomCircle title={room.room_name} type={room.room_type} id={room.room_id} roomInfo={room.room_info}/></div>)
                 }
 
-            </Slider>
-          </div>
-         : <div className="circular"><CircularProgress /></div>
-
+                </Slider>
+            </div>
+            : <div className="circular"><CircularProgress /></div>
+            )
          }
 
     </div>
