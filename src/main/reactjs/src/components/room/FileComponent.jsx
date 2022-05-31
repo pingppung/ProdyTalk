@@ -77,7 +77,7 @@ function FileComponent(props) {
     return (
         <div style={{    height: "100%", "min-height": "493px"}}>
         { loading === true
-        ? <div>
+        ? <div id="fileDiv">
             <br />
             {files.map(file =>
                 <FileList name={file.origin_name} extension={file.extension} info={file.file_info}
