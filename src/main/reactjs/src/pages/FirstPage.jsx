@@ -64,7 +64,7 @@ function FirstPage(props) {
             <img src={Computer} alt="computer" style={imagestyle}/>
 
             <div className="font">ProdyTalk은 WebRTC 기반 화상채팅 프로젝트/스터디 플랫폼입니다.<br/><br/>
-             팀원들과 진행상황들을 공유할 수 있고, <br /> 자기개발을 가능하게해 프로젝트나 스터디를 효율적으로 관리할 수 있습니다.
+             캘린더, 플래너 등을 통한 자기개발이 가능하고, <br /> 팀원들과 진행상황을 공유함으로써 프로젝트/스터디를 효율적으로 관리할 수 있습니다.
              </div>
              { isLogin === false
              ? <div className="button">
