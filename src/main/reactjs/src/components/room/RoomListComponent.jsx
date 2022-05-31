@@ -28,26 +28,26 @@ function RoomListComponent() {
             setRooms(res.data);
             setLoading(true)
         })
-    },[rooms]);
+        setTimeout(()=>{if(rooms == null){ setLoading(true) }}, 2000)
+    },[state]);
+
 
     return (
     <div className="roomlist">
-
-         { rooms === null
-         ? <h2 className="roomlist_nothing"> 참여한 방이 없습니다. 방을 생성,참여해주세요! </h2>
-         : ( loading === true
-            ? <div className="slider">
-
+        { loading == false
+        ? <div className="circular"><CircularProgress /></div>
+        : ( rooms ==null
+            ? <h2 className="roomlist_nothing"> 참여한 방이 없습니다. 방을 생성,참여해주세요! </h2>
+            :  <div className="slider">
                 <Slider {...settings}>
-                {rooms.map(room =>
-                    <div><RoomCircle title={room.room_name} type={room.room_type} id={room.room_id} roomInfo={room.room_info}/></div>)
-                }
+                    {rooms.map(room =>
+                        <div><RoomCircle title={room.room_name} type={room.room_type} id={room.room_id} roomInfo={room.room_info}/></div>)
+                    }
 
                 </Slider>
             </div>
-            : <div className="circular"><CircularProgress /></div>
             )
-         }
+        }
 
     </div>
     )
