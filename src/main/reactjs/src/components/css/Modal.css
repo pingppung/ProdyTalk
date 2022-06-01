@@ -132,6 +132,7 @@ padding: 0 0 0 0;
 
 label {
     padding-left: 20px;
+    margin-right: 10px;
 }
 
 #roomInfo {
@@ -145,6 +146,11 @@ label {
 
 span.MuiTypography-root.MuiTypography-body1.MuiFormControlLabel-label.css-ahj2mt-MuiTypography-root {
      font-family: 'S-CoreDream-4Regular';
+}
+
+button.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButtonBase-root.css-sghohy-MuiButtonBase-root-MuiButton-root {
+     font-family: 'S-CoreDream-4Regular';
+     margin-left: 10px;
 }
 
 @font-face {
