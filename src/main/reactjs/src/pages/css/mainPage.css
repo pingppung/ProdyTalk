@@ -17,6 +17,10 @@
     margin: 20px;
 }
 
+.logout button{
+font-family: S-CoreDream-4Regular;
+}
+
 .mainPage{
     min-height:100vh;
     text-align:center;
@@ -31,13 +35,21 @@
 
 #putLink{
     float:right;
-    padding: 0 22px 30px 0;
+    padding: 20px 22px 0 0;
+}
+
+#putLink label{
+    font-family: S-CoreDream-4Regular;
 }
 
 .putLinkButton{
     margin-top: 10px;
     margin-left: 15px;
     display:inline-block;
+}
+
+.putLinkButton button{
+font-family: S-CoreDream-4Regular;
 }
 
 .menu{
