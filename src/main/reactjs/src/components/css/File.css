@@ -15,6 +15,27 @@
      font-family: 'S-CoreDream-4Regular';
 }
 
+.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
+     font-family: 'S-CoreDream-4Regular';
+}
+
+button.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButtonBase-root.css-16t8wrb-MuiButtonBase-root-MuiButton-root{
+     font-family: 'S-CoreDream-4Regular';
+     margin-left: 10px;
+}
+
+.input#filled-basic {
+     font-family: 'S-CoreDream-4Regular';
+}
+
+.input#file-upload-button {
+    margin-left: 20px;
+}
+
+#fileInput {
+    margin-top: 20px;
+}
+
 @font-face {
      font-family: 'S-CoreDream-4Regular';
      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');

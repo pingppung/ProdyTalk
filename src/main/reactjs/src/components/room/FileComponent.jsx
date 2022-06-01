@@ -84,7 +84,7 @@ function FileComponent(props) {
                     id={file.file_id} size={file.file_size} propFunction={changeState}/>
             )}
             <br />
-            <input type="file" multiple name="uploadFile" onChange={onChangeFile} />
+            <input type="file" multiple name="uploadFile" onChange={onChangeFile} id="fileInput" />
             <TextField
                 style={{width:300}}
                 required
