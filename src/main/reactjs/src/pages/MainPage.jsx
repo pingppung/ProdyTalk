@@ -62,7 +62,7 @@ function MainPage({history}) {
             </div>
 
                 <div>
-                     <div id="myroomlist">마이룸 목록</div>
+                     <div id="myroomlist">마이룸</div>
                     <hr style={{ height: '5px', color: '#97aaca', opacity: '1', margin: '0 1000px 0 25px', width: '450px' }}></hr>
                     <RoomListComponent />
                 </div>
