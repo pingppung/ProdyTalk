@@ -24,6 +24,7 @@
     display: inline-block;
     animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
     font-family:'lefery';
+    font-family: 'S-CoreDream-5Medium';
 }
 
 
@@ -41,6 +42,7 @@
     -webkit-border-radius: 14px;
     -moz-border-radius: 14px;
     border-radius: 14px;
+    font-family: 'S-CoreDream-3Light';
 }
 
 .balloon:after {
@@ -54,6 +56,7 @@
     z-index: 1;
     right: -10px;
     top: 10px;
+    font-family: 'S-CoreDream-3Light';
 }
 
 .left-balloon {
@@ -140,4 +143,26 @@
 @font-face {
     font-family: 'lefery';
     src: url('../../pages/css/LeferiBaseBold.ttf') format('truetype');
+}
+
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-4Regular';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-5Medium';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+     font-size: 40px;
+     font-weight: 400;
+     font-style: normal;
 }
