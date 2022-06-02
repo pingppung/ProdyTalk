@@ -15,6 +15,23 @@
                           user-select: none;
 
                           margin-bottom: 20px;
+                          overflow:auto;
+}
+
+.todolist::-webkit-scrollbar{
+  width: 10px;
+  height: 10px
+}
+.todolist::-webkit-scrollbar-thumb{
+  background: linear-gradient(#7a8ba7, #7a8ba7);
+  border-radius: 5px;
+}
+.todolist::-webkit-scrollbar-track{
+  background: white;
+  border-radius: 5px;
+}
+.todolist::-webkit-scrollbar-corner{
+  background: white;
 }
 
 .todolist_add{
@@ -28,8 +45,11 @@
 .todolist_content{
     font-family: 'S-CoreDream-3Light';
     display: inline-block;
-    margin-left:5px;
     font-size:18px;
+    margin-bottom: 0px;
+    text-align: left;
+        margin-left: 11px;
+        margin-right: 10px;
 }
 
 .todolist_gray{
@@ -38,7 +58,11 @@
     margin-left:5px;
     font-size:18px;
     color: gray;
-    text-decoration:line-through
+    text-decoration:line-through;
+        margin-bottom: 0px;
+        text-align: left;
+            margin-left: 11px;
+            margin-right: 10px;
 }
 
 .todolist_title{
@@ -79,12 +103,19 @@
 }
 
 .todolist_item{
-    height: 40px;
     float: left;
-    margin: 10px;
+    margin-top: 10px;
     margin-left: 25px;
     display:block;
-    margin-right: 200px;
+    margin-right: 160px;
+}
+
+.css-1pg92c4 {
+float: left;
+}
+
+.css-1w8s6so {
+padding: 9px;
 }
 
 .todolist_true{

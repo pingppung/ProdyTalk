@@ -88,13 +88,13 @@ li{
 .deleteRoom button{
     background: #97aaca;
     border-color: #97aaca;
-    font-family: 'Nanum Gothic400', sans-serif;
+    font-family: 'S-CoreDream-4Regular';
 }
-/*
+
 .deleteRoom button:hover{
-    background: #1466b5;
+    background: #ce4f5b;
 }
-*/
+
 hr.member{
     margin-left:25px;
     width:260px;
