@@ -37,7 +37,7 @@ const MyPageModal = (props) => {
   const addEvent = () => {
     setChangeNum(changeNum+1); // add 버튼 누를 때 마다 changeNum + 1 해주기
 
-    props.propFunction(userId,userPwd,userName,userEmail,userPhone); // 바뀐 값 전달
+    props.propFunction(userId,userName,userPwd,userEmail,userPhone); // 바뀐 값 전달
     setUserPwd("");
     setUserName("");
     setUserEmail("");

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import UserService from '../../service/UserService';
 import VideoService from '../../service/VideoService';
 import Logo from '../image/LogoWhite.png';
@@ -175,7 +175,7 @@ class VideoSetting extends Component {
             <div className="container">
                     <div id="join">
                         <div id="logo-img">
-                            <img src={Logo} alt="ProdyTalk logo"/>
+                            <Link to="/main"><img src={Logo} alt="ProdyTalk logo"/></Link>
                         </div>
                         <br />
                         <div id="join-dialog" className="jumbotron vertical-center">
