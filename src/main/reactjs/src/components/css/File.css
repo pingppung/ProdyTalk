@@ -19,13 +19,13 @@
      font-family: 'S-CoreDream-4Regular';
 }
 
-button.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButtonBase-root.css-16t8wrb-MuiButtonBase-root-MuiButton-root{
-     font-family: 'S-CoreDream-4Regular';
-     margin-left: 10px;
+#fileDiv button {
+    font-family: 'S-CoreDream-4Regular';
+    margin-left: 10px;
 }
 
-.input#filled-basic {
-     font-family: 'S-CoreDream-4Regular';
+#fileDiv label {
+    font-family: 'S-CoreDream-4Regular';
 }
 
 .input#file-upload-button {
