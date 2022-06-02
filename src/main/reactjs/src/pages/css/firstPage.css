@@ -3,9 +3,8 @@
 	background-image: url( "../../components/image/background.png" );
 	animation: bg-pan-right 15s infinite both;
     text-align: center;
-width: 207vh;
+    width: 207vh;
     position: fixed;
-
 
 	cursor: default;
           -webkit-touch-callout: none;
@@ -15,17 +14,17 @@ width: 207vh;
           -ms-user-select: none;
           user-select: none;
 }
- .logo {
+.logo {
     font-size: 130px;
     color: white;
     font-family: 'Lobster', cursive;
     margin-left: 150px;
     position: absolute;
     margin-top: 145px;
-    }
+}
 
 .font{
-    width: 533px;
+    width: 550px;
     font-size: 15px;
     color: white;
     font-family: 'Nanum Gothic400', sans-serif;
@@ -33,7 +32,7 @@ width: 207vh;
     margin-left: 150px;
     margin-top: 345px;
     position: absolute;
-  }
+}
 
 .button{
     margin:50px;
