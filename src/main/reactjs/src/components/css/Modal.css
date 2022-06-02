@@ -152,9 +152,13 @@ span.MuiTypography-root.MuiTypography-body1.MuiFormControlLabel-label.css-ahj2mt
      font-family: 'S-CoreDream-4Regular';
 }
 
-button.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButtonBase-root.css-sghohy-MuiButtonBase-root-MuiButton-root {
+#inputMessage button {
      font-family: 'S-CoreDream-4Regular';
      margin-left: 10px;
+}
+
+#inputMessage label {
+     font-family: 'S-CoreDream-4Regular';
 }
 
 @font-face {
