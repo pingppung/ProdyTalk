@@ -37,7 +37,7 @@ function RoomListComponent() {
         { loading == false
         ? <div className="circular"><CircularProgress /></div>
         : ( rooms ==null
-            ? <h2 className="roomlist_nothing"> 참여한 방이 없습니다. 방을 생성,참여해주세요! </h2>
+            ? <h2 className="roomlist_nothing"> 참여한 방이 없습니다. 방을 생성, 참여해주세요 ! </h2>
             :  <div className="slider">
                 <Slider {...settings}>
                     {rooms.map(room =>
