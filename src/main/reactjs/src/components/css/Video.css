@@ -95,7 +95,7 @@ background-color: #97aaca;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #282828;
+  background-color: #97aaca;
   text-align: center;
 }
 /*#videoroom p{
@@ -114,10 +114,13 @@ background-color: #97aaca;
 #main-video video{
   position: absolute;
   transform: translateX(-50%);
-  height: 100%;
-  width: 90%;
+  height: auto;
+  width: 70%;
   top: 1%;
-
+  box-shadow:0.5px 0.5px 10px 0.2px #000000;
+  background: #000000;
+  align-items: center;
+  margin-top: 2.5%;
 }
 
 #main-video p, #main-video span{
@@ -161,6 +164,7 @@ background-color: #97aaca;
   height: 100%;
   width: 100%;
   top: 5%;
+  border-radius: 0.5rem;
 }
 .video-username {
     background: white;
@@ -195,15 +199,15 @@ background-color: #97aaca;
   height: 10px
 }
 #video-container-Focus::-webkit-scrollbar-thumb{
-  background: linear-gradient(#97aaca, #97aaca);
+  background: linear-gradient(#ffffff, #ffffff);
   border-radius: 5px;
 }
 #video-container-Focus::-webkit-scrollbar-track{
-  background: grey;
+  background: #7a8ba7;
   border-radius: 5px;
 }
 #video-container-Focus::-webkit-scrollbar-corner{
-  background: #282828;
+  background: #97aaca;
 }
 
 #footer {
@@ -215,7 +219,7 @@ background-color: #97aaca;
 }
 
 #footer button {
-    background-color: #97aaca;
+    background-color: #7a8ba7;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: 100%;
     color: #fff;
@@ -241,7 +245,7 @@ background-color: #97aaca;
 
 .memberList {
     width: 27%;
-    background: #97aaca;
+    background: #7a8ba7;
     height: 15%;
     position: fixed;
     right: 0;
@@ -250,16 +254,20 @@ background-color: #97aaca;
     margin-right: 1%;
 }
 
+.memberList p{
+    color: white;
+}
+
 .memberList::-webkit-scrollbar{
   width: 10px;
-  height: 10px
+  height: 10px;
 }
 .memberList::-webkit-scrollbar-thumb{
-  background: linear-gradient(grey, grey);
+  background: linear-gradient(white, white);
   border-radius: 5px;
 }
 .memberList::-webkit-scrollbar-track{
-  background: #ffffff;
+  background: #7a8ba7;
   border-radius: 5px;
 }
 .memberList::-webkit-scrollbar-corner{

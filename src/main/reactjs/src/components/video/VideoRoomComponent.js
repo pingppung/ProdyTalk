@@ -419,7 +419,6 @@ class VideoRoomComponent extends Component {
                         </div>
                     ): null}
                     <div id="footer">
-                        //<h1 id="session-title">{mySessionId}</h1>
                             <button
                                 id="buttonSwitchCamera"
                                 onClick={this.switchCamera}>

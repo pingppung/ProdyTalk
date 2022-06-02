@@ -208,7 +208,7 @@ select {
 }
 
 .col-md-6{
-width: 100%;
+    width: 100%;
 }
 
 #createRecruitForm {
@@ -223,6 +223,14 @@ width: 100%;
 #category a:active {
     color: gray;
     font-weight: bold;
+}
+
+#readRecruit a:hover {
+    font-weight: bold;
+}
+
+td {
+    cursor: pointer;
 }
 
 #cateLine {
