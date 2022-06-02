@@ -17,6 +17,10 @@
     margin: 20px;
 }
 
+.logout button{
+font-family: S-CoreDream-4Regular;
+}
+
 .mainPage{
     min-height:100vh;
     text-align:center;
@@ -31,13 +35,21 @@
 
 #putLink{
     float:right;
-    padding: 0 22px 30px 0;
+    padding: 20px 22px 0 0;
+}
+
+#putLink label{
+    font-family: S-CoreDream-4Regular;
 }
 
 .putLinkButton{
     margin-top: 10px;
     margin-left: 15px;
     display:inline-block;
+}
+
+.putLinkButton button{
+font-family: S-CoreDream-4Regular;
 }
 
 .menu{
@@ -93,7 +105,7 @@ border: 1px solid rgb(0 0 0 / 50%);
 }
 
 #myroomlist{
-    font-family: 'Nanum Gothic400', sans-serif;
+     font-family: 'S-CoreDream-4Regular';
     text-align: left;
     margin-left: 25px;
 }
@@ -128,5 +140,12 @@ border: 1px solid rgb(0 0 0 / 50%);
      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
      font-size: 40px;
      font-weight: 400;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-4Regular';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+     font-weight: normal;
      font-style: normal;
 }
