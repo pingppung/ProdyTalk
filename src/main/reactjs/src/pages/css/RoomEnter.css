@@ -41,11 +41,12 @@
     margin-left: 10px;
     margin-right: 20px;
     display:inline-block;
-    font-family: 'Nanum Gothic400', sans-serif;
+
 }
 
 .copyButton button{
     height: 30px;
+    font-family: 'S-CoreDream-4Regular';
 }
 
 .showLink{
@@ -76,4 +77,11 @@
        url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('woff2'),
        url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
        url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+     font-family: 'S-CoreDream-4Regular';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
 }

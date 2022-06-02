@@ -3,7 +3,7 @@ margin-top: 50px;
 }
 
 #mypage {
-    font-family: 'S-CoreDream-5Medium';
+    font-family: 'S-CoreDream-4Regular';
     text-align: left;
     margin-left: 25px;
 }
@@ -51,7 +51,6 @@ p.basicProfile{
 }
 
 .editButton button{
-border-radius: 10px;
     background: #ffffff;
     border-color: #97aaca;
     color: #2c3e50;
@@ -74,8 +73,8 @@ div.userId{
 }
 
 div.editButton{
-    margin-top:-50px;
-    margin-right:20px;
+    margin-top:5px;
+    margin-right:5px;
     text-align:right;
 }
 
@@ -107,5 +106,13 @@ font-family: 'Nanum Gothic400', sans-serif;
      font-family: 'S-CoreDream-4Regular';
      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
      font-weight: normal;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-5Medium';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+     font-size: 40px;
+     font-weight: 400;
      font-style: normal;
 }
