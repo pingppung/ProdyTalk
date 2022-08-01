@@ -56,21 +56,20 @@ const MyPageModal = (props) => {
 
               <div className="modal-body">
                 <div className="form-group">
-                    <label htmlFor="taskId" className="col-form-label">아이디</label>
-                    {userId}
+                    <label htmlFor="taskId" className="col-form-label" style={{marginTop: '50px'}}>아이디</label>
+                    <input type="text" className="form-control" value={userId} disabled style={{textAlign: 'center'}}/>
 
                     <label htmlFor="taskId" className="col-form-label">비밀번호</label>
-                    <input type="text" onChange={changeUserPwd} className="form-control" value={userPwd} id="user_pwd" name="user_pwd"/>
+                    <input type="text" onChange={changeUserPwd} className="form-control" value={userPwd} id="user_pwd" name="user_pwd" style={{textAlign: 'center'}}/>
 
                     <label htmlFor="taskId" className="col-form-label">이름</label>
-                    <input type="text" onChange={changeUserName} className="form-control" value={userName} id="user_name" name="user_name"/>
+                    <input type="text" onChange={changeUserName} className="form-control" value={userName} id="user_name" name="user_name" style={{textAlign: 'center'}}/>
 
                     <label htmlFor="taskId" className="col-form-label">이메일</label>
-                    <input type="text" onChange={changeUserEmail} className="form-control" value={userEmail} id="user_email" name="user_email"/>
+                    <input type="text" onChange={changeUserEmail} className="form-control" value={userEmail} id="user_email" name="user_email" style={{textAlign: 'center'}}/>
 
                     <label htmlFor="taskId" className="col-form-label">핸드폰</label>
-                    <input typ="text" onChange={changeUserPhone} className="form-control" value={userPhone} id="user_phone" name="user_phone"/>
-
+                    <input type="text" onChange={changeUserPhone} className="form-control" value={userPhone} id="user_phone" name="user_phone" style={{textAlign: 'center'}}/>
                 </div>
               </div>
               <footer>
