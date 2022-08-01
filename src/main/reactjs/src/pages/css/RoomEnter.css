@@ -22,7 +22,10 @@
     text-align:center;
     background: #97aaca;
 }
-
+.textEditor_enter{
+    text-align:center;
+    background: #97aaca;
+}
 #menu{
     text-align: center;
     font-family: 'Nanum Gothic400', sans-serif;
