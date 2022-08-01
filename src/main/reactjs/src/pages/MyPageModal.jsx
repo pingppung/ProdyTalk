@@ -15,7 +15,7 @@ const MyPageModal = (props) => {
   const [userName,setUserName] = useState("")
   const [userEmail,setUserEmail] = useState("")
   const [userPhone,setUserPhone] = useState("")
-  const[changeNum, setChangeNum] = useState(1);
+  const [changeNum, setChangeNum] = useState(1);
 
   const changeUserPwd = (e) => {
     setUserPwd(e.target.value);
