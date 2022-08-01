@@ -6,6 +6,7 @@ import GroupChatComponent from '../components/chat/GroupChatComponent';
 import FileComponent from '../components/room/FileComponent'
 import InfoComponent from '../components/room/InfoComponent'
 import ToDoListComponent from '../components/TodoListComponent'
+import TextEditorComponent from '../components/textEditor/TextEditorComponent'
 import Calendar from './Calendar';
 import Header from '../components/HeaderComponent'
 import Box from '@mui/material/Box';
@@ -14,6 +15,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Button from '@mui/material/Button';
 import Home from "../components/image/Home.png";
 import base64 from 'base-64';
+import RoomService from "../service/RoomService";
 import './css/RoomEnter.css';
 
 function RoomEnter() {
@@ -26,38 +28,57 @@ function RoomEnter() {
     const [link,setLink]=useState(false)
     const [info,setInfo]=useState(false)
     const [todolist,setToDoList]=useState(false)
+    const [editor,setEditor]=useState(false)
     const [value, setValue] = useState(0);
     const [buttonText,setButtonText]=useState("코드 보기")
     const inviteLink = "/api/enterRoom?roomId="+id
     const encodeLink = base64.encode(inviteLink)
+    const [project,setProject]=useState("")
+
 
     useEffect(() => {
+        RoomService.getRoomById(id)
+            .then((res) => {
+                setProject(res.data.room_name)
+            })
         if(value === 0){
             setInfo(true)
             setCalendar(false)
             setFile(false)
             setChat(false)
             setToDoList(false)
+            setEditor(false)
         }else if(value === 1){
             setInfo(false)
             setCalendar(true)
             setFile(false)
             setChat(false)
             setToDoList(false)
+            setEditor(false)
         }else if(value === 2) {
             setInfo(false)
             setCalendar(false)
             setFile(true)
             setChat(false)
             setToDoList(false)
+            setEditor(false)
         }else if(value === 3){
             setInfo(false)
             setCalendar(false)
             setFile(false)
             setChat(true)
             setToDoList(false)
+            setEditor(false)
         }else if(value === 5){
             setToDoList(true)
+            setCalendar(false)
+            setFile(false)
+            setChat(false)
+            setInfo(false)
+            setEditor(false)
+        }else if(value === 6){
+            setEditor(true)
+            setToDoList(false)
             setCalendar(false)
             setFile(false)
             setChat(false)
@@ -88,6 +109,9 @@ function RoomEnter() {
     return(
         <div className="roomEnterBack">
             <Header />
+            <div>
+                프로젝트명 : {project}
+            </div>
             <div id="inviteLink">
                 { (link === true)
                 ?
@@ -116,6 +140,7 @@ function RoomEnter() {
                     <BottomNavigationAction label="그룹 채팅"  />
                     <BottomNavigationAction label="화상 채팅"  />
                     <BottomNavigationAction label="ToDoList" />
+                    <BottomNavigationAction label="공동 작업" />
                   </BottomNavigation>
             </Box>
 
@@ -148,6 +173,9 @@ function RoomEnter() {
 
                 <div className="todolist_enter">
                     {todolist&&<ToDoListComponent roomId={id} />}
+                </div>
+                <div className="textEditor_enter">
+                    {editor&&<TextEditorComponent roomId={id} />}
                 </div>
             </div>
 
