@@ -80,7 +80,7 @@ public class RoomController {
         roomListVO.setRoom_total(room_total+1);
 
         roomService.setRoomTotal(roomListVO);
-        response.sendRedirect("http://prody.xyz:3000/main");
+        response.sendRedirect("http://prodytalk.icu:3000/main");
         //response.sendRedirect("http://localhost:3000/main");
     }
 

@@ -11,7 +11,7 @@ import { UserOutlined, AudioOutlined, AudioMutedOutlined, SoundOutlined, ExportO
         ,LaptopOutlined, SettingFilled, TeamOutlined, AppstoreOutlined, BorderOutlined} from '@ant-design/icons';
 import { Avatar } from 'antd';
 import '../css/Video.css';
-const OPENVIDU_SERVER_URL = 'https://prody.xyz:4443';
+const OPENVIDU_SERVER_URL = 'https://prodytalk.icu:4443';
 //const OPENVIDU_SERVER_URL = 'https://localhost:4443';
 const OPENVIDU_SERVER_SECRET = '12341234';
 
@@ -36,6 +36,7 @@ class VideoRoomComponent extends Component {
             audioEnable: true,
             shareEnable: false,
             memberlistEnable: false,
+            facefilterEnable: false,
             layoutState: 'Focus',
             audioState: 'UnMuteAudio',
             videoState: 'OnVideo',
@@ -51,6 +52,8 @@ class VideoRoomComponent extends Component {
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
         this.memberList = this.memberList.bind(this);
         this.changeLayout = this.changeLayout.bind(this);
+        this.applyFilter = this.applyFilter.bind(this);
+        this.removeFilter = this.removeFilter.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
         this.onpopstate = this.onpopstate.bind(this);
     }
@@ -120,7 +123,7 @@ class VideoRoomComponent extends Component {
         this.OV.setAdvancedConfiguration({
             iceServers: [
                 {
-                    urls: 'turn:prody.xyz:3478?transport=tcp',
+                    urls: 'turn:prodytalk.icu:3478?transport=tcp',
                     //urls: 'turn:localhost:3478?transport=tcp',
                     username: turnUsername,
                     credential: turnCredential
@@ -395,7 +398,41 @@ class VideoRoomComponent extends Component {
         }
 
     }
+    applyFilter(){
+        var filter = { type: '', options: {} };
+        filter.type = 'FaceOverlayFilter';
+        filter.options = {};
+        console.log(this.state.session);
+        console.log(this.state.mainStreamManager);
+        console.log(this.state.publisher);
+        console.log(this.state.subscribers);
 
+        this.state.publisher.stream.applyFilter(filter.type, filter.options)
+            .then(f => {
+                if(f.type === 'FaceOverlayFilter'){
+                    f.execMethod(
+                        "setOverlayedImage",
+                        {
+                            "uri": "https://cdn.pixabay.com/photo/2017/09/30/09/29/cowboy-hat-2801582_960_720.png",
+                        	"offsetXPercent": "-0.1F",
+                            "offsetYPercent": "-0.8F",
+                            "widthPercent": "1.5F",
+                            "heightPercent": "1.0F"
+                        });
+                }
+
+            });
+        this.setState({
+            facefilterEnable: true,
+        });
+    }
+
+    removeFilter() {
+    	this.state.publisher.stream.removeFilter();
+        this.setState({
+            facefilterEnable: false,
+        });
+    }
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
@@ -453,6 +490,12 @@ class VideoRoomComponent extends Component {
                                 id="buttonMemberList"
                                 onClick={this.memberList}>
                                 <span class="button-text">{this.state.memberlistEnable ?  "멤버 목록 숨기기" : "멤버 목록 표시하기"}</span>
+                                <TeamOutlined />
+                            </button>
+                            <button
+                                id="buttonMemberList"
+                                onClick={this.state.facefilterEnable ? this.removeFilter : this.applyFilter}>
+                                <span class="button-text">{this.state.facefilterEnable ?  "비디오필터 제거" : "비디오필터 적용"}</span>
                                 <TeamOutlined />
                             </button>
                             <button
@@ -534,8 +577,16 @@ class VideoRoomComponent extends Component {
     }
 
     createToken(sessionId) {
+
+        var jsonBody = {
+            role: 'PUBLISHER',
+            kurentoOptions: {}
+        };
+        jsonBody.kurentoOptions = {
+			allowedFilters: ["GStreamerFilter", 'FaceOverlayFilter']
+		}
         return new Promise((resolve, reject) => {
-            var data = {};
+            var data = JSON.stringify(jsonBody);
             axios
                 .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions/" + sessionId + "/connection", data, {
                     headers: {
