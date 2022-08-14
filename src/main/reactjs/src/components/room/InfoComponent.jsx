@@ -35,7 +35,7 @@ function InfoComponent(props) {
 
                  setTimeout(() => {
                      //window.location.href="http://localhost:3000/main"
-                     window.location.href="https://prody.xyz:3000/main"
+                     window.location.href="https://prodytalk.icu:3000/main"
                  },1000);
 
              } else {
