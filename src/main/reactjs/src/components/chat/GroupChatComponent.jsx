@@ -14,8 +14,8 @@ import '../css/Chat.css';
 
 function Chat(props) {
 
-    const sock = new SockJS('https://prodytalk.icu:3000/chat')
-    //const sock = new SockJS('http://localhost:8080/chat')
+    const sock = new SockJS('http://localhost:8080/chat')
+    //const sock = new SockJS('https://prodytalk.icu:3000/chat')
     const client=Stomp.over(sock);
 
     const [list,setList]=useState(null)
