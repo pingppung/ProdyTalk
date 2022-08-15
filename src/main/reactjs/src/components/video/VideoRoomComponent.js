@@ -11,8 +11,8 @@ import { UserOutlined, AudioOutlined, AudioMutedOutlined, SoundOutlined, ExportO
         ,LaptopOutlined, SettingFilled, TeamOutlined, AppstoreOutlined, BorderOutlined} from '@ant-design/icons';
 import { Avatar } from 'antd';
 import '../css/Video.css';
-const OPENVIDU_SERVER_URL = 'https://prodytalk.icu:4443';
-//const OPENVIDU_SERVER_URL = 'https://localhost:4443';
+//const OPENVIDU_SERVER_URL = 'https://prodytalk.icu:4443';
+const OPENVIDU_SERVER_URL = 'https://localhost:4443';
 const OPENVIDU_SERVER_SECRET = '12341234';
 
 
@@ -123,8 +123,8 @@ class VideoRoomComponent extends Component {
         this.OV.setAdvancedConfiguration({
             iceServers: [
                 {
-                    urls: 'turn:prodytalk.icu:3478?transport=tcp',
-                    //urls: 'turn:localhost:3478?transport=tcp',
+                    //urls: 'turn:prodytalk.icu:3478?transport=tcp',
+                    urls: 'turn:localhost:3478?transport=tcp',
                     username: turnUsername,
                     credential: turnCredential
                 }
