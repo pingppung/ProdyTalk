@@ -91,7 +91,7 @@ div.slider{
 
 .roomlist_nothing{
     font-family: 'S-CoreDream-5Medium';
-    margin: 130px;
+    margin: 113.5px;
 }
 
 .circular{
@@ -99,15 +99,15 @@ div.slider{
 }
 
 .navigator{
-margin: 60px 0px 0 0px;
+    margin: 60px 0px 0 0px;
 }
 
 .navigator div{
-border-radius: 0.5rem;
+    border-radius: 0.5rem;
 }
 
-.navigator button span{
-font-family: 'S-CoreDream-5Medium';
+.navigator button span, .navigator a span{
+    font-family: 'S-CoreDream-5Medium';
 }
 
 @font-face {

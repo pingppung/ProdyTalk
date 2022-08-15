@@ -2,8 +2,9 @@
   "name": "reactjs",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://prodytalk.icu:8080",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@fullcalendar/daygrid": "^5.10.1",
@@ -19,6 +20,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^4.20.5",
     "audit": "^0.0.6",
     "axios": "^0.26.1",
     "base-64": "^1.0.0",

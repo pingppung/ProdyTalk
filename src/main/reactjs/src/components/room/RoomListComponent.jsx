@@ -28,9 +28,9 @@ function RoomListComponent() {
             setRooms(res.data);
             setLoading(true)
         })
-
         setTimeout(()=>{if(rooms == null){ setLoading(true) }}, 2000)
     },[state]);
+
 
     return (
     <div className="roomlist">

@@ -17,23 +17,39 @@
     margin: 20px;
 }
 
+.logout button{
+    font-family: 'S-CoreDream-4Regular';
+}
+
 .mainPage{
     min-height:100vh;
     text-align:center;
     overflow: hidden;
-        height: 100%;
+    height: 100%;
 }
 
+.mainlogo img{
+    height: 160px;
+    width: 140px;
+}
 
 #putLink{
     float:right;
-    padding: 0 22px 30px 0;
+    padding: 20px 22px 0 0;
+}
+
+#putLink label{
+    font-family: 'S-CoreDream-4Regular';
 }
 
 .putLinkButton{
     margin-top: 10px;
     margin-left: 15px;
     display:inline-block;
+}
+
+.putLinkButton button{
+font-family: 'S-CoreDream-4Regular';
 }
 
 .menu{
@@ -48,7 +64,7 @@ background: #97aaca;
     width : 300px;
     height : 200px;
     margin: 30px 25px 0 25px;
-font-family: 'S-CoreDream-5Medium';
+    font-family: 'S-CoreDream-5Medium';
     font-size: 30px;
     border-radius: 0.5rem;
     -webkit-animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -56,7 +72,7 @@ font-family: 'S-CoreDream-5Medium';
 }
 
 .myCalendar{
-background: #97aaca;
+    background: #97aaca;
     display:inline-block;
     padding:40px;
     width : 300px;
@@ -64,13 +80,13 @@ background: #97aaca;
     font-size: 30px;
     margin: 30px 25px 0 25px;
      border-radius: 0.5rem;
-font-family: 'S-CoreDream-5Medium';
+    font-family: 'S-CoreDream-5Medium';
     -webkit-animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     	        animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .mypage{
-background: #97aaca;
+    background: #97aaca;
     display:inline-block;
     padding:40px;
     width : 300px;
@@ -78,7 +94,7 @@ background: #97aaca;
     font-size: 30px;
     border-radius: 0.5rem;
     margin: 30px 25px 0 25px;
-font-family: 'S-CoreDream-5Medium';
+    font-family: 'S-CoreDream-5Medium';
     -webkit-animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     	        animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -89,7 +105,7 @@ border: 1px solid rgb(0 0 0 / 50%);
 }
 
 #myroomlist{
-     font-family: 'S-CoreDream-4Regular';
+        font-family: 'S-CoreDream-4Regular';
     text-align: left;
     margin-left: 25px;
 }
