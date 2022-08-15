@@ -52,44 +52,45 @@ class LoginComponent extends Component {
         }
     render(){
         return (
-            <div className="form">
+            <div>
                 { (this.state.isLoading == false)
                 ? <form id="loginForm">
-                <h1 className="loginText">
-                    로그인
-                </h1>
-                <div>
-                    <div className="loginField">
-                        <TextField
-                            required
-                            fullWidth
-                            error={this.state.user_id === "" ? true: false}
-                            id="outlined-required"
-                            label="아이디"
-                            onChange={this.handleIdChange}
-                        />
-                    </div>
+                    <h1 className="loginText">
+                        로그인
+                    </h1>
+                    <div>
+                        <div className="loginField">
+                            <TextField
+                                required
+                                fullWidth
+                                error={this.state.user_id === "" ? true: false}
+                                id="outlined-required"
+                                label="아이디"
+                                onChange={this.handleIdChange}
+                            />
+                        </div>
 
-                    <div className="passwordField">
-                        <TextField
-                            required
-                            fullWidth
-                            error={this.state.user_pwd === "" ? true: false}
-                            id="outlined-required"
-                            label="비밀번호"
-                            type="password"
-                            onChange={this.handlePwdChange}
-                        />
-                    </div>
+                        <div className="passwordField">
+                            <TextField
+                                required
+                                fullWidth
+                                error={this.state.user_pwd === "" ? true: false}
+                                id="outlined-required"
+                                label="비밀번호"
+                                type="password"
+                                onChange={this.handlePwdChange}
+                                type="password"
+                            />
+                        </div>
 
-                     <div className="loginBtn">
-                         <button type="submit" onClick={this.gotoHome} >로그인 하기</button>
-                     </div>
-                     <div className="signupBtn">
-                         아직 계정이 없으신가요?
-                         <a href="/signup">회원 가입</a>
+                         <div className="loginBtn">
+                             <button type="submit" onClick={this.gotoHome} >로그인 하기</button>
+                         </div>
+                         <div className="signupBtn">
+                             아직 계정이 없으신가요?
+                             <a href="/signup">회원 가입</a>
+                        </div>
                     </div>
-                </div>
                 </form>
 
                 : <div className="login_circular">

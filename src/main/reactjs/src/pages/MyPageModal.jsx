@@ -1,10 +1,12 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import {useState} from 'react';
+import '../components/css/Modal.css';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+
 
 const MyPageModal = (props) => {
 
@@ -32,11 +34,10 @@ const MyPageModal = (props) => {
   const changeUserPhone = (e) => {
     setUserPhone(e.target.value);
   }
-
   const addEvent = () => {
     setChangeNum(changeNum+1); // add 버튼 누를 때 마다 changeNum + 1 해주기
 
-    props.propFunction(userId,userPwd,userName,userEmail,userPhone); // 바뀐 값 전달
+    props.propFunction(userId,userName,userPwd,userEmail,userPhone); // 바뀐 값 전달
     setUserPwd("");
     setUserName("");
     setUserEmail("");
@@ -56,9 +57,10 @@ const MyPageModal = (props) => {
 
               <div className="modal-body">
                 <div className="form-group">
+
                     <label htmlFor="taskId" className="col-form-label" style={{marginTop: '50px'}}>아이디</label>
                     <input type="text" className="form-control" value={userId} disabled style={{textAlign: 'center'}}/>
-
+                    
                     <label htmlFor="taskId" className="col-form-label">비밀번호</label>
                     <input type="text" onChange={changeUserPwd} className="form-control" value={userPwd} id="user_pwd" name="user_pwd" style={{textAlign: 'center'}}/>
 
@@ -85,6 +87,6 @@ const MyPageModal = (props) => {
           ) : null}
         </div>
   );
-};
+}
 
 export default MyPageModal;

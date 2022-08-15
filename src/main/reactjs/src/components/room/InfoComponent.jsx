@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 import '../css/RoomInfo.css'
 import {useAsync} from 'react-async';
 
-
 function InfoComponent(props) {
     const [total,setTotal]=useState("")
     const [member,setMember]=useState([])
@@ -35,7 +34,8 @@ function InfoComponent(props) {
                  RoomService.deleteRoom(props.roomId)
 
                  setTimeout(() => {
-                     window.location.href="http://localhost:3000/main"
+                     //window.location.href="http://localhost:3000/main"
+                     window.location.href="https://prodytalk.icu:3000/main"
                  },1000);
 
              } else {
@@ -89,7 +89,6 @@ function InfoComponent(props) {
 
       }
     </div>
-
     );
 }
 

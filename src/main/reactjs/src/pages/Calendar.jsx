@@ -18,9 +18,9 @@ function Calender(props) {
     const[calId, setCalId] = useState(0);
 
     // 날짜 클릭 해서 일정 추가하는 경우 날짜 setting
-    const[start, setStart] = useState('');
+    const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
-    const[title, setTitle] = useState('');
+    const [title, setTitle] = useState('');
 
     const openModal = () => {
         setModalOpen(true);
@@ -105,7 +105,6 @@ function Calender(props) {
                 }}
 
         events={events} // event 전달
-
         eventColor="gray"
         nowIndicator
         // dateClick={(e) => console.log(e.dateStr)}
@@ -138,7 +137,6 @@ function Calender(props) {
             openDetailModal()
           }
         }
-
       />
     </div>
   ); // return 끝

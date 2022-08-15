@@ -36,8 +36,6 @@ const RoomModal = (props) => {
     setRoomName("");
     setRoomType("");
     setRoomInfo("");
-
-    window.location.reload();
   }
 
   return (
@@ -84,7 +82,6 @@ const RoomModal = (props) => {
                   close
                 </button>
               </footer>
-
             </section>
           ) : null}
         </div>

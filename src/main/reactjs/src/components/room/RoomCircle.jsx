@@ -17,12 +17,14 @@ function RoomCircle(props) {
              marginLeft:120
     };
 
-
     return (
         <label>
             <Link to={{
-                pathname:`/roomenter/${props.id}`,
-                state:`${props.id}`
+                    pathname:`/roomenter/${props.id}`,
+                    state: {
+                        id : `${props.id}`,
+                        prevPage : 'Main',
+                    }
                 }}
                 style={{ textDecoration: 'none' }}>
                 <div id="circle">
@@ -38,12 +40,9 @@ function RoomCircle(props) {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
                 </div>
             </Link>
         </label>
-
-
     );
 }
 export default withRouter(RoomCircle);

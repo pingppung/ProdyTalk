@@ -13,6 +13,7 @@ import { pink} from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import {useLocation} from 'react-router-dom';
 import './css/firstPage.css';
+
 function FirstPage(props) {
 
     const [isLogin,setIsLogin] = useState(false)
@@ -88,10 +89,6 @@ function FirstPage(props) {
              }
 
         </div>
-
-
-
-
     );
 }
 
