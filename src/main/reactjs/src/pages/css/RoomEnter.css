@@ -18,6 +18,14 @@
     height:100vh;
 }
 
+.roomName{
+float: left;
+    margin-top: 23px;
+    font-family: 'S-CoreDream-4Regular';
+    margin-left: 20px;
+    color: white;
+}
+
 .todolist_enter{
     text-align:center;
     background: #97aaca;
