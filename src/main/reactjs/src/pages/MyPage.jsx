@@ -93,6 +93,9 @@ function MyPage() {
                     <div className="userId"><LocalPhoneIcon sx={{fontSize: 40, marginRight:1, color: '#2c3e50'}} />  핸드폰 : {userPhone}
                         <div className="editButton"><Button variant="outlined" size="large" onClick={openModal}><p className="editButton">수정</p></Button></div>
                     </div>
+
+                    <MyPageModal userId={userId} userPwd={userPwd} userName={userName} userEmail={userEmail} userPhone={userPhone} open={modalOpen} close={closeModal} propFunction={addModal} header="마이페이지 정보수정"> </MyPageModal>
+
                  </div>
                  <Link to="/main" id="homeBtn"><img src={Home} style={homeImageStyle}/></Link>
             </div>
