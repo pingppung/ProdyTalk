@@ -4,11 +4,12 @@ import { useLocation } from 'react-router-dom';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
 import MemberListComponent from './MemberList';
-import UserService from '../../service/UserService';
-import VideoService from '../../service/VideoService';
+//import UserService from '../../service/UserService';
+//import VideoService from '../../service/VideoService';
+import VideoFilter from './VideoFilter'
 import Logo from '../image/LogoWhite.png';
 import { UserOutlined, AudioOutlined, AudioMutedOutlined, SoundOutlined, ExportOutlined, VideoCameraFilled
-        ,LaptopOutlined, SettingFilled, TeamOutlined, AppstoreOutlined, BorderOutlined} from '@ant-design/icons';
+        ,LaptopOutlined, SettingFilled, TeamOutlined, AppstoreOutlined, BorderOutlined, SyncOutlined} from '@ant-design/icons';
 import { Avatar } from 'antd';
 import '../css/Video.css';
 const OPENVIDU_SERVER_URL = 'https://prodytalk.icu:4443';
@@ -23,8 +24,10 @@ class VideoRoomComponent extends Component {
 
         this.state = {
             mySessionId: 'MySessionA',
+            mySessionId2: 'MySessionA',
             myUserName: 'Participant' + Math.floor(Math.random() * 100),
             session: undefined,
+            session2: undefined,
             mainStreamManager: undefined,
             publisher: undefined,
             subscribers: [],
@@ -35,6 +38,7 @@ class VideoRoomComponent extends Component {
             videoEnable: true,
             audioEnable: true,
             shareEnable: false,
+            settingOpen: false,
             memberlistEnable: false,
             facefilterEnable: false,
             layoutState: 'Focus',
@@ -54,10 +58,11 @@ class VideoRoomComponent extends Component {
         this.changeLayout = this.changeLayout.bind(this);
         this.applyFilter = this.applyFilter.bind(this);
         this.removeFilter = this.removeFilter.bind(this);
+        this.setting = this.setting.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
         this.onpopstate = this.onpopstate.bind(this);
     }
-    componentDidMount() {    //여기서 setting페이지에서 설정한 값들 가져오기   videoEnable, audioEnable, mySessionId, myUserName, videoDeviceID, audioDeviceID
+    componentDidMount() {    //여기서 statuscheck페이지에서 설정한 값들 가져오기   videoEnable, audioEnable, mySessionId, myUserName, videoDeviceID, audioDeviceID
         this.setState({
             myUserName: this.props.location.props.myUserName,
             mySessionId: this.props.location.props.mySessionId,
@@ -82,8 +87,10 @@ class VideoRoomComponent extends Component {
         window.removeEventListener('popstate', this.onpopstate);
     }
     componentDidUpdate(_, prevState){
-        console.log(prevState.subscribers);
-        console.log(this.state.subscribers);
+        //console.log(prevState.subscribers);
+        //console.log(this.state.subscribers);
+        console.log(prevState.publisher);
+        console.log(this.state.publisher);
     }
     onbeforeunload(event) {
         event.preventDefault();
@@ -138,7 +145,6 @@ class VideoRoomComponent extends Component {
             },
             () => {
                 var mySession = this.state.session;
-
                 // --- 3) Specify the actions when events take place in the session ---
                 // On every new Stream received...
                 mySession.on('streamCreated', (event) => {
@@ -154,7 +160,6 @@ class VideoRoomComponent extends Component {
                         subscribers: subscribers,
                     });
                 });
-
                 // On every Stream destroyed...
                 mySession.on('streamDestroyed', (event) => {
                     //필요할 때마다 삭제된 모든 구독자를 제거
@@ -201,8 +206,9 @@ class VideoRoomComponent extends Component {
                             });
 
                             // --- 6) Publish your stream ---
-                            mySession.publish(publisher);
 
+                            publisher.subscribeToRemote(true);
+                            mySession.publish(publisher);
                             // Set the main video in the page to display our webcam and store our Publisher
                             this.setState({
                                 currentVideoDevice: videoDevices[0],
@@ -217,6 +223,8 @@ class VideoRoomComponent extends Component {
             },
         );
     }
+
+
     leaveSession() {
 
         const mySession = this.state.session;
@@ -347,9 +355,9 @@ class VideoRoomComponent extends Component {
             });
 
             sharePublisher.once("accessAllowed", () => {
-                this.state.session.unpublish(this.state.mainStreamManager)
+                this.state.session.unpublish(this.state.mainStreamManager);
 
-                this.state.session.publish(sharePublisher)
+                this.state.session.publish(sharePublisher);
                 this.setState({
                     mainStreamManager: sharePublisher,
                     publisher: sharePublisher,
@@ -401,12 +409,8 @@ class VideoRoomComponent extends Component {
     applyFilter(){
         var filter = { type: '', options: {} };
         filter.type = 'FaceOverlayFilter';
-        filter.options = {};
-        console.log(this.state.session);
-        console.log(this.state.mainStreamManager);
-        console.log(this.state.publisher);
-        console.log(this.state.subscribers);
-
+//        //filter. options = {"command": "audioecho delay=40000000 intensity=0.7 feedback=0.4"};
+        filter. options = {};
         this.state.publisher.stream.applyFilter(filter.type, filter.options)
             .then(f => {
                 if(f.type === 'FaceOverlayFilter'){
@@ -419,9 +423,10 @@ class VideoRoomComponent extends Component {
                             "widthPercent": "1.5F",
                             "heightPercent": "1.0F"
                         });
-                }
+                }})
+            .catch(error => console.error(error));
+        console.log(this.state.session);
 
-            });
         this.setState({
             facefilterEnable: true,
         });
@@ -431,6 +436,12 @@ class VideoRoomComponent extends Component {
     	this.state.publisher.stream.removeFilter();
         this.setState({
             facefilterEnable: false,
+        });
+    }
+
+    setting(){
+        this.setState({
+            settingOpen: true,
         });
     }
     render() {
@@ -460,7 +471,7 @@ class VideoRoomComponent extends Component {
                                 id="buttonSwitchCamera"
                                 onClick={this.switchCamera}>
                                 <span class="button-text">카메라 변경</span>
-                                <SettingFilled />
+                                <SyncOutlined />
                             </button>
                             <button
                                 id={"button" + this.state.audioState}
@@ -496,7 +507,7 @@ class VideoRoomComponent extends Component {
                                 id="buttonMemberList"
                                 onClick={this.state.facefilterEnable ? this.removeFilter : this.applyFilter}>
                                 <span class="button-text">{this.state.facefilterEnable ?  "비디오필터 제거" : "비디오필터 적용"}</span>
-                                <TeamOutlined />
+                                <SettingFilled />
                             </button>
                             <button
                                 id="buttonLeaveSession"
@@ -506,6 +517,8 @@ class VideoRoomComponent extends Component {
                             </button>
 
                         </div>
+                        <VideoFilter open={this.state.settingOpen} header="설정" />
+
                         <div className="video-div">
                             {this.state.layoutState === 'Focus' && this.state.mainStreamManager !== undefined ? (
                                 <div id="main-video" className="col-md-6">
@@ -531,7 +544,7 @@ class VideoRoomComponent extends Component {
             </div>
         );
     }
-    getToken() {
+    getToken(role) {
         return this.createSession(this.state.mySessionId).then((sessionId) => this.createToken(sessionId));
     }
 
