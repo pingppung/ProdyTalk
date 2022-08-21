@@ -38,7 +38,8 @@ class VideoRoomComponent extends Component {
             videoEnable: true,
             audioEnable: true,
             shareEnable: false,
-            settingOpen: false,
+            filterURI: undefined,
+            filterOpen: false,
             memberlistEnable: false,
             facefilterEnable: false,
             layoutState: 'Focus',
@@ -56,9 +57,9 @@ class VideoRoomComponent extends Component {
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
         this.memberList = this.memberList.bind(this);
         this.changeLayout = this.changeLayout.bind(this);
+        this.openFilterModal = this.openFilterModal.bind(this);
         this.applyFilter = this.applyFilter.bind(this);
         this.removeFilter = this.removeFilter.bind(this);
-        this.setting = this.setting.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
         this.onpopstate = this.onpopstate.bind(this);
     }
@@ -406,32 +407,44 @@ class VideoRoomComponent extends Component {
         }
 
     }
-    applyFilter(){
-        var filter = { type: '', options: {} };
-        filter.type = 'FaceOverlayFilter';
-//        //filter. options = {"command": "audioecho delay=40000000 intensity=0.7 feedback=0.4"};
-        filter. options = {};
-        this.state.publisher.stream.applyFilter(filter.type, filter.options)
-            .then(f => {
-                if(f.type === 'FaceOverlayFilter'){
-                    f.execMethod(
-                        "setOverlayedImage",
-                        {
-                            "uri": "https://cdn.pixabay.com/photo/2017/09/30/09/29/cowboy-hat-2801582_960_720.png",
-                        	"offsetXPercent": "-0.1F",
-                            "offsetYPercent": "-0.8F",
-                            "widthPercent": "1.5F",
-                            "heightPercent": "1.0F"
-                        });
-                }})
-            .catch(error => console.error(error));
-        console.log(this.state.session);
 
+    openFilterModal(){
         this.setState({
-            facefilterEnable: true,
+            filterOpen: true,
         });
     }
+    applyFilter(uri){
 
+        if(uri === undefined || this.state.filterURI !== uri){
+            this.removeFilter();
+        }
+        this.setState({
+            facefilterEnable: true,
+            filterOpen: false,
+            filterURI:uri,
+        });
+        if(uri !== undefined){
+            var filter = { type: '', options: {} };
+            filter.type = 'FaceOverlayFilter';
+    //        //filter. options = {"command": "audioecho delay=40000000 intensity=0.7 feedback=0.4"};
+            filter. options = {};
+            this.state.publisher.stream.applyFilter(filter.type, filter.options)
+                .then(f => {
+                    if(f.type === 'FaceOverlayFilter'){
+                        f.execMethod(
+                            "setOverlayedImage",
+                            {
+                                //"uri": "https://cdn.pixabay.com/photo/2017/09/30/09/29/cowboy-hat-2801582_960_720.png",
+                                "uri": uri,
+                                "offsetXPercent": "-0.1F",
+                                "offsetYPercent": "-0.8F",
+                                "widthPercent": "1.5F",
+                                "heightPercent": "1.0F"
+                            });
+                    }})
+                .catch(error => console.error(error));
+        }
+    }
     removeFilter() {
     	this.state.publisher.stream.removeFilter();
         this.setState({
@@ -439,11 +452,7 @@ class VideoRoomComponent extends Component {
         });
     }
 
-    setting(){
-        this.setState({
-            settingOpen: true,
-        });
-    }
+//{this.state.facefilterEnable ? this.removeFilter : this.applyFilter}
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
@@ -504,8 +513,8 @@ class VideoRoomComponent extends Component {
                                 <TeamOutlined />
                             </button>
                             <button
-                                id="buttonMemberList"
-                                onClick={this.state.facefilterEnable ? this.removeFilter : this.applyFilter}>
+                                id="buttonFilter"
+                                onClick={this.openFilterModal}>
                                 <span class="button-text">{this.state.facefilterEnable ?  "비디오필터 제거" : "비디오필터 적용"}</span>
                                 <SettingFilled />
                             </button>
@@ -517,7 +526,7 @@ class VideoRoomComponent extends Component {
                             </button>
 
                         </div>
-                        <VideoFilter open={this.state.settingOpen} header="설정" />
+                        <VideoFilter open={this.state.filterOpen} header="설정" parentsFunc={this.applyFilter}/>
 
                         <div className="video-div">
                             {this.state.layoutState === 'Focus' && this.state.mainStreamManager !== undefined ? (
