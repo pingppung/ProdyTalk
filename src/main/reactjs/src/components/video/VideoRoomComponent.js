@@ -160,6 +160,7 @@ class VideoRoomComponent extends Component {
                     this.setState({
                         subscribers: subscribers,
                     });
+
                 });
                 // On every Stream destroyed...
                 mySession.on('streamDestroyed', (event) => {
@@ -207,9 +208,12 @@ class VideoRoomComponent extends Component {
                             });
 
                             // --- 6) Publish your stream ---
-
                             publisher.subscribeToRemote(true);
+                            //subscriber.subscribeToAudio(false);
                             mySession.publish(publisher);
+                            console.log(publisher);
+                            console.log(this.state.subscribers);
+                            console.log(mySession);
                             // Set the main video in the page to display our webcam and store our Publisher
                             this.setState({
                                 currentVideoDevice: videoDevices[0],
