@@ -160,7 +160,6 @@ function RoomEnter() {
                     <BottomNavigationAction label="그룹 채팅"  />
                     <BottomNavigationAction component={Link} to={{pathname:`/video/setting/${id}`, state: `${id}`}} label="화상 채팅"  />
                     <BottomNavigationAction label="ToDoList" />
-                    <BottomNavigationAction label="메모" />
                   </BottomNavigation>
             </Box>
             <div id="menu">
