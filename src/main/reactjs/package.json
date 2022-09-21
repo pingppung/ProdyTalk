@@ -2,7 +2,7 @@
   "name": "reactjs",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://prodytalk.icu:8080",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.9.0",
