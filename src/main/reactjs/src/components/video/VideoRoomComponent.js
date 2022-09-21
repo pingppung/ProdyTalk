@@ -208,7 +208,7 @@ class VideoRoomComponent extends Component {
                             });
 
                             // --- 6) Publish your stream ---
-                            publisher.subscribeToRemote(true);
+                            //publisher.subscribeToRemote(true);
                             //subscriber.subscribeToAudio(false);
                             mySession.publish(publisher);
                             console.log(publisher);
@@ -516,12 +516,7 @@ class VideoRoomComponent extends Component {
                                 <span class="button-text">{this.state.memberlistEnable ?  "멤버 목록 숨기기" : "멤버 목록 표시하기"}</span>
                                 <TeamOutlined />
                             </button>
-                            <button
-                                id="buttonFilter"
-                                onClick={this.openFilterModal}>
-                                <span class="button-text">{this.state.facefilterEnable ?  "비디오필터 제거" : "비디오필터 적용"}</span>
-                                <SettingFilled />
-                            </button>
+
                             <button
                                 id="buttonLeaveSession"
                                 onClick={this.leaveSession}>
