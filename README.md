@@ -1,2 +1,2 @@
 # ProdyTalk
-한성대학교 캡스톤
+Openvidu 기반 화상채팅 협업 플랫폼
