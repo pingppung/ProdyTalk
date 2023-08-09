@@ -97,7 +97,7 @@ public class FileController {
         ){
             // 응답이 파일 타입이라는 것을 명시
             response.addHeader("Content-Disposition", "attachment;filename=\""+originName+"\"");
-            response.setContentType("application/x-download");
+            response.setContentType("application/x-download charset=UTF-8");
             // 응답 크기 명시
             response.setContentLength((int)file.length());
 
