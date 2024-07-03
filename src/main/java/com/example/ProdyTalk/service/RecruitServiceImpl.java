@@ -1,17 +1,18 @@
-package com.example.ProdyTalk.service;
+package com.example.prodytalk.service;
 
-import com.example.ProdyTalk.exception.ResourceNotFoundException;
-import com.example.ProdyTalk.mapper.RecruitMapper;
-import com.example.ProdyTalk.vo.RecruitVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.example.prodytalk.exception.ResourceNotFoundException;
+import com.example.prodytalk.mapper.RecruitMapper;
+import com.example.prodytalk.vo.RecruitVO;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RecruitServiceImpl implements RecruitService{
+public class RecruitServiceImpl implements RecruitService {
     private final RecruitMapper recruitMapper;
 
     // 전체글 목록
@@ -42,7 +43,7 @@ public class RecruitServiceImpl implements RecruitService{
     @Override
     public ResponseEntity<RecruitVO> getRecruit(Integer recruit_id) {
         RecruitVO recruit = (RecruitVO) recruitMapper.findById(recruit_id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not exist Board Data by no : ["+recruit_id+"]"));
+                .orElseThrow(() -> new ResourceNotFoundException("Not exist Board Data by no : [" + recruit_id + "]"));
         return ResponseEntity.ok(recruit);
     }
 

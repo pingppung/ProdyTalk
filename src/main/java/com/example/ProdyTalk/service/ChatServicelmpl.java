@@ -1,11 +1,9 @@
-package com.example.ProdyTalk.service;
+package com.example.prodytalk.service;
 
-import com.example.ProdyTalk.chat.vo.MessageVO;
-import com.example.ProdyTalk.mapper.ChatMapper;
-
-
-import org.springframework.scheduling.config.ScheduledTaskHolder;
 import org.springframework.stereotype.Service;
+
+import com.example.prodytalk.chat.vo.MessageVO;
+import com.example.prodytalk.mapper.ChatMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,7 +40,8 @@ public class ChatServicelmpl implements ChatService {
     }
 
     @Override
-    public List<MessageVO> getPersonalChatList(int conversation_id) { return chatMapper.getPersonalChatList(conversation_id);}
-
+    public List<MessageVO> getPersonalChatList(int conversation_id) {
+        return chatMapper.getPersonalChatList(conversation_id);
+    }
 
 }

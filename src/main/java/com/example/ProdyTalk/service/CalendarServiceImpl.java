@@ -1,10 +1,11 @@
-package com.example.ProdyTalk.service;
+package com.example.prodytalk.service;
 
-import com.example.ProdyTalk.mapper.CalendarMapper;
-import com.example.ProdyTalk.vo.CalendarVO;
-import com.example.ProdyTalk.vo.MyCalendarVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.example.prodytalk.mapper.CalendarMapper;
+import com.example.prodytalk.vo.CalendarVO;
+import com.example.prodytalk.vo.MyCalendarVO;
 
 import java.util.Calendar;
 import java.util.List;
@@ -20,6 +21,8 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
+        
+    
     public void addEvent(CalendarVO calendarVO) { calendarMapper.addEvent(calendarVO);}
 
     @Override

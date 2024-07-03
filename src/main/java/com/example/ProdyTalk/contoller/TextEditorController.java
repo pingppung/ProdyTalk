@@ -1,9 +1,9 @@
-package com.example.ProdyTalk.contoller;
+package com.example.prodytalk.contoller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins="*",maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 public class TextEditorController {
@@ -12,8 +12,8 @@ public class TextEditorController {
     public void changeText(@RequestBody String text) {
         System.out.println(text);
     }
-//    @GetMapping("/api/texteditor/get")
-//    public String getText() {
-//        return "어케하냐";
-//    }
+    // @GetMapping("/api/texteditor/get")
+    // public String getText() {
+    // return "어케하냐";
+    // }
 }

@@ -1,8 +1,5 @@
-package com.example.ProdyTalk.contoller;
+package com.example.prodytalk.contoller;
 
-import com.example.ProdyTalk.mapper.UserMapper;
-import com.example.ProdyTalk.service.UserService;
-import com.example.ProdyTalk.vo.UserVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
@@ -12,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.prodytalk.mapper.UserMapper;
+import com.example.prodytalk.service.UserService;
+import com.example.prodytalk.vo.UserVO;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Date;
 
-@CrossOrigin(origins="*",maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/authenticate")
-    public String authen(@RequestBody UserVO user){
+    public String authen(@RequestBody UserVO user) {
         userService.findUser(user);
         System.out.println(user);
         System.out.println(userService.findUser(user));
@@ -59,7 +60,7 @@ public class UserController {
         }
     }
 
-    //토큰으로 유저 아이디 확인 => 아이디 넘기기
+    // 토큰으로 유저 아이디 확인 => 아이디 넘기기
     @GetMapping("/authenticate")
     public Claims autheddn(HttpServletRequest request) {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
@@ -71,7 +72,7 @@ public class UserController {
     }
 
     @GetMapping("/api/getUser")
-    public UserVO getUserById(@RequestParam(value="user_id") String user_id) {
+    public UserVO getUserById(@RequestParam(value = "user_id") String user_id) {
         return userService.getUserById(user_id);
     }
 

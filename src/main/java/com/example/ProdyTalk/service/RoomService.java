@@ -1,24 +1,25 @@
-package com.example.ProdyTalk.service;
-
-import com.example.ProdyTalk.vo.RoomJoinVO;
-import com.example.ProdyTalk.vo.RoomListVO;
+package com.example.prodytalk.service;
 
 import java.util.List;
 
+import com.example.prodytalk.vo.RoomJoinVO;
+import com.example.prodytalk.vo.RoomListVO;
+
 public interface RoomService {
 
-    //전체 방 데이터
+    // 전체 방 데이터
     public void insertRoom(RoomListVO room);
 
     public int findIdRoom(RoomListVO room);
 
-    //유저 속해있는 방 데이터
+    // 유저 속해있는 방 데이터
     public void joinRoom(RoomJoinVO room);
 
     public List<RoomListVO> getAllRooms();
 
     public List<RoomJoinVO> findInRoom(String user_id);
-    //유저가 속해있는 방 리스트 불러오기
+
+    // 유저가 속해있는 방 리스트 불러오기
     public List<RoomListVO> getInRooms(int[] room_id);
 
     public int getRoomTotal(int room_id);

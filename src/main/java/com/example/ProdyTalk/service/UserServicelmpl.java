@@ -1,9 +1,9 @@
-package com.example.ProdyTalk.service;
-
-import com.example.ProdyTalk.mapper.UserMapper;
-import com.example.ProdyTalk.vo.UserVO;
+package com.example.prodytalk.service;
 
 import org.springframework.stereotype.Service;
+
+import com.example.prodytalk.mapper.UserMapper;
+import com.example.prodytalk.vo.UserVO;
 
 import lombok.RequiredArgsConstructor;
 

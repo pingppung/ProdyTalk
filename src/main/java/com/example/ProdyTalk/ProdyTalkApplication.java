@@ -1,4 +1,4 @@
-package com.example.ProdyTalk;
+package com.example.prodytalk;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

@@ -1,9 +1,5 @@
-package com.example.ProdyTalk.chat.controller;
+package com.example.prodytalk.chat.controller;
 
-import com.example.ProdyTalk.chat.vo.MessageVO;
-import com.example.ProdyTalk.mapper.ChatMapper;
-import com.example.ProdyTalk.service.ChatService;
-import com.example.ProdyTalk.vo.UserVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.prodytalk.chat.vo.MessageVO;
+import com.example.prodytalk.mapper.ChatMapper;
+import com.example.prodytalk.service.ChatService;
+
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,7 +26,6 @@ import java.util.Set;
 public class GreetingController {
 
     private final ChatService chatService;
-    private static Set<String> userList = new HashSet<>();
 
     @Autowired
     ChatMapper chatMapper;
@@ -46,7 +43,6 @@ public class GreetingController {
                 .getBody();
 
     }
-
 
     @MessageMapping("/chat/group/{conversationId}")
     public void sendMessage(MessageVO messageVO, @DestinationVariable int conversationId) {
@@ -82,6 +78,5 @@ public class GreetingController {
     public List<MessageVO> getPersonalChatList(@RequestParam(value = "room_id") int conversation_id) throws Exception {
         return chatService.getPersonalChatList(conversation_id);
     }
-
 
 }

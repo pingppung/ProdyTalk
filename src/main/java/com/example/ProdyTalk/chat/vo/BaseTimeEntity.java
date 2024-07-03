@@ -1,4 +1,4 @@
-package com.example.ProdyTalk.chat.vo;
+package com.example.prodytalk.chat.vo;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

@@ -1,9 +1,10 @@
-package com.example.ProdyTalk.service;
+package com.example.prodytalk.service;
 
-import com.example.ProdyTalk.mapper.FileMapper;
-import com.example.ProdyTalk.vo.FileVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.example.prodytalk.mapper.FileMapper;
+import com.example.prodytalk.vo.FileVO;
 
 import java.util.List;
 

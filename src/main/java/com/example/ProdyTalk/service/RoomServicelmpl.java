@@ -1,10 +1,10 @@
-package com.example.ProdyTalk.service;
-
-import com.example.ProdyTalk.mapper.RoomMapper;
-import com.example.ProdyTalk.vo.RoomJoinVO;
-import com.example.ProdyTalk.vo.RoomListVO;
+package com.example.prodytalk.service;
 
 import org.springframework.stereotype.Service;
+
+import com.example.prodytalk.mapper.RoomMapper;
+import com.example.prodytalk.vo.RoomJoinVO;
+import com.example.prodytalk.vo.RoomListVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,29 +15,28 @@ import java.util.List;
 public class RoomServicelmpl implements RoomService {
     private final RoomMapper roomMapper;
 
-    @Override //room_name, room_info, room_type을 넣어 방을 생성하는 메서드
+    @Override // room_name, room_info, room_type을 넣어 방을 생성하는 메서드
     public void insertRoom(RoomListVO roomVO) {
         roomMapper.insertRoom(roomVO);
     }
 
-    @Override //룸 정보들로 room_id 받아오는 메서드
+    @Override // 룸 정보들로 room_id 받아오는 메서드
     public int findIdRoom(RoomListVO roomVO) {
         return roomMapper.findIdRoom(roomVO);
     }
 
-    @Override //roomJoin 테이블에 새로운 user-room 연결 추가
+    @Override // roomJoin 테이블에 새로운 user-room 연결 추가
     public void joinRoom(RoomJoinVO room) {
         roomMapper.joinRoom(room);
         System.out.println(room);
     }
 
-    @Override //모든 룸 리스트 불러오기
+    @Override // 모든 룸 리스트 불러오기
     public List<RoomListVO> getAllRooms() {
         return roomMapper.findAll();
     }
 
-
-    @Override //user_id에 따른 룸 리스트 불러오기
+    @Override // user_id에 따른 룸 리스트 불러오기
     public List<RoomJoinVO> findInRoom(String user_id) {
         return roomMapper.findInRoom(user_id);
     }
@@ -47,7 +46,7 @@ public class RoomServicelmpl implements RoomService {
         return roomMapper.getInRooms(room_id);
     }
 
-    @Override //룸의 현재 인원 가져오는 메서드
+    @Override // 룸의 현재 인원 가져오는 메서드
     public int getRoomTotal(int room_id) {
         return roomMapper.getRoomTotal(room_id);
     }
@@ -63,7 +62,7 @@ public class RoomServicelmpl implements RoomService {
     }
 
     @Override
-    public List<RoomJoinVO> getMemberById(int room_id){
+    public List<RoomJoinVO> getMemberById(int room_id) {
         return roomMapper.getMemberById(room_id);
     }
 
