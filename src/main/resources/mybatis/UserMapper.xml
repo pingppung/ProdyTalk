@@ -9,17 +9,17 @@
         values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{user_phone})
     </insert>
 
-    <select id="findUser" resultType="com.example.ProdyTalk.vo.UserVO">
+    <select id="selectUser" resultType="com.example.ProdyTalk.vo.UserVO">
         SELECT * FROM users
         WHERE user_id = #{user_id} AND user_pwd=#{user_pwd}
     </select>
 
-    <select id="getUserById" resultType="com.example.ProdyTalk.vo.UserVO">
+    <select id="selectUserById" resultType="com.example.ProdyTalk.vo.UserVO">
         select * from users
         where user_id = #{user_id}
     </select>
 
-    <update id="editUser" parameterType="com.example.ProdyTalk.vo.UserVO">
+    <update id="updateUser" parameterType="com.example.ProdyTalk.vo.UserVO">
         update users
         set user_pwd=#{user_pwd}, user_name=#{user_name}, user_email=#{user_email}, user_phone=#{user_phone}
         where user_id=#{user_id}

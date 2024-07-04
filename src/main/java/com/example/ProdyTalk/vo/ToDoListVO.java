@@ -2,8 +2,6 @@ package com.example.prodytalk.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class ToDoListVO {
     int todolist_id;

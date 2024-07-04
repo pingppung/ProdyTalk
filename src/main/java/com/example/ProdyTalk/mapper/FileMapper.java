@@ -12,7 +12,7 @@ import java.util.List;
 public interface FileMapper {
     void insertFile(FileVO fileVO);
 
-    List<FileVO> getAllFiles(int room_id);
+    List<FileVO> selectAllFiles(int room_id);
 
     void deleteFile(String file_id);
 }

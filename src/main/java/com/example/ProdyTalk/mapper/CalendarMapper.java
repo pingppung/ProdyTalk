@@ -12,23 +12,23 @@ import java.util.List;
 @Repository
 @Mapper
 public interface CalendarMapper {
-    List<Calendar> getCalendar(int room_id);
+    List<Calendar> selectGroupCalendar(int room_id);
 
-    void addEvent(CalendarVO CalendarVO);
+    void insertGroupEvent(CalendarVO CalendarVO);
 
-    int searchLast();
+    int selectLastGroupCalendarId();
 
-    void editEvent(CalendarVO calendarVO);
+    void updateGroupEvent(CalendarVO calendarVO);
 
-    void deleteEvent(CalendarVO calendarVO);
+    void deleteGroupEvent(CalendarVO calendarVO);
 
-    List<Calendar> getMyCalendar(String user_id);
+    List<Calendar> selectMyCalendar(String user_id);
 
-    int searchMyLast();
+    int selectLastMyCalendarId();
 
-    void addMyEvent(MyCalendarVO myCalendarVO);
+    void insertMyEvent(MyCalendarVO myCalendarVO);
 
-    void editMyEvent(MyCalendarVO myCalendarVO);
+    void updateMyEvent(MyCalendarVO myCalendarVO);
 
     void deleteMyEvent(MyCalendarVO myCalendarVO);
 }

@@ -21,34 +21,34 @@ public class ToDoListController {
 
     @GetMapping("/api/todolist/id")
     public List<ToDoListVO> getToDoListById(@RequestParam(value = "room_id") int room_id) {
-        return toDoListService.getToDoListById(room_id);
+        return toDoListService.findToDoListByRoomId(room_id);
     }
 
     @PostMapping("/api/todolist/checked")
-    public void setChecked(@RequestBody ToDoListVO toDoListVO) {
-        toDoListService.setChecked(toDoListVO);
+    public void updateChecked(@RequestBody ToDoListVO toDoListVO) {
+        toDoListService.updateToDoItemChecked(toDoListVO);
     }
 
     @PostMapping("/api/todolist/add")
     public void addToDoList(@RequestBody ToDoListVO toDoListVO) {
         toDoListVO.setChecked(false);
-        toDoListService.addToDoList(toDoListVO);
+        toDoListService.addToDoItem(toDoListVO);
     }
 
     @PostMapping("/api/todolist/delete")
     public void deleteToDoList(@RequestBody ToDoListVO toDoListVO) {
-        toDoListService.deleteToDoList(toDoListVO);
+        toDoListService.deleteToDoItem(toDoListVO);
     }
 
     @GetMapping("/api/todolist/user")
     public List<ToDoListVO> getToDoListByUser(@RequestParam(value = "user_id") String user_id) {
-        return toDoListService.getToDoListByUser(user_id);
+        return toDoListService.findToDoListByUserId(user_id);
     }
 
     @PostMapping("/api/todolist/addByUser")
     public void addToDoListByUser(@RequestBody ToDoListVO toDoListVO) {
         toDoListVO.setChecked(false);
-        toDoListService.addToDoListByUser(toDoListVO);
+        toDoListService.addToDoItemByUserId(toDoListVO);
     }
 
 }

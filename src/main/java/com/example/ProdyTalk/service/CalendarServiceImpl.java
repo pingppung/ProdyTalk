@@ -16,48 +16,48 @@ public class CalendarServiceImpl implements CalendarService {
     private final CalendarMapper calendarMapper;
 
     @Override
-    public List<Calendar> getCalendar(int room_id) throws Exception {
-        return calendarMapper.getCalendar(room_id);
+    public List<Calendar> findGroupCalendar(int room_id) throws Exception {
+        return calendarMapper.selectGroupCalendar(room_id);
     }
 
     @Override
-        
-    
-    public void addEvent(CalendarVO calendarVO) { calendarMapper.addEvent(calendarVO);}
-
-    @Override
-    public int searchLast() {
-        return calendarMapper.searchLast();
+    public void addGroupEvent(CalendarVO calendarVO) {
+        calendarMapper.insertGroupEvent(calendarVO);
     }
 
     @Override
-    public void editEvent(CalendarVO calendarVO) {
-        calendarMapper.editEvent(calendarVO);
+    public int findLastGroupCalendarId() {
+        return calendarMapper.selectLastGroupCalendarId();
     }
 
     @Override
-    public void deleteEvent(CalendarVO calendarVO) {
-        calendarMapper.deleteEvent(calendarVO);
+    public void updateGroupEvent(CalendarVO calendarVO) {
+        calendarMapper.updateGroupEvent(calendarVO);
     }
 
     @Override
-    public List<Calendar> getMyCalendar(String user_id) throws Exception {
-        return calendarMapper.getMyCalendar(user_id);
+    public void deleteGroupEvent(CalendarVO calendarVO) {
+        calendarMapper.deleteGroupEvent(calendarVO);
+    }
+
+    @Override
+    public List<Calendar> findMyCalendar(String user_id) throws Exception {
+        return calendarMapper.selectMyCalendar(user_id);
     }
 
     @Override
     public void addMyEvent(MyCalendarVO myCalendarVO) {
-        calendarMapper.addMyEvent(myCalendarVO);
+        calendarMapper.insertMyEvent(myCalendarVO);
     }
 
     @Override
-    public int searchMyLast() {
-        return calendarMapper.searchMyLast();
+    public int findLastMyCalendarId() {
+        return calendarMapper.selectLastMyCalendarId();
     }
 
     @Override
-    public void editMyEvent(MyCalendarVO myCalendarVO) {
-        calendarMapper.editMyEvent(myCalendarVO);
+    public void updateMyEvent(MyCalendarVO myCalendarVO) {
+        calendarMapper.updateMyEvent(myCalendarVO);
     }
 
     @Override

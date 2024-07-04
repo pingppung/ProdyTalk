@@ -29,13 +29,13 @@ public class UserController {
     UserMapper userMapper;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public void insertUser(@RequestBody UserVO user, HttpServletResponse response) throws IOException {
-        userService.insertUser(user);
+    public void addUser(@RequestBody UserVO user, HttpServletResponse response) throws IOException {
+        userService.addUser(user);
         System.out.println("유저 DB 저장 성공");
     }
 
     @PostMapping("/authenticate")
-    public String authen(@RequestBody UserVO user) {
+    public String authenticate(@RequestBody UserVO user) {
         userService.findUser(user);
         System.out.println(user);
         System.out.println(userService.findUser(user));
@@ -62,7 +62,7 @@ public class UserController {
 
     // 토큰으로 유저 아이디 확인 => 아이디 넘기기
     @GetMapping("/authenticate")
-    public Claims autheddn(HttpServletRequest request) {
+    public Claims verifyToken(HttpServletRequest request) {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
 
         return Jwts.parser()
@@ -73,12 +73,12 @@ public class UserController {
 
     @GetMapping("/api/getUser")
     public UserVO getUserById(@RequestParam(value = "user_id") String user_id) {
-        return userService.getUserById(user_id);
+        return userService.findUserById(user_id);
     }
 
     @PostMapping("/api/editUser")
-    public void insertUser(@RequestBody UserVO userVO) {
-        userService.editUser(userVO);
+    public void updateUser(@RequestBody UserVO userVO) {
+        userService.updateUser(userVO);
         System.out.println(userVO);
     }
 }

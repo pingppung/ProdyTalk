@@ -6,15 +6,15 @@ import com.example.prodytalk.vo.ToDoListVO;
 
 public interface ToDoListService {
 
-    List<ToDoListVO> getToDoListById(int room_id);
+    List<ToDoListVO> findToDoListByRoomId(int room_id);
 
-    void setChecked(ToDoListVO todoListVO);
+    void updateToDoItemChecked(ToDoListVO todoListVO);
 
-    void addToDoList(ToDoListVO todoListVO);
+    void addToDoItem(ToDoListVO todoListVO);
 
-    void deleteToDoList(ToDoListVO todoListVO);
+    void deleteToDoItem(ToDoListVO todoListVO);
 
-    List<ToDoListVO> getToDoListByUser(String user_id);
+    List<ToDoListVO> findToDoListByUserId(String user_id);
 
-    void addToDoListByUser(ToDoListVO todoListVO);
+    void addToDoItemByUserId(ToDoListVO todoListVO);
 }

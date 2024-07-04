@@ -13,23 +13,23 @@ import java.util.List;
 public interface RoomMapper {
     void insertRoom(RoomListVO room);
 
-    List<RoomListVO> findAll();
+    List<RoomListVO> selectAllRooms();
 
-    List<RoomJoinVO> findInRoom(String user_id);
+    List<RoomJoinVO> selectRoomsByUserId(String user_id);
 
-    List<RoomListVO> getInRooms(int[] room_id);
+    List<RoomListVO> selectRoomsByIds(int[] room_id);
 
-    public int findIdRoom(RoomListVO room);
+    int selectRoomId(RoomListVO room);
 
     void joinRoom(RoomJoinVO room);
 
-    int getRoomTotal(int room_id);
+    int selectRoomTotalMembers(int room_id);
 
-    void setRoomTotal(RoomListVO roomListVO);
+    void updateRoomTotalMembers(RoomListVO roomListVO);
 
-    RoomListVO getRoomById(int room_id);
+    RoomListVO selectRoomById(int room_id);
 
-    List<RoomJoinVO> getMemberById(int room_id);
+    List<RoomJoinVO> selectMembersByRoomId(int room_id);
 
-    void deleteRoom(RoomJoinVO roomJoinVO);
+    void deleteRoomById(RoomJoinVO roomJoinVO);
 }

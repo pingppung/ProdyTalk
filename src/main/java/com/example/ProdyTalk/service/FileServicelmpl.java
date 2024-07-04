@@ -14,13 +14,13 @@ public class FileServicelmpl implements FileService {
     private final FileMapper fileMapper;
 
     @Override
-    public void insertFile(FileVO fileVO) {
+    public void addFile(FileVO fileVO) {
         fileMapper.insertFile(fileVO);
     }
 
     @Override
-    public List<FileVO> getAllFiles(int room_id) {
-        return fileMapper.getAllFiles(room_id);
+    public List<FileVO> findAllFiles(int room_id) {
+        return fileMapper.selectAllFiles(room_id);
     }
 
     @Override

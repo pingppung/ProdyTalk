@@ -2,20 +2,24 @@ package com.example.prodytalk.service;
 
 import java.util.List;
 
-import com.example.prodytalk.chat.vo.MessageVO;
+import com.example.prodytalk.vo.MessageVO;
 
 public interface ChatService {
     // 그룹채팅용
-    public void insertMessage(MessageVO messageVO);
+    public void addGroupMessage(MessageVO messageVO);
 
-    public int searchLast();
+    // 가장 최근 그룹 메시지의 ID를 검색
+    public int findLastGroupMessageId();
 
-    public List<MessageVO> getChatList(int conversation_id);
+    // 특정 그룹 채팅의 모든 메시지 검색
+    public List<MessageVO> findGroupMessages(int conversation_id);
 
     // 개인채팅용
-    public int searchPersonalLast();
+    public int findLastPersonalMessageId();
 
-    public void insertPersonalMessage(MessageVO messageVO);
+    // 가장 최근 개인 메시지의 ID를 검색
+    public void addPersonalMessage(MessageVO messageVO);
 
-    public List<MessageVO> getPersonalChatList(int conversation_id);
+    // 특정 개인 채팅의 모든 메시지 검색
+    public List<MessageVO> findPersonalMessages(int conversation_id);
 }

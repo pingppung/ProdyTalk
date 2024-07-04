@@ -9,11 +9,11 @@
         values(#{room_name},#{room_type},#{room_info},#{room_total})
     </insert>
 
-    <select id="findAll" resultType="com.example.ProdyTalk.vo.RoomListVO">
+    <select id="selectAllRooms" resultType="com.example.ProdyTalk.vo.RoomListVO">
         SELECT * from room_list
     </select>
 
-    <select id="findIdRoom" resultType="int">
+    <select id="selectRoomId" resultType="int">
         SELECT * FROM room_list
         WHERE room_name = #{room_name}
     </select>
@@ -24,12 +24,12 @@
         values(#{room_id},#{user_id})
     </select>
 
-    <select id="findInRoom" resultType="com.example.ProdyTalk.vo.RoomJoinVO">
+    <select id="selectRoomsByUserId" resultType="com.example.ProdyTalk.vo.RoomJoinVO">
         SELECT * from room_join
         WHERE user_id = #{user_id}
     </select>
 
-    <select id="getInRooms" resultType="com.example.ProdyTalk.vo.RoomListVO">
+    <select id="selectRoomsByIds" resultType="com.example.ProdyTalk.vo.RoomListVO">
         SELECT * from room_list
         WHERE room_id IN
             <foreach collection="array" item="room_id" open="(" close=")" separator=",">
@@ -37,28 +37,28 @@
             </foreach>
     </select>
 
-    <select id="getRoomTotal" resultType="int">
+    <select id="selectRoomTotalMembers" resultType="int">
         SELECT room_total FROM room_list
         WHERE room_id = #{room_id}
     </select>
 
-    <update id="setRoomTotal" parameterType="com.example.ProdyTalk.vo.RoomListVO">
+    <update id="updateRoomTotalMembers" parameterType="com.example.ProdyTalk.vo.RoomListVO">
         update room_list
         set room_total = #{room_total}
         where room_id = #{room_id}
     </update>
 
-    <select id="getRoomById" resultType="com.example.ProdyTalk.vo.RoomListVO">
+    <select id="selectRoomById" resultType="com.example.ProdyTalk.vo.RoomListVO">
         select * from room_list
         where room_id = #{room_id}
     </select>
 
-    <select id="getMemberById"  resultType="com.example.ProdyTalk.vo.RoomJoinVO">
+    <select id="selectMembersByRoomId"  resultType="com.example.ProdyTalk.vo.RoomJoinVO">
         select * from room_join
         where room_id = #{room_id}
     </select>
 
-    <delete id="deleteRoom" parameterType="com.example.ProdyTalk.vo.RoomJoinVO">
+    <delete id="deleteRoomById" parameterType="com.example.ProdyTalk.vo.RoomJoinVO">
         delete from room_join
         where room_id = #{room_id} and user_id=#{user_id}
     </delete>

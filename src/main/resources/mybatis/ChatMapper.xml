@@ -4,20 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ProdyTalk.mapper.ChatMapper">
 
-    <insert id="insertMessage" parameterType="com.example.ProdyTalk.chat.vo.MessageVO">
+    <insert id="insertGroupMessage" parameterType="com.example.ProdyTalk.chat.vo.MessageVO">
         INSERT INTO message(message_id,content,user_id,conversation_id)
         values(#{message_id},#{content},#{user_id},#{conversation_id})
     </insert>
 
-    <select id="searchLast" resultType="int">
+    <select id="selectLastGroupMessageId" resultType="int">
         SELECT message_id FROM message ORDER BY message_id DESC LIMIT 1;
     </select>
 
-    <select id="getChatList" parameterType="int" resultType="com.example.ProdyTalk.chat.vo.MessageVO">
+    <select id="selectGroupMessages" parameterType="int" resultType="com.example.ProdyTalk.chat.vo.MessageVO">
         select * from message where conversation_id=#{conversation_id}
     </select>
 
-    <select id="searchPersonalLast" resultType="int">
+    <select id="selectLastPersonalMessageId" resultType="int">
         SELECT message_id FROM personal_message ORDER BY message_id DESC LIMIT 1;
     </select>
 
@@ -26,7 +26,7 @@
         values(#{message_id},#{content},#{user_id},#{conversation_id})
     </insert>
 
-    <select id="getPersonalChatList" parameterType="int" resultType="com.example.ProdyTalk.chat.vo.MessageVO">
+    <select id="selectPersonalMessages" parameterType="int" resultType="com.example.ProdyTalk.chat.vo.MessageVO">
         select * from personal_message where conversation_id=#{conversation_id}
     </select>
 

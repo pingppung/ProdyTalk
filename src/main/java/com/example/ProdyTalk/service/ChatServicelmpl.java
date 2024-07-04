@@ -2,8 +2,8 @@ package com.example.prodytalk.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.prodytalk.chat.vo.MessageVO;
 import com.example.prodytalk.mapper.ChatMapper;
+import com.example.prodytalk.vo.MessageVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,33 +15,33 @@ public class ChatServicelmpl implements ChatService {
     private final ChatMapper chatMapper;
 
     @Override
-    public void insertMessage(MessageVO messageVO) {
-        chatMapper.insertMessage(messageVO);
+    public void addGroupMessage(MessageVO messageVO) {
+        chatMapper.insertGroupMessage(messageVO);
     }
 
     @Override
-    public int searchLast() {
-        return chatMapper.searchLast();
+    public int findLastGroupMessageId() {
+        return chatMapper.selectLastGroupMessageId();
     }
 
     @Override
-    public List<MessageVO> getChatList(int conversation_id) {
-        return chatMapper.getChatList(conversation_id);
+    public List<MessageVO> findGroupMessages(int conversation_id) {
+        return chatMapper.selectGroupMessages(conversation_id);
     }
 
     @Override
-    public int searchPersonalLast() {
-        return chatMapper.searchPersonalLast();
+    public int findLastPersonalMessageId() {
+        return chatMapper.selectLastPersonalMessageId();
     }
 
     @Override
-    public void insertPersonalMessage(MessageVO messageVO) {
+    public void addPersonalMessage(MessageVO messageVO) {
         chatMapper.insertPersonalMessage(messageVO);
     }
 
     @Override
-    public List<MessageVO> getPersonalChatList(int conversation_id) {
-        return chatMapper.getPersonalChatList(conversation_id);
+    public List<MessageVO> findPersonalMessages(int conversation_id) {
+        return chatMapper.selectPersonalMessages(conversation_id);
     }
 
 }

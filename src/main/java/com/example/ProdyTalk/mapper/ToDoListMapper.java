@@ -10,15 +10,15 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ToDoListMapper {
-    List<ToDoListVO> getToDoListById(int room_id);
+    List<ToDoListVO> selectToDoListByRoomId(int room_id);
 
-    void setChecked(ToDoListVO toDoListVO);
+    void updateTodoItemChecked(ToDoListVO toDoListVO);
 
-    void addToDoList(ToDoListVO toDoListVO);
+    void insertTodoItem(ToDoListVO toDoListVO);
 
-    void deleteToDoList(ToDoListVO toDoListVO);
+    void deleteTodoItem(ToDoListVO toDoListVO);
 
-    List<ToDoListVO> getToDoListByUser(String user_id);
+    List<ToDoListVO> selectToDoListByUserId(String user_id);
 
-    void addToDoListByUser(ToDoListVO toDoListVO);
+    void insertToDoItemByUserId(ToDoListVO toDoListVO);
 }

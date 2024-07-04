@@ -4,44 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ProdyTalk.mapper.CalendarMapper">
 
-    <select id="getCalendar" parameterType="int" resultType="com.example.ProdyTalk.vo.CalendarVO">
+    <select id="selectGroupCalendar" parameterType="int" resultType="com.example.ProdyTalk.vo.CalendarVO">
         select * from calendar where room_id=#{room_id}
     </select>
 
-    <insert id="addEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
+    <insert id="insertGroupEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
         insert into calendar (title,start,end,color,calendar_id,room_id)
         values (#{title},#{start},#{end},#{color},#{calendar_id},#{room_id})
     </insert>
 
-    <select id="searchLast" resultType="int">
+    <select id="selectLastGroupCalendarId" resultType="int">
         SELECT calendar_id FROM calendar ORDER BY calendar_id DESC LIMIT 1;
     </select>
 
-    <update id="editEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
+    <update id="updateGroupEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
         update calendar
         set title = #{title}, start = #{start}, end = #{end}, color = #{color}
         where calendar_id = #{calendar_id};
     </update>
 
-    <delete id="deleteEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
+    <delete id="deleteGroupEvent" parameterType="com.example.ProdyTalk.vo.CalendarVO">
         delete from calendar where calendar_id = #{calendar_id};
     </delete>
 
-    <select id="getMyCalendar" parameterType="String" resultType="com.example.ProdyTalk.vo.MyCalendarVO">
+    <select id="selectMyCalendar" parameterType="String" resultType="com.example.ProdyTalk.vo.MyCalendarVO">
         select * from calendar_my where user_id=#{user_id}
     </select>
 
-    <insert id="addMyEvent" parameterType="com.example.ProdyTalk.vo.MyCalendarVO">
+    <insert id="insertMyEvent" parameterType="com.example.ProdyTalk.vo.MyCalendarVO">
         insert into calendar_my (title,start,end,color,calendar_id,user_id)
         values (#{title},#{start},#{end},#{color},#{calendar_id},#{user_id})
     </insert>
 
 
-    <select id="searchMyLast" resultType="int">
+    <select id="selectLastMyCalendarId" resultType="int">
         SELECT calendar_id FROM calendar_my ORDER BY calendar_id DESC LIMIT 1;
     </select>
 
-    <update id="editMyEvent" parameterType="com.example.ProdyTalk.vo.MyCalendarVO">
+    <update id="updateMyEvent" parameterType="com.example.ProdyTalk.vo.MyCalendarVO">
         update calendar_my
         set title = #{title}, start = #{start}, end = #{end}, color = #{color}
         where calendar_id = #{calendar_id};

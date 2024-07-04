@@ -7,23 +7,35 @@ import com.example.prodytalk.vo.CalendarVO;
 import com.example.prodytalk.vo.MyCalendarVO;
 
 public interface CalendarService {
-    public List<Calendar> getCalendar(int room_id) throws Exception;
+    // 그룹 캘린더용
+    // 특정 룸 ID의 그룹 캘린더 이벤트 목록 조회
+    public List<Calendar> findGroupCalendar(int room_id) throws Exception;
 
-    public void addEvent(CalendarVO calendarVO);
+    // 그룹 캘린더 이벤트 추가
+    public void addGroupEvent(CalendarVO calendarVO);
 
-    public int searchLast();
+    // 가장 최근의 그룹 캘린더 ID 조회
+    public int findLastGroupCalendarId();
 
-    public void editEvent(CalendarVO calendarVO);
+    // 그룹 캘린더 이벤트 업데이트
+    public void updateGroupEvent(CalendarVO calendarVO);
 
-    public void deleteEvent(CalendarVO calendarVO);
+    // 그룹 캘린더 이벤트 삭제
+    public void deleteGroupEvent(CalendarVO calendarVO);
 
-    public List<Calendar> getMyCalendar(String user_id) throws Exception;
+    // 개인 캘린더용
+    // 특정 사용자 ID의 개인 캘린더 이벤트 목록 조회
+    public List<Calendar> findMyCalendar(String user_id) throws Exception;
 
-    public int searchMyLast();
+    // 가장 최근의 개인 캘린더 ID 조회
+    public int findLastMyCalendarId();
 
+    // 개인 캘린더 이벤트 추가
     public void addMyEvent(MyCalendarVO myCalendarVO);
 
-    public void editMyEvent(MyCalendarVO myCalendarVO);
+    // 개인 캘린더 이벤트 업데이트
+    public void updateMyEvent(MyCalendarVO myCalendarVO);
 
+    // 개인 캘린더 이벤트 삭제
     public void deleteMyEvent(MyCalendarVO myCalendarVO);
 }

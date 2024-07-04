@@ -4,33 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ProdyTalk.mapper.ToDoListMapper">
 
-    <select id="getToDoListById" resultType="com.example.ProdyTalk.vo.ToDoListVO">
+    <select id="selectToDoListByRoomId" resultType="com.example.ProdyTalk.vo.ToDoListVO">
         SELECT * from todolist
         WHERE room_id = #{room_id}
     </select>
 
-    <select id="getToDoListByUser" resultType="com.example.ProdyTalk.vo.ToDoListVO">
+    <select id="selectToDoListByUserId" resultType="com.example.ProdyTalk.vo.ToDoListVO">
         SELECT * from todolist
         WHERE user_id = #{user_id}
     </select>
 
-    <update id="setChecked" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+    <update id="updateTodoItemChecked" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
     update todolist
     set checked = #{checked}
     where todolist_id = #{todolist_id}
     </update>
 
-    <insert id="addToDoList" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+    <insert id="insertTodoItem" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
         INSERT INTO todolist(content,room_id,checked)
         values(#{content},#{room_id},#{checked})
     </insert>
 
-    <insert id="addToDoListByUser" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+    <insert id="insertToDoItemByUserId" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
         INSERT INTO todolist(content,user_id,checked)
         values(#{content},#{user_id},#{checked})
     </insert>
 
-    <delete id="deleteToDoList" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
+    <delete id="deleteTodoItem" parameterType="com.example.ProdyTalk.vo.ToDoListVO">
         delete from todolist
         where todolist_id = #{todolist_id}
     </delete>

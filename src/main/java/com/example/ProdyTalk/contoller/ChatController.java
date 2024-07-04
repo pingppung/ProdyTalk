@@ -1,4 +1,4 @@
-package com.example.prodytalk.chat.controller;
+package com.example.prodytalk.contoller;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.prodytalk.chat.vo.MessageVO;
 import com.example.prodytalk.mapper.ChatMapper;
 import com.example.prodytalk.service.ChatService;
+import com.example.prodytalk.vo.MessageVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
-public class GreetingController {
+public class ChatController {
 
     private final ChatService chatService;
 
@@ -34,23 +34,22 @@ public class GreetingController {
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @GetMapping("/api/chatting")
-    public Claims autheddn(HttpServletRequest request) throws Exception {
+    public Claims getClaimsFromToken(HttpServletRequest request) throws Exception {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
 
         return Jwts.parser()
-                .setSigningKey("secret") // (3)
+                .setSigningKey("secret")
                 .parseClaimsJws(token) // (4)
                 .getBody();
-
     }
 
     @MessageMapping("/chat/group/{conversationId}")
-    public void sendMessage(MessageVO messageVO, @DestinationVariable int conversationId) {
+    public void sendGroupMessage(MessageVO messageVO, @DestinationVariable int conversationId) {
 
-        int messageId = chatService.searchLast();
+        int messageId = chatService.findLastGroupMessageId();
         messageVO.setMessage_id(messageId + 1);
         messageVO.setConversation_id(conversationId);
-        chatService.insertMessage(messageVO);
+        chatService.addGroupMessage(messageVO);
 
         System.out.println("메시지 내용 저장 성공");
 
@@ -59,10 +58,10 @@ public class GreetingController {
 
     @MessageMapping("/chat/personal/{conversationId}")
     public void sendPersonalMessage(MessageVO messageVO, @DestinationVariable int conversationId) {
-        int messageId = chatService.searchPersonalLast();
+        int messageId = chatService.findLastPersonalMessageId();
         messageVO.setMessage_id(messageId + 1);
         messageVO.setConversation_id(conversationId);
-        chatService.insertPersonalMessage(messageVO);
+        chatService.addPersonalMessage(messageVO);
 
         System.out.println("메시지 내용 저장 성공");
 
@@ -70,13 +69,13 @@ public class GreetingController {
     }
 
     @GetMapping("/api/group/chatList")
-    public List<MessageVO> getChatList(@RequestParam(value = "room_id") int conversation_id) throws Exception {
-        return chatService.getChatList(conversation_id);
+    public List<MessageVO> getGroupMessages(@RequestParam(value = "room_id") int conversation_id) throws Exception {
+        return chatService.findGroupMessages(conversation_id);
     }
 
     @GetMapping("/api/personal/chatList")
-    public List<MessageVO> getPersonalChatList(@RequestParam(value = "room_id") int conversation_id) throws Exception {
-        return chatService.getPersonalChatList(conversation_id);
+    public List<MessageVO> getPersonalMessages(@RequestParam(value = "room_id") int conversation_id) throws Exception {
+        return chatService.findPersonalMessages(conversation_id);
     }
 
 }

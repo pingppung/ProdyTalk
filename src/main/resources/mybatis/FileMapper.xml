@@ -9,7 +9,7 @@
         values(#{file_id},#{origin_name},#{extension},#{file_size},#{file_info},#{user_id},#{room_id})
     </insert>
 
-    <select id="getAllFiles" parameterType="int" resultType="com.example.ProdyTalk.vo.FileVO">
+    <select id="selectAllFiles" parameterType="int" resultType="com.example.ProdyTalk.vo.FileVO">
         select * from file where room_id=#{room_id}
     </select>
 

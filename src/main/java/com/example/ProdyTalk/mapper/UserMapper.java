@@ -10,19 +10,15 @@ import com.example.prodytalk.vo.UserVO;
 @Repository
 @Mapper
 public interface UserMapper {
-    List<UserVO> userList();
+    List<UserVO> selectAllUsers();
 
-    UserVO fetchUserByID(String id);
+    UserVO selectUserById(String user_id);
 
-    UserVO findUser(UserVO user);
+    UserVO selectUser(UserVO user);
 
     void updateUser(UserVO user);
 
     void insertUser(UserVO user);
 
-    void deleteUser(String id);
-
-    UserVO getUserById(String user_id);
-
-    void editUser(UserVO userVO);
+    void deleteUserById(String id);
 }

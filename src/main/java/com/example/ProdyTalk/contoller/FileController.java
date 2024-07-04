@@ -26,20 +26,16 @@ public class FileController {
     FileMapper fileMapper;
 
     @PostMapping("/api/fileupload")
-    public void uploadFile(
+    public void addFile(
             @RequestParam(value = "files") MultipartFile[] uploadFile,
             @RequestParam(value = "file_info") String fileInfo,
             @RequestParam(value = "room_id") int roomId, Model model) {
         // String uploadFolder = "E:\\storage";
         String uploadFolder = "/home/ubuntu/uploadFile";
         for (MultipartFile multipartFile : uploadFile) {
+            // 날짜와 랜덤 정수값으로 새로운 파일명 만들기
             String fileId = (new Date().getTime()) + "" + (new Random().ints(1000, 9999).findAny().getAsInt()); // 현재
-                                                                                                                // 날짜와
-                                                                                                                // 랜덤
-                                                                                                                // 정수값으로
-                                                                                                                // 새로운
-                                                                                                                // 파일명
-                                                                                                                // 만들기
+
             String originName = multipartFile.getOriginalFilename(); // ex) 파일.jpg
             String fileExtension = originName.substring(originName.lastIndexOf(".") + 1); // ex) jpg
             originName = originName.substring(0, originName.lastIndexOf(".")); // ex) 파일
@@ -68,14 +64,14 @@ public class FileController {
             fileVO.setFile_info(fileInfo);
             fileVO.setRoom_id(roomId);
 
-            fileService.insertFile(fileVO);
+            fileService.addFile(fileVO);
         }
     }
 
     @GetMapping("/filelist")
     public List<FileVO> getAllFiles(@RequestParam(value = "room_id", required = false) int room_id) {
 
-        return fileService.getAllFiles(room_id);
+        return fileService.findAllFiles(room_id);
     }
 
     @PostMapping("/api/filedelete")

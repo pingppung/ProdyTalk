@@ -1,15 +1,12 @@
 package com.example.prodytalk.contoller;
 
-import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.prodytalk.service.RecruitService;
 import com.example.prodytalk.vo.RecruitVO;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -19,22 +16,19 @@ public class RecruitController {
     @Autowired
     private RecruitService recruitService;
 
-    // get all recruit
     @GetMapping("/recruit")
     public List<RecruitVO> getAllRecruits(Integer recruit_id) {
-        return recruitService.getAllRecruit(recruit_id);
+        return recruitService.findAllRecruits(recruit_id);
     }
 
-    // get study recruit
     @GetMapping("/recruit/study")
     public List<RecruitVO> getStudyRecruits(Integer recruit_id) {
-        return recruitService.getStudyRecruit(recruit_id);
+        return recruitService.findStudyRecruits(recruit_id);
     }
 
-    // get project recruit
     @GetMapping("/recruit/project")
     public List<RecruitVO> getProjectRecruits(Integer recruit_id) {
-        return recruitService.getProjectRecruit(recruit_id);
+        return recruitService.findProjectRecruits(recruit_id);
     }
 
     @PostMapping("/recruit")
@@ -47,23 +41,21 @@ public class RecruitController {
         // Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id",String.class);
         // System.out.println(recruit.getRecruit_id() + " "+ user_id);
 
-        recruitService.createRecruit(recruit);
+        recruitService.addRecruit(recruit);
     }
 
-    // get one recruit
     @GetMapping("/recruit/{recruit_id}")
     public ResponseEntity<RecruitVO> getRecruitByNo(@PathVariable Integer recruit_id) {
-        return recruitService.getRecruit(recruit_id);
+        return recruitService.findRecruitById(recruit_id);
     }
 
-    // update recruit
     @PostMapping("/recruit/update")
     public void updateRecruitByNo(@RequestBody RecruitVO recruit) {
-        recruitService.updateRecruit(recruit);
+        recruitService.modfiyRecruit(recruit);
     }
 
     @PostMapping("/recruit/delete")
     public void deleteRecruitByNo(@RequestBody RecruitVO recruit) {
-        recruitService.deleteRecruitByNo(recruit);
+        recruitService.deleteRecruit(recruit);
     }
 }

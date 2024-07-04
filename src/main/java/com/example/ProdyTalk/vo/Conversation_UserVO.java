@@ -1,4 +1,4 @@
-package com.example.prodytalk.chat.vo;
+package com.example.prodytalk.vo;
 
 import lombok.Data;
 

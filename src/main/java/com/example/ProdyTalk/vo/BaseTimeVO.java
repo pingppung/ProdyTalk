@@ -1,4 +1,4 @@
-package com.example.prodytalk.chat.vo;
+package com.example.prodytalk.vo;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseTimeEntity {
+public class BaseTimeVO {
     @CreatedDate
     private LocalDateTime createdDate;
 

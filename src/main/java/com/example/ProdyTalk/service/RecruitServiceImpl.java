@@ -15,47 +15,42 @@ import java.util.List;
 public class RecruitServiceImpl implements RecruitService {
     private final RecruitMapper recruitMapper;
 
-    // 전체글 목록
     @Override
-    public List<RecruitVO> getAllRecruit(Integer recruit_id) {
-        return recruitMapper.findAll(recruit_id);
+    public List<RecruitVO> findAllRecruits(Integer recruit_id) {
+        return recruitMapper.selectAllRecruits(recruit_id);
     }
 
-    // 스터디 글 목록
     @Override
-    public List<RecruitVO> getStudyRecruit(Integer recruit_id) {
-        return recruitMapper.findStudy(recruit_id);
+    public List<RecruitVO> findStudyRecruits(Integer recruit_id) {
+        return recruitMapper.selectStudyRecruits(recruit_id);
     }
 
-    // 프로젝트 글 목록
     @Override
-    public List<RecruitVO> getProjectRecruit(Integer recruit_id) {
-        return recruitMapper.findProject(recruit_id);
+    public List<RecruitVO> findProjectRecruits(Integer recruit_id) {
+        return recruitMapper.selectProjectRecruits(recruit_id);
     }
 
-    // 글 작성
     @Override
-    public void createRecruit(RecruitVO recruit) {
-        recruitMapper.save(recruit);
+    public void addRecruit(RecruitVO recruit) {
+        recruitMapper.insertRecruit(recruit);
     }
 
-    // 글 상세보기
     @Override
-    public ResponseEntity<RecruitVO> getRecruit(Integer recruit_id) {
-        RecruitVO recruit = (RecruitVO) recruitMapper.findById(recruit_id)
+    public ResponseEntity<RecruitVO> findRecruitById(Integer recruit_id) {
+        RecruitVO recruit = (RecruitVO) recruitMapper.selectRecruitById(recruit_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not exist Board Data by no : [" + recruit_id + "]"));
         return ResponseEntity.ok(recruit);
     }
 
     // 글 수정
     @Override
-    public void updateRecruit(RecruitVO updateRecruit) {
-        recruitMapper.update(updateRecruit);
+    public void modfiyRecruit(RecruitVO updateRecruit) {
+        recruitMapper.updateRecruit(updateRecruit);
     }
 
     // 글 삭제
     @Override
-    public void deleteRecruitByNo(RecruitVO recruit) {
-        recruitMapper.delete(recruit);
+    public void deleteRecruit(RecruitVO recruit) {
+        recruitMapper.deleteRecruit(recruit);
     }
 }
