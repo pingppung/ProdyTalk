@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import {useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -15,7 +15,6 @@ function MyCalender(props) {
     const[userId, setUserId] = useState('');
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
     const[calId, setCalId] = useState(0);
 
     // 날짜 setting

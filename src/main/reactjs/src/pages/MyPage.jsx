@@ -4,15 +4,12 @@ import { Link,withRouter } from "react-router-dom";
 import Header from '../components/HeaderComponent'
 import Button from '@mui/material/Button';
 import UserService from '../service/UserService.js';
-import basicProfile from '../components/image/basicProfile.png';
 import CircularProgress from '@mui/material/CircularProgress';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import KeyIcon from '@mui/icons-material/Key';
 import BadgeIcon from '@mui/icons-material/Badge';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import MyPageModal from './MyPageModal';
-import { blue } from '@mui/material/colors';
 import Home from "../components/image/Home.png";
 import './css/myPage.css'
 function MyPage() {

@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import {useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
 import { Link } from "react-router-dom";
 import Header from '../components/HeaderComponent'
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import Button from '@mui/material/Button';
 import Home from "../components/image/Home.png";
 import MyCalendar from "./MyCalendar";
 import MyTodolist from "../components/MyToDoList"
-import base64 from 'base-64';
 import './css/mySchedule.css';
 
 function MySchedule() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -14,12 +14,10 @@ function Calender(props) {
 
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
     const[calId, setCalId] = useState(0);
 
     // 날짜 클릭 해서 일정 추가하는 경우 날짜 setting
     const [start, setStart] = useState('');
-    const [end, setEnd] = useState('');
     const [title, setTitle] = useState('');
 
     const openModal = () => {

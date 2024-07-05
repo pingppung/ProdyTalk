@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './css/Header.css';
 import Logo from "./image/LogoWhite.png";
 import { Link,withRouter } from "react-router-dom";
-import User from "./image/UserIcon.png";
-import UserService from '../service/UserService'
+import UserService from '../../service/UserService'
 import Button from '@mui/material/Button';
 
 class HeaderComponent extends Component {

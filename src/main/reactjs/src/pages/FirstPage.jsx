@@ -1,12 +1,7 @@
 import {React,useEffect} from 'react';
 import {useState} from 'react';
 import { Link,withRouter } from "react-router-dom";
-import Box from '@mui/material/Box';
-import LogoWhite from "../components/image/LogoWhite.png";
-import Header from '../components/HeaderComponent'
-import Background from '../components/image/background.png'
 import Computer from '../components/image/computer.png'
-import ChatService from "../service/ChatService.js";
 import UserService from "../service/UserService";
 import Button from '@mui/material/Button';
 import { pink} from '@mui/material/colors';
@@ -17,7 +12,6 @@ import './css/firstPage.css';
 function FirstPage(props) {
 
     const [isLogin,setIsLogin] = useState(false)
-    const [logout,setLogout] = useState(false)
     const location=useLocation()
     const login=location.state
     const imagestyle = {

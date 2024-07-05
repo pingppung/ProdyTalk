@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import RecruitService from '../service/RecruitService'
+import RecruitService from '../../service/RecruitService'
 import './css/Recruit.css';
 import Back from "./image/Back.png";
-import ChatPage from "./chat/PersonalChatComponent";
+import ChatPage from "../chat/PersonalChatComponent";
 import Chat from './image/Chat.png';
 
-import UserService from '../service/UserService'
+import UserService from '../../service/UserService'
 
 class ReadRecruitComponent extends Component {
     constructor(props) {

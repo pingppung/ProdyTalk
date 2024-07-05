@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import UserService from '../service/UserService'
-import { Link } from "react-router-dom";
+import UserService from '../../service/UserService'
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import './css/Login.css';
 
-//function LoginForm({ user_id, user_pwd, onChange,onCreate }) {
 class LoginComponent extends Component {
     constructor(props) {
         super(props);
@@ -79,7 +76,6 @@ class LoginComponent extends Component {
                                 label="비밀번호"
                                 type="password"
                                 onChange={this.handlePwdChange}
-                                type="password"
                             />
                         </div>
 

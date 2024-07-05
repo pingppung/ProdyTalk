@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import OpenViduVideoComponent from './OvVideo';
-//import './UserVideo.css';
-import { AudioMutedOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
+import { AudioMutedOutlined} from '@ant-design/icons';
 import '../css/Video.css';
 
 export default class UserVideoComponent extends Component {
 
     getNicknameTag() {
-        // Gets the nickName of the user
         return JSON.parse(this.props.streamManager.stream.connection.data).clientData;
     }
     render() {

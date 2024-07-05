@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
 import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
 import MemberListComponent from './MemberList';
-//import UserService from '../../service/UserService';
-//import VideoService from '../../service/VideoService';
 import VideoFilter from './VideoFilter'
-import Logo from '../image/LogoWhite.png';
-import { UserOutlined, AudioOutlined, AudioMutedOutlined, SoundOutlined, ExportOutlined, VideoCameraFilled
+import { AudioOutlined, AudioMutedOutlined, ExportOutlined, VideoCameraFilled
         ,LaptopOutlined, SettingFilled, TeamOutlined, AppstoreOutlined, BorderOutlined, SyncOutlined} from '@ant-design/icons';
-import { Avatar } from 'antd';
 import '../css/Video.css';
 const OPENVIDU_SERVER_URL = 'https://prodytalk.icu:4443';
 //const OPENVIDU_SERVER_URL = 'https://localhost:4443';
@@ -88,8 +83,6 @@ class VideoRoomComponent extends Component {
         window.removeEventListener('popstate', this.onpopstate);
     }
     componentDidUpdate(_, prevState){
-        //console.log(prevState.subscribers);
-        //console.log(this.state.subscribers);
         console.log(prevState.publisher);
         console.log(this.state.publisher);
     }
@@ -123,7 +116,6 @@ class VideoRoomComponent extends Component {
     }
 
     joinSession() {
-        // --- 1) Get an OpenVidu object ---
         this.OV = new OpenVidu();
 
         let turnUsername = 'twomandarin';
@@ -139,49 +131,32 @@ class VideoRoomComponent extends Component {
             ]
         });
 
-        // --- 2) Init a session ---
         this.setState(
             {
                 session: this.OV.initSession(),
             },
             () => {
                 var mySession = this.state.session;
-                // --- 3) Specify the actions when events take place in the session ---
-                // On every new Stream received...
                 mySession.on('streamCreated', (event) => {
-                    // Subscribe to the Stream to receive it. Second parameter is undefined
-                    // so OpenVidu doesn't create an HTML video by its own
                     // 우리가 받은 각각의 새로운 구독자를 array 에 저장
                     var subscriber = mySession.subscribe(event.stream, undefined);
                     var subscribers = this.state.subscribers;
                     subscribers.push(subscriber);
-                        console.log(subscriber);
-                    // Update the state with the new subscribers
                     this.setState({
                         subscribers: subscribers,
                     });
 
                 });
-                // On every Stream destroyed...
                 mySession.on('streamDestroyed', (event) => {
                     //필요할 때마다 삭제된 모든 구독자를 제거
-                    // Remove the stream from 'subscribers' array
                     this.deleteSubscriber(event.stream.streamManager);
                 });
 
-                // On every asynchronous exception...
                 mySession.on('exception', (exception) => {
                     console.warn(exception);
                 });
 
-
-                // --- 4) Connect to the session with a valid user token ---
-
-                // 'getToken' method is simulating what your server-side should do.
-                // 'token' parameter should be retrieved and returned by your own backend
                 this.getToken().then((token) => {
-                    // First param is the token got from OpenVidu Server. Second param can be retrieved by every user on event
-                    // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
                     mySession
                         .connect(
                             token,
@@ -190,31 +165,22 @@ class VideoRoomComponent extends Component {
                         .then(async () => {
                             var devices = await this.OV.getDevices();
                             var videoDevices = devices.filter(device => device.kind === 'videoinput');
-
-                            // --- 5) Get your own camera stream ---
-                            // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
-                            // element: we will manage it on our own) and with the desired properties
                             let publisher = this.OV.initPublisher(undefined, {
-                                //audioSource: undefined, // The source of audio. If undefined default microphone
                                 audioSource: this.state.audioDeviceID,
-                                //videoSource: videoDevices[0].deviceId, // The source of video. If undefined default webcam
                                 videoSource: this.state.videoDeviceID,
-                                publishAudio: this.state.audioEnable, // Whether you want to start publishing with your audio unmuted or not
-                                publishVideo: this.state.videoEnable, // Whether you want to start publishing with your video enabled or not
-                                resolution: '640x480', // The resolution of your video
-                                frameRate: 30, // The frame rate of your video
-                                insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
-                                mirror: false, // Whether to mirror your local video or not
+                                publishAudio: this.state.audioEnable, 
+                                publishVideo: this.state.videoEnable, 
+                                resolution: '640x480', 
+                                frameRate: 30, 
+                                insertMode: 'APPEND', 
+                                mirror: false,
                             });
 
-                            // --- 6) Publish your stream ---
                             publisher.subscribeToRemote(true);
-                            //subscriber.subscribeToAudio(false);
                             mySession.publish(publisher);
                             console.log(publisher);
                             console.log(this.state.subscribers);
                             console.log(mySession);
-                            // Set the main video in the page to display our webcam and store our Publisher
                             this.setState({
                                 currentVideoDevice: videoDevices[0],
                                 mainStreamManager: publisher,
@@ -231,7 +197,6 @@ class VideoRoomComponent extends Component {
 
 
     leaveSession() {
-
         const mySession = this.state.session;
 
         if (mySession) {
@@ -246,7 +211,6 @@ class VideoRoomComponent extends Component {
         });
         this.props.history.push({
            pathname: `/roomenter/${this.state.mySessionId}`,
-           //pathname: `/video/setting/${this.state.mySessionId}`,
            state: {
                 id: `${this.state.mySessionId}`,
                 prevPage : 'VideoChat',
@@ -264,8 +228,6 @@ class VideoRoomComponent extends Component {
                 var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
 
                 if (newVideoDevice.length > 0){
-                    // Creating a new publisher with specific videoSource
-                    // In mobile devices the default and first camera is the front one
                     var newPublisher = this.OV.initPublisher(undefined, {
                         videoSource: newVideoDevice[0].deviceId,
                         publishAudio: this.state.audioEnable,
@@ -275,7 +237,6 @@ class VideoRoomComponent extends Component {
                         insertMode: 'APPEND'
                     });
 
-                    //newPublisher.once("accessAllowed", () => {
                     await this.state.session.unpublish(this.state.mainStreamManager)
 
                     await this.state.session.publish(newPublisher)
@@ -348,8 +309,6 @@ class VideoRoomComponent extends Component {
         }
 
         try{
-            // Creating a new publisher with specific videoSource
-            // In mobile devices the default and first camera is the front one
             var sharePublisher = this.OV.initPublisher(undefined, {
                 videoSource: this.videoMode,
                 publishAudio: true,
@@ -430,7 +389,7 @@ class VideoRoomComponent extends Component {
         if(uri !== undefined){
             var filter = { type: '', options: {} };
             filter.type = 'FaceOverlayFilter';
-    //        //filter. options = {"command": "audioecho delay=40000000 intensity=0.7 feedback=0.4"};
+            //filter. options = {"command": "audioecho delay=40000000 intensity=0.7 feedback=0.4"};
             filter. options = {};
             this.state.publisher.stream.applyFilter(filter.type, filter.options)
                 .then(f => {
@@ -456,7 +415,6 @@ class VideoRoomComponent extends Component {
         });
     }
 
-//{this.state.facefilterEnable ? this.removeFilter : this.applyFilter}
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
@@ -582,17 +540,18 @@ class VideoRoomComponent extends Component {
                     } else {
                         console.log(error);
                         console.warn(
-                            'No connection to OpenVidu Server. This may be a certificate error at ' +
-                            OPENVIDU_SERVER_URL,
+                            'OpenVidu 서버에 연결할 수 없습니다. 이는 ' +
+                            OPENVIDU_SERVER_URL +
+                            '에서 인증 오류일 수 있습니다.',
                         );
                         if (
                             window.confirm(
-                                'No connection to OpenVidu Server. This may be a certificate error at "' +
+                                'OpenVidu 서버에 연결할 수 없습니다. ' +
                                 OPENVIDU_SERVER_URL +
-                                '"\n\nClick OK to navigate and accept it. ' +
-                                'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
+                                '에서 인증 오류가 발생할 수 있습니다.\n\n"확인"을 클릭하여 인증서를 수락하고 이동합니다. ' +
+                                '인증 경고가 표시되지 않으면 OpenVidu 서버가 ' +
                                 OPENVIDU_SERVER_URL +
-                                '"',
+                                '에서 정상적으로 실행되는지 확인해 주세요.',
                             )
                         ) {
                             window.location.assign(OPENVIDU_SERVER_URL + '/accept-certificate');

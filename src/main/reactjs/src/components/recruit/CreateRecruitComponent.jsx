@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import RecruitService from '../service/RecruitService';
-import UserService from '../service/UserService'
+import RecruitService from '../../service/RecruitService';
+import UserService from '../../service/UserService'
 import './css/Recruit.css';
 
 class CreateRecruitComponent extends Component {

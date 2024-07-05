@@ -1,10 +1,10 @@
 import {React,useState} from "react";
 import {useEffect} from 'react';
-import TodoListItem from './todolist/TodoListItem'
+import TodoListItem from './TodoListItem'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import ToDoListService from '../service/ToDoListService';
-import ToDoListModal from './todolist/ToDoListModal';
+import ToDoListService from '../../service/ToDoListService';
+import ToDoListModal from './ToDoListModal';
 
 function TodoListComponent(props) {
     const now = new Date();

@@ -1,13 +1,9 @@
 import React,{useState} from 'react';
 import {useEffect} from 'react';
-import Box from '@mui/material/Box';
 import './css/mainPage.css'
 import Header from '../components/HeaderComponent.jsx'
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
-import RoomCircle from '../components/room/RoomCircle.jsx'
 import RoomListComponent from '../components/room/RoomListComponent.jsx'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import HomeIcon from '@mui/icons-material/Home';
