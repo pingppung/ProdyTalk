@@ -4,6 +4,7 @@ import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,9 @@ import java.util.List;
 public class RoomController {
     private final RoomService roomService;
 
+    @Value("${jwt.key}")
+    private String key;
+
     @PostMapping("/createroom")
     public void insertUser(@RequestBody RoomListVO room, HttpServletRequest request) {
         room.setRoom_total(1);
@@ -33,7 +37,7 @@ public class RoomController {
 
         // 어떤 유저가 방을 만드는 건지 token을 이용해 유저id 알아내기
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
-        String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id", String.class);
+        String user_id = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().get("id", String.class);
         log.debug(user_id + "가 방" + room_id + "을 생성했습니다.");
 
         RoomJoinVO join = new RoomJoinVO();
@@ -47,7 +51,7 @@ public class RoomController {
     public List<RoomListVO> getAllRooms(HttpServletRequest request) {
 
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
-        String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id", String.class);
+        String user_id = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().get("id", String.class);
 
         List<RoomJoinVO> room_ids = roomService.findRoomsByUserId(user_id);
         int[] room_id = new int[room_ids.size()];
@@ -66,7 +70,7 @@ public class RoomController {
         log.debug("룸 아이디는" + room_id + "입니다.");
 
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
-        String user_id = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().get("id", String.class);
+        String user_id = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().get("id", String.class);
 
         RoomJoinVO roomJoinVO = new RoomJoinVO();
         roomJoinVO.setRoom_id(room_id);

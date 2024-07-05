@@ -1,10 +1,8 @@
 package com.example.prodytalk.contoller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.prodytalk.mapper.CalendarMapper;
 import com.example.prodytalk.service.CalendarService;
 import com.example.prodytalk.vo.CalendarVO;
 import com.example.prodytalk.vo.MyCalendarVO;
@@ -18,9 +16,6 @@ import java.util.List;
 public class CalendarController {
     private final CalendarService calendarService;
     private int calendar_id;
-
-    @Autowired
-    CalendarMapper calendarMapper;
 
     @GetMapping("/calendar")
     public List<Calendar> getCalendar(@RequestParam(value = "room_id") int room_id) throws Exception {

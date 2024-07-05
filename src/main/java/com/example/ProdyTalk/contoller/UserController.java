@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,9 @@ import java.util.Date;
 public class UserController {
     private final UserService userService;
 
+    @Value("${jwt.key}")
+    private String key;
+
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public void addUser(@RequestBody UserVO user, HttpServletResponse response) throws IOException {
         userService.addUser(user);
@@ -41,13 +45,13 @@ public class UserController {
             Date now = new Date();
 
             return Jwts.builder()
-                    .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // (1)
-                    .setIssuer("fresh") // (2)
-                    .setIssuedAt(now) // (3)
-                    .setExpiration(new Date(now.getTime() + Duration.ofMinutes(30).toMillis())) // (4)
-                    .claim("id", user.getUser_id()) // (5)
+                    .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                    .setIssuer("fresh")
+                    .setIssuedAt(now)
+                    .setExpiration(new Date(now.getTime() + Duration.ofMinutes(30).toMillis()))
+                    .claim("id", user.getUser_id())
                     .claim("pwd", user.getUser_pwd())
-                    .signWith(SignatureAlgorithm.HS256, "secret") // (6)
+                    .signWith(SignatureAlgorithm.HS256, key)
                     .compact();
 
         } else {
@@ -62,8 +66,8 @@ public class UserController {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
 
         return Jwts.parser()
-                .setSigningKey("secret") // (3)
-                .parseClaimsJws(token) // (4)
+                .setSigningKey(key)
+                .parseClaimsJws(token)
                 .getBody();
     }
 
