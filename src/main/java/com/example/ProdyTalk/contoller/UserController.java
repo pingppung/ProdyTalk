@@ -5,11 +5,11 @@ import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.prodytalk.mapper.UserMapper;
 import com.example.prodytalk.service.UserService;
 import com.example.prodytalk.vo.UserVO;
 
@@ -22,25 +22,21 @@ import java.util.Date;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
-
-    @Autowired
-    UserMapper userMapper;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public void addUser(@RequestBody UserVO user, HttpServletResponse response) throws IOException {
         userService.addUser(user);
-        System.out.println("유저 DB 저장 성공");
+        log.debug("유저 DB 저장 성공");
     }
 
     @PostMapping("/authenticate")
     public String authenticate(@RequestBody UserVO user) {
         userService.findUser(user);
-        System.out.println(user);
-        System.out.println(userService.findUser(user));
         if (userService.findUser(user) != null) {
-            System.out.println("유저 확인!!");
+            log.debug("유저 확인!!");
 
             Date now = new Date();
 
@@ -55,7 +51,7 @@ public class UserController {
                     .compact();
 
         } else {
-            System.out.println("회원가입 안된 유저!!");
+            log.error("회원가입 안된 유저!!");
             throw new IllegalArgumentException("회원가입 안됨.");
         }
     }

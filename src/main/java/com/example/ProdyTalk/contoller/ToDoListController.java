@@ -1,10 +1,8 @@
 package com.example.prodytalk.contoller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.prodytalk.mapper.ToDoListMapper;
 import com.example.prodytalk.service.ToDoListService;
 import com.example.prodytalk.vo.ToDoListVO;
 
@@ -15,9 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ToDoListController {
     private final ToDoListService toDoListService;
-
-    @Autowired
-    ToDoListMapper toDoListMapper;
 
     @GetMapping("/api/todolist/id")
     public List<ToDoListVO> getToDoListById(@RequestParam(value = "room_id") int room_id) {

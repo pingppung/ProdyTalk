@@ -1,19 +1,19 @@
 package com.example.prodytalk.contoller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.prodytalk.service.RecruitService;
 import com.example.prodytalk.vo.RecruitVO;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequiredArgsConstructor
 public class RecruitController {
-
-    @Autowired
     private RecruitService recruitService;
 
     @GetMapping("/recruit")

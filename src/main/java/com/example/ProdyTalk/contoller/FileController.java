@@ -1,12 +1,12 @@
 package com.example.prodytalk.contoller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.prodytalk.mapper.FileMapper;
 import com.example.prodytalk.service.FileService;
 import com.example.prodytalk.vo.FileVO;
 
@@ -19,11 +19,10 @@ import java.util.Random;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class FileController {
-    private final FileService fileService;
 
-    @Autowired
-    FileMapper fileMapper;
+    private final FileService fileService;
 
     @PostMapping("/api/fileupload")
     public void addFile(
@@ -41,9 +40,7 @@ public class FileController {
             originName = originName.substring(0, originName.lastIndexOf(".")); // ex) 파일
             long fileSize = multipartFile.getSize(); // 파일 사이즈
 
-            System.out.println("name=" + originName);
-            System.out.println("size=" + fileSize);
-            System.out.println("file_info=" + fileInfo);
+            log.debug("name=" + originName + ", size=" + fileSize + ", file_info=" + fileInfo);
 
             File savefile = new File(uploadFolder, fileId + "." + fileExtension);
             if (!savefile.exists()) {
@@ -53,7 +50,7 @@ public class FileController {
             try {
                 multipartFile.transferTo(savefile);
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
 
             FileVO fileVO = new FileVO();
@@ -70,7 +67,6 @@ public class FileController {
 
     @GetMapping("/filelist")
     public List<FileVO> getAllFiles(@RequestParam(value = "room_id", required = false) int room_id) {
-
         return fileService.findAllFiles(room_id);
     }
 
@@ -88,9 +84,6 @@ public class FileController {
         // String path="E:\\storage\\"+fileName;
 
         String path = "/home/ubuntu/uploadFile/" + fileName;
-
-        System.out.println(path);
-
         File file = new File(path);
 
         try (
