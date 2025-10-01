@@ -64,28 +64,69 @@ public class RoomController {
     }
 
     @GetMapping("/api/enterRoom")
-    public void enterRoom(@RequestParam("roomId") int room_id,
-            HttpServletResponse response,
-            HttpServletRequest request) throws IOException {
-        log.debug("룸 아이디는" + room_id + "입니다.");
-
-        String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring("Bearer ".length());
-        String user_id = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().get("id", String.class);
-
-        RoomJoinVO roomJoinVO = new RoomJoinVO();
-        roomJoinVO.setRoom_id(room_id);
-        roomJoinVO.setUser_id(user_id);
-        roomService.joinRoom(roomJoinVO);
-
-        RoomListVO roomListVO = new RoomListVO();
-        int room_total = roomService.findRoomTotalMembers(room_id);
-        roomListVO.setRoom_id(room_id);
-        roomListVO.setRoom_total(room_total + 1);
-
-        roomService.updateRoomTotalMembers(roomListVO);
-        response.sendRedirect("http://prodytalk.icu:3000/main");
-        // response.sendRedirect("http://localhost:3000/main");
+    public void enterRoom(@RequestParam("roomId") int roomId,
+                          HttpServletResponse response,
+                          HttpServletRequest request) throws IOException {
+    
+        log.debug("룸 아이디는 " + roomId + " 입니다.");
+    
+        try {
+            // 1. roomId 유효성 체크
+            if (roomId <= 0) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "❌ 유효하지 않은 방 ID입니다.");
+                return;
+            }
+    
+            // 2. 토큰에서 userId 추출
+            String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "❌ 인증 토큰이 없습니다.");
+                return;
+            }
+    
+            String token = authHeader.substring("Bearer ".length());
+            String userId = Jwts.parser().setSigningKey(key)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .get("id", String.class);
+    
+            if (userId == null || userId.isEmpty()) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "❌ 토큰에서 사용자 정보를 확인할 수 없습니다.");
+                return;
+            }
+    
+            // 3. 참여 요청 객체 생성
+            RoomJoinVO roomJoinVO = new RoomJoinVO();
+            roomJoinVO.setRoom_id(roomId);
+            roomJoinVO.setUser_id(userId);
+    
+            try {
+                // 4. 방 참여 시도 (중복이면 DuplicateKeyException 발생)
+                roomService.joinRoom(roomJoinVO);
+            } catch (DuplicateKeyException e) {
+                log.info("이미 참여 중인 사용자입니다: userId=" + userId + ", roomId=" + roomId);
+                // 중복일 경우 인원수 업데이트만 진행 → 넘어감
+            }
+    
+            // 5. 항상 DB에서 실제 인원 수를 COUNT 기반으로 집계
+            int roomTotal = roomService.countMembersByRoomId(roomId);
+    
+            RoomListVO roomListVO = new RoomListVO();
+            roomListVO.setRoom_id(roomId);
+            roomListVO.setRoom_total(roomTotal);
+            roomService.updateRoomTotalMembers(roomListVO);
+    
+            // 6. 정상적으로 처리된 경우 → 메인 페이지로 리다이렉트
+            response.sendRedirect("http://prodytalk.icu:3000/main");
+            // response.sendRedirect("http://localhost:3000/main");
+    
+        } catch (Exception e) {
+            // 예기치 못한 서버 오류 처리
+            log.error("방 입장 처리 중 오류 발생: " + e.getMessage(), e);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "❌ 방 입장 중 오류가 발생했습니다.");
+        }
     }
+
 
     @GetMapping("/api/getroom")
     public RoomListVO getRoomById(@RequestParam(value = "room_id") int room_id) {
