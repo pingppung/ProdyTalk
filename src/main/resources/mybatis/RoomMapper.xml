@@ -4,63 +4,73 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ProdyTalk.mapper.RoomMapper">
 
+    <!-- 방 생성 -->
     <insert id="insertRoom" parameterType="com.example.ProdyTalk.vo.RoomListVO">
-        INSERT INTO room_list(room_name,room_type,room_info,room_total)
-        values(#{room_name},#{room_type},#{room_info},#{room_total})
+        INSERT INTO room_list(room_name, room_type, room_info, room_total)
+        VALUES (#{room_name}, #{room_type}, #{room_info}, #{room_total})
     </insert>
 
+    <!-- 모든 방 조회 -->
     <select id="selectAllRooms" resultType="com.example.ProdyTalk.vo.RoomListVO">
-        SELECT * from room_list
+        SELECT * FROM room_list
     </select>
 
+    <!-- 특정 방 ID 조회 -->
     <select id="selectRoomId" resultType="int">
-        SELECT * FROM room_list
+        SELECT room_id FROM room_list
         WHERE room_name = #{room_name}
     </select>
 
+    <!-- 방 참여 (중복 방지를 위해 DB에 UNIQUE 제약 필요: (room_id, user_id)) -->
+    <insert id="joinRoom" parameterType="com.example.ProdyTalk.vo.RoomJoinVO">
+        INSERT INTO room_join(room_id, user_id)
+        VALUES (#{room_id}, #{user_id})
+    </insert>
 
-    <select id="joinRoom" parameterType="com.example.ProdyTalk.vo.RoomJoinVO">
-        INSERT INTO room_join(room_id,user_id)
-        values(#{room_id},#{user_id})
-    </select>
-
+    <!-- 특정 유저가 참여한 방 조회 -->
     <select id="selectRoomsByUserId" resultType="com.example.ProdyTalk.vo.RoomJoinVO">
-        SELECT * from room_join
+        SELECT * FROM room_join
         WHERE user_id = #{user_id}
     </select>
 
+    <!-- 여러 방 ID로 방 정보 조회 -->
     <select id="selectRoomsByIds" resultType="com.example.ProdyTalk.vo.RoomListVO">
-        SELECT * from room_list
+        SELECT * FROM room_list
         WHERE room_id IN
             <foreach collection="array" item="room_id" open="(" close=")" separator=",">
                 #{room_id}
             </foreach>
     </select>
 
-    <select id="selectRoomTotalMembers" resultType="int">
-        SELECT room_total FROM room_list
+    <!-- DB에서 실제 인원 수 집계 -->
+    <select id="countMembersByRoomId" resultType="int">
+        SELECT COUNT(*) FROM room_join
         WHERE room_id = #{room_id}
     </select>
 
+    <!-- 방 인원 업데이트 -->
     <update id="updateRoomTotalMembers" parameterType="com.example.ProdyTalk.vo.RoomListVO">
-        update room_list
-        set room_total = #{room_total}
-        where room_id = #{room_id}
+        UPDATE room_list
+        SET room_total = #{room_total}
+        WHERE room_id = #{room_id}
     </update>
 
+    <!-- 특정 방 조회 -->
     <select id="selectRoomById" resultType="com.example.ProdyTalk.vo.RoomListVO">
-        select * from room_list
-        where room_id = #{room_id}
+        SELECT * FROM room_list
+        WHERE room_id = #{room_id}
     </select>
 
-    <select id="selectMembersByRoomId"  resultType="com.example.ProdyTalk.vo.RoomJoinVO">
-        select * from room_join
-        where room_id = #{room_id}
+    <!-- 특정 방 멤버 리스트 조회 -->
+    <select id="selectMembersByRoomId" resultType="com.example.ProdyTalk.vo.RoomJoinVO">
+        SELECT * FROM room_join
+        WHERE room_id = #{room_id}
     </select>
 
+    <!-- 방 나가기 -->
     <delete id="deleteRoomById" parameterType="com.example.ProdyTalk.vo.RoomJoinVO">
-        delete from room_join
-        where room_id = #{room_id} and user_id=#{user_id}
+        DELETE FROM room_join
+        WHERE room_id = #{room_id} AND user_id = #{user_id}
     </delete>
 
 </mapper>
